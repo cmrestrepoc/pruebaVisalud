@@ -1,0 +1,34 @@
+{
+	"name": "Candelaria PWA test",
+	"short_name": "VISALUD",
+	"description": "Aplicación para captura de datos de establecimientos",
+	"background_color": "#FFF",
+	"theme_color": "#FB94AE",
+	"orientation": "landscape",
+	"display": "standalone",
+	"start_url": "./index.html?utm_source=web_app_manifest",
+	"scope": "./",
+	"lang": "es-CO",
+	"icons": [
+		{
+			"src": "./img/escudo130.ico",
+			"sizes": "100x112",
+			"type": "image/ico"
+		},
+		{
+			"src": "./img/escudo.jpg",
+			"sizes": "100x112",
+			"type": "image/jpg"
+		},
+		{
+			"src": "./img/escudo.png",
+			"sizes": "144x144",
+			"type": "image/png"
+		},
+		{
+			"src": "./img/llave.png",
+			"sizes": "51x153",
+			"type": "image/png"
+		}
+	]
+}
