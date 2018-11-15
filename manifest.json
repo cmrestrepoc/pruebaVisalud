@@ -3,7 +3,7 @@
 	"short_name": "VISALUD",
 	"description": "Aplicación para captura de datos de establecimientos",
 	"background_color": "#FFF",
-	"theme_color": "#FB94AE",
+	"theme_color": "#65c0ba",
 	"orientation": "landscape",
 	"display": "standalone",
 	"start_url": "./index.html?utm_source=web_app_manifest",

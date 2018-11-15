@@ -1,0 +1,352 @@
+<!DOCTYPE HTML>
+<html lang="es">
+	<head>
+		<meta charset="utf-8"/>
+		<title>Visalud</title>
+
+		<!-- favicon -->
+		<link rel="shortcut icon" type="img/png" href="./img/escudo130.ico" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+		<!-- Color de la aplicación -->
+		<meta name="theme-color" content="#65c0ba" />
+
+		<!-- Optomización para móvil -->
+		<meta name="MobileOptimized" content="width" />
+		<meta name="HandleFriendly" content="true" />
+
+		<!-- Configuración General PWA -->
+		<link rel="manifest" href="manifest.json" />
+
+		<link rel="stylesheet" type="text/css" href="./css/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="./css/styles.css">
+
+		<script src="./js/jquery-3.3.1.slim.min.js"></script>
+		<script src="./js/bootstrap.js"></script>
+		<script src="./js/bootstrap.min.js"></script>
+		<script src="//cdn.jsdelivr.net/npm/pouchdb@7.0.0/dist/pouchdb.min.js"></script>
+		<script type="text/javascript" src="main.js"></script>
+		
+	</head>
+	<body>
+		<header>
+			<a href="index.html">
+				<img src="./img/escudo.jpg" />
+			</a>
+			<div class="titulos">
+				<h1>MUNICIPIO DE CANDELARIA (V)</h1>
+				<h2>Vigilancia en Salud Pública</h2>
+			</div>
+		</header>
+
+		<div class="container">
+			<div class="row">
+
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						Inscripción de establecimientos Formato FT493
+					</div>
+					<div class="panel-body">
+						<div class="form-group">
+							<div class="col-md-4">
+								<label class="col-md-12 control-label">Departamento:</label>
+								<input type="text" class="form-control" name="depto" value="VALLE DEL CAUCA">
+							</div>
+							<div class="col-md-8">
+								<div class="col-md-4">
+									<label class="col-md-12 control-label">Mpio:</label>
+									<input type="text" class="form-control" name="mpio" value="CANDELARIA">
+								</div>
+								<div class="col-md-4">
+									<label class="col-md-12 control-label">Fecha:</label>
+									<input type="date" class="form-control" name="fecha">
+								</div>
+								<div class="col-md-4">
+									<label class="col-md-12 control-label">Insc. No:</label>
+									<input type="number" class="form-control" name="inscripcion">
+								</div>
+							</div>						
+																						
+						</div>
+
+						<br><br><br><br>
+
+						<div class="form-group">
+							<label class="control-label col-md-12" style="text-decoration:underline">PERSONERÍA JURÍDICA</label>
+							<div class="col-md-5">
+								<label class="col-md-12 control-label">Razón social:</label>
+								<input type="text" class="form-control" name="razonSocial">
+							</div>
+							<div class="col-md-5">
+								<label class="col-md-12 control-label">Nombre Comercial:</label>
+								<input type="text" class="form-control" name="nombreComercial">
+							</div>
+							<div class="col-md-2">
+								<label class="col-md-12 control-label">Nit:</label>
+								<input type="text" class="form-control" name="nit">
+							</div>
+						</div><!-- Fin del form-group -->
+
+						<br><br><br><br><br>
+
+						<div class="form-group">
+							<label class="control-label col-md-12" style="text-decoration:underline">PERSONA NATURAL</label>
+							<div class="col-md-5">
+								<label class="col-md-12 control-label">N. Establ.:</label>
+								<input type="text" class="form-control" name="nEstablecimiento">
+							</div>
+							<div class="col-md-4">
+								<label class="col-md-12 control-label">Propietario:</label>
+								<input type="text" class="form-control" name="propietario">
+							</div>
+							<div class="col-md-3">
+								<label class="col-md-12 control-label">Identificación:</label>
+								<div class="col-md-5">
+									<select class="form-control" name="tipoId">
+										<option value="cc">CC</option>
+										<option value="ce">CE</option>
+										<option value="nit">NIT</option>
+									</select>
+								</div>
+								<div class="col-md-7">
+									<input type="text" class="form-control" name="identificacion">
+								</div>							
+							</div>
+						</div><!-- Fin del form-group -->
+
+						<br><br><br><br>
+
+						<div class="form-group">
+							<div class="col-md-5">
+								<label class="col-md-12 control-label">Dirección:</label>
+								<input type="text" class="form-control" name="direccion">
+							</div>							
+							<div class="col-md-7">
+								<div class="col-md-2">
+									<label class="col-md-12 control-label">Zona:</label>
+									<select class="form-control" name="zona">
+										<option value="u">U</option>
+										<option value="r">R</option>
+									</select>											
+								</div>
+								<div class="col-md-10">
+									<label class="control-label">Barrio / Corregimiento:</label>
+									<input type="text" class="form-control" name="barrioCgto">
+								</div>							
+							</div>							
+						</div><!-- Fin del form-group -->
+
+						<br><br><br><br>
+
+						<div class="form-group">
+							<div class="col-md-2" style="margin-left:50px">
+								<div class="input-group">
+									<span class="input-group-addon">
+								    	<input type="checkbox" name="comuna">
+								    </span>
+								    <input type="text" class="form-control" value="Comuna">
+								</div>
+							</div>									
+							<div class="col-md-2">
+								<div class="input-group">
+									<span class="input-group-addon">
+								    	<input type="checkbox" name="localidad">
+								    </span>
+								    <input type="text" class="form-control" value="Localidad">
+								</div>
+							</div>								
+							<div class="col-md-2">
+								<div class="input-group">
+									<span class="input-group-addon">
+								    	<input type="checkbox" name="sector">
+								    </span>
+								    <input type="text" class="form-control" value="Sector">
+								</div>
+							</div>								
+							<div class="col-md-3">
+								<div class="input-group">
+									<span class="input-group-addon">
+								    	<input type="checkbox" name="corregimiento">
+								    </span>
+								    <input type="text" class="form-control" value="Corregimiento">
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="input-group">
+									<span class="input-group-addon">
+								    	<input type="checkbox" name="caserio">
+								    </span>
+								    <input type="text" class="form-control" value="Caserío">
+								</div>
+							</div>
+
+							<br><br><br>
+							<div class="col-md-2" style="margin-left:50px">
+								<div class="input-group">
+									<span class="input-group-addon">
+								    	<input type="checkbox" name="upz">
+								    </span>
+								    <input type="text" class="form-control" value="Upz">
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="input-group">
+									<span class="input-group-addon">
+								    	<input type="checkbox" name="otro">
+								    </span>
+								    <input type="text" class="form-control" value="Otro">
+								</div>
+							</div>					
+						</div>
+
+	                    <br><br>
+
+	                    <div class="form-group">
+							<div class="col-md-5">
+								<label class="col-md-12 control-label">Cual:</label>
+								<input type="text" class="form-control" name="nomTerritorio">
+							</div>													
+							<div class="col-md-3">
+								<label class="col-md-12 control-label">Celular:</label>
+								<input type="text" class="form-control" name="celular">	
+							</div>
+							<div class="col-md-2">
+								<label class="col-md-12 control-label">Fax:</label>
+								<input type="text" class="form-control" name="fax">		
+							</div>
+							<div class="col-md-2">
+								<label class="col-md-12 control-label">Teléfono:</label>
+								<input type="text" class="form-control" name="telefono">		
+							</div>							
+						</div><!-- Fin del form-group -->
+
+						<br><br><br><br>
+
+						<div class="form-group">
+							<div class="col-md-7">
+								<label class="col-md-12 control-label">Correo:</label>
+								<input type="text" class="form-control" name="correo">
+							</div>
+
+							<div class="col-md-5">
+								<label class="col-md-12 control-label">Autoriza envío de correos electrónicos:</label>
+								<div class="col-md-3">
+									<select class="form-control" name="autoriza">
+										<option value="s">S</option>
+										<option value="n">N</option>
+									</select>
+								</div>								
+							</div>							
+						</div><!-- Fin del form-group -->
+
+						<br><br><br><br>
+
+						<div class="form-group">
+							<div class="col-md-5">
+								<label class="col-md-12 control-label">Dir Notif:</label>
+								<input type="text" class="form-control" name="dirNotif">
+							</div>							
+							<div class="col-md-5">
+								<div class="col-md-5">
+									<label class="control-label">Depto Notif:</label>
+									<input type="text" class="form-control" value="Valle del Cauca" name="deptoNotif">
+								</div>
+								<div class="col-md-4">
+									<label class="control-label">Mpio Notif:</label>
+									<input type="text" class="form-control" value="Candelaria" name="mpioNotif">
+								</div>
+								<div class="col-md-3">
+									<label class="col-md-12 control-label">Visitado:</label>
+									<select class="form-control" name="visitado">
+										<option value="s">Si</option>
+										<option value="n">No</option>
+									</select>											
+								</div>													
+							</div>
+							<div class="col-md-2">
+								<label class="col-md-12 control-label">Fecha:</label>
+								<input type="date" class="form-control" name="fechaNotif">
+							</div>							
+						</div><!-- Fin del form-group -->
+
+						<br><br><br><br>
+
+						<div class="form-group">
+							<label class="col-md-1 control-label">Visitó:</label>		
+							<div class="col-md-5">
+								<input type="text" class="form-control" name="funcionario">
+							</div>
+
+							<label class="col-md-1 control-label">Concepto:</label>
+							<div class="col-md-5">								
+								<input type="text" class="form-control" name="concepto">
+							</div>							
+						</div><!-- Fin del form-group -->
+
+						<br><br><br><br>
+
+						<div class="form-group">
+							<label class="col-md-3 control-label">Observaciones por autoridad sanitaria:</label>		
+							<div class="col-md-9">
+								<textarea class="form-control" name="obAutoridad"></textarea>
+							</div>
+							<br><br><br>
+							<label class="col-md-3 control-label">Observaciones por persona que se inscribe:</label>
+							<div class="col-md-9">
+								<textarea class="form-control" name="obPersona"></textarea>
+							</div>							
+						</div><!-- Fin del form-group -->
+
+						<br><br><br>
+
+						<div class="form-group">									
+							<div class="col-md-3">
+								<label class="col-md-12 control-label">__</label>
+								<label class="col-md-12 control-label">Persona que inscribe:</label>
+							</div>
+							<div class="col-md-4">
+								<label class="col-md-12 control-label">___</label>
+								<input type="text" class="form-control" name="inscribe">
+							</div>
+							<div class="col-md-3">								
+								<label class="col-md-12 control-label">Identicación:</label>
+								<input type="text" class="form-control" name="idInscribe">
+							</div>
+							<div class="col-md-2">								
+								<label class="col-md-12 control-label">Cargo:</label>
+								<input type="text" class="form-control" name="cargoInscribe">
+							</div>
+							<div class="col-md-3">
+								<label class="col-md-12 control-label">Persona que recibe:</label>
+							</div>
+							<div class="col-md-4">
+								<input type="text" class="form-control" name="recibe">
+							</div>
+							<div class="col-md-3">								
+								<input type="text" class="form-control" name="idRecibe">
+							</div>
+							<div class="col-md-2">								
+								<input type="text" class="form-control" name="cargoRecibe">
+							</div>							
+						</div><!-- Fin del form-group -->
+
+						<br><br><br><br><br><br>
+
+						
+						<div class="form-group">
+	                        <div class="col-md-10 col-md-offset-2">
+	                            <button type="submit" class="btn btn-primary">
+	                                Guardar
+	                            </button>
+	                        </div>
+	                    </div><!-- Fin del form-group -->	                    
+
+					</div><!-- Fin del Panel-body -->
+				</div><!-- Fin del Panel-default -->
+
+			</div><!-- Fin del Row -->
+		</div><!-- Fin del Container -->
+	</body>
+</html>

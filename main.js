@@ -10,3 +10,4 @@ if('serviceWorker' in navigator){
 }else{
 	console.log('NO PUEDES usar los serviceWorker en tu navegador');
 }
+

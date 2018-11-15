@@ -1,0 +1,516 @@
+<!DOCTYPE HTML>
+<html lang="es">
+	<head>
+		<meta charset="utf-8"/>
+		<title>Visalud</title>
+
+		<!-- favicon -->
+		<link rel="shortcut icon" type="img/png" href="./img/escudo130.ico" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+		<!-- Color de la aplicación -->
+		<meta name="theme-color" content="#65c0ba" />
+
+		<!-- Optomización para móvil -->
+		<meta name="MobileOptimized" content="width" />
+		<meta name="HandleFriendly" content="true" />
+
+		<!-- Configuración General PWA -->
+		<link rel="manifest" href="manifest.json" />
+
+		<link rel="stylesheet" type="text/css" href="./css/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="./css/styles.css">
+		
+		<script src="./js/jquery-3.3.1.slim.min.js"></script>
+		<script src="./js/bootstrap.js"></script>
+		<script src="./js/bootstrap.min.js"></script>
+		<script src="./js/pouchdb.min.js"></script>
+		<script type="text/javascript" src="main.js"></script>
+
+	</head>
+
+	<body>
+		<header>
+			<a href="index.html">
+				<img src="./img/escudo.jpg" />
+			</a>
+			<div class="titulos">
+				<h1>MUNICIPIO DE CANDELARIA (V)</h1>
+				<h2>Vigilancia en Salud Pública</h2>
+			</div>
+
+		</header>
+
+		<div class="container">
+			<div class="row">
+				
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						FT440: Acta de Inspección Sanitaria con Enfoque de Riesgo para Expendios de Carne
+					</div>
+						
+					<div class="panel-body">
+
+						<!-- Nav tabs -->
+						<ul id="misTabs" class="nav nav-tabs" role="tablist">
+							<li role="presentation" class="active"><a href="#datos" aria-controls="datos" role="tab" data-toggle="tab">Datos del Establecimiento</a></li>
+							<li role="presentation"><a href="#evaluacion" aria-controls="evaluacion" role="tab" data-toggle="tab">Evaluación</a></li>
+							<li role="presentation"><a href="#observaciones" aria-controls="observaciones" role="tab" data-toggle="tab">Observaciones - Notificaciones</a></li>
+						</ul>
+
+						<!-- Tab panes -->
+						<div class="tab-content" id="miTabContent">
+							<div role="tabpanel" class="tab-pane fade active in" id="datos" aria-labelledby="datos-tab">
+								<div class="form-group">
+									<div class="col-md-2">
+										<label class="col-md-12 control-label">Ciudad:</label>
+										<input type="text" class="form-control" name="ciudad">
+									</div>
+									<div class="col-md-2">
+										<label class="col-md-12 control-label">Comuna:</label>
+										<input type="number" class="form-control" name="comuna">
+									</div>
+									<div class="col-md-2">
+										<label class="col-md-12 control-label">Fecha:</label>
+										<input type="date" class="form-control" name="fecha">
+									</div>
+									<div class="col-md-2">
+										<label class="col-md-12 control-label">Acta No:</label>
+										<input type="number" class="form-control" name="acta">
+									</div>
+
+									<div class="col-md-4">
+										<label class="col-md-12 control-label">Entidad:</label>
+										<input type="text" class="form-control" name="entidad">
+									</div>						
+								</div>
+
+								<br><br><br><br>
+
+								<div class="form-group">
+									<div class="col-md-4">
+										<label class="col-md-6 control-label">Razón Social:</label>
+										<input type="text" class="form-control" name="razonSocial">
+									</div>
+									<div class="col-md-2">
+										<label class="col-md-6 control-label">Nit/CC:</label>
+										<input type="text" class="form-control" name="nit_cc">
+									</div>
+									<div class="col-md-4">
+										<label class="col-md-12 control-label">Nombre Comercial:</label>
+										<input type="text" class="form-control" name="nit_cc">
+									</div>
+									<div class="col-md-2">
+										<label class="col-md-12 control-label">Inscripción No:</label>
+										<input type="number" class="form-control" name="inscripcion">
+									</div>
+								</div><!-- Fin del form-group -->
+								<br><br><br><br>
+							</div><!-- Fin del tab-pane -->	
+
+							<div role="tabpanel" aria-labelledby="evaluacion-tab" class="tab-pane fade" id="evaluacion">
+
+								<br>
+
+								<div class="col-md-12">
+									<div class="panel panel-default">
+										<div class="panel-heading">
+											I CONDICIONES SANITARIAS DE INSTALACIÓN Y PROCESO
+										</div>
+												
+										<div class="panel-body">
+											<div class="col-md-6">
+												<div class="form-group" style="border-style:ridge; padding:3px">
+													<table class="table" style="font-size:12px">
+														<thead>
+															<tr>
+																<th scope="col">1. EDIF. E INSTALACIONES</th>
+																<th scope="col">P</th>
+																<th scope="col">EVALUA.</th>
+																<th scope="col">HALLAZGOS</th>
+															</tr>
+														</thead>
+														<tbody>	
+															<tr>
+																<th scope="row">1.1 Localización y diseño</th>
+																<td>4</td>
+																<td>
+																	<select class="form-control">
+																		<option value="A">1</option>
+																		<option value="AR">2</option>
+																		<option value="3">3</option>
+																	</select>
+																</td>
+																<td><textarea class="form-control"></textarea></td>
+															</tr>
+															<tr>
+																<th scope="row">1.2 Condiciones en pisos y paredes</th>
+																<td>4</td>
+																<td>
+																	<select class="form-control">
+																		<option value="A">1</option>
+																		<option value="AR">2</option>
+																		<option value="3">3</option>
+																	</select>
+																</td>
+																<td><textarea class="form-control"></textarea></td>
+															</tr>
+															<tr>
+																<th scope="row">1.3 Techos, iluminación y ventilación</th>
+																<td>4</td>
+																<td>
+																	<select class="form-control">
+																		<option value="A">1</option>
+																		<option value="AR">2</option>
+																		<option value="3">3</option>
+																	</select>
+																</td>
+																<td><textarea class="form-control"></textarea></td>
+															</tr>
+															<tr>
+																<th scope="row">1.4 Instalaciones Sanitarias</th>
+																<td>5</td>
+																<td>
+																	<select class="form-control">
+																		<option value="A">1</option>
+																		<option value="AR">2</option>
+																		<option value="3">3</option>
+																	</select>
+																</td>
+																<td><textarea class="form-control"></textarea></td>
+															</tr>
+														</tbody>
+													</table>
+
+													<div class="col-md-4">
+														<button class="btn btn-primary">Eval. bloque 1</button>
+													</div>
+													<div class="col-md-5">
+														<input type="text" class="form-control">
+													</div>
+													<div class="col-md-3">
+														<label>17%</label>
+													</div>
+												<br><br>
+												</div>
+
+												<div class="form-group" style="border-style:ridge; padding:3px">
+													<table class="table" style="font-size:12px">
+														<thead>
+															<tr>
+																<th scope="col">2. EQUIPOS Y UTENSILIOS</th>
+																<th scope="col">P</th>
+																<th scope="col">EVALUA.</th>
+																<th scope="col">HALLAZGOS</th>
+															</tr>
+														</thead>
+														<tbody>	
+															<tr>
+																<th scope="row">2.1 Condiciones de equipos y utensilios</th>
+																<td>6</td>
+																<td>
+																	<select class="form-control">
+																		<option value="A">1</option>
+																		<option value="AR">2</option>
+																		<option value="3">3</option>
+																	</select>
+																</td>
+																<td><textarea class="form-control"></textarea></td>
+															</tr>
+															<tr>
+																<th scope="row">2.2 Condiciones de equipos de conservación</th>
+																<td>7</td>
+																<td>
+																	<select class="form-control">
+																		<option value="A">1</option>
+																		<option value="AR">2</option>
+																		<option value="3">3</option>
+																	</select>
+																</td>
+																<td><textarea class="form-control"></textarea></td>
+															</tr>							
+														</tbody>
+													</table>
+
+													<div class="col-md-4">
+														<button class="btn btn-primary">Eval. bloque 2</button>
+													</div>
+													<div class="col-md-5">
+														<input type="text" class="form-control">
+													</div>
+													<div class="col-md-3">
+														<label>13%</label>
+													</div>
+												<br><br>			
+												</div>
+
+												<div class="form-group" style="border-style:ridge; padding:3px">
+													<table class="table" style="font-size:12px">
+														<thead>
+															<tr>
+																<th scope="col">3. PERSONAL MANIPULADOR DE ALIMENTOS</th>
+																<th scope="col">P</th>
+																<th scope="col">EVALUA.</th>
+																<th scope="col">HALLAZGOS</th>
+															</tr>
+														</thead>
+														<tbody>	
+															<tr>
+																<th scope="row">3.1 Estado de salud (signos y lesiones)</th>
+																<td>8</td>
+																<td>
+																	<select class="form-control">
+																		<option value="A">1</option>
+																		<option value="AR">2</option>
+																		<option value="3">3</option>
+																	</select>
+																</td>
+																<td><textarea class="form-control"></textarea></td>
+															</tr>
+															<tr>
+																<th scope="row">3.2 Prácticas higiénicas</th>
+																<td>8</td>
+																<td>
+																	<select class="form-control">
+																		<option value="A">1</option>
+																		<option value="AR">2</option>
+																		<option value="3">3</option>
+																	</select>
+																</td>
+																<td><textarea class="form-control"></textarea></td>
+															</tr>						
+														</tbody>
+													</table>
+
+													<div class="col-md-4">
+														<button class="btn btn-primary">Eval. bloque 3</button>
+													</div>
+													<div class="col-md-5">
+														<input type="text" class="form-control">
+														</div>
+													<div class="col-md-3">
+														<label>16%</label>
+													</div>
+												<br><br>		
+												</div>
+											</div>
+
+											<div class="form-group col-md-6" style="border-style:ridge; padding:10px">
+												<table class="table" style="font-size:12px">
+													<thead>
+														<tr>
+															<th scope="col">4. REQUISITOS HIGIÉNICOS</th>
+															<th scope="col">P</th>
+															<th scope="col">EVALUA.</th>
+															<th scope="col">HALLAZGOS</th>
+														</tr>
+													</thead>
+													<tbody>	
+														<tr>
+															<th scope="row">4.1 Requisitos legales</th>
+															<td>7</td>
+															<td>
+																<select class="form-control">
+																	<option value="A">1</option>
+																	<option value="AR">2</option>
+																	<option value="3">3</option>
+																</select>
+															</td>
+															<td><textarea class="form-control"></textarea></td>
+														</tr>
+														<tr>
+															<th scope="row">4.2 Manejo de temperatura</th>
+															<td>9</td>
+															<td>
+																<select class="form-control">
+																	<option value="A">1</option>
+																	<option value="AR">2</option>
+																	<option value="3">3</option>
+																</select>
+															</td>
+															<td><textarea class="form-control"></textarea></td>
+														</tr>
+														<tr>
+															<th scope="row">4.3 Condiciones de almacenamiento</th>
+															<td>5</td>
+															<td>
+																<select class="form-control">
+																	<option value="A">1</option>
+																	<option value="AR">2</option>
+																	<option value="3">3</option>
+																</select>
+															</td>
+															<td><textarea class="form-control"></textarea></td>
+														</tr>						
+													</tbody>
+												</table>
+
+												<div class="col-md-4">
+													<button class="btn btn-primary">Eval. bloque 4</button>
+												</div>
+												<div class="col-md-5">
+													<input type="text" class="form-control">
+												</div>
+												<div class="col-md-3">
+													<label>21%</label>
+												</div>
+													
+											</div>
+
+											<div class="form-group col-md-6" style="border-style:ridge; padding:3px">
+												<table class="table" style="font-size:12px">
+													<thead>
+														<tr>
+															<th scope="col">5. SANEAMIENTO</th>
+															<th scope="col">P</th>
+															<th scope="col">EVALUA.</th>
+															<th scope="col">HALLAZGOS</th>
+														</tr>
+													</thead>
+													<tbody>	
+														<tr>
+															<th scope="row">5.1 Suministro y calidad de agua potable</th>
+															<td>7</td>
+															<td>
+																<select class="form-control">
+																	<option value="A">1</option>
+																	<option value="AR">2</option>
+																	<option value="3">3</option>
+																</select>
+															</td>
+															<td><textarea class="form-control"></textarea></td>
+														</tr>
+														<tr>
+															<th scope="row">5.2 Residuos líquidos</th>
+															<td>5</td>
+															<td>
+																<select class="form-control">
+																	<option value="A">1</option>
+																	<option value="AR">2</option>
+																	<option value="3">3</option>
+																</select>
+															</td>
+															<td><textarea class="form-control"></textarea></td>
+														</tr>
+														<tr>
+															<th scope="row">5.3 Residuos sólidos</th>
+															<td>5</td>
+															<td>
+																<select class="form-control">
+																	<option value="A">1</option>
+																	<option value="AR">2</option>
+																	<option value="3">3</option>
+																</select>
+															</td>
+															<td><textarea class="form-control"></textarea></td>
+														</tr>
+														<tr>
+															<th scope="row">5.4 Control integral de plagas</th>
+															<td>9</td>
+															<td>
+																<select class="form-control">
+																	<option value="A">1</option>
+																	<option value="AR">2</option>
+																	<option value="3">3</option>
+																</select>
+																</td>
+															<td><textarea class="form-control"></textarea></td>
+														</tr>
+														<tr>
+															<th scope="row">5.5 Limpieza y desinfección de áreas, equipos y utensilios</th>
+															<td>7</td>
+															<td>
+																<select class="form-control">
+																	<option value="A">1</option>
+																	<option value="AR">2</option>
+																	<option value="3">3</option>
+																</select>
+																</td>
+															<td><textarea class="form-control"></textarea></td>
+														</tr>
+													</tbody>
+												</table>
+
+												<div class="col-md-4">
+													<button class="btn btn-primary">Eval. bloque 5</button>
+												</div>
+												<div class="col-md-5">
+													<input type="text" class="form-control">
+												</div>
+												<div class="col-md-3">
+													<label>33%</label>
+												</div>
+														
+											</div>
+
+										</div>
+									</div>
+								</div>
+										
+								<div class="col-md-6">										
+									<div class="panel panel-default">
+										<div class="panel-heading">
+											II CONCEPTOS SANITARIOS
+										</div>
+												
+										<div class="panel-body">
+											<div class="form-group">
+												<h1>prueba</h1>
+											</div>
+										</div>
+									</div>
+
+									<div class="panel panel-default">
+										<div class="panel-heading">
+											V APLICACIÓN DE MEDIDA SANITARIA DE SEGURIDAD
+										</div>											
+										<div class="panel-body">
+											<div class="form-group">
+												<h1>prueba</h1>
+											</div>
+										</div>
+									</div>
+
+								</div>
+										
+								<div class="col-md-6">
+									<div class="panel panel-default">
+										<div class="panel-heading">
+											III RELACIÓN DE MUESTRAS TOMADAS EN EL ESTABLECIMIENTO
+										</div>											
+										<div class="panel-body">
+											<div class="form-group">
+												<h1>prueba</h1>
+											</div>
+										</div>
+									</div>									
+								</div>
+									
+							</div>
+
+							<div role="tabpanel" aria-labelledby="observacion-tab" class="tab-pane fade" id="observaciones">
+								<div class="form-group">
+									<h1>prueba</h1>
+								</div>
+							</div>
+
+						</div><!-- Fin del tab-content -->
+
+						<div class="form-group">
+	                        <div class="col-md-10 col-md-offset-2">
+	                            <button type="submit" class="btn btn-primary">
+	                                Guardar
+	                            </button>
+	                        </div>
+	                    </div>
+
+					</div><!-- Fin del Panel-body -->
+				</div><!-- Fin del panel default -->
+			</div><!-- Fin del Row -->
+		</div><!-- Fin del container -->
+
+	</body>
+
+</html>

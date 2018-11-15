@@ -1,0 +1,163 @@
+*{
+	margin: 0px;
+	padding: 0px;
+	text-decoration: none;
+	font-family: Verdana;
+	letter-spacing: 0px;
+}
+
+body{
+	background: white;
+}
+
+.clearfix{
+	clear: both;
+	float: none;
+}
+
+.container{
+	width: 85%;
+	margin: 0px auto; /* Centrar un bloque */
+}
+
+/* Estilos de cabecera */
+header{
+	/*background-color: yellow;*/
+	height: 200px;
+	/*line-height: 160px;*/
+	padding-top: 40px;
+	padding-left: 80px;
+	padding-right: 100px;
+}
+
+header img{
+	float: left;
+}
+
+.titulos{
+	text-align: center;
+}
+
+#menu1{
+	margin-top: 30px;
+	width: 48%;
+	float:left;
+}
+
+#menu2{
+	width: 48%;
+	float: left;
+	margin-top: 30px;
+}
+
+#inscripciones{
+	width: 130px;
+	margin-left: 80px;
+	margin-right: 20px;
+	margin-top: 150px;
+	float: left;
+	/*text-align: center;*/
+}
+
+#llave{
+	margin-top: 100px;
+	float: left;
+}
+
+#derivadosInscripciones{
+	float: left;
+}
+
+#derivadosInscripciones h4{
+	margin-bottom: 80px;
+	margin-top: 107px;
+}
+
+#llave1{
+	margin-top: 38px;
+	float: left;
+}
+
+#derivadosEstablecimientos h4{
+	margin-top: 50px;
+	margin-bottom: -30px;
+}
+
+#llave2{
+	margin-top: 55px;
+	margin-left: -30px;
+	float: left;
+}
+
+#llave2 img{
+	height: 60px;
+}
+
+#derivadosVehiculos{
+	margin-top: 72px;
+}
+
+#actas{
+	width: 130px;
+	margin-left: 50px;
+	margin-right: 0px;
+	margin-top: 212px;
+	float: left;
+	/*text-align: center;*/
+}
+
+#llave3{
+	margin-left: -70px;
+	margin-top: 120px;
+	float: left;
+}
+
+#llave3 img{
+	height: 200px;
+}
+
+#derivadosActas{
+	float: left;
+	margin-left: 0px;
+}
+
+#derivadosActas h4{
+	margin-top: 120px;
+	margin-bottom: 70px;
+}
+
+#llave4{
+	margin-top: 0px;
+	float: left;
+}
+
+#llave4 img{
+	height: 250px;
+}
+
+#deriActaEstablecimientos h4{
+	margin-top: 15px;
+	margin-bottom: -10px;
+}
+
+#llave5{
+	margin-top: 50px;
+	margin-left: -50px;
+	float: left;
+}
+
+#llave5 img{
+	height: 60px;
+}
+
+#deriActaVehiculos{
+	margin-top: 62px;
+}
+
+
+
+/*@media all and (max-width: 1000px){
+	header{
+		background: red;
+	}
+}*/

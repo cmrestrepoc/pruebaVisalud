@@ -1,10 +1,20 @@
+//imports
+importScripts('https://cdn.jsdelivr.net/npm/pouchdb@7.0.0/dist/pouchdb.min.js');
+
+importScripts('./js/sw-db.js');
 // Asignar un nombre y versión de la cache
 const CACHE_NAME = 'v2_cache_visalud_pwa';
 
 // ficheros a cachear en la aplicación
 var urlsToCache = [
 	'./',
-	'./styles.css',
+	'./css/styles.css',
+	'./css/bootstrap.css',
+	'./css/bootstrap.min.css',
+	'./js/bootstrap.js',
+	'./js/bootstrap.min.js',
+	'./js/jquery-3.3.1.slim.min.js',
+	'./js/pouchdb.min.js',
 	'./img/escudo130.ico',
 	'./img/escudo.png',
 	'./img/escudo.jpg',
