@@ -176,9 +176,9 @@ function eliminarInscritos(){
 
 //Aquí se usa la función json(), que funciona similar a JSON.parse()
 function cargarInscritos(){
-	fetch('http://192.168.0.5/formularioVisaludAPI/public/inscritos/create')
+	fetch('https://192.168.0.5/formularioVisaludAPI/public/inscritos/create')
 		.then( res => {
-			fetch('http://192.168.0.5/formularioVisaludAPI/public/inscritos')
+			fetch('https://192.168.0.5/formularioVisaludAPI/public/inscritos')
 				.then( resp => resp.json() )
 				.then( respObj => {
 					//console.log (id);
