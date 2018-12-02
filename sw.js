@@ -72,13 +72,21 @@ self.addEventListener('activate', e => {
 original desde el servidor una vez haya conexión 
 a internet */
 self.addEventListener('fetch', e => {
-	const respuesta = caches.open(CACHE_NAME).then( cache => {
+	const respuesta = fetch( e.request ).then( res => {
 
-		fetch( e.request ).then( newResp => 
-			cache.put( e.request, newResp ));
-		
-		return cache.match( e.request );
+		if(!res) return caches.match(e.request);
+
+		caches.open( CACHE_NAME )
+			.then( cache => {
+				cache.put(e.request, res);
+				//limpiarCache( CACHE_NAME, 20 );
+			});
+
+		return res.clone();
+
+	}).catch( err => {
+		return caches.match( e.request );
 	});
-
+	
 	e.respondWith( respuesta );
 });
