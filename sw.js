@@ -78,8 +78,6 @@ self.addEventListener('fetch', e => {
 			cache.put( e.request, newResp ));
 		
 		return cache.match( e.request );
-	}).catch( err => {
-		return fetch(e.request);
 	});
 
 	e.respondWith( respuesta );
