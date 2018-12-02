@@ -72,15 +72,13 @@ self.addEventListener('activate', e => {
 original desde el servidor una vez haya conexión 
 a internet */
 self.addEventListener('fetch', e => {
-	e.respondWith(
-		caches.match(e.request)
-			  .then(res => {
-			  	if(res){
-			  		// Se devuelven los datos desde el cache
-			  		return res;
-			  	}
+	const respuesta = caches.open(CACHE_NAME).then( cache => {
 
-			  	return fetch(e.request);
-			  })
-	);
+		fetch( e.request ).then( newResp => 
+			cache.put( e.request, newResp ));
+		
+		return cache.match( e.request );
+	});
+
+	e.respondWith( respuesta );
 });
