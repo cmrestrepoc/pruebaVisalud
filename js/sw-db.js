@@ -176,34 +176,31 @@ function eliminarInscritos(){
 
 //Aquí se usa la función json(), que funciona similar a JSON.parse()
 function cargarInscritos(){
-	fetch('https://192.168.0.5/formularioVisaludAPI/public/inscritos/create')
-		.then( res => {
-			fetch('https://192.168.0.5/formularioVisaludAPI/public/inscritos')
-				.then( resp => resp.json() )
-				.then( respObj => {
-					//console.log (id);
-					//console.log(respObj);
-					//eliminarInscritos();
-					db.destroy().then( resp => {
-						console.log('Base de datos anterior eliminada');
-						db = new PouchDB('pruebaVisalud');
-						console.log('Nueva base de datos creada');
-						respObj.forEach(function(registro){
-							var id = { _id: registro.id.toString() };
-							// Con la siguiente línea se añade la variable _id al objeto			
-							registro = Object.assign(id,registro);   
-							//console.log(registro);
-							db.put(registro, function callback(err, result){
-								if (!err) {
-									console.log('inscrito guardado en base de datos');
-								}else {
-									console.log('problemas guardando inscrito en base de datos', err);
-								}
-							});
-						});
-						mostrarInscritos();
+	fetch('https://sisbenpro.com/public/inscritosVisual')
+		.then( resp => resp.json() )
+		.then( respObj => {
+			//console.log (id);
+			//console.log(respObj);
+			//eliminarInscritos();
+			db.destroy().then( resp => {
+				console.log('Base de datos anterior eliminada');
+				db = new PouchDB('pruebaVisalud');
+				console.log('Nueva base de datos creada');
+				respObj.forEach(function(registro){
+					var id = { _id: registro.id.toString() };
+					// Con la siguiente línea se añade la variable _id al objeto			
+					registro = Object.assign(id,registro);   
+					//console.log(registro);
+					db.put(registro, function callback(err, result){
+						if (!err) {
+							console.log('inscrito guardado en base de datos');
+						}else {
+							console.log('problemas guardando inscrito en base de datos', err);
+						}
 					});
 				});
+				mostrarInscritos();
+			});
 		});	
 }
 
