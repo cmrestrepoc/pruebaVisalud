@@ -151,6 +151,22 @@ function createColumns(arreglo){
 	return td;
 }
 
+function createRadio(id){
+	var radio = document.createElement('input');
+	radio.type = 'radio';
+	radio.setAttribute('name',"seleInscrito");
+	radio.value = id;
+
+	var span = document.createElement('span');
+	span.className = 'input-group-addon';
+	span.appendChild(radio);
+
+	var td = document.createElement('td');
+	td.appendChild(span);
+
+	return td;
+}
+
 function mostrarInscritos(){
 	db.allDocs({include_docs: true, descending: true}).then ( doc => {
 		var tbody = document.getElementById('inscritos');
@@ -165,8 +181,10 @@ function mostrarInscritos(){
 			tr.appendChild(createColumns(registro.doc.N_INSCRIP));
 			tr.appendChild(createColumns(registro.doc.FECHA));
 			tr.appendChild(createColumns(registro.doc.NOMBRE_P));
+			tr.appendChild(createRadio(registro.doc.id));
 			tbody.appendChild(tr);
 		});
+		$('#tablaInscritos').DataTable();
 	});
 }
 
@@ -176,13 +194,14 @@ function eliminarInscritos(){
 
 //Aquí se usa la función json(), que funciona similar a JSON.parse()
 function cargarInscritos(){
+	//fetch('http://localhost/formularioVisaludAPI/public/inscritos')
 	fetch('https://sisbenpro.com/public/inscritosVisual')
 		.then( resp => resp.json() )
 		.then( respObj => {
 			//console.log (id);
 			//console.log(respObj);
 			//eliminarInscritos();
-			db.destroy().then( resp => {
+			db.destroy().then( response => {
 				console.log('Base de datos anterior eliminada');
 				db = new PouchDB('pruebaVisalud');
 				console.log('Nueva base de datos creada');
@@ -201,7 +220,7 @@ function cargarInscritos(){
 				});
 				mostrarInscritos();
 			});
-		});	
+		});
 }
 
 //eliminarInscritos();
