@@ -4,26 +4,29 @@
 //importScripts('./js/sw-db.js');
 
 // Asignar un nombre y versión de la cache
-const CACHE_NAME = 'v2_cache_visalud_pwa';
+const CACHE_NAME = 'v1_cache_visalud_jamundi';
 
 // ficheros a cachear en la aplicación
 var urlsToCache = [
 	'./',
 	'./index.html',
 	'./menu0.html',
+	'./f26.html',
+	'./f243.html',
+	'./f333.html',
 	'./f440.html',
-	'./f493.html',
-	'./f479.html',
-	'./f444.html',
-	'./f495.html',
-	'./f474.html',
-	'./f480.html',
-	'./f442.html',
-	'./f478.html',
 	'./f441.html',
+	'./f442.html',
+	'./f444.html',
 	'./f472.html',
+	'./f474.html',
 	'./f475.html',
+	'./f478.html',
+	'./f479.html',
+	'./f480.html',
 	'./f481.html',
+	'./f493.html',
+	'./f495.html',
 	'./firmaEvaluacion.html',
 	'./firmaInscripcion.html',
 	'./css/styles.css',
@@ -39,8 +42,6 @@ var urlsToCache = [
 	'./js/jquery.jqscribble.js',
 	'./js/jquery.extrabrushes.js',
 	'./js/login.js',
-	'./img/escudo130.ico',
-	'./img/escudo.png',
 	'./img/escudo.jpg',
 	'./img/llave.png'
 ];

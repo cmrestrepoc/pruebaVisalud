@@ -1,7 +1,7 @@
 {
-	"name": "Candelaria PWA test",
+	"name": "VISALUD JAMUNDÍ",
 	"short_name": "VISALUD",
-	"description": "Aplicación para captura de datos de establecimientos",
+	"description": "Aplicación para el ejercicio de vigilancia en salud pública sobre establecimientos y vehículos",
 	"background_color": "#FFF",
 	"theme_color": "#65c0ba",
 	"orientation": "landscape",
@@ -11,24 +11,9 @@
 	"lang": "es-CO",
 	"icons": [
 		{
-			"src": "./img/escudo130.ico",
-			"sizes": "100x112",
-			"type": "image/ico"
-		},
-		{
 			"src": "./img/escudo.jpg",
 			"sizes": "100x112",
 			"type": "image/jpg"
-		},
-		{
-			"src": "./img/escudo.png",
-			"sizes": "144x144",
-			"type": "image/png"
-		},
-		{
-			"src": "./img/llave.png",
-			"sizes": "51x153",
-			"type": "image/png"
 		}
 	]
 }
