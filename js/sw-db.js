@@ -1391,7 +1391,7 @@ function guardarEvaluacion(formulario){
 				}
 				console.log(tipoEsta);
 				adicional = {
-					ACTIVIDAD: tipoEsta,
+					ACTIVIDAD: JSON.stringify(tipoEsta),
 					CUAL: document.getElementsByName('cualEstab')[0].value,
 					E14: document.getElementsByName('evaluacion_1')[3].value,
 					H14: document.getElementsByName('hallazgos_1_4')[0].value,
@@ -1425,7 +1425,7 @@ function guardarEvaluacion(formulario){
 				}
 				console.log(tipoEsta);
 				adicional = {
-					ACTIVIDAD: tipoEsta,
+					ACTIVIDAD: JSON.stringify(tipoEsta),
 					E22: document.getElementsByName('evaluacion_2')[1].value,
 					H22: document.getElementsByName('hallazgos_2_2')[0].value,
 					E33: document.getElementsByName('evaluacion_3')[2].value,
@@ -1447,7 +1447,7 @@ function guardarEvaluacion(formulario){
 					document.getElementsByName('tipoEstablecimiento')[i].checked ? tipoEsta.push(document.getElementsByName('tipoEstablecimiento')[i].value) : console.log(i);
 				}
 				adicional = {
-					ACTIVIDAD: tipoEsta,
+					ACTIVIDAD: JSON.stringify(tipoEsta),
 					E14: document.getElementsByName('evaluacion_1')[3].value,
 					H14: document.getElementsByName('hallazgos_1_4')[0].value,
 					E15: document.getElementsByName('evaluacion_1')[4].value,
@@ -1480,9 +1480,8 @@ function guardarEvaluacion(formulario){
 				for (let i = 0; i < document.getElementsByName('tipoEstablecimiento').length; i++) {
 					document.getElementsByName('tipoEstablecimiento')[i].checked ? tipoEsta.push(document.getElementsByName('tipoEstablecimiento')[i].value) : console.log(i);
 				}
-				console.log(tipoEsta);
 				adicional = {
-					ACTIVIDAD: tipoEsta,
+					ACTIVIDAD: JSON.stringify(tipoEsta),
 					GRS: document.getElementsByName('grs')[0].value,
 					GRSCON: document.getElementsByName('grscon')[0].value,
 					E14: document.getElementsByName('evaluacion_1')[3].value,
@@ -1526,9 +1525,8 @@ function guardarEvaluacion(formulario){
 				for (let i = 0; i < document.getElementsByName('tipoEstablecimiento').length; i++) {
 					document.getElementsByName('tipoEstablecimiento')[i].checked ? tipoEsta.push(document.getElementsByName('tipoEstablecimiento')[i].value) : console.log(i);
 				}
-				console.log(tipoEsta);
 				adicional = {
-					ACTIVIDAD: tipoEsta,
+					ACTIVIDAD: JSON.stringify(tipoEsta),
 					E11: document.getElementsByName('evaluacion_1')[0].value,
 					H11: document.getElementsByName('hallazgos_1_1')[0].value,
 					E12: document.getElementsByName('evaluacion_1')[1].value,
@@ -1551,9 +1549,12 @@ function guardarEvaluacion(formulario){
 			case '481':
 				preguntasComunes = comunesEvaluadosEstabPreguntas(formulario);
 				evaluadoEsta = guardarEvaluadosEstablecimientos(formulario);
-				let ata = document.getElementsByName('tipoEstablecimiento')[0].checked ? '' : 'X';
+				tipoEsta = [];
+				for (let i = 0; i < document.getElementsByName('tipoEstablecimiento').length; i++) {
+					document.getElementsByName('tipoEstablecimiento')[i].checked ? tipoEsta.push(document.getElementsByName('tipoEstablecimiento')[i].value) : console.log(i);
+				}
 				adicional = {
-					ATA: ata,
+					ACTIVIDAD: JSON.stringify(tipoEsta),
 					E14: document.getElementsByName('evaluacion_1')[3].value,
 					H14: document.getElementsByName('hallazgos_1_4')[0].value,
 					E33: document.getElementsByName('evaluacion_3')[2].value,
