@@ -19,104 +19,64 @@
 		<!-- Configuración General PWA -->
 		<link rel="manifest" href="manifest.json" />
 
-
+		<link rel="stylesheet" type="text/css" href="./css/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="./css/styles.css">
 
 		<script src="./js/jquery-3.3.1.slim.min.js"></script>
 		<script src="./js/bootstrap.js"></script>
 		<script src="./js/bootstrap.min.js"></script>
 		<script src="./js/pouchdb.min.js"></script>
-		<script type="text/javascript" src="main.js"></script>
+		<script src="main.js" type="text/javascript"></script>
+		<script src="./js/login.js" type="text/javascript"></script>
 
 	</head>
 
 	<body>
 		<header>
-			<img src="./img/escudo.jpg" />
+			<a href="index.html">
+				<img src="./img/escudo.jpg" />
+			</a>
 			<div class="titulos">
 				<h1>MUNICIPIO DE CANDELARIA (V)</h1>
 				<h2>Vigilancia en Salud Pública</h2>
-				<h4>Control de Riesgo en Alimentos y Bebidas</h4>
-				<h4>IVC a Establecimientos y Vehículos</h4>
+			</div>
+		</header><br><br>
+
+		<div class="container">
+
+			<div class="panel panel-primary col-md-6 col-md-offset-3">
+				<div class="panel-heading">
+					INGRESO - APLICACIÓN VISALUD
+				</div>
+				<div class="panel-body">
+					<div class="form-group">
+						<h5>Para ingresar a la aplicación, debe ingresar sus credenciales</h5>
+					</div>
+					<br>
+					<div class="form-group">
+						<label class="col-md-5 control-label">Nombre de Usuario:</label>
+						<div class="col-md-7">
+							<input type="text" class="form-control" name="nomUsuario">
+						</div>						
+						<br><br><br>
+						<label class="col-md-3 col-md-offset-2 control-label">Clave:</label>
+						<div class="col-md-7">
+							<input type="password" class="form-control" name="password">
+						</div>
+					</div>
+					<br><br><br>
+					<div class="form-group">
+	                        <div class="col-md-3 col-md-offset-4">
+	                            <a type="submit" onclick="login()" class="btn btn-primary">
+	                                Enviar
+	                            </a>
+	                        </div>
+	                    </div><!-- Fin del form-group -->
+				</div>
 			</div>
 
-		</header>
-
-		<section id="menu1">
-			<div id="inscripciones">
-				<h4>Inscripiciones, Autorizaciones, diagnósticos</h4>
-			</div>
-
-			<div id="llave">
-				<img src="./img/llave.png">
-			</div>
-
-			<div id="derivadosInscripciones">
-				<h4>Establecimientos</h4>
-				<h4>Vehículos</h4>
-			</div>
-
-			<div id="llave1">
-				<img src="./img/llave.png">
-			</div>
-
-			<div id="derivadosEstablecimientos">
-				<h4>FT-442</h4>
-				<h4>FT-443</h4>
-				<h4>FT-569</h4>
-				<h4><a href="f493.html">FT-493</a></h4>
-			</div>
-
-			<div id="llave2">
-				<img src="./img/llave.png">
-			</div>
-
-			<div id="derivadosVehiculos">
-				<h4>FT-444</h4>
-			</div>
-		</section>
-		
-		<section id="menu2">
-			<div id="actas">
-				<h4>Actas</h4>
-			</div>
-
-			<div id="llave3">
-				<img src="./img/llave.png">
-			</div>
-
-			<div id="derivadosActas">
-				<h4>Establecimientos</h4>
-				<h4 style="margin-top:170px">Vehículos</h4>
-			</div>
-
-			<div id="llave4">
-				<img src="./img/llave.png">
-			</div>
-
-			<div id="deriActaEstablecimientos">
-				<h4>FT-243</h4>
-				<h4>FT-333</h4>
-				<h4><a href="f440.html">FT-440</a></h4>
-				<h4>FT-474</h4>
-				<h4>FT-475</h4>
-				<h4>FT-478</h4>
-				<h4>FT-479</h4>
-				<h4>FT-480</h4>
-				<h4>FT-481</h4>
-				<h4>FT-495</h4>
-			</div>
-
-			<div id="llave5">
-				<img src="./img/llave.png">
-			</div>
-
-			<div id="deriActaVehiculos">
-				<h4>FT-441</h4>
-				<h4>FT-472</h4>
-			</div>
-		</section>
-
+		</div>
 	</body>
 
-</html>
+</html>	

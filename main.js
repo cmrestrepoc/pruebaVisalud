@@ -11,110 +11,89 @@ if('serviceWorker' in navigator){
 	console.log('NO PUEDES usar los serviceWorker en tu navegador');
 }
 
-function setConcepto() {
-	var concepto = document.getElementsByName('concepto')[0].value;
+function setConcepto(objeto, destino) {
+	var concepto = objeto.value;
 
 	switch(concepto){
 		case '1':
-			document.getElementsByName('textoConcepto')[0].value = 'Aceptable';
+			document.getElementsByName(destino)[0].value = 'FAVORABLE';
 			break;
 		case '2':
-			document.getElementsByName('textoConcepto')[0].value = 'Aceptable con requerimientos';
+			document.getElementsByName(destino)[0].value = 'FAVORABLE CON REQUERIMIENTOS';
 			break;
 		case '3':
-			document.getElementsByName('textoConcepto')[0].value = 'Desfavorable';
+			document.getElementsByName(destino)[0].value = 'DESFAVORABLE';
 			break;
 		default:
-			document.getElementsByName('textoConcepto')[0].value = '';
+			document.getElementsByName(destino)[0].value = '';
 	}
 }
 
-function setMotivo() {
-	var motivo = document.getElementsByName('motivo')[0].value;
+function setMotivo(objeto, destino) {
+	var motivo = objeto.value;
 
 	switch(motivo){
 		case '01':
-			document.getElementsByName('textoMotivo')[0].value = 'PROGRAMACIÓN';
+			document.getElementsByName(destino)[0].value = 'PROGRAMACIÓN';
 			break;
 		case '02':
-			document.getElementsByName('textoMotivo')[0].value = 'SOLICITUD DEL INTERESADO';
+			document.getElementsByName(destino)[0].value = 'SOLICITUD DEL INTERESADO';
 			break;
 		case '03':
-			document.getElementsByName('textoMotivo')[0].value = 'ASOCIADA A PQRS';
+			document.getElementsByName(destino)[0].value = 'ASOCIADA A PQRS';
 			break;
 		case '04':
-			document.getElementsByName('textoMotivo')[0].value = 'SOLICITUD OFICIAL';
+			document.getElementsByName(destino)[0].value = 'SOLICITUD OFICIAL';
 			break;
 		case '05':
-			document.getElementsByName('textoMotivo')[0].value = 'SEGUIMIENTO A VISITA ANTERIOR';
+			if(destino == 'textoMotivo440'){
+				document.getElementsByName(destino)[0].value = 'SEGUIMIENTO A VISITA ANTERIOR';
+			}else{
+				document.getElementsByName(destino)[0].value = 'EVENTO DE INTERÉS EN SALUD PÚBLICA';
+			};
 			break;
 		case '06':
-			document.getElementsByName('textoMotivo')[0].value = 'SOLICITUD DE PRÁCTICA DE PRUEBAS/PR';
+			document.getElementsByName(destino)[0].value = 'SOLICITUD DE PRÁCTICA DE PRUEBAS/PR';
 			break;
 		case '09':
-			document.getElementsByName('textoMotivo')[0].value = 'OTRO';
+			document.getElementsByName(destino)[0].value = 'OTRO';
 			break;
 		default:
-			document.getElementsByName('textoMotivo')[0].value = '';
+			document.getElementsByName(destino)[0].value = '';
 	}
 }
 
-var puntajeBloque1 = 0;
-var puntajeBloque2 = 0;
-var puntajeBloque3 = 0;
-var puntajeBloque4 = 0;
-var puntajeBloque5 = 0;
+var puntajeBloques = [];
 
-function evaluarBloque1(){
-	var puntaje1 = document.getElementsByName('evaluacion_1_1')[0].value;
-	var puntaje2 = document.getElementsByName('evaluacion_1_2')[0].value;
-	var puntaje3 = document.getElementsByName('evaluacion_1_3')[0].value;
-	var puntaje4 = document.getElementsByName('evaluacion_1_4')[0].value;
-
-	puntajeBloque1 = (puntaje1*4 + puntaje2*4 + puntaje3*4 + puntaje4*5);
-	document.getElementsByName('evalBloque1')[0].value = puntajeBloque1;
-
-}
-
-function evaluarBloque2(){
-	var puntaje1 = document.getElementsByName('evaluacion_2_1')[0].value;
-	var puntaje2 = document.getElementsByName('evaluacion_2_2')[0].value;
+function evaluarBloque(evaluacion, puntaje, resultado, indice){
+	var evaluaciones = document.getElementsByName(evaluacion);
+	var puntos = document.getElementsByName(puntaje);	
+	var i = 0;
+	var suma = 0;
 	
-	puntajeBloque2 = (puntaje1*6 + puntaje2*7);
-	document.getElementsByName('evalBloque2')[0].value = puntajeBloque2;
-}
-
-function evaluarBloque3(){
-	var puntaje1 = document.getElementsByName('evaluacion_3_1')[0].value;
-	var puntaje2 = document.getElementsByName('evaluacion_3_2')[0].value;
+	evaluaciones.forEach( eva => {
+		//console.log ((evaluaciones[i].value*puntos[i].innerHTML));
+		suma = suma + (eva.value*puntos[i].innerHTML);
+		i++;
+	})
 	
-	puntajeBloque3 = (puntaje1*8 + puntaje2*8);
-	document.getElementsByName('evalBloque3')[0].value = puntajeBloque3;
+	document.getElementsByName(resultado)[0].value = suma;
+	puntajeBloques[indice] = suma;
+	//console.log(puntajeBloques);
 }
 
-function evaluarBloque4(){
-	var puntaje1 = document.getElementsByName('evaluacion_4_1')[0].value;
-	var puntaje2 = document.getElementsByName('evaluacion_4_2')[0].value;
-	var puntaje3 = document.getElementsByName('evaluacion_4_3')[0].value;
 
-	puntajeBloque4 = (puntaje1*7 + puntaje2*9 + puntaje3*5);
-	document.getElementsByName('evalBloque4')[0].value = puntajeBloque4;
-}
-
-function evaluarBloque5(){
-	var puntaje1 = document.getElementsByName('evaluacion_5_1')[0].value;
-	var puntaje2 = document.getElementsByName('evaluacion_5_2')[0].value;
-	var puntaje3 = document.getElementsByName('evaluacion_5_3')[0].value;
-	var puntaje4 = document.getElementsByName('evaluacion_5_4')[0].value;
-	var puntaje5 = document.getElementsByName('evaluacion_5_5')[0].value;
-	
-	puntajeBloque5 = (puntaje1*7 + puntaje2*5 + puntaje3*5 + puntaje4*9 + puntaje5*7);
-	document.getElementsByName('evalBloque5')[0].value = puntajeBloque5;
-}
-
-function consolidarPuntaje(){
-	var puntajeTotal = puntajeBloque1 + puntajeBloque2 + puntajeBloque3 + puntajeBloque4 + puntajeBloque5;
+function consolidarPuntaje(con, puntaje){
+	var puntajeTotal = 0;
 	var concepto = 0;
+
+	for (var i = 0; i < puntajeBloques.length; i++) {
+		if(puntajeBloques[i] != null){
+			puntajeTotal += puntajeBloques[i];
+		}else{
+			puntajeTotal += 0;
+		}
+	};
 
 	if (puntajeTotal >= 90) {
 		concepto = 1;
@@ -124,6 +103,242 @@ function consolidarPuntaje(){
 		concepto = 3;
 	}
 	
-	document.getElementsByName('conceptoEval')[0].value = concepto;
-	document.getElementsByName('cumplimiento')[0].value = puntajeTotal;
+	//console.log(puntajeTotal);
+	document.getElementsByName(con)[0].value = concepto;
+	document.getElementsByName(puntaje)[0].value = puntajeTotal;
+}
+
+function crearInput(name, tipoInput){
+	let input = document.createElement('input');
+	input.type = tipoInput;
+	input.className = 'form-control';
+	input.setAttribute('name', name);
+
+	return input; 
+}
+
+function crearColumna(name, tipoInput){
+	let td = document.createElement('td');
+	td.appendChild(crearInput(name, tipoInput));
+	return td;
+}
+
+function crearMuestra(){
+	let tbody = document.getElementById('muestras');
+	let tr = document.createElement('tr');
+	//let listado = document.getElementById('listadoMuestras');
+	//let br = document.createElement('br');
+	
+	tr.appendChild(crearColumna('Orden', 'text'));
+	tr.appendChild(crearColumna('Um', 'text'));
+	tr.appendChild(crearColumna('Contenido', 'text'));
+	tr.appendChild(crearColumna('Producto', 'text'));
+	tr.appendChild(crearColumna('Temperatura', 'text'));
+	tr.appendChild(crearColumna('TipoEnvase', 'text'));
+	tr.appendChild(crearColumna('LoteFechaV', 'text'));
+	tr.appendChild(crearColumna('RegSanit', 'text'));
+
+	tbody.appendChild(tr);
+	//listado.parentNode.insertBefore(br, listado.nextSibling);
+}
+
+function crearMuestraCongelado(){
+	let tbody = document.getElementById('muestrasCongelado');
+	let tr = document.createElement('tr');
+	
+	tr.appendChild(crearColumna('producto', 'text'));
+	tr.appendChild(crearColumna('lote', 'text'));
+	tr.appendChild(crearColumna('presentaci', 'text'));
+	tr.appendChild(crearColumna('cantidad', 'text'));
+	tr.appendChild(crearColumna('fv', 'date'));
+	tr.appendChild(crearColumna('invima', 'text'));
+
+	tbody.appendChild(tr);
+	//listado.parentNode.insertBefore(br, listado.nextSibling);
+}
+
+function loginServer(){
+	let user = JSON.parse(localStorage.getItem('usuario'));
+	let clave = document.getElementsByName('password')[0].value;
+
+	let data = 'nombreUsuario='+user+'&clave='+clave;
+
+	let identity = {
+		usuario: user,
+		token: ''
+	};
+	//console.log(data);
+	fetch('https://sisbenpro.com/public/loginVisalud', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded'
+		},
+		body: data
+	})
+	.then( res => {
+		res.json()
+		.then( jsonRes => {
+			if (jsonRes.err != undefined) {
+				var identidad = JSON.parse(localStorage.getItem('identity'));
+				if (identidad != undefined) {
+					//identidad = JSON.parse(localStorage.getItem('identity'));
+					fetch('https://sisbenpro.com/public/cerrarSesion/'+identidad.usuario)
+					.then( res => res.json() )
+					.then( jsonRes => alert('Sesión cerrada por precaución. ' + jsonRes.res) );
+					localStorage.removeItem('identity');				
+				} else{
+					alert('Error: ' + jsonRes.err);
+				}
+				location.reload();
+			}else if (jsonRes.token == 'Usuario ya está loggeado') {
+				alert('Este usuario ya está loggeado');
+				history.back();
+			}else{
+				identity.token = jsonRes.token;
+				localStorage.setItem('identity', JSON.stringify(identity));
+				console.log('respuesta POST', jsonRes);
+				console.log(identity);
+				history.back();
+			}
+		});
+	})
+	.catch( err => alert('Problemas con la conexión a internet', err.json()) );
+}
+
+function estabNumInscripcion(valor, formulario){
+	document.getElementsByName('inscripcion' + formulario)[0].value += valor;
+}
+
+function vehiNumInscripcion(valor){
+	document.getElementsByName('inscripcion444')[0].value += valor;
+}
+
+function auxiliarInscVehi(valor){
+	if(document.getElementsByName('placaSrmque444')[0].value == '' && document.getElementsByName('placaRemolque444')[0].value == ''){
+		document.getElementsByName('inscripcion444')[0].value += valor;
+	}
+}
+
+function setSujeto(value, destino) {
+	switch(value){
+		case "479-1":
+			document.getElementsByName(destino)[0].value = "RESTAURANTES - PANADERIAS - Y/O PASTELERIAS - CAFETERIAS - FRUTERIAS - COMIDAS RAPIDAS - SERVICIO DE BANQUETES - OFERTA DE ALIMENTACION POR REDES S.";
+			break;
+		case "479-2":
+			document.getElementsByName(destino)[0].value = "COMEDORES ESCOLARES (INCLUYE PAE Y PRIVADOS) INFANTILES (ICBF - INPEC) - COLEGIOS Y UNIVERSIDADES";
+			break;
+		case "479-3":
+			document.getElementsByName(destino)[0].value = "COMEDORES CARCELARIOS (USPEC) - FUERZAS MILITARES Y POLICIVAS";
+			break;
+		case "479-4":
+			document.getElementsByName(destino)[0].value = "COMEDORES HOGARES GERIATRICOS - ASILOS - HOSPITALES - CASINOS DE EMPRESAS O FABRICAS - CLUBES SOCIALES";
+			break;
+		case "479-5":
+			document.getElementsByName(destino)[0].value = "HOTELES - MOTELES - HOSTALES - RESIDENCIAS Y CASAS DE LENOCINIO CON PREPARACION DE ALIMENTOS";
+			break;
+		case "479-6":
+			document.getElementsByName(destino)[0].value = "ESTABLECIMIENTOS DE PREPARACION DE ALIMENTOS AL INTERIOR DE PLAZAS DE MERCADO - CENTRALES DE ABASTO - PLAZOLETAS DE COMIDA - ZONAS FRANCAS";
+			break;
+		case "481-1":
+			document.getElementsByName(destino)[0].value = "BODEGAS PARA ALMACENAMIENTO DE ALIMENTOS Y/O BEBIDAS INCLUIDAS ZONAS FRANCAS";
+			break;
+		case "481-2":
+			document.getElementsByName(destino)[0].value = "ALMACENAN Y DISTRIBUYEN";
+			break;
+		case "481-3":
+			document.getElementsByName(destino)[0].value = "DADORES DE FRIO";
+			break;
+		case "495-1":
+			document.getElementsByName(destino)[0].value = "TIENDAS DE BARRIO I CIGARRERIAS INCLUIDAS ZONAS FRANCAS";
+			break;
+		case "495-2":
+			document.getElementsByName(destino)[0].value = "MINI MERCADO";
+			break;
+		case "495-3":
+			document.getElementsByName(destino)[0].value = "EXPENDIO CON OPERACIONES DE PORCIONADO - TROCEADO O ACONDICIONAMIENTO";
+			break;
+		case "495-4":
+			document.getElementsByName(destino)[0].value = "EXPENDIO DE PRODUCTOS DE LA PESCA";
+			break;
+		case "495-5":
+			document.getElementsByName(destino)[0].value = "CHARCUTERIAS Y SALSAMENTARIAS";
+			break;
+		case "495-6":
+			document.getElementsByName(destino)[0].value = "VENTA DE LECHE CRUDA";
+			break;
+		case "440-1":
+			document.getElementsByName(destino)[0].value = "CARNICERIAS Y FAMAS";
+			break;
+		case "440-2":
+			document.getElementsByName(destino)[0].value = "CARNICERIA DE GRANDES SUPERFICIES - DE PLAZAS DE MERCADO";
+			break;
+		case "474-1":
+			document.getElementsByName(destino)[0].value = "BARES";
+			break;
+		case "474-2":
+			document.getElementsByName(destino)[0].value = "DISCOTECAS";
+			break;
+		case "474-3":
+			document.getElementsByName(destino)[0].value = "CANTINAS";
+			break;
+		case "474-4":
+			document.getElementsByName(destino)[0].value = "TABERNAS";
+			break;
+		case "474-5":
+			document.getElementsByName(destino)[0].value = "CIGARRERIAS";
+			break;
+		case "474-6":
+			document.getElementsByName(destino)[0].value = "LICORERAS";
+			break;
+		case "474-7":
+			document.getElementsByName(destino)[0].value = "WHISKERIAS";
+			break;
+		case "474-8":
+			document.getElementsByName(destino)[0].value = "PROSTIBULOS";
+			break;
+		case "474-9":
+			document.getElementsByName(destino)[0].value = "CLUBES SOCIALES";
+			break;
+		case "478-1":
+			document.getElementsByName(destino)[0].value = "GRAN SUPERFICIE";
+			break;
+		case "478-2":
+			document.getElementsByName(destino)[0].value = "HIPERMERCADO";
+			break;
+		case "478-3":
+			document.getElementsByName(destino)[0].value = "SUPERMERCADO";
+			break;
+		case "478-4":
+			document.getElementsByName(destino)[0].value = "FRUVER";
+			break;
+		case "475-1":
+			document.getElementsByName(destino)[0].value = "CENTRO DE ABASTO";
+			break;
+		case "475-2":
+			document.getElementsByName(destino)[0].value = "PLAZA DE MERCADO";
+			break;
+		case "472-1":
+			document.getElementsByName(destino)[0].value = "VEHICULO";
+			break;
+		case "480-1":
+			document.getElementsByName(destino)[0].value = "PUESTO FIJO ESTACIONARIO";
+			break;
+		case "480-2":
+			document.getElementsByName(destino)[0].value = "PUESTO MOVIL";
+			break;
+		case "480-3":
+			document.getElementsByName(destino)[0].value = "PLAZA DE MERCADO MOVIL";
+			break;
+		case "480-4":
+			document.getElementsByName(destino)[0].value = "MERCADO CAMPESINO";
+			break;
+		case "480-5":
+			document.getElementsByName(destino)[0].value = "FOOD TRUCK";
+			break;
+		case "480-6":
+			document.getElementsByName(destino)[0].value = "COMERCIALIZACION AMBULANTE DE LECHE CRUDA PARA CONSUMO HUMANO DIRECTO";
+			break;
+		default:
+			document.getElementsByName(destino)[0].value = '';
+	}
 }

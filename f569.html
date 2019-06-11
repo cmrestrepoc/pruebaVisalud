@@ -1,0 +1,538 @@
+<!DOCTYPE HTML>
+<html lang="es">
+	<head>
+		<meta charset="utf-8"/>
+		<title>F569</title>
+
+		<!-- favicon -->
+		<link rel="shortcut icon" type="img/png" href="./img/escudo130.ico" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+		<!-- Color de la aplicación -->
+		<meta name="theme-color" content="#65c0ba" />
+
+		<!-- Optomización para móvil -->
+		<meta name="MobileOptimized" content="width" />
+		<meta name="HandleFriendly" content="true" />
+
+		<!-- Configuración General PWA -->
+		<link rel="manifest" href="manifest.json" />
+
+		<link rel="stylesheet" type="text/css" href="./css/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="./css/styles.css">
+		<link rel="stylesheet" type="text/css" href="./css/jquery.dataTables.min.css">
+
+		<script src="./js/jquery-3.3.1.slim.min.js"></script>
+		<script type="text/javascript" src="./js/jquery.dataTables.min.js"></script>
+		<script src="./js/bootstrap.min.js"></script>
+		<script src="./js/pouchdb.min.js"></script>
+		<script type="text/javascript" src="main.js"></script>
+		<script type="text/javascript" src="./js/sw-db.js"></script>
+		
+	</head>
+	<body onload="cargarInicioInscripciones('569')">
+		<header>
+			<a href="menu0.html">
+				<img alt src="./img/escudo.jpg" />
+			</a>
+			<div class="titulos">
+				<h1>MUNICIPIO DE CANDELARIA (V)</h1>
+				<h2>Vigilancia en Salud Pública</h2>
+				<h2>Formato FT569</h2>
+			</div>
+		</header>
+
+		<br><br>
+
+		<div class="container">
+			<div class="row">
+
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						Inscripción de establecimientos de expendio y/o Almacenamiento de carnes y productos cárnicos comestibles FT569
+					</div>
+					<div class="panel-body">
+						<div class="form-group">
+							<div class="col-md-2">
+								<label class="col-md-12 control-label">Departamento:</label>
+								<input type="text" class="form-control" name="depto569" value="VALLE DEL CAUCA">
+							</div>
+							<div class="col-md-10">
+								<div class="col-md-2">
+									<label class="col-md-12 control-label">Mpio:</label>
+									<input type="text" class="form-control" name="mpio569" value="CANDELARIA">
+								</div>
+								<div class="col-md-3">
+									<label class="col-md-12 control-label">Fecha:</label>
+									<input type="date" class="form-control" name="fecha569">
+								</div>
+								<script type="text/javascript">
+									cargarInicio('569');
+								</script>										
+								<div class="col-md-4">
+									<label class="col-md-12 control-label">Insc. No:</label>
+									<input type="text" class="form-control" name="inscripcion569" value="76130">
+								</div>
+								<div class="col-md-3">
+									<label class="col-md-12 control-label">Acta:</label>
+									<input type="text" class="form-control" name="acta569">
+								</div>
+							</div>						
+																						
+						</div>
+
+						<br><br><br><br>
+
+						<div class="form-group">
+							<div class="col-md-6" style="padding-right:0">
+								<div class="row">
+									<div class="col-md-5" style="text-align:right">
+										<br>
+										<label class="control-label">Actividad Primaria:</label>									
+									</div>
+									<div class="col-md-3">
+										<label class="control-label col-md-12">Expendio</label>
+										<select class="form-control" name="expendio569">
+											<option></option>
+											<option value="S">SI</option>
+											<option value="N">NO</option>
+										</select>
+									</div>
+									<div class="col-md-3">
+										<label class="control-label col-md-12">Almac/to</label>
+										<select class="form-control" name="almacena569">
+											<option></option>
+											<option value="S">SI</option>
+											<option value="N">NO</option>
+										</select>
+									</div>
+								</div>
+								<br><br>
+								<div class="row">
+									<div class="col-md-5" style="text-align:right">
+										<br>
+										<label class="control-label">Actividad Secundaria:</label>									
+									</div>
+									<div class="col-md-3">
+										<label class="control-label col-md-12">Depósito</label>
+										<select class="form-control" name="deposito569">
+											<option></option>
+											<option value="S">SI</option>
+											<option value="N">NO</option>
+										</select>
+									</div>
+									<div class="col-md-3">
+										<label class="control-label col-md-12">Desp. Av.</label>
+										<select class="form-control" name="despresa569">
+											<option></option>
+											<option value="S">SI</option>
+											<option value="N">NO</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6" style="padding:0">								
+								<div class="col-md-6" style="padding-left:0">
+									<label class="control-label col-md-12">Dependencia</label>
+									<select class="form-control" name="dependencia569" onchange="especificar(this)">
+										<option></option>
+										<option value="I">I - Independiente</option>
+										<option value="S">S - Supermercado/Minimercado</option>
+										<option value="PM">PM - Plaza de Mercado</option>
+										<option value="O">O - Otros</option>
+									</select>
+								</div>
+								<script type="text/javascript">
+									function especificar(objeto){
+										if(objeto.value == 'O'){
+											document.getElementById('cual569').style.display = 'block';
+											//console.log(document.getElementById('cual569'));
+										}else{
+											document.getElementById('cual569').style.display = 'none';
+										}
+									}
+								</script>
+								<div class="col-md-6" id="cual569" style="display:none">
+									<label class="control-label col-md-12">Cuál?</label>
+									<input type="text" class="form-control" name="cual569">
+								</div>
+								<br><br><br><br><br>
+								<label class="col-md-5 control-label" style="text-align:right">Usuario autoriza Notifiación y/o firma electrónica</label>
+								<div class="col-md-3">
+									<label class="col-md-12 control-label">Notific.</label>
+									<select class="form-control" name="autorizaNoti569">
+										<option></option>
+										<option value="S">Si</option>
+										<option value="N">No</option>
+									</select>
+								</div>
+								<div class="col-md-3">
+									<label class="col-md-12 control-label">Firma</label>
+									<select class="form-control" name="autorizaFirma569">
+										<option></option>
+										<option value="S">Si</option>
+										<option value="N">No</option>
+									</select>
+								</div>
+							</div>
+						</div>
+
+						<br><br><br><br><br><br><br><br><br><br>
+
+						<div class="form-group">
+							<div class="col-md-4">
+								<label class="col-md-12 control-label">Razón social:</label>
+								<input type="text" class="form-control" name="razonSocial569">
+							</div>
+							<div class="col-md-4">
+								<label class="col-md-12 control-label">Nombre Comercial:</label>
+								<input type="text" class="form-control" name="nombreComercial569">
+							</div>
+							<div class="col-md-2">
+								<label class="col-md-12 control-label">Mat. Mercantil:</label>
+								<input type="text" class="form-control" name="matriculaMercantil569">
+							</div>									
+							<div class="col-md-2">
+								<label class="col-md-12 control-label">Nit/Cédula:</label>
+								<input type="number" class="form-control" name="nit569" onchange="estabNumInscripcion(this.value, '569')">
+							</div>
+						</div><!-- Fin del form-group -->
+
+						<br><br><br><br><br>
+
+						<div class="form-group">
+							<label class="col-md-2 control-label" style="text-align:right; padding-right:0">Tipo de territorio:</label>
+							<div class="col-md-2">
+								<div class="input-group">
+									<span class="input-group-addon">
+								    	<input type="radio" name="territorio569" value="barrio" id="barrio">
+								    </span>
+								    <input type="text" class="form-control" name="barrio" value="Barrio">
+								</div>
+							</div>									
+							<div class="col-md-2" style="padding:0">
+								<div class="input-group">
+									<span class="input-group-addon">
+								    	<input type="radio" name="territorio569" value="corregimiento" id="corregimiento">
+								    </span>
+								    <input type="text" class="form-control" name="corregimiento" value="Corregimiento">
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="input-group">
+									<span class="input-group-addon">
+								    	<input type="radio" name="territorio569" value="vereda" id="vereda">
+								    </span>
+								    <input type="text" class="form-control" name="vereda" value="Vereda">
+								</div>
+							</div>					
+							<label class="col-md-1 control-label" style="text-align:right;padding:0">Nombre:</label>
+							<div class="col-md-3">
+								<select class="form-control" name="nomTerr569">
+									<option></option>
+									<option value="SAMANES">SAMANES</option>
+									<option value="OBRERO">OBRERO</option>
+									<option value="PANAMERICANO">PANAMERICANO</option>
+									<option value="SAN CRISTOBAL">SAN CRISTOBAL</option>
+									<option value="MUNICIPAL">MUNICIPAL</option>
+									<option value="LA CRUZ">LA CRUZ</option>
+									<option value="LA VICTORIA">LA VICTORIA</option>
+									<option value="JORGE ELIECER GAITAN">JORGE ELIECER GAITAN</option>
+									<option value="MARIA AUXILIADORA">MARIA AUXILIADORA</option>
+									<option value="SANTA ANA">SANTA ANA</option>
+									<option value="ARMANDO VASQUEZ">ARMANDO VASQUEZ</option>
+									<option value="COOTRAIM">COOTRAIM</option>
+									<option value="BRISAS DEL RIO">BRISAS DEL RIO</option>
+									<option value="BUCHITOLO">BUCHITOLO</option>
+									<option value="EL ARENAL">EL ARENAL</option>
+									<option value="EL CABUYAL">EL CABUYAL</option>
+									<option value="EL CARMELO">EL CARMELO</option>
+									<option value="EL LAURO">EL LAURO</option>
+									<option value="EL TIPLE">EL TIPLE</option>
+									<option value="JUANCHITO">JUANCHITO</option>
+									<option value="VILLAGORGONA">VILLAGORGONA</option>
+									<option value="LA REGINA">LA REGINA</option>
+									<option value="MADRE VIEJA">MADRE VIEJA</option>
+									<option value="SAN JOAQUIN">SAN JOAQUIN</option>
+									<option value="POBLADO CAMPESTRE">POBLADO CAMPESTRE</option>
+								</select>
+							</div>					
+						</div>
+
+	                    <br><br><br>
+
+						<div class="form-group">
+							<div class="col-md-4">
+								<label class="col-md-12 control-label">Dirección:</label>
+								<input type="text" class="form-control" name="direccion569">		
+							</div>
+							<div class="col-md-4">
+								<label class="col-md-12 control-label">Propietario:</label>
+								<input type="text" class="form-control" name="propietario569">
+							</div>
+							<div class="col-md-4">
+								<label class="col-md-12 control-label">Identificación:</label>
+								<div class="col-md-4">
+									<select class="form-control" name="tipoIdProp569" id="tipoIdProp569">
+										<option></option>
+										<option value="CC">CC</option>
+										<option value="CE">CE</option>
+										<option value="NIT">NIT</option>
+									</select>
+								</div>
+								<div class="col-md-8">
+									<input type="text" class="form-control" name="idPropietario569">
+								</div>							
+							</div>
+						</div>
+
+						<br><br><br><br>
+
+						<div class="form-group">
+							<div class="col-md-2">
+								<label class="col-md-12 control-label">Teléfono:</label>
+								<input type="text" class="form-control" name="tel569">		
+							</div>
+							<div class="col-md-2">
+								<label class="col-md-12 control-label">Celular:</label>
+								<input type="text" class="form-control" name="cel569">	
+							</div>
+							<div class="col-md-4">
+								<label class="col-md-12 control-label">Representante legal:</label>
+								<input type="text" class="form-control" name="repLegal569">
+							</div>
+							<div class="col-md-4">
+								<label class="col-md-12 control-label">Identificación:</label>
+								<div class="col-md-4">
+									<select class="form-control" name="tipoIdRl569">
+										<option></option>
+										<option value="CC">CC</option>
+										<option value="CE">CE</option>
+										<option value="NIT">NIT</option>
+									</select>
+								</div>
+								<div class="col-md-8">
+									<input type="text" class="form-control" name="idRepLegal569">
+								</div>							
+							</div>														
+						</div><!-- Fin del form-group -->
+
+						<br><br><br><br>
+
+						<div class="col-md-5">
+							<div class="col-md-11 col-md-offset-1">
+								<label class="col-md-12 control-label">Dir Notif:</label>
+								<input type="text" class="form-control" name="dirNotif569">
+							</div>
+						</div>													
+						<div class="col-md-6">
+							<div class="col-md-5">
+								<label class="control-label">Depto Notif:</label>
+								<input type="text" class="form-control" value="VALLE DEL CAUCA" name="deptoNotif569">
+							</div>
+							<div class="col-md-4">
+								<label class="control-label">Mpio Notif:</label>
+								<input type="text" class="form-control" value="CANDELARIA" name="mpioNotif569">
+							</div>
+						</div>
+
+						<br><br><br><br>
+
+						<div class="form-group">
+							<div class="col-md-5">
+								<div class="col-md-11 col-md-offset-1">
+									<label class="col-md-12 control-label">Correo:</label>
+									<input type="email" class="form-control" name="correoProp569">
+								</div>
+							</div>							
+							<div class="col-md-2">
+								<label class="col-md-12 control-label">Fax:</label>
+								<input type="text" class="form-control" name="fax569">		
+							</div>
+							<div class="col-md-4">
+								<div class="col-md-5">
+									<label class="col-md-12 control-label">Visitado:</label>
+									<select class="form-control" name="visitado569">
+										<option></option>
+										<option value="S">Si</option>
+										<option value="N">No</option>
+									</select>											
+								</div>
+								<div class="col-md-7">
+									<label class="col-md-12 control-label">Fecha Ult. Visita:</label>
+									<input type="date" class="form-control" name="fechaUltVisita569">
+								</div>
+							</div>
+																				
+						</div><!-- Fin del form-group -->
+
+						<br><br><br><br>
+
+						<div class="form-group">															
+							<div class="col-md-5 col-md-offset-1"569>
+								<label class="col-md-12 control-label">Concepto última inspección:</label>
+								<div class="col-md-3">
+									<select class="form-control" name="concepto569" onchange="setConcepto(this,'textoConcepto569')">
+										<option></option>				
+										<option value="1">1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
+									</select>
+								</div>
+								<div class="col-md-9" style="padding:0">
+									<input type="text" class="form-control" name="textoConcepto569">
+								</div>
+							</div>
+							<div class="col-md-4">								
+								<label class="col-md-12 control-label">Funcionario Ult. Visita:</label>
+								<input type="texto" class="form-control" name="funcUltVisita569">
+							</div>								
+						</div><!-- Fin del form-group -->
+
+						<br><br><br><br><br>
+
+						<div class="form-group">
+							<label class="col-md-3 control-label">Observaciones por autoridad sanitaria:</label>		
+							<div class="col-md-9">
+								<textarea class="form-control" name="obAutoridad569"></textarea>
+							</div>
+							<label class="col-md-3 control-label">Observaciones por persona que se inscribe:</label>		
+							<div class="col-md-9">
+								<textarea class="form-control" name="obPersona569"></textarea>
+							</div>							
+						</div><!-- Fin del form-group -->
+
+						<br><br><br><br><br><br>
+
+						<div class="form-group">									
+							<div class="col-md-3 col-md-offset-1">
+								<label class="col-md-12 control-label">__</label>
+								<label class="col-md-12 control-label">Persona que inscribe:</label>
+							</div>
+							<div class="col-md-4 col-md-offset-1">
+								<label class="col-md-12 control-label">Nombre:</label>
+								<input type="text" class="form-control" name="inscribe569">
+							</div>
+							<div class="col-md-2">								
+								<label class="col-md-12 control-label">Identificación:</label>
+								<input type="text" class="form-control" name="idInscribe569">
+							</div>
+							<div class="col-md-3 col-md-offset-1">
+								<label class="col-md-12 control-label">Persona que recibe:</label>
+							</div>
+							<div class="col-md-4 col-md-offset-1">
+								<input type="text" class="form-control" name="recibe569">
+							</div>
+							<div class="col-md-2">								
+								<input type="text" class="form-control" name="idRecibe569">
+							</div>							
+						</div><!-- Fin del form-group -->
+
+						<br><br><br><br><br><br><br><br>
+
+						<input type="hidden" name="id569" value="0">
+
+						<div class="form-group">
+	                        <div class="col-md-2 col-md-offset-1">
+	                            <a type="submit" onclick="guardarInscrito569()" class="btn btn-primary">
+	                                Guardar
+	                            </a>
+	                        </div>
+
+	                        <div class="col-md-3">
+	                            <a id="todosInscritos" onclick="cargarInscritos('569')" class="btn btn-primary">
+	                                Traer inscritos desde serv.
+	                            </a>
+							</div>
+							
+							<div class="col-md-3">
+								<button class="btn btn-primary" data-toggle="modal" data-target="#resp"  onclick="cargarServidor('569')">
+									Subir nuevos inscritos a serv.
+								</button>
+								<!-- Modal -->
+								<div class="modal fade" id="resp" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+									<div class="modal-dialog" role="document">
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+												<h4 class="modal-title" id="myModalLabel">Respuesta: </h4>
+											</div>
+											<div class="modal-body">
+												<label id="cuerpoRespuesta"></label>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+	                        <div class="col-md-3">
+	                            <a type="submit" onclick="cerrarSesionServidor()" class="btn btn-primary">
+	                                Cerrar Sesión con Servidor
+	                            </a>
+	                        </div>
+	                    </div><!-- Fin del form-group -->
+
+	                    <br><br><br><br><br>
+
+	                    <script type="text/javascript">mostrarInscritos569('569');</script>
+	                    <div class="form-group">
+	                    	<div class="panel panel-default">
+	                    		<div class="panel-heading">INSCRITOS CREADOS O MODIFICADOS EN ESTE DISPOSITIVO</div>
+	                    		<div class="panel-body">	                    			
+	                    			<table class="table table-bordered" id="tablaInscritosNuevos569">
+										<thead>
+											<tr>
+												<th></th>
+												<th>ID</th>
+												<th>Establecimiento</th>
+												<th>Acta No.</th>
+												<th>Fecha Inscrip.</th>
+												<th>Nom. Propietario</th>
+												<th>Ident. Propietario</th>									
+												<th></th>
+											</tr>									
+										</thead>
+										<tbody id="inscritosNuevos569"></tbody>
+									</table>													
+	                    		</div>
+	                    	</div>							
+						</div><!-- Fin del form-group -->
+	                    
+						<br>
+
+						<div class="form-group">
+	                    	<div class="panel panel-default">
+	                    		<div class="panel-heading">INSCRITOS CARGADOS DESDE SERVIDOR</div>
+	                    		<div class="panel-body">	                    			
+	                    			<table class="table table-bordered" id="tablaInscritos569">
+										<thead>
+											<tr>
+												<th></th>
+												<th>ID</th>
+												<th>Establecimiento</th>
+												<th>Acta No.</th>
+												<th>Fecha Inscrip.</th>
+												<th>Nom. Propietario</th>
+												<th>Ident. Propietario</th>												
+												<th></th>
+											</tr>									
+										</thead>
+										<tbody id="inscritos569"></tbody>
+									</table>													
+	                    		</div>
+	                    	</div>
+							
+						</div><!-- Fin del form-group -->
+
+						<br><br><br><br><br><br>
+
+
+					</div><!-- Fin del Panel-body -->
+				</div><!-- Fin del Panel-default -->
+
+			</div><!-- Fin del Row -->
+		</div><!-- Fin del Container -->
+	</body>
+</html>

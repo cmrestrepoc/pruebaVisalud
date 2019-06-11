@@ -1,0 +1,200 @@
+<!DOCTYPE HTML>
+<html lang="es">
+	<head>
+		<meta charset="utf-8"/>
+		<title>Visalud</title>
+
+		<!-- favicon -->
+		<link rel="shortcut icon" type="img/png" href="./img/escudo130.ico" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+		<!-- Color de la aplicación -->
+		<meta name="theme-color" content="#65c0ba" />
+
+		<!-- Optomización para móvil -->
+		<meta name="MobileOptimized" content="width" />
+		<meta name="HandleFriendly" content="true" />
+
+		<!-- Configuración General PWA -->
+		<link rel="manifest" href="manifest.json" />
+
+
+		<link rel="stylesheet" type="text/css" href="./css/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="./css/styles.css">
+
+		<script type="text/javascript" src="./js/jquery-3.3.1.slim.min.js"></script>
+		<script type="text/javascript" src="./js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="./js/pouchdb.min.js"></script>
+		<script type="text/javascript" src="main.js"></script>
+		<script type="text/javascript" src="./js/sw-db.js"></script>
+		<script type="text/javascript" src="./js/login.js"></script>
+		<script type="text/javascript" src="./sw.js"></script>
+
+	</head>
+
+	<body onload="verificarSesionLocal(); verificarAccion();">
+		<header id="index">
+			<img alt style="width: 8%" src="./img/escudo.jpg" />
+			<div class="titulos">
+				<h1>MUNICIPIO DE CANDELARIA (V)</h1>
+				<h2>Vigilancia en Salud Pública</h2>
+				<h4>Control de Riesgo en Alimentos y Bebidas</h4>
+				<h4>IVC a Establecimientos y Vehículos</h4>
+			</div>
+			<div class="logout">
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#opciones">OPCIONES</button>
+				<!-- Modal -->
+				<div class="modal fade" id="opciones" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+				  <div class="modal-dialog" role="document">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				        <h4 class="modal-title" id="myModalLabel">Escoja una de las siguientes opciones: </h4>
+				      </div>
+				      <div class="modal-body">
+				        <br>
+				        <div class="row">
+				        	<div class="col-md-9 col-md-offset-3">
+										<button type="button" class="btn btn-primary" onclick="limpiarCache()">
+											Actualizar Aplicación
+										</button>	
+				        	</div>
+								</div><br>
+								<div class="row">
+				        	<div class="col-md-9 col-md-offset-3">
+				        		<button type="button" class="btn btn-primary" onclick="logout()">Cerrar Sesión en la Aplicación</button>	
+				        	</div>
+				        </div><br>
+				        <div class="row">
+				        	<div class="col-md-9 col-md-offset-3">
+										<button type="button" class="btn btn-primary" onclick="cargarTodosLosInscritos()">
+											CARGAR TODOS LOS INCRITOS
+										</button>	
+				        	</div>
+								</div><br>
+								<div class="row">
+				        	<div class="col-md-9 col-md-offset-3">
+										<button type="button" class="btn btn-primary" onclick="cargarInscritos('493')">
+											Cargar Inscritos Estab. Alimentos
+										</button>	
+				        	</div>
+				        </div><br>
+				        <div class="row">
+				        	<div class="col-md-9 col-md-offset-3">
+										<button type="button" class="btn btn-primary" onclick="cargarInscritos('569')">
+											Cargar Inscritos Estab. Prod. Cárnicos
+										</button>	
+				        	</div>
+				        </div><br>
+				        <div class="row">
+				        	<div class="col-md-9 col-md-offset-3">
+										<button type="button" class="btn btn-primary" onclick="cargarInscritos('444')">
+											Cargar Inscritos Vehículos
+										</button>	
+				        	</div>
+				        </div><br>
+				        <div class="row">
+				        	<div class="col-md-9 col-md-offset-3">
+										<button type="button" class="btn btn-primary" onclick="cerrarSesionServidor()">
+											Cerrar Sesión con el servidor
+										</button>	
+				        	</div>
+				        </div><br>
+				      </div>
+				      <div class="modal-footer">
+				      	<div class="alert alert-danger alert-dismissible fade in col-md-12" role="alert" name="alertaOpciones" style="display: none">
+									<strong>Cuidado!</strong> Texto Adicional.
+								</div>
+				        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+			</div>
+		</header>
+
+		<section id="menu1">
+			<div id="inscripciones">
+				<h4>Inscripiciones, Autorizaciones, diagnósticos</h4>
+			</div>
+
+			<div id="llave">
+				<img alt src="./img/llave.png">
+			</div>
+
+			<div id="derivadosInscripciones">
+				<h4>Establecimientos</h4>
+				<h4>Vehículos</h4>
+			</div>
+
+			<div id="llave1">
+				<img alt src="./img/llave.png">
+			</div>
+
+			<div id="derivadosEstablecimientos">
+				<h4><a href="f442.html">FT-442</a></h4>
+				<h4><a href="f443.html">FT-443</a></h4>
+				<h4><a href="f569.html">FT-569</a></h4>
+				<h4><a href="f493.html">FT-493</a></h4>
+			</div>
+
+			<div id="llave2">
+				<img alt src="./img/llave.png">
+			</div>
+
+			<div id="derivadosVehiculos">
+				<h4><a href="f444.html">FT-444</a></h4>
+			</div>
+		</section>
+		
+		<section id="menu2">
+			<div id="actas">
+				<h4>Actas</h4>
+			</div>
+
+			<div id="llave3">
+				<img alt src="./img/llave.png">
+			</div>
+
+			<div id="derivadosActas">
+				<h4>Establecimientos</h4>
+				<h4 style="margin-top:180px">Vehículos</h4>
+			</div>
+
+			<div id="llave4">
+				<img alt src="./img/llave.png">
+			</div>
+
+			<div id="deriActaEstablecimientos">
+				<h4><a href="f26.html">FT-26</a></h4>
+				<h4><a href="f243.html">FT-243</a></h4>
+				<h4><a href="f333.html">FT-333</a></h4>
+				<h4><a href="f440.html">FT-440</a></h4>
+				<h4><a href="f474.html">FT-474</a></h4>
+				<h4><a href="f475.html">FT-475</a></h4>
+				<h4><a href="f478.html">FT-478</a></h4>
+				<h4><a href="f479.html">FT-479</a></h4>
+				<h4><a href="f480.html">FT-480</a></h4>
+				<h4><a href="f481.html">FT-481</a></h4>
+				<h4><a href="f495.html">FT-495</a></h4>
+			</div>
+
+			<div id="llave5">
+				<img alt src="./img/llave.png">
+			</div>
+
+			<div id="deriActaVehiculos">
+				<h4><a href="f441.html">FT-441</a></h4>
+				<h4><a href="f472.html">FT-472</a></h4>
+			</div>
+
+			<br><br><br>
+
+			 
+		</section>
+
+	</body>
+
+</html>

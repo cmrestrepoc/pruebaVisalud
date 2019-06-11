@@ -1,0 +1,222 @@
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>Visalud</title>
+
+<link rel="shortcut icon" type="img/png" href="./img/escudo130.ico" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+<!-- Color de la aplicación -->
+<meta name="theme-color" content="#65c0ba" />
+
+<!-- Optomización para móvil -->
+<meta name="MobileOptimized" content="width" />
+<meta name="HandleFriendly" content="true" />
+
+<link rel="stylesheet" type="text/css" href="./css/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="./css/styles.css">
+<link rel="stylesheet" type="text/css" href="./css/jquery.dataTables.min.css">
+<script src="./js/jquery-3.3.1.slim.min.js"></script>
+<script type="text/javascript" src="./js/jquery.dataTables.min.js"></script>
+<script src="./js/bootstrap.js"></script>
+<script src="./js/bootstrap.min.js"></script>
+<script src="./js/pouchdb.min.js"></script>
+<script src="main.js" type="text/javascript"></script>
+<script src="./js/sw-db.js" type="text/javascript"></script>
+<script src="./js/jquery.jqscribble.js" type="text/javascript"></script>
+<script src="./js/jqscribble.extrabrushes.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+    function save()
+    {
+        let canvas;
+        let imageData;
+        canvas = document.getElementById('firmaAut1');
+        imageData = canvas.toDataURL("image/png");
+        localStorage.setItem('firmaAut1', imageData);
+        canvas = document.getElementById('firmaAut2');
+        imageData = canvas.toDataURL("image/png");
+        localStorage.setItem('firmaAut2', imageData);
+        canvas = document.getElementById('firmaIns1');
+        imageData = canvas.toDataURL("image/png");
+        localStorage.setItem('firmaIns1', imageData);
+        canvas = document.getElementById('firmaIns2');
+        imageData = canvas.toDataURL("image/png");
+        localStorage.setItem('firmaIns2', imageData);
+                /* break;
+            case 'firmaAut2':
+                localStorage.setItem('firmaAut2', imageData);
+                break;
+            case 'firmaIns1':
+                localStorage.setItem('firmaIns1', imageData);
+                break;
+            case 'firmaIns2':
+                localStorage.setItem('firmaIns2', imageData);
+                break;
+            default:
+                alert('Problemas con la firma');
+                history.back();
+        } */
+        alert('Firmas Almacenadas correctamente');
+    }
+    $(document).ready(function()
+    {
+        $("#firmaAut1").jqScribble();
+        $("#firmaAut2").jqScribble();
+        $("#firmaIns1").jqScribble();
+        $("#firmaIns2").jqScribble();
+
+        if(localStorage.getItem('form') == '333'|| localStorage.getItem('form') == '243' || localStorage.getItem('form') == '26') {
+            let elemento = document.getElementsByName('firma');
+            elemento[0].innerHTML = "POR PARTE DE LA EMPRESA";
+            document.getElementsByClassName('panel')[1].style.display = localStorage.getItem('form') == '26' ? 'none': 'block';
+            localStorage.getItem('form') == '333' ? elemento[1].innerHTML = "POR PARTE DEL LABORATORIO" : elemento[1].innerHTML = "TESTIGO DE LA ENCUESTA";
+        } 
+    });
+
+    function regresar(){
+        localStorage.removeItem('form');
+        save();
+        history.back();
+    }
+</script>
+    
+<style>
+/* Some CSS styling */
+/*#contenedor {
+    /* Prevent nearby text being highlighted when accidentally dragging mouse outside confines of the canvas */
+/*    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}*/
+.cajonBoton {
+    float:left;
+    width:270px;
+    height:350px;
+    background-color:#def;
+    padding:10px;
+    border-radius:4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.cajonFirma {
+    float:left;
+    margin-left:10px;
+}
+
+#firmaAut1, #firmaAut2, #firmaIns1, #firmaIns2{
+    float:left;
+    height:350px;
+    width:720px;
+    border:2px solid #888;
+    border-radius: 4px;
+    position:relative; /* Necessary for correct mouse co-ords in Firefox */
+}
+</style>
+</head>
+
+<body>
+    <header>
+        <a href="menu0.html">
+            <img alt src="./img/escudo.jpg" />
+        </a>
+        <div class="titulos">
+            <h1>MUNICIPIO DE CANDELARIA (V)</h1>
+            <h2>Vigilancia en Salud Pública</h2>
+        </div>
+    </header><br><br>
+
+    <div class="col-md-2 col-md-offset-2">
+        <button class="btn btn-primary" onclick="regresar()">Regresar</button>
+    </div>
+    <br><br><br>
+
+    <div class="container">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                FIRMA
+            </div>                                              
+            <div class="panel-body">
+                <div id="contenedor">
+                    <div class="cajonBoton">
+                        <h6>FIRMA 1 DE AUTORIDAD SANITARIA</h6>
+                        <br><br>
+                        <input type="submit" class="btn btn-primary" value="Limpiar" id="limpiar" onclick='$("#firmaAut1").data("jqScribble").clear();'>
+                    </div>
+                    <div class="cajonFirma">
+                        <canvas id="firmaAut1" height="300" width="720">
+                        </canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                FIRMA
+            </div>                                              
+            <div class="panel-body">
+                <div id="contenedor">
+                    <div class="cajonBoton">
+                        <h6>FIRMA 2 DE AUTORIDAD SANITARIA</h6>
+                        <br><br>
+                        <input type="submit" class="btn btn-primary" value="Limpiar" id="limpiar" onclick='$("#firmaAut2").data("jqScribble").clear();'>
+                    </div>
+                    <div class="cajonFirma">
+                        <canvas id="firmaAut2" height="300" width="720">
+                        </canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                FIRMA
+            </div>                                              
+            <div class="panel-body">
+                <div id="contenedor">
+                    <div class="cajonBoton">
+                        <h6 name="firma">FIRMA 1 DE QUIEN ES EVALUADO</h6>
+                        <br><br>
+                        <input type="submit" class="btn btn-primary" value="Limpiar" id="limpiar" onclick='$("#firmaIns1").data("jqScribble").clear();'>
+                    </div>
+                    <div class="cajonFirma">
+                        <canvas id="firmaIns1" height="300" width="720">
+                        </canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                FIRMA
+            </div>                                              
+            <div class="panel-body">
+                <div id="contenedor">
+                    <div class="cajonBoton">
+                        <h6 name="firma">FIRMA 2 DE QUIEN ES EVALUADO</h6>
+                        <br><br>
+                        <input type="submit" class="btn btn-primary" value="Limpiar" id="limpiar" onclick='$("#firmaIns2").data("jqScribble").clear();'>
+                    </div>
+                    <div class="cajonFirma">
+                        <canvas id="firmaIns2" height="300" width="720">
+                        </canvas>
+                    </div>
+                </div>
+            </div>
+        </div> 
+    </div>
+                                 
+    
+</body>
+</html>

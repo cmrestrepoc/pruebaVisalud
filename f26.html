@@ -1,0 +1,423 @@
+<!DOCTYPE HTML>
+<html lang="es">
+	<head>
+		<meta charset="utf-8"/>
+		<title>F26</title>
+
+		<!-- favicon -->
+		<link rel="shortcut icon" type="img/png" href="./img/escudo130.ico" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+		<!-- Color de la aplicación -->
+		<meta name="theme-color" content="#65c0ba" />
+
+		<!-- Optomización para móvil -->
+		<meta name="MobileOptimized" content="width" />
+		<meta name="HandleFriendly" content="true" />
+
+		<!-- Configuración General PWA -->
+		<link rel="manifest" href="manifest.json" />
+
+		<link rel="stylesheet" type="text/css" href="./css/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="./css/styles.css">
+		<link rel="stylesheet" type="text/css" href="./css/jquery.dataTables.min.css">
+
+		<script src="./js/jquery-3.3.1.slim.min.js"></script>
+		<script type="text/javascript" src="./js/jquery.dataTables.min.js"></script>
+		<script src="./js/bootstrap.min.js"></script>
+		<script src="./js/pouchdb.min.js"></script>
+		<script type="text/javascript" src="main.js"></script>
+		<script type="text/javascript" src="./js/sw-db.js"></script>
+		
+	</head>
+	<body onload="verificarAccionForm('26')">
+		<header>
+			<a href="menu0.html">
+				<img alt src="./img/escudo.jpg" />
+			</a>
+			<div class="titulos">
+				<h1>MUNICIPIO DE CANDELARIA (V)</h1>
+				<h2>Vigilancia en Salud Pública</h2>
+				<h2>Formato FT26</h2>
+			</div>
+		</header>
+
+		<br><br>
+
+		<div class="container">
+			<div class="row">
+
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						Acta de visita de inspección y vigilancia FT26
+					</div>
+					<div class="panel-body">
+						<div class="form-group">
+                            <div class="col-md-4" style="padding:0">
+                                <div class="col-md-5">
+                                    <label class="col-md-12 control-label">Mpio:</label>
+                                    <input type="text" class="form-control" name="mpio26" value="CANDELARIA">
+                                </div>
+                                <div class="col-md-7">
+                                    <label class="col-md-12 control-label">Fecha:</label>
+                                    <input type="date" class="form-control" name="fecha26">
+                                </div>
+                                <script type="text/javascript">
+                                    cargarInicio('26');
+                                </script>
+                            </div>
+							
+                            <div class="col-md-8">
+                                <label class="col-md-12 control-label">Tipo de Sujeto</label>
+                                <div class="col-md-2">
+                                    <select class="form-control col-md-3" name="tipoSujeto26"
+                                        onchange="setSujeto(this.value, 'sujeto26')">
+                                        <option></option>
+                                        <option value="479-1">479-1</option>
+                                        <option value="479-2">479-2</option>
+                                        <option value="479-3">479-3</option>
+                                        <option value="479-4">479-4</option>
+                                        <option value="479-5">479-5</option>
+                                        <option value="479-6">479-6</option>
+                                        <option value="481-1">481-1</option>
+                                        <option value="481-2">481-2</option>
+                                        <option value="481-3">481-3</option>
+                                        <option value="495-1">495-1</option>
+                                        <option value="495-2">495-2</option>
+                                        <option value="495-3">495-3</option>
+                                        <option value="495-4">495-4</option>
+                                        <option value="495-5">495-5</option>
+                                        <option value="495-6">495-6</option>
+                                        <option value="440-1">440-1</option>
+                                        <option value="440-2">440-2</option>
+                                        <option value="474-1">474-1</option>
+                                        <option value="474-2">474-2</option>
+                                        <option value="474-3">474-3</option>
+                                        <option value="474-4">474-4</option>
+                                        <option value="474-5">474-5</option>
+                                        <option value="474-6">474-6</option>
+                                        <option value="474-7">474-7</option>
+                                        <option value="474-8">474-8</option>
+                                        <option value="474-9">474-9</option>
+                                        <option value="478-1">478-1</option>
+                                        <option value="478-2">478-2</option>
+                                        <option value="478-3">478-3</option>
+                                        <option value="478-4">478-4</option>
+                                        <option value="475-1">475-1</option>
+                                        <option value="475-2">475-2</option>
+                                        <option value="472-1">472-1</option>
+                                        <option value="480-1">480-1</option>
+                                        <option value="480-2">480-2</option>
+                                        <option value="480-3">480-3</option>
+                                        <option value="480-4">480-4</option>
+                                        <option value="480-5">480-5</option>
+                                        <option value="480-6">480-6</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-10">
+                                    <input type="text" class="form-control" name="sujeto26">
+                                </div>
+							</div>															
+                        </div>
+                        <br><br><hr>
+
+                        <div class="form-group">
+                            <div class="col-md-8" style="padding:0">
+                                <div class="col-md-6">
+                                    <label class="col-md-12 control-label">Razón Social:</label>
+                                    <input type="text" class="form-control" name="razonSocial26">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="col-md-12 control-label">Nombre Comercial:</label>
+                                    <input type="text" class="form-control" name="nombreComercial26">
+                                </div>
+                            </div>
+                            <div class="col-md-4" style="padding:0">
+                                <div class="col-md-7">
+                                    <label class="col-md-12 control-label">Acta:</label>
+                                    <input type="text" class="form-control" name="acta26">
+                                </div>
+                                <script>
+                                    calcularNumActa('26').then( numActa => {
+                                        document.getElementsByName('acta26')[0].value = numActa;
+                                    });
+                                </script>
+                                <div class="col-md-5">
+                                    <label class="col-md-12 control-label">Hora: </label>
+                                    <input type="text" class="form-control" name="hora26" required="required">
+                                </div>    
+                            </div>
+                        </div>
+                        <br><br><br><hr>
+
+                        <div class="form-group">
+                            <div class="col-md-5">
+                                <label class="col-md-12 control-label">Rep. Legal:</label>
+                                <input type="text" class="form-control" name="repLegal26">
+                            </div>										
+                            <div class="col-md-4">					
+                                <label class="col-md-12 control-label">Identificación:</label>
+                                <div class="col-md-4">
+                                    <select class="form-control" name="tipoIdRl26">
+                                        <option></option>
+                                        <option value="CC">CC</option>
+                                        <option value="CE">CE</option>
+                                        <option value="NIT">NIT</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-8" style="padding:0">
+                                    <input type="text" class="form-control" name="idRepLegal26" placeholder="# identificación">
+                                </div>											
+                            </div>
+                            <div class="col-md-2">
+                                <label class="col-md-6 control-label">Nit/CC:</label>
+                                <input type="text" class="form-control" name="nit26" required="required">
+                            </div>
+                        </div>
+                        <br><br><br><hr>
+
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                <label class="col-md-12 control-label">Tipo de territorio:</label>
+                                <div class="col-md-4">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <input type="radio" name="territorio26" value="barrio" id="barrio">
+                                        </span>
+                                        <input type="text" class="form-control" name="barrio" value="Barrio">
+                                    </div>
+                                </div>
+                                <div class="col-md-4" style="padding:0">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <input type="radio" name="territorio26" value="corregimiento" id="corregimiento">
+                                        </span>
+                                        <input type="text" class="form-control" name="corregimiento" value="Corregimiento">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <input type="radio" name="territorio26" value="vereda" id="vereda">
+                                        </span>
+                                        <input type="text" class="form-control" name="vereda" value="Vereda">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="col-md-12 control-label">Nombre:</label>
+                                <select class="form-control" name="nomTerr26">
+                                    <option></option>
+                                    <option value="SAMANES">SAMANES</option>
+                                    <option value="OBRERO">OBRERO</option>
+                                    <option value="PANAMERICANO">PANAMERICANO</option>
+                                    <option value="SAN CRISTOBAL">SAN CRISTOBAL</option>
+                                    <option value="MUNICIPAL">MUNICIPAL</option>
+                                    <option value="LA CRUZ">LA CRUZ</option>
+                                    <option value="LA VICTORIA">LA VICTORIA</option>
+                                    <option value="JORGE ELIECER GAITAN">JORGE ELIECER GAITAN</option>
+                                    <option value="MARIA AUXILIADORA">MARIA AUXILIADORA</option>
+                                    <option value="SANTA ANA">SANTA ANA</option>
+                                    <option value="ARMANDO VASQUEZ">ARMANDO VASQUEZ</option>
+                                    <option value="COOTRAIM">COOTRAIM</option>
+                                    <option value="BRISAS DEL RIO">BRISAS DEL RIO</option>
+                                    <option value="BUCHITOLO">BUCHITOLO</option>
+                                    <option value="EL ARENAL">EL ARENAL</option>
+                                    <option value="EL CABUYAL">EL CABUYAL</option>
+                                    <option value="EL CARMELO">EL CARMELO</option>
+                                    <option value="EL LAURO">EL LAURO</option>
+                                    <option value="EL TIPLE">EL TIPLE</option>
+                                    <option value="JUANCHITO">JUANCHITO</option>
+                                    <option value="VILLAGORGONA">VILLAGORGONA</option>
+                                    <option value="LA REGINA">LA REGINA</option>
+                                    <option value="MADRE VIEJA">MADRE VIEJA</option>
+                                    <option value="SAN JOAQUIN">SAN JOAQUIN</option>
+                                    <option value="POBLADO CAMPESTRE">POBLADO CAMPESTRE</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <label class="col-md-12 control-label">Zona:</label>				
+								<select class="form-control" name="zona26" id="zona26">
+									<option></option>
+									<option value="U">URBANA</option>
+									<option value="R">RURAL</option>
+								</select>														
+                            </div>		
+                        </div>
+                        <br><br><br><hr>
+
+                        <div class="form-group">
+                            <div class="col-md-5">
+                                <label class="col-md-12 control-label">Dirección</label>
+                                <input type="text" class="form-control" name="direccion26">
+                            </div>													
+                            <div class="col-md-3">
+                                <label class="col-md-12 control-label">Celular:</label>
+                                <input type="text" class="form-control" name="cel26">	
+                            </div>
+                            <div class="col-md-2">
+                                <label class="col-md-12 control-label">Fax:</label>
+                                <input type="text" class="form-control" name="fax26">		
+                            </div>
+                            <div class="col-md-2">
+                                <label class="col-md-12 control-label">Teléfono:</label>
+                                <input type="text" class="form-control" name="tel26">		
+                            </div>							
+                        </div><!-- Fin del form-group -->
+                        <br><br><br><hr>
+
+                        <div class="form-group">
+                            <div class="col-md-5">
+                                <label class="col-md-12 control-label">Correo</label>
+                                <input type="email" class="form-control" name="correoProp26">
+                            </div>
+                            <div class="col-md-5" style="padding-left: 0; margin-left: -20px">
+                                <label class="col-md-6 control-label" style="text-align: right">Usuario autoriza Notifiación y/o firma electrónica</label>
+                                <div class="col-md-3">
+                                    <label class="col-md-12 control-label">Notific.</label>
+                                    <select class="form-control" name="autorizaNoti26">
+                                        <option></option>
+                                        <option value="S">Si</option>
+                                        <option value="N">No</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="col-md-12 control-label">Firma</label>
+                                    <select class="form-control" name="autorizaFirma26">
+                                        <option></option>
+                                        <option value="S">Si</option>
+                                        <option value="N">No</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-2" style="padding:0">
+                                <label class="col-md-12 control-label">Tipo de visita:</label>
+                                <select class="form-control" name="tipoVisita26">
+                                    <option></option>
+                                    <option value="1">IVC</option>
+                                    <option value="2">QUEJA SANITARIA</option>
+                                </select>
+                            </div>													
+                        </div><!-- Fin del form-group -->
+                        <br><br><br><hr>
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" style="text-align:right">OBSERVACIONES REALIZADAS EN LA VISITA:</label>		
+                            <div class="col-md-9">
+                                <textarea class="form-control" name="obAutoridad26"></textarea>
+                            </div>
+                            <br><br><br>
+                            <label class="col-md-3 control-label" style="text-align:right">REQUERIMIENTOS DE LA VISITA:</label>
+                            <div class="col-md-9">
+                                <textarea class="form-control" name="obPersona26"></textarea>
+                            </div>
+                        </div><!-- Fin del form-group -->
+                        <br><br><hr>
+
+                        <div class="form-group">
+                            <div class="col-md-10 col-md-offset-1">
+                                <div class="col-md-4">
+                                    <label class="col-md-12 control-label">__</label>
+                                    <label class="col-md-12 control-label" style="text-align: right; line-height: 30px">Realiza la encuesta:</label>
+                                </div>
+                                <div class="col-md-5">
+                                    <label class="col-md-12 control-label">Nombre:</label>
+                                    <input type="text" class="form-control" name="funcionario26-1">
+                                </div>
+                                <div class="col-md-3">								
+                                    <label class="col-md-12 control-label">Identificación:</label>
+                                    <input type="text" class="form-control" name="idFuncionario26-1">
+                                </div><br><br> <br> <br>
+                                <div class="col-md-4">
+                                    <label class="col-md-12 control-label" style="text-align: right; line-height: 30px">
+                                        Propietario o Rep. legal:
+                                    </label>
+                                </div>
+                                <div class="col-md-5">
+                                    <input type="text" class="form-control" name="persona26-1">
+                                </div>
+                                <div class="col-md-3">								
+                                    <input type="text" class="form-control" name="idPersona26-1">
+                                </div><br><br> <br>
+                                <div class="col-md-4">
+                                    <label class="col-md-12 control-label" style="text-align: right; line-height: 30px">Testigo de la encuesta:</label>
+                                </div>
+                                <div class="col-md-5">
+                                    <input type="text" class="form-control" name="testigo26">
+                                </div>
+                                <div class="col-md-3">								
+                                    <input type="text" class="form-control" name="idTestigo26">
+                                </div>						        
+                            </div>
+                        </div><!-- Fin del form-group -->
+
+                        <br><br><br><br><br><br><br><br><br><hr>
+
+						<input type="hidden" name="id26" value="0">
+								
+						<br><br>
+						<div class="form-group">
+			                <div class="col-md-4 col-md-offset-2">
+			                    <button type="submit" onclick="guardarEvaluacion('26')" class="btn btn-primary">
+			                        Guardar
+			                    </button>			                            
+			                </div>
+			                <div class="col-md-3">
+			                    <button class="btn btn-primary" data-toggle="modal" data-target="#resp"  onclick="cargarServidor('26')">
+			                        Subir información a servidor
+								</button>
+								<!-- Modal -->
+								<div class="modal fade" id="resp" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+									<div class="modal-dialog" role="document">
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+												<h4 class="modal-title" id="myModalLabel">Respuesta: </h4>
+											</div>
+											<div class="modal-body">
+												<label id="cuerpoRespuesta"></label>
+											</div>
+										</div>
+									</div>
+								</div>
+			                </div>
+			                <div class="col-md-3">
+			                    <a type="submit" onclick="cerrarSesionServidor()" class="btn btn-primary">
+			                        Cerrar Sesión con Servidor
+			                    </a>
+			                </div>		                       
+			            </div>
+
+                        <br><br><br><br>
+                        
+                        <script type="text/javascript">mostrarEvaluados('26');</script>
+			            <div class="form-group">
+			                <div class="panel panel-default">
+			                    <div class="panel-heading">ACTAS ALMACENADAS EN DISPOSITIVO</div>
+			                    <div class="panel-body">	                    			
+			                    	<table class="table table-bordered" id="tablaEvaluados">
+										<thead>
+											<tr>
+												<th></th>
+												<th>Establecimiento</th>
+												<th>Acta Número</th>
+                                                <th>Fecha</th>
+                                                <th>Tipo de sujeto</th>
+                                                <th></th>
+											</tr>									
+										</thead>
+										<tbody id="evaluados"></tbody>
+									</table>													
+			                    </div>
+			                </div>	
+                        </div><!-- Fin del form-group -->
+                        
+                    </div><!-- Fin del panel body -->
+                </div><!-- Fin del panel default -->
+            
+            </div><!-- Fin del row -->
+        </div><!-- Fin del container -->
+    </body>
+</html>  

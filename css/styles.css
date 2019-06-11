@@ -34,8 +34,24 @@ header img{
 	float: left;
 }
 
+#index{
+	/*background-color: yellow;*/
+	height: 120px;
+	/*line-height: 160px;*/
+	padding-top: 20px;
+	padding-left: 80px;
+	padding-right: 100px;
+}
+
 .titulos{
 	text-align: center;
+	float: left;
+	width: 84%;
+}
+
+.logout{
+	float:left;
+	width: 8%;
 }
 
 #menu1{
@@ -94,7 +110,8 @@ header img{
 }
 
 #derivadosVehiculos{
-	margin-top: 72px;
+	margin-top: 65px;
+	float: left;
 }
 
 #actas{
@@ -113,7 +130,7 @@ header img{
 }
 
 #llave3 img{
-	height: 200px;
+	height: 220px;
 }
 
 #derivadosActas{
@@ -122,7 +139,7 @@ header img{
 }
 
 #derivadosActas h4{
-	margin-top: 120px;
+	margin-top: 130px;
 	margin-bottom: 70px;
 }
 
@@ -132,7 +149,7 @@ header img{
 }
 
 #llave4 img{
-	height: 250px;
+	height: 270px;
 }
 
 #deriActaEstablecimientos h4{
@@ -142,7 +159,7 @@ header img{
 
 #llave5{
 	margin-top: 50px;
-	margin-left: -50px;
+	margin-left: -60px;
 	float: left;
 }
 
@@ -151,10 +168,43 @@ header img{
 }
 
 #deriActaVehiculos{
-	margin-top: 62px;
+	margin-top: 45px;
+	margin-left: -30px;
+	float:left;
 }
 
+/*#firmaAutoridad{
+	/* Prevent nearby text being highlighted when accidentally dragging mouse outside confines of the canvas */
+	/*background-color:red;*/
+/*	-webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
 
+.cajonFirma{
+	float:left;
+}
+
+.botonFirma{
+	float:left;
+	height:410px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#firma{
+	float:left;
+	border:2px solid #888;
+	border-radius: 4px;
+	width:880px;
+	height: 400px;
+	position: relative;
+}
+*/
 
 /*@media all and (max-width: 1000px){
 	header{

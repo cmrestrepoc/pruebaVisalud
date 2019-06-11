@@ -1,0 +1,44 @@
+/* Some CSS styling */
+#sketchpadapp {
+    /* Prevent nearby text being highlighted when accidentally dragging mouse outside confines of the canvas */
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.cajonBoton {
+    float:left;
+    width:420px;
+    height:285px;
+    background-color:#def;
+    padding:10px;
+    border-radius:4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.cajonFirma {
+    float:left;
+    margin-left:10px;
+}
+#firma {
+    float:left;
+    height:300px;
+    width:800px;
+    border:2px solid #888;
+    border-radius:4px;
+    position:relative; /* Necessary for correct mouse co-ords in Firefox */
+}
+
+/*#clearbutton {
+    font-size: 15px;
+    padding: 10px;
+    -webkit-appearance: none;
+    background: blue;
+    color:white;
+    border: 1px solid #888;
+}*/

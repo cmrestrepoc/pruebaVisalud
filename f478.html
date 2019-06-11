@@ -1,0 +1,1232 @@
+<!DOCTYPE HTML>
+<html lang="es">
+	<head>
+		<meta charset="utf-8"/>
+		<title>F478</title>
+
+		<!-- favicon -->
+		<link rel="shortcut icon" type="img/png" href="./img/escudo130.ico" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+		<!-- Color de la aplicación -->
+		<meta name="theme-color" content="#65c0ba" />
+
+		<!-- Optomización para móvil -->
+		<meta name="MobileOptimized" content="width" />
+		<meta name="HandleFriendly" content="true" />
+
+		<!-- Configuración General PWA -->
+		<link rel="manifest" href="manifest.json" />
+
+		<style>
+			body {
+				/* Disables pull-to-refresh but allows overscroll glow effects. */
+				overscroll-behavior-y: contain;
+			}
+		</style>
+
+		<link rel="stylesheet" type="text/css" href="./css/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="./css/styles.css">
+		<link rel="stylesheet" type="text/css" href="./css/jquery.dataTables.min.css">
+
+		<script src="./js/jquery-3.3.1.slim.min.js"></script>
+		<script type="text/javascript" src="./js/jquery.dataTables.min.js"></script>
+		<script src="./js/bootstrap.min.js"></script>
+		<script src="./js/pouchdb.min.js"></script>
+		<script type="text/javascript" src="main.js"></script>
+		<script type="text/javascript" src="./js/sw-db.js"></script>
+
+	</head>
+
+	<body onload="verificarAccionForm('478')">
+		<header>
+			<a href="menu0.html">
+				<img alt src="./img/escudo.jpg" />
+			</a>
+			<div class="titulos">
+				<h1>MUNICIPIO DE CANDELARIA (V)</h1>
+				<h2>Vigilancia en Salud Pública</h2>
+				<h2>Acta FT478</h2>
+			</div>
+
+		</header>
+
+		<br><br>
+
+		<div class="container">
+			<div class="row">
+				
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						FT478: Acta de Inspección Sanitaria con Enfoque de Riesgo para Alimentos y Bebidas en Grandes Superficies
+					</div>
+						
+					<div class="panel-body">
+
+						<!-- Nav tabs -->
+						<ul id="misTabs" class="nav nav-tabs" role="tablist">
+							<li role="presentation" class="active"><a href="#inscritos493" aria-controls="inscritos493" role="tab" data-toggle="tab">Inscritos</a></li>
+							<li role="presentation"><a href="#datos" aria-controls="datos" role="tab" data-toggle="tab" onclick="validarCambioTab(0)">Datos del Establecimiento</a></li>
+							<li role="presentation"><a href="#evaluacion" aria-controls="evaluacion" role="tab" data-toggle="tab" onclick="validarCambioTab(1)">Evaluación</a></li>
+							<li role="presentation"><a href="#observaciones" aria-controls="observaciones" role="tab" data-toggle="tab" onclick="mostrarEvaluados('478')">Observaciones - Notificaciones</a></li>
+						</ul>
+
+						<!-- Tab panes -->
+						<div class="tab-content" id="miTabContent">
+							<div role="tabpanel" class="tab-pane fade active in" id="inscritos493" aria-labelledby="inscritos493-tab">
+								<br>
+								<script type="text/javascript">mostrarInscritos493('478');</script>
+	                    		<div class="form-group">
+									<div class="panel panel-default">
+										<div class="panel-heading">INSCRITOS CREADOS O MODIFICADOS EN ESTE DISPOSITIVO</div>
+										<div class="panel-body">	                    			
+											<table class="table table-bordered" id="tablaInscritosNuevos">
+												<thead>
+													<tr>
+														<th></th>
+														<th>ID</th>
+														<th>Establecimiento</th>
+														<th>Acta No.</th>
+														<th>Fecha Inscrip.</th>
+														<th>Nom. Propietario</th>
+														<th>Ident. Propietario</th>									
+														<th></th>
+													</tr>									
+												</thead>
+												<tbody id="inscritosNuevos"></tbody>
+											</table>													
+										</div>
+									</div>							
+								</div><!-- Fin del form-group -->	
+								<br>
+								<div class="form-group">
+									<div class="panel panel-default">
+			                    		<div class="panel-heading">INSCRITOS CARGADOS DESDE SERVIDOR</div>
+			                    		<div class="panel-body">
+			                    			<table class="table table-bordered" id="tablaInscritos">
+												<thead>
+													<tr>
+														<th></th>
+														<th>ID</th>
+														<th>Establecimiento</th>
+														<th>Acta No.</th>
+														<th>Fecha Inscrip.</th>
+														<th>Nom. Propietario</th>
+														<th>Ident. Propietario</th>									
+														<th></th>
+													</tr>	
+												</thead>
+												<tbody id="inscritos"></tbody>
+											</table>
+										</div>
+	                    			</div>
+								</div><!-- Fin del form-group -->
+							</div><!-- Fin del tab-pane -->
+
+							<div role="tabpanel" class="tab-pane fade" id="datos" aria-labelledby="datos-tab">
+								<br><div class="alert alert-danger alert-dismissible fade in col-md-12" role="alert" name="alertaInscrito" style="display: none">
+									<strong>Cuidado!</strong> Debe elegir un inscrito antes de continuar.
+								</div><br>
+								
+								<div class="form-group">
+									<div class="col-md-7">
+										<div class="col-md-4">
+											<label class="col-md-12 control-label">Fecha:</label>
+											<input type="date" class="form-control" name="fecha478">
+										</div>
+										<script type="text/javascript">
+											cargarInicio('478');
+										</script>										
+										<div class="col-md-8" style="padding:0">
+											<label class="col-md-12 control-label">Entidad:</label>
+											<input type="text" class="form-control" name="entidad478" value="SECRETARÍA DE SALUD MUNICIPAL - CANDELARIA">
+										</div>
+									</div>
+									<div class="col-md-5">
+										<label class="col-md-8 control-label" style="text-align: right; line-height: 30px">
+											Gran Superficie
+										</label>
+										<div class="col-md-3">
+											<select class="form-control" name="grs">
+												<option></option>
+												<option value="S">Si</option>
+												<option value="N">No</option>
+											</select>
+										</div>
+										<label class="col-md-8 control-label" style="text-align: right; line-height: 30px">
+											Con preparación de alimentos
+										</label>
+										<div class="col-md-3">
+											<select class="form-control" name="grscon">
+												<option></option>
+												<option value="S">Si</option>
+												<option value="N">No</option>
+											</select>
+										</div>										
+									</div>					
+								</div>
+
+								<br><br><br><hr>
+
+								<div class="form-group">
+									<label class="col-md-2 control-label" style="text-align:right">TIPO DE ESTABLECIMIENTO:</label>
+									<div class="col-md-2">
+										<div class="input-group">
+											<span class="input-group-addon">
+											    <input type="checkbox" name="tipoEstablecimiento" value="restaurante">
+											   </span>
+											   <input type="text" class="form-control" name="restaurante" value="Restaurante">
+										</div>
+									</div>									
+									<div class="col-md-2">
+										<div class="input-group">
+											<span class="input-group-addon">
+											    <input type="checkbox" name="tipoEstablecimiento" value="cafeteria">
+											   </span>
+											   <input type="text" class="form-control" name="cafeteria" value="Cafeteria">
+										</div>
+									</div>								
+									<div class="col-md-2">
+										<div class="input-group">
+											<span class="input-group-addon">
+											    <input type="checkbox" name="tipoEstablecimiento" value="panaderia">
+											   </span>
+											   <input type="text" class="form-control" name="panaderia" value="Panaderia">
+										</div>
+									</div>									
+									<div class="col-md-2">
+										<div class="input-group">
+											<span class="input-group-addon">
+											    <input type="checkbox" name="tipoEstablecimiento" value="fruteria">
+											   </span>
+											   <input type="text" class="form-control" name="fruteria" value="Fruteria">
+										</div>
+									</div>
+									<div class="col-md-2">
+										<div class="input-group">
+											<span class="input-group-addon">
+											    <input type="checkbox" name="tipoEstablecimiento" value="comidasRapidas">
+											   </span>
+											   <input type="text" class="form-control" name="comRapidas" value="C. Rápidas">
+										</div>
+									</div>									
+									<br><br><br>									
+									<div class="col-md-2 col-md-offset-2">
+										<div class="input-group">
+											<span class="input-group-addon">
+											    <input type="checkbox" name="tipoEstablecimiento" value="comedores">
+											   </span>
+											   <input type="text" class="form-control" name="comedores" value="Comedores">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<label class="control-label col-md-4">Tipo de Comedor:</label>
+										<div class="col-md-8">
+											<select name="cualEstab" class="form-control">
+												<option></option>
+												<option value="PROGRAMAS SOCIALES">Programas Sociales</option>
+												<option value="CARCELARIOS PENITENCIARIOS">Carcelarios-Penitenciarios</option>
+											</select>
+										</div>
+									</div>																															
+								</div><!-- Fin del form-group -->
+								<br><hr>
+
+								<div class="form-group">
+									<div class="col-md-4">
+										<label class="col-md-6 control-label">Razón Social:</label>
+										<input type="text" class="form-control" name="razonSocial478">
+									</div>
+									<div class="col-md-2">
+										<label class="col-md-6 control-label">Nit/CC:</label>
+										<input type="text" class="form-control" name="nit478">
+									</div>
+									<div class="col-md-4">
+										<label class="col-md-12 control-label">Nombre Comercial:</label>
+										<input type="text" class="form-control" name="nombreComercial478">
+									</div>
+									<div class="col-md-2">
+										<label class="col-md-12 control-label">Inscripción No:</label>
+										<input type="text" class="form-control" name="inscripcion478">
+									</div>
+								</div><!-- Fin del form-group -->
+								<br><br><br><hr>
+
+								<div class="form-group">
+									<div class="col-md-3">
+										<label class="col-md-12 control-label">Matrícula Mercantil:</label>
+										<input type="text" class="form-control" name="matriculaMercantil478">
+									</div>
+									<div class="col-md-4">
+										<label class="col-md-12 control-label">Dirección:</label>
+										<input type="text" class="form-control" name="direccion478">
+									</div>
+									<div class="col-md-3">
+										<label class="col-md-12 control-label">Departamento:</label>
+										<input type="text" class="form-control" name="dpto478" value="VALLE DEL CAUCA">
+									</div>
+									<div class="col-md-2">
+										<label class="col-md-12 control-label">Municipio:</label>
+										<input type="text" class="form-control" name="mpio478" value="CANDELARIA">
+									</div>
+								</div><!-- Fin del form-group -->
+								<br><br><br><hr>
+
+								<div class="form-group">
+									<label class="col-md-2 control-label" style="text-align:right; padding-right:0">Tipo de territorio:</label>
+									<div class="col-md-2">
+										<div class="input-group">
+											<span class="input-group-addon">
+										    	<input type="radio" name="territorio478" value="barrio" id="barrio">
+										    </span>
+										    <input type="text" class="form-control" name="barrio" value="Barrio">
+										</div>
+									</div>
+									<div class="col-md-2" style="padding:0">
+										<div class="input-group">
+											<span class="input-group-addon">
+										    	<input type="radio" name="territorio478" value="corregimiento" id="corregimiento">
+										    </span>
+										    <input type="text" class="form-control" name="corregimiento" value="Corregimiento">
+										</div>
+									</div>
+									<div class="col-md-2">
+										<div class="input-group">
+											<span class="input-group-addon">
+										    	<input type="radio" name="territorio478" value="vereda" id="vereda">
+										    </span>
+										    <input type="text" class="form-control" name="vereda" value="Vereda">
+										</div>
+									</div>
+									<label class="col-md-1 control-label" style="text-align:right;padding:0">Nombre:</label>
+									<div class="col-md-3">
+										<select class="form-control" name="nomTerr478">
+											<option></option>
+											<option value="SAMANES">SAMANES</option>
+											<option value="OBRERO">OBRERO</option>
+											<option value="PANAMERICANO">PANAMERICANO</option>
+											<option value="SAN CRISTOBAL">SAN CRISTOBAL</option>
+											<option value="MUNICIPAL">MUNICIPAL</option>
+											<option value="LA CRUZ">LA CRUZ</option>
+											<option value="LA VICTORIA">LA VICTORIA</option>
+											<option value="JORGE ELIECER GAITAN">JORGE ELIECER GAITAN</option>
+											<option value="MARIA AUXILIADORA">MARIA AUXILIADORA</option>
+											<option value="SANTA ANA">SANTA ANA</option>
+											<option value="ARMANDO VASQUEZ">ARMANDO VASQUEZ</option>
+											<option value="COOTRAIM">COOTRAIM</option>
+											<option value="BRISAS DEL RIO">BRISAS DEL RIO</option>
+											<option value="BUCHITOLO">BUCHITOLO</option>
+											<option value="EL ARENAL">EL ARENAL</option>
+											<option value="EL CABUYAL">EL CABUYAL</option>
+											<option value="EL CARMELO">EL CARMELO</option>
+											<option value="EL LAURO">EL LAURO</option>
+											<option value="EL TIPLE">EL TIPLE</option>
+											<option value="JUANCHITO">JUANCHITO</option>
+											<option value="VILLAGORGONA">VILLAGORGONA</option>
+											<option value="LA REGINA">LA REGINA</option>
+											<option value="MADRE VIEJA">MADRE VIEJA</option>
+											<option value="SAN JOAQUIN">SAN JOAQUIN</option>
+											<option value="POBLADO CAMPESTRE">POBLADO CAMPESTRE</option>
+										</select>
+									</div>														
+								</div><!-- Fin del form-group -->
+
+			                    <br><br><hr>
+
+			                    <div class="form-group">
+									<div class="col-md-5">
+										<label class="col-md-12 control-label">Correo</label>
+										<input type="text" class="form-control" name="correoProp478">
+									</div>													
+									<div class="col-md-3">
+										<label class="col-md-12 control-label">Celular:</label>
+										<input type="text" class="form-control" name="cel478">	
+									</div>
+									<div class="col-md-2">
+										<label class="col-md-12 control-label">Fax:</label>
+										<input type="text" class="form-control" name="fax478">		
+									</div>
+									<div class="col-md-2">
+										<label class="col-md-12 control-label">Teléfono:</label>
+										<input type="text" class="form-control" name="tel478">		
+									</div>							
+								</div><!-- Fin del form-group -->
+
+								<br><br><br><hr>
+
+			                    <div class="form-group">
+									<div class="col-md-6">
+										<div class="col-md-6" style="padding:0">
+											<label class="col-md-12 control-label">Propietario:</label>
+											<input type="text" class="form-control" name="propietario478">
+										</div>
+										<div class="col-md-6" style="padding:0">
+											<label class="col-md-12 control-label">Identificación:</label>
+											<div class="col-md-5">
+												<select class="form-control" name="tipoIdProp478" id="tipoIdProp478">
+													<option></option>
+													<option value="CC">CC</option>
+													<option value="CE">CE</option>
+													<option value="NIT">NIT</option>
+												</select>
+											</div>
+											<div class="col-md-7" style="padding:0">
+												<input type="text" class="form-control" name="idPropietario478" placeholder="# identificación">
+											</div>							
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="col-md-6" style="padding:0">
+											<label class="col-md-12 control-label">Rep. Legal:</label>
+											<input type="text" class="form-control" name="repLegal478">
+										</div>										
+										<div class="col-md-6" style="padding:0">					
+											<label class="col-md-12 control-label">Identificación:</label>
+											<div class="col-md-5">
+												<select class="form-control" name="tipoIdRl478">
+													<option></option>
+													<option value="CC">CC</option>
+													<option value="CE">CE</option>
+													<option value="NIT">NIT</option>
+												</select>
+											</div>
+											<div class="col-md-7" style="padding:0">
+												<input type="text" class="form-control" name="idRepLegal478" placeholder="# identificación">
+											</div>											
+										</div>										
+									</div>
+								</div><!-- Fin del form-group -->
+								<br><br><br><hr>
+
+								<div class="form-group">
+									
+									<div class="col-md-6" style="padding:0">
+										<div class="col-md-5" style="padding:0">
+											<label class="col-md-12 control-label">Dir Notif:</label>
+										<input type="text" class="form-control" name="dirNotif478">
+										</div>										
+										<div class="col-md-4">
+											<label class="control-label col-md-12">Depto N.:</label>
+											<input type="text" class="form-control" value="VALLE DEL CAUCA" name="deptoNotif478">
+										</div>
+										<div class="col-md-3" style="padding:0">
+											<label class="control-label col-md-12">Mpio N.:</label>
+											<input type="text" class="form-control" value="CANDELARIA" name="mpioNotif478">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="col-md-8">
+											<label class="col-md-12 control-label">Horarios:</label>
+											<input type="text" class="form-control" name="horarios478">
+										</div>
+										<div class="col-md-4" style="padding:0">
+											<label class="col-md-12 control-label">No. Trabajadores:</label>
+											<div class="col-md-8">
+												<input type="number" class="form-control" name="noTrabajadores478">
+											</div>								
+										</div>
+									</div>								
+								</div><!-- Fin del form-group -->
+
+								<br><br><br><hr>								
+
+								<div class="form-group">
+									<label class="control-label col-md-2" style="text-align:right">ÚLTIMA INSPECCIÓN:</label>
+									<div class="col-md-7">
+										<div class="col-md-4" style="padding:0">
+											<label class="col-md-12 control-label">Fecha:</label>
+											<input type="date" class="form-control" name="fechaUltVisita478">
+										</div>
+										<div class="col-md-7 col-md-offset-1" style="padding:0">
+											<label class="col-md-12 control-label">Concepto última inspección:</label>
+											<div class="col-md-3">
+												<select class="form-control" name="concepto478" onchange="setConcepto(this, 'textoConcepto478')">
+													<option></option>				
+													<option value="1">1</option>
+													<option value="2">2</option>
+													<option value="3">3</option>
+												</select>
+											</div>
+											<div class="col-md-9" style="padding:0">
+												<input type="text" class="form-control" name="textoConcepto478">
+											</div>
+										</div>												
+									</div>
+									<div class="col-md-3">
+										<label class="control-label col-md-12">Porcentaje Cumplimiento</label>
+										<div class="col-md-6">
+											<input type="number" class="form-control" name="porcentaje478">
+										</div>%									
+									</div>
+								</div><!-- Fin del form-group -->
+
+								<br><br><br><hr>
+
+								<div class="form-group">
+									<div class="col-md-6" style="padding:0"><br>
+										<label class="control-lable col-md-3" style="text-align:right" style="padding:0">Motivo de la visita:</label>
+										<div class="col-md-2" style="padding:0">
+											<select class="form-control" name="motivo478" onchange="setMotivo(this,'textoMotivo478')">
+												<option></option>				
+												<option value="01">01</option>
+												<option value="02">02</option>
+												<option value="03">03</option>
+												<option value="04">04</option>
+												<option value="05">05</option>
+												<option value="06">06</option>					
+												<option value="09">09</option>
+											</select>
+										</div>
+										<div class="col-md-7">
+											<input type="text" class="form-control" name="textoMotivo478">
+										</div>
+									</div>									
+									<div class="col-md-6">
+										<label class="col-md-6 control-label">Usuario autoriza Notifiación y/o firma electrónica</label>
+										<div class="col-md-3">
+											<label class="col-md-12 control-label">Notific.</label>
+											<select class="form-control" name="autorizaNoti478">
+												<option></option>
+												<option value="S">Si</option>
+												<option value="N">No</option>
+											</select>
+										</div>
+										<div class="col-md-3">
+											<label class="col-md-12 control-label">Firma</label>
+											<select class="form-control" name="autorizaFirma478">
+												<option></option>
+												<option value="S">Si</option>
+												<option value="N">No</option>
+											</select>
+										</div>
+									</div>									
+								</div><!-- Fin del form-group -->
+								<br><br><br>
+							</div><!-- Fin del tab-pane -->	
+
+							<div role="tabpanel" aria-labelledby="evaluacion-tab" class="tab-pane fade" id="evaluacion">
+
+								<br><div class="alert alert-danger alert-dismissible fade in col-md-12" role="alert" name="alertaInscrito" style="display: none">
+									<strong>Cuidado!</strong> Debe elegir un inscrito antes de continuar.
+								</div><br>
+
+								<br>
+								<div class="col-md-12">
+									<div class="panel panel-default">
+										<div class="panel-heading">
+											I CONDICIONES SANITARIAS DE INSTALACIÓN Y PROCESO
+										</div>
+												
+										<div class="panel-body">
+											<div class="col-md-6">
+												<div class="form-group" style="border-style:ridge; padding:3px">
+													<table class="table" style="font-size:12px">
+														<thead>
+															<tr>
+																<th scope="col">1. EDIF. E INSTALACIONES</th>
+																<th scope="col">P</th>
+																<th scope="col">EVALUAC.</th>
+																<th scope="col">HALLAZGOS</th>
+															</tr>
+														</thead>
+														<tbody>	
+															<tr>
+																<th scope="row">1.1 Localización y diseño</th>
+																<td name="puntaje_1">1.5</td>
+																<td>
+																	<select class="form-control" name="evaluacion_1">
+																		<option value="1">1</option>
+																		<option value="0.5">2</option>
+																		<option value="0">3</option>
+																	</select>
+																</td>
+																<td><textarea class="form-control" name="hallazgos_1_1"></textarea></td>
+															</tr>
+															<tr>
+																<th scope="row">1.2 Condiciones en pisos y paredes</th>
+																<td name="puntaje_1">1.5</td>
+																<td>
+																	<select class="form-control" name="evaluacion_1">
+																		<option value="1">1</option>
+																		<option value="0.5">2</option>
+																		<option value="0">3</option>
+																	</select>
+																</td>
+																<td><textarea class="form-control" name="hallazgos_1_2"></textarea></td>
+															</tr>
+															<tr>
+																<th scope="row">1.3 Techos, iluminación y ventilación</th>
+																<td name="puntaje_1">2</td>
+																<td>
+																	<select class="form-control" name="evaluacion_1">
+																		<option value="1">1</option>
+																		<option value="0.5">2</option>
+																		<option value="0">3</option>
+																	</select>
+																</td>
+																<td><textarea class="form-control" name="hallazgos_1_3"></textarea></td>
+															</tr>
+															<tr>
+																<th scope="row">1.4 Instalaciones Sanitarias</th>
+																<td name="puntaje_1">3</td>
+																<td>
+																	<select class="form-control" name="evaluacion_1">
+																		<option value="1">1</option>
+																		<option value="0.5">2</option>
+																		<option value="0">3</option>
+																	</select>
+																</td>
+																<td><textarea class="form-control" name="hallazgos_1_4"></textarea></td>
+															</tr>
+															<tr>
+																<th scope="row">1.5 Distribución y áreas</th>
+																<td name="puntaje_1">2</td>
+																<td>
+																	<select class="form-control" name="evaluacion_1">
+																		<option value="1">1</option>
+																		<option value="0.5">2</option>
+																		<option value="0">3</option>
+																	</select>
+																</td>
+																<td><textarea class="form-control" name="hallazgos_1_5"></textarea></td>
+															</tr>
+														</tbody>
+													</table>
+
+													<div class="col-md-4">
+														<button class="btn btn-primary" onClick="evaluarBloque('evaluacion_1','puntaje_1','evalBloque1',0)">Eval. bloque 1</button>
+													</div>
+													<div class="col-md-5">
+														<input type="text" class="form-control" name="evalBloque1">
+													</div>
+													<div class="col-md-3">
+														<label>10%</label>
+													</div>
+												<br><br>
+												</div>
+
+												<div class="form-group" style="border-style:ridge; padding:3px">
+													<table class="table" style="font-size:12px">
+														<thead>
+															<tr>
+																<th scope="col">2. EQUIPOS Y UTENSILIOS</th>
+																<th scope="col">P</th>
+																<th scope="col">EVALUAC.</th>
+																<th scope="col">HALLAZGOS</th>
+															</tr>
+														</thead>
+														<tbody>	
+															<tr>
+																<th scope="row">2.1 Condiciones de equipos y utensilios</th>
+																<td name="puntaje_2">3</td>
+																<td>
+																	<select class="form-control" name="evaluacion_2">
+																		<option value="1">1</option>
+																		<option value="0.5">2</option>
+																		<option value="0">3</option>
+																	</select>
+																</td>
+																<td><textarea class="form-control" name="hallazgos_2_1"></textarea></td>
+															</tr>
+															<tr>
+																<th scope="row">2.2 Diseño y funcionamiento de eq. y utensilios</th>
+																<td name="puntaje_2">3</td>
+																<td>
+																	<select class="form-control" name="evaluacion_2">
+																		<option value="1">1</option>
+																		<option value="0.5">2</option>
+																		<option value="0">3</option>
+																	</select>
+																</td>
+																<td><textarea class="form-control" name="hallazgos_2_2"></textarea></td>
+															</tr>
+															<tr>
+																<th scope="row">2.3 Superficies de contacto con el alimento</th>
+																<td name="puntaje_2">4</td>
+																<td>
+																	<select class="form-control" name="evaluacion_2">
+																		<option value="1">1</option>
+																		<option value="0.5">2</option>
+																		<option value="0">3</option>
+																	</select>
+																</td>
+																<td><textarea class="form-control" name="hallazgos_2_3"></textarea></td>
+															</tr>							
+														</tbody>
+													</table>
+
+													<div class="col-md-4">
+														<button class="btn btn-primary" onClick="evaluarBloque('evaluacion_2','puntaje_2','evalBloque2',1)">Eval. bloque 2</button>
+													</div>
+													<div class="col-md-5">
+														<input type="text" class="form-control" name="evalBloque2">
+													</div>
+													<div class="col-md-3">
+														<label>10%</label>
+													</div>
+												<br><br>			
+												</div>
+
+												<div class="form-group" style="border-style:ridge; padding:3px">
+													<table class="table" style="font-size:12px">
+														<thead>
+															<tr>
+																<th scope="col">3. PERSONAL MANIPULADOR DE ALIMENTOS</th>
+																<th scope="col">P</th>
+																<th scope="col">EVALUAC.</th>
+																<th scope="col">HALLAZGOS</th>
+															</tr>
+														</thead>
+														<tbody>	
+															<tr>
+																<th scope="row">3.1 Estado de salud</th>
+																<td name="puntaje_3">5</td>
+																<td>
+																	<select class="form-control" name="evaluacion_3">
+																		<option value="1">1</option>
+																		<option value="0.5">2</option>
+																		<option value="0">3</option>
+																	</select>
+																</td>
+																<td><textarea class="form-control" name="hallazgos_3_1"></textarea></td>
+															</tr>
+															<tr>
+																<th scope="row">3.2 Reconocimiento Médico</th>
+																<td name="puntaje_3">2</td>
+																<td>
+																	<select class="form-control" name="evaluacion_3">
+																		<option value="1">1</option>
+																		<option value="0.5">2</option>
+																		<option value="0">3</option>
+																	</select>
+																</td>
+																<td><textarea class="form-control" name="hallazgos_3_2"></textarea></td>
+															</tr>
+															<tr>
+																<th scope="row">3.3 Prácticas higiénicas</th>
+																<td name="puntaje_3">6</td>
+																<td>
+																	<select class="form-control" name="evaluacion_3">
+																		<option value="1">1</option>
+																		<option value="0.5">2</option>
+																		<option value="0">3</option>
+																	</select>
+																</td>
+																<td><textarea class="form-control" name="hallazgos_3_3"></textarea></td>
+															</tr>
+															<tr>
+																<th scope="row">3.4 Educación y capacitación</th>
+																<td name="puntaje_3">3</td>
+																<td>
+																	<select class="form-control" name="evaluacion_3">
+																		<option value="1">1</option>
+																		<option value="0.5">2</option>
+																		<option value="0">3</option>
+																	</select>
+																</td>
+																<td><textarea class="form-control" name="hallazgos_3_4"></textarea></td>
+															</tr>						
+														</tbody>
+													</table>
+
+													<div class="col-md-4">
+														<button class="btn btn-primary" onClick="evaluarBloque('evaluacion_3','puntaje_3','evalBloque3',2)">Eval. bloque 3</button>
+													</div>
+													<div class="col-md-5">
+														<input type="text" class="form-control" name="evalBloque3">
+														</div>
+													<div class="col-md-3">
+														<label>16%</label>
+													</div>
+												<br><br>		
+												</div>
+											</div>
+
+											<div class="form-group col-md-6" style="border-style:ridge; padding:10px">
+												<table class="table" style="font-size:12px">
+													<thead>
+														<tr>
+															<th scope="col">4. REQUISITOS HIGIÉNICOS</th>
+															<th scope="col">P</th>
+															<th scope="col">EVALUAC.</th>
+															<th scope="col">HALLAZGOS</th>
+														</tr>
+													</thead>
+													<tbody>	
+														<tr>
+															<th scope="row">4.1 Control de materias primas e insumos</th>
+															<td name="puntaje_4">4</td>
+															<td>
+																<select class="form-control" name="evaluacion_4">
+																	<option value="1">1</option>
+																	<option value="0.5">2</option>
+																	<option value="0">3</option>
+																</select>
+															</td>
+															<td><textarea class="form-control" name="hallazgos_4_1"></textarea></td>
+														</tr>
+														<tr>
+															<th scope="row">4.2 Prevención de contaminación cruzada</th>
+															<td name="puntaje_4">8</td>
+															<td>
+																<select class="form-control" name="evaluacion_4">
+																	<option value="1">1</option>
+																	<option value="0.5">2</option>
+																	<option value="0">3</option>
+																</select>
+															</td>
+															<td><textarea class="form-control" name="hallazgos_4_2"></textarea></td>
+														</tr>
+														<tr>
+															<th scope="row">4.3 Control de proceso</th>
+															<td name="puntaje_4">3</td>
+															<td>
+																<select class="form-control" name="evaluacion_4">
+																	<option value="1">1</option>
+																	<option value="0.5">2</option>
+																	<option value="0">3</option>
+																</select>
+															</td>
+															<td><textarea class="form-control" name="hallazgos_4_3"></textarea></td>
+														</tr>
+														<tr>
+															<th scope="row">4.4 Operaciones de envasado y embalaje</th>
+															<td name="puntaje_4">3</td>
+															<td>
+																<select class="form-control" name="evaluacion_4">
+																	<option value="1">1</option>
+																	<option value="0.5">2</option>
+																	<option value="0">3</option>
+																</select>
+															</td>
+															<td><textarea class="form-control" name="hallazgos_4_4"></textarea></td>
+														</tr>
+														<tr>
+															<th scope="row">4.5 Procedencia y requisitos legales</th>
+															<td name="puntaje_4">4</td>
+															<td>
+																<select class="form-control" name="evaluacion_4">
+																	<option value="1">1</option>
+																	<option value="0.5">2</option>
+																	<option value="0">3</option>
+																</select>
+															</td>
+															<td><textarea class="form-control" name="hallazgos_4_5"></textarea></td>
+														</tr>
+													</tbody>
+												</table>
+
+												<div class="col-md-4">
+													<button class="btn btn-primary" onClick="evaluarBloque('evaluacion_4','puntaje_4','evalBloque4',3)">Eval. bloque 4</button>
+												</div>
+												<div class="col-md-5">
+													<input type="text" class="form-control" name="evalBloque4">
+												</div>
+												<div class="col-md-3">
+													<label>22%</label>
+												</div>
+													
+											</div>
+
+											<div class="form-group col-md-6" style="border-style:ridge; padding:3px">
+												<table class="table" style="font-size:12px">
+													<thead>
+														<tr>
+															<th scope="col">5. SANEAMIENTO</th>
+															<th scope="col">P</th>
+															<th scope="col">EVALUAC.</th>
+															<th scope="col">HALLAZGOS</th>
+														</tr>
+													</thead>
+													<tbody>	
+														<tr>
+															<th scope="row">5.1 Suministro y calidad de agua potable</th>
+															<td name="puntaje_5">4</td>
+															<td>
+																<select class="form-control" name="evaluacion_5">
+																	<option value="1">1</option>
+																	<option value="0.5">2</option>
+																	<option value="0">3</option>
+																</select>
+															</td>
+															<td><textarea class="form-control" name="hallazgos_5_1"></textarea></td>
+														</tr>
+														<tr>
+															<th scope="row">5.2 Residuos líquidos</th>
+															<td name="puntaje_5">2</td>
+															<td>
+																<select class="form-control" name="evaluacion_5">
+																	<option value="1">1</option>
+																	<option value="0.5">2</option>
+																	<option value="0">3</option>
+																</select>
+															</td>
+															<td><textarea class="form-control" name="hallazgos_5_2"></textarea></td>
+														</tr>
+														<tr>
+															<th scope="row">5.3 Residuos sólidos</th>
+															<td name="puntaje_5">2</td>
+															<td>
+																<select class="form-control" name="evaluacion_5">
+																	<option value="1">1</option>
+																	<option value="0.5">2</option>
+																	<option value="0">3</option>
+																</select>
+															</td>
+															<td><textarea class="form-control" name="hallazgos_5_3"></textarea></td>
+														</tr>
+														<tr>
+															<th scope="row">5.4 Control integral de plagas</th>
+															<td name="puntaje_5">7</td>
+															<td>
+																<select class="form-control" name="evaluacion_5">
+																	<option value="1">1</option>
+																	<option value="0.5">2</option>
+																	<option value="0">3</option>
+																</select>
+																</td>
+															<td><textarea class="form-control" name="hallazgos_5_4"></textarea></td>
+														</tr>
+														<tr>
+															<th scope="row">5.5 Limpieza y desinfección de áreas, equipos y utensilios</th>
+															<td name="puntaje_5">4</td>
+															<td>
+																<select class="form-control" name="evaluacion_5">
+																	<option value="1">1</option>
+																	<option value="0.5">2</option>
+																	<option value="0">3</option>
+																</select>
+																</td>
+															<td><textarea class="form-control" name="hallazgos_5_5"></textarea></td>
+														</tr>
+														<tr>
+															<th scope="row">5.6 Soportes documentales</th>
+															<td name="puntaje_5">3</td>
+															<td>
+																<select class="form-control" name="evaluacion_5">
+																	<option value="1">1</option>
+																	<option value="0.5">2</option>
+																	<option value="0">3</option>
+																</select>
+																</td>
+															<td><textarea class="form-control" name="hallazgos_5_6"></textarea></td>
+														</tr>
+													</tbody>
+												</table>
+
+												<div class="col-md-4">
+													<button class="btn btn-primary" onClick="evaluarBloque('evaluacion_5','puntaje_5','evalBloque5',4)">Eval. bloque 5</button>
+												</div>
+												<div class="col-md-5">
+													<input type="text" class="form-control" name="evalBloque5">
+												</div>
+												<div class="col-md-3">
+													<label>22%</label>
+												</div>
+												<br><br>		
+											</div>
+
+											<div class="form-group col-md-6" style="border-style:ridge; padding:3px">
+												<table class="table" style="font-size:12px">
+													<thead>
+														<tr>
+															<th scope="col">6. ALMACENAMIENTO Y COMERCIALIZACIÓN</th>
+															<th scope="col">P</th>
+															<th scope="col">EVALUAC.</th>
+															<th scope="col">HALLAZGOS</th>
+														</tr>
+													</thead>
+													<tbody>	
+														<tr>
+															<th scope="row">6.1 Condiciones generales de almacenamiento</th>
+															<td name="puntaje_6">5</td>
+															<td>
+																<select class="form-control" name="evaluacion_6">
+																	<option value="1">1</option>
+																	<option value="0.5">2</option>
+																	<option value="0">3</option>
+																</select>
+															</td>
+															<td><textarea class="form-control" name="hallazgos_6_1"></textarea></td>
+														</tr>
+														<tr>
+															<th scope="row">6.2 Manejo y conservación congelados/frios</th>
+															<td name="puntaje_6">10</td>
+															<td>
+																<select class="form-control" name="evaluacion_6">
+																	<option value="1">1</option>
+																	<option value="0.5">2</option>
+																	<option value="0">3</option>
+																</select>
+															</td>
+															<td><textarea class="form-control" name="hallazgos_6_2"></textarea></td>
+														</tr>
+														<tr>
+															<th scope="row">6.3 Manejo y exhibición a temp. ambiente</th>
+															<td name="puntaje_6">5</td>
+															<td>
+																<select class="form-control" name="evaluacion_6">
+																	<option value="1">1</option>
+																	<option value="0.5">2</option>
+																	<option value="0">3</option>
+																</select>
+															</td>
+															<td><textarea class="form-control" name="hallazgos_6_3"></textarea></td>
+														</tr>														
+													</tbody>
+												</table>
+
+												<div class="col-md-4">
+													<button class="btn btn-primary" onClick="evaluarBloque('evaluacion_6','puntaje_6','evalBloque6',5)">Eval. bloque 6</button>
+												</div>
+												<div class="col-md-5">
+													<input type="text" class="form-control" name="evalBloque6">
+												</div>
+												<div class="col-md-3">
+													<label>20%</label>
+												</div>
+												<br><br>		
+											</div>
+
+										</div>
+									</div>
+								</div>
+										
+								<div class="col-md-6">										
+									<div class="panel panel-default">
+										<div class="panel-heading">
+											II CONCEPTO SANITARIO
+										</div>
+												
+										<div class="panel-body">
+											<div class="form-group">
+												<div class="col-md-3">
+													<button class="btn btn-primary" style="font-size:13px" onClick="consolidarPuntaje('conceptoEval478','cumplimiento478')">Cumplimiento</button>
+												</div>
+												<div class="col-md-3">
+													<input class="form-control" type="number" name="cumplimiento478"></input>
+												</div>
+
+												<div class="col-md-3" style="text-align:right">
+													<label class="control-label">Concepto:</label>
+												</div>
+												<div class="col-md-3" style="padding-left:0">
+													<input class="form-control" type="number" name="conceptoEval478"></input>
+												</div>										
+											</div>
+										</div>
+									</div>
+
+									<div class="panel panel-default">
+										<div class="panel-heading">
+											V APLICACIÓN DE MEDIDA SANITARIA DE SEGURIDAD
+										</div>											
+										<div class="panel-body">
+											<div class="form-group">
+												<label class="control-label col-md-12">¿Aplica alguna medida?</label>
+												<div class="col-md-3">
+													<select class="form-control" name="medidaSeguridad478">
+														<option></option>
+														<option value="S">SI</option>
+														<option value="N">NO</option>
+													</select>
+												</div><br><br><br><br>
+												<label class="control-label col-md-12">Detalle, en caso afirmativo</label>
+												<textarea class="form-control" name="medida478"></textarea>
+											</div>
+										</div>
+									</div>
+
+								</div>
+										
+								<div class="col-md-6">
+									<div class="panel panel-default">
+										<div class="panel-heading">
+											III RELACIÓN DE MUESTRAS TOMADAS EN EL ESTABLECIMIENTO
+										</div>											
+										<div class="panel-body">
+											<div class="form-group">
+												<div class="form-group">
+													<div class="col-md-3">
+														<label class="control-label" style="text-align:right">Número de Muestras</label>
+													</div>
+													<div class="col-md-3">
+														<input class="form-control" type="number" name="numeroMuestras478"></input>
+													</div>
+
+													<div class="col-md-3">
+														<label class="control-label" style="text-align:right">Número de Acta</label>
+													</div>
+													<div class="col-md-3" style="padding-left:0">
+														<input class="form-control" type="number" name="numeroActa478"></input>
+													</div>										
+												</div>
+											</div>
+										</div>
+									</div>									
+								</div>									
+							</div><!-- Fin del tab-pane -->
+
+							<div role="tabpanel" aria-labelledby="observacion-tab" class="tab-pane fade" id="observaciones">
+								
+								<br><div class="alert alert-danger alert-dismissible fade in col-md-12" role="alert" name="alertaInscrito" style="display: none">
+									<strong>Cuidado!</strong> Debe elegir un inscrito antes de continuar.
+								</div><br>
+
+								<div class="form-group">
+									<br><label class="control-label col-md-12">VI. OBSERVACIONES</label><br><br>
+
+									<label class="col-md-3 control-label" style="text-align:right">Por parte de la autoridad sanitaria:</label>		
+									<div class="col-md-9">
+										<textarea class="form-control" name="obAutoridad478"></textarea>
+									</div>
+									<br><br><br>
+									<label class="col-md-3 control-label" style="text-align:right">Por parte del establecimiento:</label>
+									<div class="col-md-9">
+										<textarea class="form-control" name="obPersona478"></textarea>
+									</div>
+								</div><!-- Fin del form-group -->
+								<br><br><hr>
+
+								<div class="form-group">
+									<label class="control-label col-md-12">VII. NOTIFICACIÓN DEL ACTA: POR PARTE DE LOS FUNCIONARIOS QUE REALIZAN LA VISITA</label>																
+									<div class="col-md-2">
+										<label class="col-md-12 control-label">__</label>
+										<label class="col-md-12 control-label">Funcionario 1:</label>
+									</div>
+									<div class="col-md-5">
+										<label class="col-md-12 control-label">___</label>
+										<input type="text" class="form-control" name="funcionario478-1">
+									</div>
+									<div class="col-md-2">								
+										<label class="col-md-12 control-label">Identificación:</label>
+										<input type="text" class="form-control" name="idFuncionario478-1">
+									</div>
+									<div class="col-md-3">								
+										<label class="col-md-12 control-label">Cargo:</label>
+										<input type="text" class="form-control" name="cargoFuncionario478-1">
+									</div>
+									<div class="col-md-2">
+										<label class="col-md-12 control-label">Funcionario 2:</label>
+									</div>
+									<div class="col-md-5">
+										<input type="text" class="form-control" name="funcionario478-2">
+									</div>
+									<div class="col-md-2">								
+										<input type="text" class="form-control" name="idFuncionario478-2">
+									</div>
+									<div class="col-md-3">								
+										<input type="text" class="form-control" name="cargoFuncionario478-2">
+									</div>							
+								</div><!-- Fin del form-group -->
+
+								<br><br><br><br><br><br><hr>
+
+								<div class="form-group">
+									<label class="control-label col-md-12">VII. NOTIFICACIÓN DEL ACTA: POR PARTE DEL ESTABLECIMIENTO</label>																
+									<div class="col-md-2">
+										<label class="col-md-12 control-label">__</label>
+										<label class="col-md-12 control-label">Persona 1:</label>
+									</div>
+									<div class="col-md-5">
+										<label class="col-md-12 control-label">___</label>
+										<input type="text" class="form-control" name="persona478-1">
+									</div>
+									<div class="col-md-2">								
+										<label class="col-md-12 control-label">Identificación:</label>
+										<input type="text" class="form-control" name="idPersona478-1">
+									</div>
+									<div class="col-md-3">								
+										<label class="col-md-12 control-label">Cargo:</label>
+										<input type="text" class="form-control" name="cargoPersona478-1">
+									</div>
+									<div class="col-md-2">
+										<label class="col-md-12 control-label">Persona 2:</label>
+									</div>
+									<div class="col-md-5">
+										<input type="text" class="form-control" name="persona478-2">
+									</div>
+									<div class="col-md-2">								
+										<input type="text" class="form-control" name="idPersona478-2">
+									</div>
+									<div class="col-md-3">								
+										<input type="text" class="form-control" name="cargoPersona478-2">
+									</div>							
+								</div><!-- Fin del form-group -->
+
+								<br><br><br><br><br><br><hr>
+
+								<input type="hidden" name="id478" value="0">
+								
+								<br><br>
+								<div class="form-group">
+			                        <div class="col-md-4 col-md-offset-2">
+			                            <button data-toggle="modal" data-target="#resp" onclick="guardarEvaluacion('478')" class="btn btn-primary">
+			                                Guardar
+			                            </button>			                            
+			                        </div>
+			                        <div class="col-md-3">
+											<button class="btn btn-primary" data-toggle="modal" data-target="#resp"  onclick="cargarServidor('478')">
+												Subir información a servidor
+											</button>
+											<!-- Modal -->
+											<div class="modal fade" id="resp" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+												<div class="modal-dialog" role="document">
+													<div class="modal-content">
+														<div class="modal-header">
+															<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+															<h4 class="modal-title" id="myModalLabel">Respuesta: </h4>
+														</div>
+														<div class="modal-body">
+															<label id="cuerpoRespuesta"></label>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+			                        <div class="col-md-3">
+			                            <a type="submit" onclick="cerrarSesionServidor()" class="btn btn-primary">
+			                                Cerrar Sesión con Servidor
+			                            </a>
+			                        </div>		                       
+			                    </div>
+
+			                    <br><br><br><hr>
+
+			                    <div class="form-group">
+			                    	<div class="panel panel-default">
+			                    		<div class="panel-heading">EVALUADOS EN BD</div>
+			                    		<div class="panel-body">	                    			
+			                    			<table class="table table-bordered" id="tablaEvaluados">
+												<thead>
+													<tr>
+														<th></th>
+														<th>Establecimiento</th>
+														<th>Acta Número</th>
+														<th>Fecha Evaluación</th>
+														<th>P. Cumplimiento</th>
+														<th>Concepto</th>
+														<th></th>
+													</tr>									
+												</thead>
+												<tbody id="evaluados"></tbody>
+											</table>													
+			                    		</div>
+			                    	</div>
+									
+								</div><!-- Fin del form-group -->
+
+							</div><!-- Fin del tab-pane -->
+
+						</div><!-- Fin del tab-content -->						
+
+					</div><!-- Fin del Panel-body -->
+				</div><!-- Fin del panel default -->
+			</div><!-- Fin del Row -->
+		</div><!-- Fin del container -->
+
+	</body>
+
+</html>

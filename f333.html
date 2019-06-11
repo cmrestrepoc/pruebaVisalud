@@ -1,0 +1,520 @@
+<!DOCTYPE HTML>
+<html lang="es">
+	<head>
+		<meta charset="utf-8"/>
+		<title>F333</title>
+
+		<!-- favicon -->
+		<link rel="shortcut icon" type="img/png" href="./img/escudo130.ico" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+		<!-- Color de la aplicación -->
+		<meta name="theme-color" content="#65c0ba" />
+
+		<!-- Optomización para móvil -->
+		<meta name="MobileOptimized" content="width" />
+		<meta name="HandleFriendly" content="true" />
+
+		<!-- Configuración General PWA -->
+		<link rel="manifest" href="manifest.json" />
+
+		<link rel="stylesheet" type="text/css" href="./css/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="./css/styles.css">
+		<link rel="stylesheet" type="text/css" href="./css/jquery.dataTables.min.css">
+
+		<script src="./js/jquery-3.3.1.slim.min.js"></script>
+		<script type="text/javascript" src="./js/jquery.dataTables.min.js"></script>
+		<script src="./js/bootstrap.min.js"></script>
+		<script src="./js/pouchdb.min.js"></script>
+		<script type="text/javascript" src="main.js"></script>
+		<script type="text/javascript" src="./js/sw-db.js"></script>
+		<script type="text/javascript" src="./js/firma.js"></script>
+		
+	</head>
+	<body onload="verificarAccionForm('333')">
+		<header>
+			<a href="menu0.html">
+				<img alt src="./img/escudo.jpg" />
+			</a>
+			<div class="titulos">
+				<h1>MUNICIPIO DE CANDELARIA (V)</h1>
+				<h2>Vigilancia en Salud Pública</h2>
+				<h2>Formato FT333</h2>
+			</div>
+		</header>
+
+		<br><br>
+
+		<div class="container">
+			<div class="row">
+
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						Acta de toma de muestras de alimentos Formato FT333
+					</div>
+					<div class="panel-body">
+						
+						<!-- Nav tabs -->
+						<ul id="misTabs" class="nav nav-tabs" role="tablist">
+							<li role="presentation" class="active"><a href="#inscritos493" aria-controls="inscritos493" role="tab" data-toggle="tab">Inscritos</a></li>
+							<li role="presentation"><a href="#formulario" aria-controls="formulario" role="tab" data-toggle="tab" onclick="mostrarEvaluados('333')">Formulario</a></li>
+						</ul>
+						
+						<div class="tab-content" id="miTabContent">
+							<div role="tabpanel" class="tab-pane fade active in" id="inscritos493" aria-labelledby="inscritos493-tab">
+								<br>
+								<script type="text/javascript">mostrarInscritos493('333');</script>
+								<div class="form-group">
+									<div class="panel panel-default">
+										<div class="panel-heading">INSCRITOS EN BD</div>
+										<div class="panel-body">	                    			
+											<table class="table table-bordered" id="tablaInscritos">
+												<thead>
+													<tr>
+														<th></th>
+														<th>ID</th>
+														<th>Establecimiento</th>
+														<th>Inscripción No.</th>
+														<th>Fecha Inscrip.</th>
+														<th>Nom. Propietario</th>
+														<th>Ident. Propietario</th>									
+														<th></th>
+													</tr>									
+												</thead>
+												<tbody id="inscritos"></tbody>
+											</table>													
+										</div>
+									</div>									
+								</div><!-- Fin del form-group -->
+							</div><!-- Fin del tab-pane -->
+
+							<div role="tabpanel" class="tab-pane fade" id="formulario" aria-labelledby="formulario-tab">								
+								<br><div class="alert alert-danger alert-dismissible fade in col-md-12" role="alert" name="alertaInscrito" style="display: none">
+									<strong>Cuidado!</strong> Debe elegir un inscrito antes de continuar.
+								</div><br>
+								
+								<div class="form-group">
+									<div class="col-md-9">
+										<div class="col-md-4">
+											<label class="col-md-12 control-label">Mpio:</label>
+											<input type="text" class="form-control" name="mpio333" value="CANDELARIA">
+										</div>
+										<div class="col-md-4">
+											<label class="col-md-12 control-label">Fecha:</label>
+											<input type="date" class="form-control" name="fecha333">
+										</div>
+										<script type="text/javascript">
+											cargarInicio('333');
+										</script>										
+										<div class="col-md-4">
+											<label class="col-md-12 control-label">Insc. No:</label>
+											<input type="text" class="form-control" name="inscripcion333">
+										</div>
+									</div>						
+									<div class="col-md-3">
+										<label class="col-md-12 control-label">Acta No.:</label>
+										<input type="text" class="form-control" name="acta333">
+									</div>															
+								</div>
+		
+								<br><br><br><br>
+		
+								<div class="form-group">
+									<div class="col-md-3" style="padding:0">
+										<label class="col-md-12 control-label">Razón social:</label>
+										<input type="text" class="form-control" name="razonSocial333">
+									</div>									
+									<div class="col-md-2">
+										<label class="col-md-12 control-label">Nit/Cédula:</label>
+										<input type="text" class="form-control" name="nit333">
+									</div>
+									<div class="col-md-4">
+										<label class="col-md-12 control-label">Propietario:</label>
+										<input type="text" class="form-control" name="propietario333">
+									</div>
+									<div class="col-md-3" style="padding:0">
+										<label class="col-md-12 control-label" style="padding:0">Identificación:</label>
+										<div class="col-md-3" style="padding:0">
+											<select class="form-control" name="tipoIdProp333" id="tipoIdProp333">
+												<option></option>
+												<option value="CC">CC</option>
+												<option value="CE">CE</option>
+												<option value="NIT">NIT</option>
+											</select>
+										</div>
+										<div class="col-md-9">
+											<input type="text" class="form-control" name="idPropietario333">
+										</div>							
+									</div>
+								</div><!-- Fin del form-group -->
+		
+								<br><br><br><br><br>
+		
+								<div class="form-group">																			
+									<div class="col-md-3">
+										<label class="col-md-12 control-label">Celular:</label>
+										<input type="text" class="form-control" name="cel333">	
+									</div>
+									<div class="col-md-2">
+										<label class="col-md-12 control-label">Teléfono:</label>
+										<input type="text" class="form-control" name="tel333">		
+									</div>
+									<div class="col-md-4">
+										<label class="col-md-12 control-label">Rep. legal:</label>
+										<input type="text" class="form-control" name="repLegal333">
+									</div>
+									<div class="col-md-3" style="padding:0">
+										<label class="col-md-12 control-label" style="padding:0">Identificación:</label>
+										<div class="col-md-3" style="padding:0">
+											<select class="form-control" name="tipoIdRl333" id="tipoIdRl333">
+												<option></option>
+												<option value="CC">CC</option>
+												<option value="CE">CE</option>
+												<option value="NIT">NIT</option>
+											</select>
+										</div>
+										<div class="col-md-9">
+											<input type="text" class="form-control" name="idRepLegal333">
+										</div>							
+									</div>							
+								</div><!-- Fin del form-group -->
+		
+								<br><br><br><br><br>
+		
+								<div class="form-group">
+									<label class="col-md-1 col-md-offset-1 control-label">Dirección:</label>
+									<div class="col-md-5">
+										<input type="text" class="form-control" name="direccion333">
+									</div>
+									<label class="col-md-1 control-label" style="text-align:right;padding:0">Barrio/Cgto.:</label>
+									<div class="col-md-3">
+										<select class="form-control" name="nomTerr333">
+											<option></option>
+											<option value="SAMANES">SAMANES</option>
+											<option value="OBRERO">OBRERO</option>
+											<option value="PANAMERICANO">PANAMERICANO</option>
+											<option value="SAN CRISTOBAL">SAN CRISTOBAL</option>
+											<option value="MUNICIPAL">MUNICIPAL</option>
+											<option value="LA CRUZ">LA CRUZ</option>
+											<option value="LA VICTORIA">LA VICTORIA</option>
+											<option value="JORGE ELIECER GAITAN">JORGE ELIECER GAITAN</option>
+											<option value="MARIA AUXILIADORA">MARIA AUXILIADORA</option>
+											<option value="SANTA ANA">SANTA ANA</option>
+											<option value="ARMANDO VASQUEZ">ARMANDO VASQUEZ</option>
+											<option value="COOTRAIM">COOTRAIM</option>
+											<option value="BRISAS DEL RIO">BRISAS DEL RIO</option>
+											<option value="BUCHITOLO">BUCHITOLO</option>
+											<option value="EL ARENAL">EL ARENAL</option>
+											<option value="EL CABUYAL">EL CABUYAL</option>
+											<option value="EL CARMELO">EL CARMELO</option>
+											<option value="EL LAURO">EL LAURO</option>
+											<option value="EL TIPLE">EL TIPLE</option>
+											<option value="JUANCHITO">JUANCHITO</option>
+											<option value="VILLAGORGONA">VILLAGORGONA</option>
+											<option value="LA REGINA">LA REGINA</option>
+											<option value="MADRE VIEJA">MADRE VIEJA</option>
+											<option value="SAN JOAQUIN">SAN JOAQUIN</option>
+											<option value="POBLADO CAMPESTRE">POBLADO CAMPESTRE</option>
+										</select>
+									</div>			
+								</div><!-- Fin del form-group -->
+		
+								<br><br><br><br>
+		
+								<div class="form-group">
+									<label class="col-md-1 col-md-offset-1 control-label">Correo:</label>
+									<div class="col-md-5">
+										<input type="email" class="form-control" name="correoProp333">
+									</div>
+									<label class="col-md-1 control-label" style="text-align:right;padding:0">Objeto:</label>
+									<div class="col-md-3">
+										<input type="text" class="form-control" name="objeto333">
+									</div>
+														
+								</div><!-- Fin del form-group -->
+		
+								<br><br><br><br>
+		
+								<div class="form-group" id="listadoMuestras">
+									<div class="panel panel-default">
+										<div class="panel-heading">
+											Listado de Muestras:
+										</div>
+										<div class="panel-body">
+											<div class="table-responsive col-md-12">
+												<table class="table table-bordered">
+													<thead>
+														<tr>
+															<th>Orden</th>
+															<th>No. U/M</th>
+															<th>Contenido</th>
+															<th>Producto</th>
+															<th>Temp. °C</th>
+															<th>Envase</th>
+															<th>Lote/F. V.</th>
+															<th>Reg Sanit</th>
+														</tr>
+													</thead>
+													<tbody id="muestras">
+														<tr>
+															<td><input class="form-control" type="text" name="Orden"></td>
+															<td><input class="form-control" type="text" name="Um"></td>
+															<td><input class="form-control" type="text" name="Contenido"></td>
+															<td><input class="form-control" type="text" name="Producto"></td>
+															<td><input class="form-control" type="text" name="Temperatura"></td>
+															<td><input class="form-control" type="text" name="TipoEnvase"></td>
+															<td><input class="form-control" type="text" name="LoteFechaV"></td>
+															<td><input class="form-control" type="text" name="RegSanit"></td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
+									<br>
+									<div class="col-md-4 col-md-offset-2">
+										<button class="btn btn-primary" onclick="crearMuestra()">Adicionar Muestra</button>	
+									</div>
+								</div><!-- Fin del form-group -->
+		
+								<br><br><br><br>
+		
+								<div class="form-group">							
+									<div class="col-md-10">
+										<label class="col-md-6 col-md-offset-1 control-label">Usuario autoriza Notifiación y/o firma electrónica</label>
+										<div class="col-md-2">
+											<label class="col-md-12 control-label">Notific.</label>
+											<select class="form-control" name="autorizaNoti333">
+												<option></option>
+												<option value="S">Si</option>
+												<option value="N">No</option>
+											</select>
+										</div>
+										<div class="col-md-2">
+											<label class="col-md-12 control-label">Firma</label>
+											<select class="form-control" name="autorizaFirma333">
+												<option></option>
+												<option value="S">Si</option>
+												<option value="N">No</option>
+											</select>
+										</div>								
+									</div>							
+								</div><!-- Fin del form-group -->
+		
+								<br><br><br><br>
+		
+								<div class="form-group">
+									<label class="col-md-3 control-label">Observaciones por parte de la autoridad sanitaria:</label>		
+									<div class="col-md-9">
+										<textarea class="form-control" name="obAutoridad333"></textarea>
+									</div>
+									<br><br><br>							
+								</div><!-- Fin del form-group -->
+		
+								<br><br>
+		
+								<div class="form-group">
+									<div class="col-md-6">
+										<label class="col-md-12 control-label">POR LA ENTIDAD DE SALUD</label>
+										<div class="row">
+											<div class="col-md-12">
+												<label class="col-md-2 control-label" style="padding-left: 0px">
+													Nombre:
+												</label>
+												<div class="col-md-10" style="padding: 0px">
+													<input type="text" class="form-control" name="funcionario333-1">
+												</div>
+											</div><br><br><br><br>
+											<div class="col-md-6">
+												<label class="col-md-6 control-label" style="padding-left: 0px">
+													Identificación:
+												</label>
+												<div class="col-md-6" style="padding: 0px">
+													<input type="text" class="form-control" name="idFuncionario333-1">
+												</div>
+											</div>
+											<div class="col-md-6">
+												<label class="col-md-3 control-label" style="padding-left: 0px">
+													Cargo:
+												</label>
+												<div class="col-md-9" style="padding: 0px">
+													<input type="text" class="form-control" name="cargoFuncionario333-1">
+												</div>
+											</div>		
+										</div><br><br><br>
+										<div class="row">
+											<div class="col-md-12">
+												<label class="col-md-2 control-label" style="padding-left: 0px">
+													Nombre:
+												</label>
+												<div class="col-md-10" style="padding: 0px">
+													<input type="text" class="form-control" name="funcionario333-2">
+												</div>
+											</div><br><br><br>
+											<div class="col-md-6">
+												<label class="col-md-6 control-label" style="padding-left: 0px;">
+													Identificación:
+												</label>
+												<div class="col-md-6" style="padding: 0px">
+													<input type="text" class="form-control" name="idFuncionario333-2">
+												</div>
+											</div>
+											<div class="col-md-6">
+												<label class="col-md-3 control-label" style="padding-left: 0px">
+													Cargo:
+												</label>
+												<div class="col-md-9" style="padding: 0px">
+													<input type="text" class="form-control" name="cargoFuncionario333-2">
+												</div>
+											</div>		
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="row">
+											<label class="col-md-12 control-label">POR PARTE DE LA EMPRESA</label>
+											<div class="col-md-12">
+												<label class="col-md-2 control-label" style="padding-left: 0px">
+													Nombre:
+												</label>
+												<div class="col-md-10" style="padding: 0px">
+													<input type="text" class="form-control" name="persona333-1">
+												</div>
+											</div><br><br><br><br>
+											<div class="col-md-6">
+												<label class="col-md-6 control-label" style="padding-left: 0px">
+													Identificación:
+												</label>
+												<div class="col-md-6" style="padding: 0px">
+													<input type="text" class="form-control" name="idPersona333-1">
+												</div>
+											</div>
+											<div class="col-md-6">
+												<label class="col-md-3 control-label" style="padding-left: 0px">
+													Cargo:
+												</label>
+												<div class="col-md-9" style="padding: 0px">
+													<input type="text" class="form-control" name="cargoPersona333-1">
+												</div>
+											</div>
+										</div><br><br><br>
+										<div class="row">
+											<label class="col-md-12 control-label">POR PARTE DEL LABORATORIO</label>
+											<div class="col-md-12">
+												<label class="col-md-2 control-label" style="padding-left: 0px">
+													Nombre:
+												</label>
+												<div class="col-md-10" style="padding: 0px">
+													<input type="text" class="form-control" name="persona333-2">
+												</div>
+											</div><br><br><br><br>
+											<div class="col-md-6">
+												<label class="col-md-6 control-label" style="padding-left: 0px">
+													Identificación:
+												</label>
+												<div class="col-md-6" style="padding: 0px">
+													<input type="text" class="form-control" name="idPersona333-2">
+												</div>
+											</div>
+											<div class="col-md-6">
+												<label class="col-md-3 control-label" style="padding-left: 0px">
+													Cargo:
+												</label>
+												<div class="col-md-9" style="padding: 0px">
+													<input type="text" class="form-control" name="cargoPersona333-2">
+												</div>
+											</div>
+										</div><br>
+										<div class="row">
+											<div class="col-md-4">
+												<label class="col-md-12 control-label">
+													Fecha:
+												</label>
+												<input type="date" class="form-control" name="fecha333-2">
+											</div>
+											<div class="col-md-4">
+												<label class="col-md-2 control-label">
+													Hora:
+												</label>
+												<input type="text" class="form-control" name="hora333-2">
+											</div>
+											<div class="col-md-4">
+												<label class="col-md-2 control-label">
+													Temperatura:
+												</label>
+												<input type="text" class="form-control" name="temperatura333-2">
+											</div>
+										</div>
+									</div>							
+								</div><!-- Fin del form-group -->
+		
+								<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+		
+								<input type="hidden" name="id333" value="0">
+									<br><br>
+									<div class="form-group">
+										<div class="col-md-4 col-md-offset-2">
+											<button type="submit" data-toggle="modal" data-target="#resp" onclick="guardarEvaluacion('333')" class="btn btn-primary">
+												Guardar
+											</button>			                            
+										</div>
+										<div class="col-md-3">
+											<button class="btn btn-primary" data-toggle="modal" data-target="#resp" onclick="cargarServidor('333')">
+												Subir información a servidor
+											</button>
+											<!-- Modal -->
+											<div class="modal fade" id="resp" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+												<div class="modal-dialog" role="document">
+													<div class="modal-content">
+														<div class="modal-header">
+															<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+															<h4 class="modal-title" id="myModalLabel">Respuesta: </h4>
+														</div>
+														<div class="modal-body">
+															<label id="cuerpoRespuesta"></label>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="col-md-3">
+											<a type="submit" onclick="cerrarSesionServidor()" class="btn btn-primary">
+												Cerrar Sesión con Servidor
+											</a>
+										</div>			                       
+									</div><!-- Fin del form-group -->
+								<br><br><br><br>
+		
+								<div class="form-group">
+									<div class="panel panel-default">
+										<div class="panel-heading">ACTAS</div>
+										<div class="panel-body">	                    			
+											<table class="table table-bordered" id="tablaEvaluados">
+												<thead>
+													<tr>
+														<th></th>
+														<th>Establecimiento</th>
+														<th>Acta Número</th>
+														<th>Fecha Evaluación</th>
+														<th>Observaciones Autoridad Sanitaria</th>
+														<th></th>
+													</tr>									
+												</thead>
+												<tbody id="evaluados"></tbody>
+											</table>													
+										</div>
+									</div>
+									
+								</div><!-- Fin del form-group -->
+							</div><!-- Fin del tab-pane -->
+	                    		
+						</div><!-- Fin del tab-content -->
+
+					</div><!-- Fin del Panel-body -->
+				</div><!-- Fin del Panel-default -->
+
+			</div><!-- Fin del Row -->
+		</div><!-- Fin del Container -->
+	</body>
+</html>

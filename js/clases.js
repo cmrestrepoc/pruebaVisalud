@@ -121,7 +121,7 @@ sumarUno(10).then( nuevoNumero => {
 		console.log(error);
 	});*/
 
-fetch( 'https://swapi.co/api/people/1/' )
+/*fetch( 'https://swapi.co/api/people/1/' )
 	.then( resp => resp.json() )
 	.then( persona=> {
 		//console.log(persona.name);
@@ -142,3 +142,23 @@ fetch( 'https://swapi.co/api/people/1/' )
 	})
 	.then( resp => resp.json() )
 	.then( console.log ); //El último then lleva punto y coma, los otros no
+*/
+
+var Persona = function(){
+	this.nombre = "Carlos";
+	this.apellido = "Restrepo";
+	this.edad = 35;
+};
+
+var programador = new Persona();
+
+Persona.prototype.direccion = "Bogotá";
+
+for (prop in programador){
+	console.log( programador.hasOwnProperty(prop) );
+	
+	if ( !programador.hasOwnProperty(prop) ) 
+		continue;								//Es una sola línea, no lleva llaves el if
+
+	console.log( prop, ":", programador[prop]);
+}

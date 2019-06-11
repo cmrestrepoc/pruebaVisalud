@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+<html lang="es">
+	<head>
+		<meta charset="utf-8"/>
+		<title>Visalud</title>
+
+		<!-- favicon -->
+		<link rel="shortcut icon" type="img/png" href="./img/escudo130.ico" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+		<!-- Color de la aplicación -->
+		<meta name="theme-color" content="#65c0ba" />
+
+		<!-- Optomización para móvil -->
+		<meta name="MobileOptimized" content="width" />
+		<meta name="HandleFriendly" content="true" />
+
+		<!-- Configuración General PWA -->
+		<link rel="manifest" href="manifest.json" />
+
+		<link rel="stylesheet" type="text/css" href="./css/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="./css/styles.css">
+
+		<script src="./js/jquery-3.3.1.slim.min.js"></script>
+		<script src="./js/bootstrap.js"></script>
+		<script src="./js/bootstrap.min.js"></script>
+		<script src="./js/pouchdb.min.js"></script>
+		<script type="text/javascript" src="main.js"></script>
+
+	</head>
+
+	<body>
+		<header>
+			<a href="menu0.html">
+				<img alt src="./img/escudo.jpg" />
+			</a>
+			<div class="titulos">
+				<h1>MUNICIPIO DE CANDELARIA (V)</h1>
+				<h2>Vigilancia en Salud Pública</h2>
+			</div>
+		</header><br><br>
+
+		<div class="container">
+
+			<div class="panel panel-primary col-md-6 col-md-offset-3">
+				<div class="panel-heading">
+					CONEXIÓN CON EL SERVIDOR
+				</div>
+				<div class="panel-body">
+					<div class="form-group">
+						<h5>Para establecer una conexión con el servidor, debe ingresar sus credenciales</h5>
+					</div>
+					<br>
+					<div class="form-group">
+						<label class="col-md-3 col-md-offset-1 control-label">Contraseña:</label>
+						<div class="col-md-6">
+							<input type="password" class="form-control" name="password">
+						</div>
+					</div>
+					<br><br><br>
+					<div class="form-group">
+	                        <div class="col-md-3 col-md-offset-4">
+	                            <a type="submit" onclick="loginServer()" class="btn btn-primary">
+	                                Enviar
+	                            </a>
+	                        </div>
+	                    </div><!-- Fin del form-group -->
+				</div>
+			</div>
+
+		</div>
+	</body>
+
+</html>	

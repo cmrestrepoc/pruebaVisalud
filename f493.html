@@ -2,7 +2,7 @@
 <html lang="es">
 	<head>
 		<meta charset="utf-8"/>
-		<title>Visalud</title>
+		<title>F493</title>
 
 		<!-- favicon -->
 		<link rel="shortcut icon" type="img/png" href="./img/escudo130.ico" />
@@ -26,17 +26,17 @@
 
 		<script src="./js/jquery-3.3.1.slim.min.js"></script>
 		<script type="text/javascript" src="./js/jquery.dataTables.min.js"></script>
-		<script src="./js/bootstrap.js"></script>
 		<script src="./js/bootstrap.min.js"></script>
 		<script src="./js/pouchdb.min.js"></script>
 		<script type="text/javascript" src="main.js"></script>
 		<script type="text/javascript" src="./js/sw-db.js"></script>
+		<script type="text/javascript" src="./js/firma.js"></script>
 		
 	</head>
-	<body>
+	<body onload="cargarInicioInscripciones('493')">
 		<header>
-			<a href="index.html">
-				<img src="./img/escudo.jpg" />
+			<a href="menu0.html">
+				<img alt src="./img/escudo.jpg" />
 			</a>
 			<div class="titulos">
 				<h1>MUNICIPIO DE CANDELARIA (V)</h1>
@@ -56,22 +56,29 @@
 					</div>
 					<div class="panel-body">
 						<div class="form-group">
-							<div class="col-md-4">
+							<div class="col-md-2">
 								<label class="col-md-12 control-label">Departamento:</label>
-								<input type="text" class="form-control" name="depto" value="VALLE DEL CAUCA">
+								<input type="text" class="form-control" name="depto493" value="VALLE DEL CAUCA">
 							</div>
-							<div class="col-md-8">
-								<div class="col-md-4">
+							<div class="col-md-10">
+								<div class="col-md-2">
 									<label class="col-md-12 control-label">Mpio:</label>
-									<input type="text" class="form-control" name="mpio" value="CANDELARIA">
+									<input type="text" class="form-control" name="mpio493" value="CANDELARIA">
 								</div>
-								<div class="col-md-4">
+								<div class="col-md-3">
 									<label class="col-md-12 control-label">Fecha:</label>
-									<input type="date" class="form-control" name="fechaInsc">
+									<input type="date" class="form-control" name="fecha493">
 								</div>
+								<script type="text/javascript">
+									cargarInicio('493');
+								</script>										
 								<div class="col-md-4">
 									<label class="col-md-12 control-label">Insc. No:</label>
-									<input type="number" class="form-control" name="inscripcion">
+									<input type="text" class="form-control" name="inscripcion493" value="76130">
+								</div>
+								<div class="col-md-3">
+									<label class="col-md-12 control-label">Acta:</label>
+									<input type="text" class="form-control" name="acta493">
 								</div>
 							</div>						
 																						
@@ -81,17 +88,21 @@
 
 						<div class="form-group">
 							<label class="control-label col-md-12" style="text-decoration:underline">PERSONERÍA JURÍDICA</label>
-							<div class="col-md-5">
+							<div class="col-md-4">
 								<label class="col-md-12 control-label">Razón social:</label>
-								<input type="text" class="form-control" name="razonSocial">
+								<input type="text" class="form-control" name="razonSocial493">
 							</div>
-							<div class="col-md-5">
+							<div class="col-md-4">
 								<label class="col-md-12 control-label">Nombre Comercial:</label>
-								<input type="text" class="form-control" name="nombreComercial">
+								<input type="text" class="form-control" name="nombreComercial493">
 							</div>
 							<div class="col-md-2">
-								<label class="col-md-12 control-label">Nit:</label>
-								<input type="text" class="form-control" name="nit">
+								<label class="col-md-12 control-label">Mat. Mercantil:</label>
+								<input type="text" class="form-control" name="matriculaMercantil493">
+							</div>									
+							<div class="col-md-2">
+								<label class="col-md-12 control-label">Nit/Cédula:</label>
+								<input type="number" class="form-control" name="nit493" onchange="estabNumInscripcion(this.value, '493')">
 							</div>
 						</div><!-- Fin del form-group -->
 
@@ -99,39 +110,40 @@
 
 						<div class="form-group">
 							<label class="control-label col-md-12" style="text-decoration:underline">PERSONA NATURAL</label>
+							<br><br>
+							<div class="col-md-6">
+								<label class="col-md-3 control-label">Propietario:</label>
+								<div class="col-md-9">
+									<input type="text" class="form-control" name="propietario493">
+								</div>
+							</div>
 							<div class="col-md-5">
-								<label class="col-md-12 control-label">N. Establ.:</label>
-								<input type="text" class="form-control" name="nEstablecimiento">
-							</div>
-							<div class="col-md-4">
-								<label class="col-md-12 control-label">Propietario:</label>
-								<input type="text" class="form-control" name="propietario">
-							</div>
-							<div class="col-md-3">
-								<label class="col-md-12 control-label">Identificación:</label>
-								<div class="col-md-5">
-									<select class="form-control" name="tipoId">
-										<option value="cc">CC</option>
-										<option value="ce">CE</option>
-										<option value="nit">NIT</option>
+								<label class="col-md-3 control-label" style="padding:0">Identificación:</label>
+								<div class="col-md-3">
+									<select class="form-control" name="tipoIdProp493" id="tipoIdProp493">
+										<option></option>
+										<option value="CC">CC</option>
+										<option value="CE">CE</option>
+										<option value="NIT">NIT</option>
 									</select>
 								</div>
-								<div class="col-md-7">
-									<input type="text" class="form-control" name="identificacion">
+								<div class="col-md-6">
+									<input type="text" class="form-control" name="idPropietario493">
 								</div>							
 							</div>
 						</div><!-- Fin del form-group -->
 
-						<br><br><br><br><br>
+						<br><br><br><br>
 
 						<div class="form-group">
-							<label class="col-md-1 col-md-offset-1 control-label">Dirección:</label>			
+							<label class="col-md-1 col-md-offset-1 control-label">Dirección:</label>
 							<div class="col-md-6">
-								<input type="text" class="form-control" name="direccion">
+								<input type="text" class="form-control" name="direccion493">
 							</div>
 							<label class="col-md-1 control-label">Zona:</label>				
 							<div class="col-md-2">
-								<select class="form-control" name="zona">
+								<select class="form-control" name="zona493" id="zona493">
+									<option></option>
 									<option value="U">URBANA</option>
 									<option value="R">RURAL</option>
 								</select>														
@@ -141,158 +153,165 @@
 						<br><br><br><br>
 
 						<div class="form-group">
-							<div class="col-md-2" style="margin-left:50px">
-								<div class="input-group">
-									<span class="input-group-addon">
-								    	<input type="radio" name="territorioInscripcion" value="comuna">
-								    </span>
-								    <input type="text" class="form-control" name="comuna" value="Comuna">
-								</div>
-							</div>
+							<label class="col-md-2 control-label" style="text-align:right; padding-right:0">Tipo de territorio:</label>
 							<div class="col-md-2">
 								<div class="input-group">
 									<span class="input-group-addon">
-								    	<input type="radio" name="territorioInscripcion" value="barrio">
+								    	<input type="radio" name="territorio493" value="barrio" id="barrio">
 								    </span>
 								    <input type="text" class="form-control" name="barrio" value="Barrio">
 								</div>
 							</div>									
-							<div class="col-md-2">
+							<div class="col-md-2" style="padding:0">
 								<div class="input-group">
 									<span class="input-group-addon">
-								    	<input type="radio" name="territorioInscripcion" value="localidad">
-								    </span>
-								    <input type="text" class="form-control" name="localidad" value="Localidad">
-								</div>
-							</div>								
-							<div class="col-md-2">
-								<div class="input-group">
-									<span class="input-group-addon">
-								    	<input type="radio" name="territorioInscripcion" value="sector">
-								    </span>
-								    <input type="text" class="form-control" name="sector" value="Sector">
-								</div>
-							</div>								
-							<div class="col-md-3">
-								<div class="input-group">
-									<span class="input-group-addon">
-								    	<input type="radio" name="territorioInscripcion" value="corregimiento">
+								    	<input type="radio" name="territorio493" value="corregimiento" id="corregimiento">
 								    </span>
 								    <input type="text" class="form-control" name="corregimiento" value="Corregimiento">
 								</div>
 							</div>
-							<br><br><br>
-							<div class="col-md-2" style="margin-left:50px">
-								<div class="input-group">
-									<span class="input-group-addon">
-								    	<input type="radio" name="territorioInscripcion" value="upz">
-								    </span>
-								    <input type="text" class="form-control" name="upz" value="Upz">
-								</div>
-							</div>
 							<div class="col-md-2">
 								<div class="input-group">
 									<span class="input-group-addon">
-								    	<input type="radio" name="territorioInscripcion" value="caserio">
+								    	<input type="radio" name="territorio493" value="vereda" id="vereda">
 								    </span>
-								    <input type="text" class="form-control" name="caserio" value="Caserío">
+								    <input type="text" class="form-control" name="vereda" value="Vereda">
 								</div>
 							</div>
-							<div class="col-md-2">
-								<div class="input-group">
-									<span class="input-group-addon">
-								    	<input type="radio" name="territorioInscripcion" value="otro">
-								    </span>
-								    <input type="text" class="form-control" name="otro" value="Otro">
-								</div>
-							</div>					
+							<label class="col-md-1 control-label" style="text-align:right;padding:0">Nombre:</label>
+							<div class="col-md-3">
+								<select class="form-control" name="nomTerr493">
+									<option></option>
+									<option value="SAMANES">SAMANES</option>
+									<option value="OBRERO">OBRERO</option>
+									<option value="PANAMERICANO">PANAMERICANO</option>
+									<option value="SAN CRISTOBAL">SAN CRISTOBAL</option>
+									<option value="MUNICIPAL">MUNICIPAL</option>
+									<option value="LA CRUZ">LA CRUZ</option>
+									<option value="LA VICTORIA">LA VICTORIA</option>
+									<option value="JORGE ELIECER GAITAN">JORGE ELIECER GAITAN</option>
+									<option value="MARIA AUXILIADORA">MARIA AUXILIADORA</option>
+									<option value="SANTA ANA">SANTA ANA</option>
+									<option value="ARMANDO VASQUEZ">ARMANDO VASQUEZ</option>
+									<option value="COOTRAIM">COOTRAIM</option>
+									<option value="BRISAS DEL RIO">BRISAS DEL RIO</option>
+									<option value="BUCHITOLO">BUCHITOLO</option>
+									<option value="EL ARENAL">EL ARENAL</option>
+									<option value="EL CABUYAL">EL CABUYAL</option>
+									<option value="EL CARMELO">EL CARMELO</option>
+									<option value="EL LAURO">EL LAURO</option>
+									<option value="EL TIPLE">EL TIPLE</option>
+									<option value="JUANCHITO">JUANCHITO</option>
+									<option value="VILLAGORGONA">VILLAGORGONA</option>
+									<option value="LA REGINA">LA REGINA</option>
+									<option value="MADRE VIEJA">MADRE VIEJA</option>
+									<option value="SAN JOAQUIN">SAN JOAQUIN</option>
+									<option value="POBLADO CAMPESTRE">POBLADO CAMPESTRE</option>
+								</select>
+							</div>				
 						</div>
 
-	                    <br><br>
+	                    <br><br><br>
 
-	                    <div class="form-group">
-							<div class="col-md-5">
-								<label class="col-md-12 control-label">Cual:</label>
-								<input type="text" class="form-control" name="nomTerrInscrito">
-							</div>													
+	                    <div class="form-group">																			
 							<div class="col-md-3">
 								<label class="col-md-12 control-label">Celular:</label>
-								<input type="text" class="form-control" name="celInscrito">	
+								<input type="text" class="form-control" name="cel493">	
 							</div>
 							<div class="col-md-2">
 								<label class="col-md-12 control-label">Fax:</label>
-								<input type="text" class="form-control" name="faxInscrito">		
+								<input type="text" class="form-control" name="fax493">		
 							</div>
 							<div class="col-md-2">
 								<label class="col-md-12 control-label">Teléfono:</label>
-								<input type="text" class="form-control" name="telInscrito">		
+								<input type="text" class="form-control" name="tel493">		
+							</div>
+							<div class="col-md-5">
+								<label class="col-md-12 control-label">Correo:</label>
+								<input type="email" class="form-control" name="correoProp493">
 							</div>							
 						</div><!-- Fin del form-group -->
 
-						<br><br><br><br>
+						<br><br><br><br><br>
 
-						<div class="form-group">
-							<div class="col-md-7">
-								<label class="col-md-12 control-label">Correo:</label>
-								<input type="text" class="form-control" name="correoPropInscrito">
-							</div>
-
-							<div class="col-md-5">
-								<label class="col-md-12 control-label">Autoriza envío de correos electrónicos:</label>
-								<div class="col-md-3">
-									<select class="form-control" name="autorizaPropInscrito">
-										<option value="s">S</option>
-										<option value="n">N</option>
+						<div class="form-group">							
+							<div class="col-md-10">
+								<label class="col-md-6 col-md-offset-1 control-label">Usuario autoriza Notifiación y/o firma electrónica</label>
+								<div class="col-md-2">
+									<label class="col-md-12 control-label">Notific.</label>
+									<select class="form-control" name="autorizaNoti493">
+										<option></option>
+										<option value="S">Si</option>
+										<option value="N">No</option>
+									</select>
+								</div>
+								<div class="col-md-2">
+									<label class="col-md-12 control-label">Firma</label>
+									<select class="form-control" name="autorizaFirma493">
+										<option></option>
+										<option value="S">Si</option>
+										<option value="N">No</option>
 									</select>
 								</div>								
 							</div>							
 						</div><!-- Fin del form-group -->
 
-						<br><br><br><br>
+						<br><br><br><br><br>
 
 						<div class="form-group">
-							<div class="col-md-5">
+							<div class="col-md-4">
 								<label class="col-md-12 control-label">Dir Notif:</label>
-								<input type="text" class="form-control" name="dirNotifInsc">
+								<input type="text" class="form-control" name="dirNotif493">
 							</div>							
-							<div class="col-md-5">
+							<div class="col-md-6">
 								<div class="col-md-5">
 									<label class="control-label">Depto Notif:</label>
-									<input type="text" class="form-control" value="Valle del Cauca" name="deptoNotifInsc">
+									<input type="text" class="form-control" value="VALLE DEL CAUCA" name="deptoNotif493">
 								</div>
 								<div class="col-md-4">
 									<label class="control-label">Mpio Notif:</label>
-									<input type="text" class="form-control" value="Candelaria" name="mpioNotifInsc">
+									<input type="text" class="form-control" value="CANDELARIA" name="mpioNotif493">
 								</div>
-								<div class="col-md-3">
+								<div class="col-md-2" style="padding:0px">
 									<label class="col-md-12 control-label">Visitado:</label>
-									<select class="form-control" name="visitadoInsc">
-										<option value="s">Si</option>
-										<option value="n">No</option>
+									<select class="form-control" name="visitado493" id="visitado493">
+										<option></option>
+										<option value="S">Si</option>
+										<option value="N">No</option>
 									</select>											
 								</div>													
 							</div>
-							<div class="col-md-2">
-								<label class="col-md-12 control-label">Fecha:</label>
-								<input type="date" class="form-control" name="fechaNotifInsc">
+							<div class="col-md-2" style="padding-left:0">
+								<label class="col-md-12 control-label">Fecha Ult. Visita:</label>
+								<input type="date" class="form-control" name="fechaUltVisita493">
 							</div>							
 						</div><!-- Fin del form-group -->
 
 						<br><br><br><br>
 
 						<div class="form-group">
-							<label class="col-md-1 control-label">Visitó:</label>		
 							<div class="col-md-5">
-								<input type="text" class="form-control" name="funcionarioUltVisita" placeholder="Nombre del funcionario que visitó por última vez">
+								<label class="col-md-12 control-label">Visitó:</label>							
+								<input type="text" class="form-control" name="funcUltVisita493" placeholder="Nombre del funcionario que visitó por última vez">
 							</div>
 
-							<label class="col-md-1 control-label">Concepto:</label>
-							<div class="col-md-5">								
-								<input type="text" class="form-control" name="conceptoUltVisita" placeholder="Concepto de la última visita">
+							<div class="col-md-5" style="padding:0">
+								<label class="col-md-12 control-label">Concepto última inspección:</label>
+								<div class="col-md-3">
+									<select class="form-control" name="concepto493" onchange="setConcepto(this,'textoConcepto493')">
+										<option></option>				
+										<option value="1">1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
+									</select>
+								</div>
+								<div class="col-md-9" style="padding:0">
+									<input type="text" class="form-control" name="textoConcepto493">
+								</div>
 							</div>							
 						</div><!-- Fin del form-group -->
 
-						<br><br><br>
+						<br><br><br><br><br>
 
 
 						<div class="form-group">
@@ -313,25 +332,25 @@
 											<div class="input-group">
 											    <input type="text" class="form-control" name="restaurante" value="Restaurante">
 												<span class="input-group-addon">
-											    	<input type="checkbox" name="alimentos" value="restaurante">
+											    	<input type="checkbox" name="actividad493" value="A01">
 											    </span>
 											</div>
 											<div class="input-group">
 											    <input type="text" class="form-control" name="cafeteria" value="Cafetería">
 												<span class="input-group-addon">
-											    	<input type="checkbox" name="alimentos" value="cafeteria">
+											    	<input type="checkbox" name="actividad493" value="A02">
 											    </span>
 											</div>
 											<div class="input-group">
 											    <input type="text" class="form-control" name="panaderia" value="Panadería-pastelería">
 												<span class="input-group-addon">
-											    	<input type="checkbox" name="alimentos" value="panaderia">
+											    	<input type="checkbox" name="actividad493" value="A03">
 											    </span>
 											</div>
 											<div class="input-group">
 											    <input type="text" class="form-control" name="fruteria" value="Jugos-heladería">
 												<span class="input-group-addon">
-											    	<input type="checkbox" name="alimentos" value="fruteria">
+											    	<input type="checkbox" name="actividad493" value="A04">
 											    </span>
 											</div>
 										</div>
@@ -346,13 +365,13 @@
 											<div class="input-group">
 											    <input type="text" class="form-control" name="sociales" value="Programas sociales">
 												<span class="input-group-addon">
-											    	<input type="checkbox" name="comedores" value="sociales">
+											    	<input type="checkbox" name="actividad493" value="A11">
 											    </span>
 											</div>
 											<div class="input-group">
 											    <input type="text" class="form-control" name="carcelarios" value="Carcelarios-Penit.">
 												<span class="input-group-addon">
-											    	<input type="checkbox" name="comedores" value="carcelarios">
+											    	<input type="checkbox" name="actividad493" value="A12">
 											    </span>
 											</div>
 										</div>
@@ -367,13 +386,13 @@
 											<div class="input-group">
 											    <input type="text" class="form-control" name="expendio" value="Expendio">
 												<span class="input-group-addon">
-											    	<input type="checkbox" name="expendioAli" value="X">
+											    	<input type="checkbox" name="actividad493" value="A21">
 											    </span>
 											</div>
 											<div class="input-group">
 											    <input type="text" class="form-control" name="pesca" value="Productos de Pesca">
 												<span class="input-group-addon">
-											    	<input type="checkbox" name="expendioAli" value="X">
+											    	<input type="checkbox" name="actividad493" value="A22">
 											    </span>
 											</div>
 										</div>
@@ -386,7 +405,7 @@
 											<div class="input-group">
 											    <input type="text" class="form-control" name="superMercados" value="Hiper(sup.) Mercados">
 												<span class="input-group-addon">
-											    	<input type="checkbox" name="grandesSuperficies" value="X">
+											    	<input type="checkbox" name="actividad493" value="A31">
 											    </span>
 											</div>		
 										</div>
@@ -399,13 +418,13 @@
 											<div class="input-group">
 											    <input type="text" class="form-control" name="menu" value="Ensamble menú">
 												<span class="input-group-addon">
-											    	<input type="checkbox" name="ensamble" value="X">
+											    	<input type="checkbox" name="actividad493" value="A41">
 											    </span>
 											</div>
 											<div class="input-group">
 											    <input type="text" class="form-control" name="refrigerios" value="Ensamble refrigerios">
 												<span class="input-group-addon">
-											    	<input type="checkbox" name="ensamble" value="X">
+											    	<input type="checkbox" name="actividad493" value="A42">
 											    </span>
 											</div>
 										</div>
@@ -419,13 +438,13 @@
 											<div class="input-group">
 											    <input type="text" class="form-control" name="tempAmbiente" value="A temp. Ambiente">
 												<span class="input-group-addon">
-											    	<input type="checkbox" name="almacenamiento" value="X">
+											    	<input type="checkbox" name="actividad493" value="A51">
 											    </span>
 											</div>
 											<div class="input-group">
 											    <input type="text" class="form-control" name="dadorFrio" value="Dador de frío">
 												<span class="input-group-addon">
-											    	<input type="checkbox" name="almacenamiento" value="X">
+											    	<input type="checkbox" name="actividad493" value="A52">
 											    </span>
 											</div>
 										</div>
@@ -441,25 +460,25 @@
 											<div class="input-group">
 											    <input type="text" class="form-control" name="fijo" value="Puesto fijo">
 												<span class="input-group-addon">
-											    	<input type="checkbox" name="ventaViaPublica" value="X">
+											    	<input type="checkbox" name="actividad493" value="A61">
 											    </span>
 											</div>
 											<div class="input-group">
 											    <input type="text" class="form-control" name="movil" value="Puesto móvil">
 												<span class="input-group-addon">
-											    	<input type="checkbox" name="ventaViaPublica" value="X">
+											    	<input type="checkbox" name="actividad493" value="A62">
 											    </span>
 											</div>
 											<div class="input-group">
 											    <input type="text" class="form-control" name="fijoAlim" value="Fijo con prep. alim.">
 												<span class="input-group-addon">
-											    	<input type="checkbox" name="ventaViaPublica" value="X">
+											    	<input type="checkbox" name="actividad493" value="A63">
 											    </span>
 											</div>
 											<div class="input-group">
 												<input type="text" class="form-control" name="movilAlim" value="Móvil con prep. alim.">
 												<span class="input-group-addon">
-											    	<input type="checkbox" name="ventaViaPublica" value="X">
+											    	<input type="checkbox" name="actividad493" value="A64">
 											    </span>									    
 											</div>
 										</div>
@@ -469,7 +488,7 @@
 											<div class="input-group">
 												<input type="text" class="form-control" name="alcoholicas" value="Expendio de bebidas alcohólicas" style="font-weight:bold">
 												<span class="input-group-addon">
-												    <input type="checkbox" name="bebidasAlco" value="X">
+												    <input type="checkbox" name="actividad493" value="A71">
 												</span>
 												
 											</div>											
@@ -484,13 +503,13 @@
 											<div class="input-group">
 												<input type="text" class="form-control" name="plaza" value="Plaza de mercado">
 												<span class="input-group-addon">
-											    	<input type="checkbox" name="plazasMercado" value="X">
+											    	<input type="checkbox" name="actividad493" value="A81">
 											    </span>									    
 											</div>
 											<div class="input-group">
 												<input type="text" class="form-control" name="abasto" value="Central de abasto">
 												<span class="input-group-addon">
-											    	<input type="checkbox" name="plazasMercado" value="X">
+											    	<input type="checkbox" name="actividad493" value="A82">
 											    </span>								    
 											</div>
 										</div>
@@ -504,12 +523,12 @@
 						<div class="form-group">
 							<label class="col-md-3 control-label">Observaciones por autoridad sanitaria:</label>		
 							<div class="col-md-9">
-								<textarea class="form-control" name="obAutoridad"></textarea>
+								<textarea class="form-control" name="obAutoridad493"></textarea>
 							</div>
 							<br><br><br>
 							<label class="col-md-3 control-label">Observaciones por persona que se inscribe:</label>
 							<div class="col-md-9">
-								<textarea class="form-control" name="obPersona"></textarea>
+								<textarea class="form-control" name="obPersona493"></textarea>
 							</div>							
 						</div><!-- Fin del form-group -->
 
@@ -522,72 +541,124 @@
 							</div>
 							<div class="col-md-4">
 								<label class="col-md-12 control-label">___</label>
-								<input type="text" class="form-control" name="inscribe">
+								<input type="text" class="form-control" name="inscribe493">
 							</div>
 							<div class="col-md-2">								
-								<label class="col-md-12 control-label">Identicación:</label>
-								<input type="text" class="form-control" name="idInscribe">
+								<label class="col-md-12 control-label">Identificación:</label>
+								<input type="text" class="form-control" name="idInscribe493">
 							</div>
 							<div class="col-md-3">								
 								<label class="col-md-12 control-label">Cargo:</label>
-								<input type="text" class="form-control" name="cargoInscribe">
+								<input type="text" class="form-control" name="cargoInscribe493">
 							</div>
 							<div class="col-md-3">
 								<label class="col-md-12 control-label">Persona que recibe:</label>
 							</div>
 							<div class="col-md-4">
-								<input type="text" class="form-control" name="recibe">
+								<input type="text" class="form-control" name="recibe493">
 							</div>
 							<div class="col-md-2">								
-								<input type="text" class="form-control" name="idRecibe">
+								<input type="text" class="form-control" name="idRecibe493">
 							</div>
 							<div class="col-md-3">								
-								<input type="text" class="form-control" name="cargoRecibe">
+								<input type="text" class="form-control" name="cargoRecibe493">
 							</div>							
 						</div><!-- Fin del form-group -->
 
-						<br><br><br><br><br><br>
+						<br><br><br><br><br><br><br>
+
+						<input type="hidden" name="id493" value="0">
 
 						<div class="form-group">
-	                        <div class="col-md-3 col-md-offset-2">
-	                            <a href="./f493.html" type="submit" onclick="guardarInscrito()" class="btn btn-primary">
+	                        <div class="col-md-2 col-md-offset-1">
+	                            <a type="submit" onclick="guardarInscrito493()" class="btn btn-primary">
 	                                Guardar
 	                            </a>
 	                        </div>
 
-	                        <div class="col-md-3 col-md-offset-2">
-	                            <a id="todosInscritos" onclick="cargarInscritos()" class="btn btn-primary">
-	                                Cargar inscritos desde servidor
+	                        <div class="col-md-3">
+	                            <a id="todosInscritos" onclick="cargarInscritos('493')" class="btn btn-primary">
+	                                Traer inscritos desde serv.
 	                            </a>
-	                        </div>
+							</div>
+							
+							<div class="col-md-3">
+								<button class="btn btn-primary" data-toggle="modal" data-target="#resp"  onclick="cargarServidor('493')">
+									Subir nuevos inscritos a serv.
+								</button>
+								<!-- Modal -->
+								<div class="modal fade" id="resp" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+									<div class="modal-dialog" role="document">
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+												<h4 class="modal-title" id="myModalLabel">Respuesta: </h4>
+											</div>
+											<div class="modal-body">
+												<label id="cuerpoRespuesta"></label>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+	                        <div class="col-md-3">
+	                            <a type="submit" onclick="cerrarSesionServidor()" class="btn btn-primary">
+	                                Cerrar Sesión con Servidor
+	                            </a>
+	                        </div>                   	                        	                     
 	                    </div><!-- Fin del form-group -->
 
-	                    <br><br><br><br><br><br>
+	                    <br><br><br><br>
 
-	                    <div class="form-group">
+						<script type="text/javascript">mostrarInscritos493('493');</script>
+						<div class="form-group">
 	                    	<div class="panel panel-default">
-	                    		<div class="panel-heading">INSCRITOS EN BD</div>
+	                    		<div class="panel-heading">INSCRITOS CREADOS O MODIFICADOS EN ESTE DISPOSITIVO</div>
+	                    		<div class="panel-body">	                    			
+	                    			<table class="table table-bordered" id="tablaInscritosNuevos">
+										<thead>
+											<tr>
+												<th></th>
+												<th>ID</th>
+												<th>Establecimiento</th>
+												<th>Acta No.</th>
+												<th>Fecha Inscrip.</th>
+												<th>Nom. Propietario</th>
+												<th>Ident. Propietario</th>									
+												<th></th>
+											</tr>									
+										</thead>
+										<tbody id="inscritosNuevos"></tbody>
+									</table>													
+	                    		</div>
+	                    	</div>							
+						</div><!-- Fin del form-group -->
+
+						<br>
+
+						<div class="form-group">
+	                    	<div class="panel panel-default">
+	                    		<div class="panel-heading">INSCRITOS CARGADOS DESDE SERVIDOR</div>
 	                    		<div class="panel-body">	                    			
 	                    			<table class="table table-bordered" id="tablaInscritos">
 										<thead>
 											<tr>
 												<th></th>
+												<th>ID</th>
 												<th>Establecimiento</th>
-												<th>Inscripción No.</th>
+												<th>Acta No.</th>
 												<th>Fecha Inscrip.</th>
 												<th>Nom. Propietario</th>
+												<th>Ident. Propietario</th>									
 												<th></th>
 											</tr>									
 										</thead>
 										<tbody id="inscritos"></tbody>
 									</table>													
 	                    		</div>
-	                    	</div>
-							
+	                    	</div>							
 						</div><!-- Fin del form-group -->
-
-						<br><br><br><br><br><br>
-
 
 					</div><!-- Fin del Panel-body -->
 				</div><!-- Fin del Panel-default -->
