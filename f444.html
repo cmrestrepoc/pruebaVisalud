@@ -5,7 +5,7 @@
 		<title>F444</title>
 
 		<!-- favicon -->
-		<link rel="shortcut icon" type="img/png" href="./img/escudo.jpg" />
+		<link rel="shortcut icon" type="img/png" href="./img/escudo130.ico" />
 
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
@@ -38,9 +38,9 @@
 				<img alt src="./img/escudo.jpg" />
 			</a>
 			<div class="titulos">
-				<h1>MUNICIPIO DE JAMUNDÍ (V)</h1>
+				<h1>MUNICIPIO DE <span id="municipio"></span> (V)</h1>
 				<h2>Vigilancia en Salud Pública</h2>
-				<h2>Formato FT444</h2>
+				<h2>Formato <span id="formato"></span></h2>
 			</div>
 		</header>
 
@@ -51,18 +51,18 @@
 
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						Inscripción de Vehículos Formato FT444
+						Inscripción de Vehículos Formato <span id="nomForm"></span>
 					</div>
 					<div class="panel-body">
 						<div class="form-group">
 							<div class="col-md-2">
 								<label class="col-md-12 control-label">Departamento:</label>
-								<input type="text" class="form-control" name="depto444" value="VALLE DEL CAUCA">
+								<input type="text" class="form-control" name="depto444">
 							</div>
 							<div class="col-md-10">
 								<div class="col-md-2">
 									<label class="col-md-12 control-label">Mpio:</label>
-									<input type="text" class="form-control" name="mpio444" value="JAMUNDÍ">
+									<input type="text" class="form-control" name="mpio444">
 								</div>
 								<div class="col-md-3">
 									<label class="col-md-12 control-label">Fecha:</label>
@@ -73,7 +73,7 @@
 								</script>										
 								<div class="col-md-4">
 									<label class="col-md-12 control-label">Insc. No:</label>
-									<input type="text" class="form-control" name="inscripcion444" value="76130">
+									<input type="text" class="form-control" name="inscripcion444">
 								</div>
 								<div class="col-md-3">
 									<label class="col-md-12 control-label">Acta:</label>
@@ -203,11 +203,11 @@
 							<div class="col-md-6">
 								<div class="col-md-6">
 									<label class="control-label">Depto Notif:</label>
-									<input type="text" class="form-control" value="VALLE DEL CAUCA" name="deptoNotif444">
+									<input type="text" class="form-control" name="deptoNotif444">
 								</div>
 								<div class="col-md-6">
 									<label class="control-label">Mpio Notif:</label>
-									<input type="text" class="form-control" value="JAMUNDÍ" name="mpioNotif444">
+									<input type="text" class="form-control" name="mpioNotif444">
 								</div>										
 							</div>														
 						</div><!-- Fin del form-group -->
@@ -407,5 +407,6 @@
 
 			</div><!-- Fin del Row -->
 		</div><!-- Fin del Container -->
+		<script>setInicio('444');</script>
 	</body>
 </html>

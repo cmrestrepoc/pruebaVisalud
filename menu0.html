@@ -5,7 +5,7 @@
 		<title>Visalud</title>
 
 		<!-- favicon -->
-		<link rel="shortcut icon" type="img/png" href="./img/escudo.jpg" />
+		<link rel="shortcut icon" type="img/png" href="./img/escudo130.ico" />
 
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
@@ -38,7 +38,7 @@
 		<header id="index">
 			<img alt style="width: 8%" src="./img/escudo.jpg" />
 			<div class="titulos">
-				<h1>MUNICIPIO DE JAMUNDÍ (V)</h1>
+				<h1>MUNICIPIO DE <span id="municipio"></span> (V)</h1>
 				<h2>Vigilancia en Salud Pública</h2>
 				<h4>Control de Riesgo en Alimentos y Bebidas</h4>
 				<h4>IVC a Establecimientos y Vehículos</h4>
@@ -57,9 +57,9 @@
 				        <br>
 				        <div class="row">
 				        	<div class="col-md-9 col-md-offset-3">
-										<button type="button" class="btn btn-primary" onclick="limpiarCache()">
-											Actualizar Aplicación
-										</button>	
+								<button type="button" class="btn btn-primary" onclick="limpiarCache()">
+									Actualizar Aplicación
+								</button>	
 				        	</div>
 								</div><br>
 								<div class="row">
@@ -69,16 +69,16 @@
 				        </div><br>
 				        <div class="row">
 				        	<div class="col-md-9 col-md-offset-3">
-										<button type="button" class="btn btn-primary" onclick="cargarTodosLosInscritos()">
-											CARGAR TODOS LOS INCRITOS
-										</button>	
+								<button type="button" class="btn btn-primary" onclick="cargarTodosLosInscritos()">
+									CARGAR TODOS LOS INCRITOS
+								</button>	
 				        	</div>
 								</div><br>
 								<div class="row">
 				        	<div class="col-md-9 col-md-offset-3">
-										<button type="button" class="btn btn-primary" onclick="cargarInscritos('493')">
-											Cargar Inscritos Estab. Alimentos
-										</button>	
+								<button type="button" class="btn btn-primary" onclick="cargarInscritos('493')">
+									Cargar Inscritos Estab. Alimentos
+								</button>	
 				        	</div>
 				        </div><br>
 				        <div class="row">
@@ -134,10 +134,10 @@
 			</div>
 
 			<div id="derivadosEstablecimientos">
-				<h4><a href="f442.html">FT-442</a></h4>
-				<h4><a href="f443.html">FT-443</a></h4>
-				<h4><a href="f569.html">FT-569</a></h4>
-				<h4><a href="f493.html">FT-493</a></h4>
+				<h4><a href="f442.html" name="nombreFormularios"></a></h4>
+				<h4><a href="f443.html" name="nombreFormularios"></a></h4>
+				<h4><a href="f569.html" name="nombreFormularios"></a></h4>
+				<h4><a href="f493.html" name="nombreFormularios"></a></h4>
 			</div>
 
 			<div id="llave2">
@@ -145,7 +145,7 @@
 			</div>
 
 			<div id="derivadosVehiculos">
-				<h4><a href="f444.html">FT-444</a></h4>
+				<h4><a href="f444.html" name="nombreFormularios"></a></h4>
 			</div>
 		</section>
 		
@@ -168,17 +168,17 @@
 			</div>
 
 			<div id="deriActaEstablecimientos">
-				<h4><a href="f26.html">FT-26</a></h4>
-				<h4><a href="f243.html">FT-243</a></h4>
-				<h4><a href="f333.html">FT-333</a></h4>
-				<h4><a href="f440.html">FT-440</a></h4>
-				<h4><a href="f474.html">FT-474</a></h4>
-				<h4><a href="f475.html">FT-475</a></h4>
-				<h4><a href="f478.html">FT-478</a></h4>
-				<h4><a href="f479.html">FT-479</a></h4>
-				<h4><a href="f480.html">FT-480</a></h4>
-				<h4><a href="f481.html">FT-481</a></h4>
-				<h4><a href="f495.html">FT-495</a></h4>
+				<h4><a href="f26.html" name="nombreFormularios"></a></h4>
+				<h4><a href="f243.html" name="nombreFormularios"></a></h4>
+				<h4><a href="f333.html" name="nombreFormularios"></a></h4>
+				<h4><a href="f440.html" name="nombreFormularios"></a></h4>
+				<h4><a href="f474.html" name="nombreFormularios"></a></h4>
+				<h4><a href="f475.html" name="nombreFormularios"></a></h4>
+				<h4><a href="f478.html" name="nombreFormularios"></a></h4>
+				<h4><a href="f479.html" name="nombreFormularios"></a></h4>
+				<h4><a href="f480.html" name="nombreFormularios"></a></h4>
+				<h4><a href="f481.html" name="nombreFormularios"></a></h4>
+				<h4><a href="f495.html" name="nombreFormularios"></a></h4>
 			</div>
 
 			<div id="llave5">
@@ -186,15 +186,15 @@
 			</div>
 
 			<div id="deriActaVehiculos">
-				<h4><a href="f441.html">FT-441</a></h4>
-				<h4><a href="f472.html">FT-472</a></h4>
+				<h4><a href="f441.html" name="nombreFormularios"></a></h4>
+				<h4><a href="f472.html" name="nombreFormularios"></a></h4>
 			</div>
 
 			<br><br><br>
 
 			 
 		</section>
-
+		<script>setInicioMenu()</script>
 	</body>
 
 </html>

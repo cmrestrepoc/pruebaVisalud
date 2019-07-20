@@ -5,7 +5,7 @@
 		<title>F480</title>
 
 		<!-- favicon -->
-		<link rel="shortcut icon" type="img/png" href="./img/escudo.jpg" />
+		<link rel="shortcut icon" type="img/png" href="./img/escudo130.ico" />
 
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
@@ -46,9 +46,9 @@
 				<img alt src="./img/escudo.jpg" />
 			</a>
 			<div class="titulos">
-				<h1>MUNICIPIO DE JAMUNDÍ (V)</h1>
+				<h1>MUNICIPIO DE <span id="municipio"></span> (V)</h1>
 				<h2>Vigilancia en Salud Pública</h2>
-				<h2>Acta FT480</h2>
+				<h2>Acta <span id="formato"></span></h2>
 			</div>
 
 		</header>
@@ -59,7 +59,7 @@
 			<div class="row">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						FT480: Acta de Inspección Sanitaria con Enfoque de Riesgo para Ventas de Alimentos y Bebidas en Vía Pública
+						<span id="nomForm"></span>: Acta de Inspección Sanitaria con Enfoque de Riesgo para Ventas de Alimentos y Bebidas en Vía Pública
 					</div>
 						
 					<div class="panel-body">
@@ -132,7 +132,7 @@
 								<div class="form-group">
 									<div class="col-md-2">
 										<label class="col-md-12 control-label">Ciudad:</label>
-										<input type="text" class="form-control" name="ciudad480" value="JAMUNDÍ">
+										<input type="text" class="form-control" name="ciudad480">
 									</div>
 									<div class="col-md-10">
 										<div class="col-md-3">
@@ -148,7 +148,7 @@
 										</div>
 										<div class="col-md-6" style="padding:0">
 											<label class="col-md-12 control-label">Entidad:</label>
-											<input type="text" class="form-control" name="entidad480" value="SECRETARÍA DE SALUD MUNICIPAL - JAMUNDÍ">
+											<input type="text" class="form-control" name="entidad480">
 										</div>
 									</div>
 															
@@ -226,11 +226,11 @@
 									</div>									
 									<div class="col-md-4">
 										<label class="col-md-12 control-label">Departamento:</label>
-										<input type="text" class="form-control" name="dpto480" value="VALLE DEL CAUCA">
+										<input type="text" class="form-control" name="dpto480">
 									</div>
 									<div class="col-md-3">
 										<label class="col-md-12 control-label">Municipio:</label>
-										<input type="text" class="form-control" name="mpio480" value="JAMUNDÍ">
+										<input type="text" class="form-control" name="mpio480">
 									</div>
 									<br><br><br><br>
 									<div class="col-md-5">
@@ -239,11 +239,11 @@
 									</div>									
 									<div class="col-md-4">
 										<label class="col-md-12 control-label">Departamento:</label>
-										<input type="text" class="form-control" name="dpto480" value="VALLE DEL CAUCA">
+										<input type="text" class="form-control" name="dpto480">
 									</div>
 									<div class="col-md-3">
 										<label class="col-md-12 control-label">Municipio:</label>
-										<input type="text" class="form-control" name="mpio480" value="JAMUNDÍ">
+										<input type="text" class="form-control" name="mpio480">
 									</div>									
 								</div><!-- Fin del form-group -->
 								<br><br><br><hr>
@@ -290,31 +290,6 @@
 									<div class="col-md-3">
 										<select class="form-control" name="nomTerr480">
 											<option></option>
-											<option value="SAMANES">SAMANES</option>
-											<option value="OBRERO">OBRERO</option>
-											<option value="PANAMERICANO">PANAMERICANO</option>
-											<option value="SAN CRISTOBAL">SAN CRISTOBAL</option>
-											<option value="MUNICIPAL">MUNICIPAL</option>
-											<option value="LA CRUZ">LA CRUZ</option>
-											<option value="LA VICTORIA">LA VICTORIA</option>
-											<option value="JORGE ELIECER GAITAN">JORGE ELIECER GAITAN</option>
-											<option value="MARIA AUXILIADORA">MARIA AUXILIADORA</option>
-											<option value="SANTA ANA">SANTA ANA</option>
-											<option value="ARMANDO VASQUEZ">ARMANDO VASQUEZ</option>
-											<option value="COOTRAIM">COOTRAIM</option>
-											<option value="BRISAS DEL RIO">BRISAS DEL RIO</option>
-											<option value="BUCHITOLO">BUCHITOLO</option>
-											<option value="EL ARENAL">EL ARENAL</option>
-											<option value="EL CABUYAL">EL CABUYAL</option>
-											<option value="EL CARMELO">EL CARMELO</option>
-											<option value="EL LAURO">EL LAURO</option>
-											<option value="EL TIPLE">EL TIPLE</option>
-											<option value="JUANCHITO">JUANCHITO</option>
-											<option value="VILLAGORGONA">VILLAGORGONA</option>
-											<option value="LA REGINA">LA REGINA</option>
-											<option value="MADRE VIEJA">MADRE VIEJA</option>
-											<option value="SAN JOAQUIN">SAN JOAQUIN</option>
-											<option value="POBLADO CAMPESTRE">POBLADO CAMPESTRE</option>
 										</select>
 									</div>														
 								</div><!-- Fin del form-group -->
@@ -395,11 +370,11 @@
 										</div>										
 										<div class="col-md-4">
 											<label class="control-label col-md-12">Depto N.:</label>
-											<input type="text" class="form-control" value="VALLE DEL CAUCA" name="deptoNotif480">
+											<input type="text" class="form-control" name="deptoNotif480">
 										</div>
 										<div class="col-md-3" style="padding:0">
 											<label class="control-label col-md-12">Mpio N.:</label>
-											<input type="text" class="form-control" value="JAMUNDÍ" name="mpioNotif480">
+											<input type="text" class="form-control" name="mpioNotif480">
 										</div>
 									</div>
 									<div class="col-md-6">
@@ -1052,7 +1027,7 @@
 				</div><!-- Fin del panel default -->
 			</div><!-- Fin del Row -->
 		</div><!-- Fin del container -->
-
+		<script>setInicio('480');</script>
 	</body>
 
 </html>

@@ -5,7 +5,7 @@
 		<title>F443</title>
 
 		<!-- favicon -->
-		<link rel="shortcut icon" type="img/png" href="./img/escudo.jpg" />
+		<link rel="shortcut icon" type="img/png" href="./img/escudo130.ico" />
 
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
@@ -33,15 +33,15 @@
 		<script type="text/javascript" src="./js/firma.js"></script>
 		
 	</head>
-	<body onload="cargarInicioInscripciones('443')">
+	<body onload="verificarAccionForm('443')">
 		<header>
 			<a href="menu0.html">
 				<img alt src="./img/escudo.jpg" />
 			</a>
 			<div class="titulos">
-				<h1>MUNICIPIO DE JAMUNDÍ (V)</h1>
+				<h1>MUNICIPIO DE <span id="municipio"></span> (V)</h1>
 				<h2>Vigilancia en Salud Pública</h2>
-				<h2>Formato FT443</h2>
+				<h2>Acta <span id="formato"></span></h2>
 			</div>
 		</header>
 
@@ -52,18 +52,19 @@
 
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						Solicitud de Autorización Sanitaria para Almacenamiento y/o Distribución, Expendio de carne y productos Cárnicos comestibles FT-443
+						Solicitud de Autorización Sanitaria para Almacenamiento y/o Distribución, 
+						Expendio de carne y productos Cárnicos comestibles <span id="nomForm"></span>
 					</div>
 					<div class="panel-body">
 						<div class="form-group">
 							<div class="col-md-2">
 								<label class="col-md-12 control-label">Departamento:</label>
-								<input type="text" class="form-control" name="depto443" value="VALLE DEL CAUCA">
+								<input type="text" class="form-control" name="depto443">
 							</div>
 							<div class="col-md-10">
 								<div class="col-md-2">
 									<label class="col-md-12 control-label">Mpio:</label>
-									<input type="text" class="form-control" name="mpio443" value="JAMUNDÍ">
+									<input type="text" class="form-control" name="mpio443">
 								</div>
 								<div class="col-md-3">
 									<label class="col-md-12 control-label">Fecha:</label>
@@ -74,7 +75,7 @@
 								</script>										
 								<div class="col-md-4">
 									<label class="col-md-12 control-label">Insc. No:</label>
-									<input type="text" class="form-control" name="inscripcion443" value="76130">
+									<input type="text" class="form-control" name="inscripcion443">
 								</div>
 								<div class="col-md-3">
 									<label class="col-md-12 control-label">Acta:</label>
@@ -182,31 +183,6 @@
 							<div class="col-md-3">
 								<select class="form-control" name="nomTerr443">
 									<option></option>
-									<option value="SAMANES">SAMANES</option>
-									<option value="OBRERO">OBRERO</option>
-									<option value="PANAMERICANO">PANAMERICANO</option>
-									<option value="SAN CRISTOBAL">SAN CRISTOBAL</option>
-									<option value="MUNICIPAL">MUNICIPAL</option>
-									<option value="LA CRUZ">LA CRUZ</option>
-									<option value="LA VICTORIA">LA VICTORIA</option>
-									<option value="JORGE ELIECER GAITAN">JORGE ELIECER GAITAN</option>
-									<option value="MARIA AUXILIADORA">MARIA AUXILIADORA</option>
-									<option value="SANTA ANA">SANTA ANA</option>
-									<option value="ARMANDO VASQUEZ">ARMANDO VASQUEZ</option>
-									<option value="COOTRAIM">COOTRAIM</option>
-									<option value="BRISAS DEL RIO">BRISAS DEL RIO</option>
-									<option value="BUCHITOLO">BUCHITOLO</option>
-									<option value="EL ARENAL">EL ARENAL</option>
-									<option value="EL CABUYAL">EL CABUYAL</option>
-									<option value="EL CARMELO">EL CARMELO</option>
-									<option value="EL LAURO">EL LAURO</option>
-									<option value="EL TIPLE">EL TIPLE</option>
-									<option value="JUANCHITO">JUANCHITO</option>
-									<option value="VILLAGORGONA">VILLAGORGONA</option>
-									<option value="LA REGINA">LA REGINA</option>
-									<option value="MADRE VIEJA">MADRE VIEJA</option>
-									<option value="SAN JOAQUIN">SAN JOAQUIN</option>
-									<option value="POBLADO CAMPESTRE">POBLADO CAMPESTRE</option>
 								</select>
 							</div>				
 						</div>
@@ -266,11 +242,11 @@
 							<div class="col-md-6">
 								<div class="col-md-5">
 									<label class="control-label">Depto Notif:</label>
-									<input type="text" class="form-control" value="VALLE DEL CAUCA" name="deptoNotif443">
+									<input type="text" class="form-control" name="deptoNotif443">
 								</div>
 								<div class="col-md-4">
 									<label class="control-label">Mpio Notif:</label>
-									<input type="text" class="form-control" value="JAMUNDÍ" name="mpioNotif443">
+									<input type="text" class="form-control" name="mpioNotif443">
 								</div>
 								<div class="col-md-2" style="padding:0px">
 									<label class="col-md-12 control-label">Visitado:</label>
@@ -407,12 +383,12 @@
 
 	                    <br><br><br><br>
 
-	                    <script type="text/javascript">mostrarInscritos443('443');</script>
-	                    <div class="form-group">
-	                    	<div class="panel panel-default">
-	                    		<div class="panel-heading">INSCRITOS EN BD</div>
-	                    		<div class="panel-body">	                    			
-	                    			<table class="table table-bordered" id="tablaInscritos">
+	                    <script type="text/javascript">mostrarInscritos569('443');</script>
+						<div class="form-group">
+							<div class="panel panel-default">
+								<div class="panel-heading">INSCRITOS NUEVOS</div>
+								<div class="panel-body">	                    			
+									<table class="table table-bordered" id="tablaInscritosNuevos569">
 										<thead>
 											<tr>
 												<th></th>
@@ -425,20 +401,19 @@
 												<th></th>
 											</tr>									
 										</thead>
-										<tbody id="inscritos"></tbody>
+										<tbody id="inscritosNuevos569"></tbody>
 									</table>													
-	                    		</div>
-	                    	</div>
-							
+								</div>
+							</div>								
 						</div><!-- Fin del form-group -->
-
-						<br><br><br><br><br><br>
+						
+						<br>
 
 						<div class="form-group">
-	                    	<div class="panel panel-default">
-	                    		<div class="panel-heading">INSCRITOS NUEVOS</div>
-	                    		<div class="panel-body">	                    			
-	                    			<table class="table table-bordered" id="tablaInscritosNuevos">
+							<div class="panel panel-default">
+								<div class="panel-heading">INSCRITOS EN BD</div>
+								<div class="panel-body">	                    			
+									<table class="table table-bordered" id="tablaInscritos569">
 										<thead>
 											<tr>
 												<th></th>
@@ -451,11 +426,10 @@
 												<th></th>
 											</tr>									
 										</thead>
-										<tbody id="inscritosNuevos"></tbody>
+										<tbody id="inscritos569"></tbody>
 									</table>													
-	                    		</div>
-	                    	</div>
-							
+								</div>
+							</div>								
 						</div><!-- Fin del form-group -->
 
 					</div><!-- Fin del Panel-body -->
@@ -463,5 +437,6 @@
 
 			</div><!-- Fin del Row -->
 		</div><!-- Fin del Container -->
+		<script>setInicio('443');</script>
 	</body>
 </html>

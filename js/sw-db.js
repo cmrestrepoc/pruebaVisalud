@@ -17,30 +17,9 @@ var db442 = new PouchDB('evaluaciones442');
 var db333 = new PouchDB('evaluaciones333');
 var db243 = new PouchDB('evaluaciones243');
 var db26 = new PouchDB('evaluaciones26');
+var db443 = new PouchDB('evaluaciones443');
 var db441 = new PouchDB('evaluaciones441');
 var db472 = new PouchDB('evaluaciones472');
-
-
-/* db493.changes({
-	since: 'now',
-	live: true
-}).on('change', function(changes){
-	mostrarInscritos493('493');
-});
-
-db569.changes({
-	since: 'now',
-	live: true
-}).on('change', function(changes){
-	mostrarInscritos569('569');
-});
-
-db444.changes({
-	since: 'now',
-	live: true
-}).on('change', function(changes){
-	mostrarInscritos444('444');
-}); */
 
 dbNuevos493.changes({
 	since: 'now',
@@ -62,7 +41,6 @@ dbNuevos444.changes({
 }).on('change', function(changes){
 	mostrarInscritos444('444');
 });
-
 
 function verificarSesionLocal(){
 	let estado = localStorage.getItem('estado');
@@ -115,6 +93,9 @@ function dbActasForm(formulario){
 		case '26':
 			db = db26;
 			break
+		case '443':
+			db = db443;
+			break;
 		case '441':
 			db = db441;
 			break;
@@ -130,7 +111,7 @@ function calcularFecha(){
 	console.log(fecha.getFullYear());
 	let mes = fecha.getMonth() + 1;
 	let cadenaMes = mes < 10 ? '0' + mes : mes;
-	let cadenaDia = fecha.getUTCDate() < 10 ? '0' + fecha.getUTCDate() : fecha.getUTCDate();
+	let cadenaDia = fecha.getDate() < 10 ? '0' + fecha.getDate() : fecha.getDate();
 	
 	return {
 		dia: cadenaDia,
@@ -161,6 +142,326 @@ function cargarInicio(formulario){
 		localStorage.removeItem('firmaAut2');
 		localStorage.removeItem('firmaIns1');
 		localStorage.removeItem('firmaIns2');
+	}
+}
+
+function setInicio(formulario){
+	//alert("Se ejecuta setInicio");
+	document.getElementById('municipio').innerHTML = "CANDELARIA";
+	let form = "";
+	switch(formulario){
+		case '440':
+			form = 'F-61';
+			break;
+		case '474':
+			form = 'F-62';
+			break;
+		case '479':
+			form = 'F-45';
+			break;
+		case '480':
+			form = 'F-65';
+			break;
+		case '495':
+			form = 'F-67';
+			break;
+		case '478':
+			form = 'F-64';
+			break;
+		case '475':
+			form = 'F-63';
+			break;
+		case '481':
+			form = 'F-11'; 
+			break;
+		case '442':
+			form = 'F-57';
+			break;
+		case '333':
+			form = 'F-50';
+			break;
+		case '243':
+			form = 'F-58';
+			break;
+		case '26':
+			form = 'F-48'
+			break
+		case '443':
+			form = 'F-59';
+			break;
+		case '441':
+			form = 'F-71';
+			break;
+		case '472':
+			form = 'F-72';
+			break;
+		case '493':
+			form = 'F-55'
+			break
+		case '569':
+			form = 'F-54';
+			break;
+		case '444':
+			form = 'F-53';
+			break;
+		default:
+	}
+	document.getElementById('nomForm').innerHTML = form;
+	document.getElementById('formato').innerHTML = form;
+	localStorage.setItem('form', form.substr(2));
+	document.getElementsByName('mpio' + formulario)[0] ? 
+		document.getElementsByName('mpio' + formulario)[0].value = "JAMUNDÍ": null;
+	document.getElementsByName('ciudad' + formulario)[0] ? 
+		document.getElementsByName('ciudad' + formulario)[0].value = "JAMUNDÍ": null;
+	document.getElementsByName('mpioNotif' + formulario)[0] ?
+		document.getElementsByName('mpioNotif' + formulario)[0].value = "JAMUNDÍ": null;
+	document.getElementsByName('dpto' + formulario)[0] ? 
+		document.getElementsByName('dpto' + formulario)[0].value = "VALLE DEL CAUCA": null;
+	document.getElementsByName('depto' + formulario)[0] ? 
+		document.getElementsByName('depto' + formulario)[0].value = "VALLE DEL CAUCA": null;
+	document.getElementsByName('deptoNotif' + formulario)[0] ?
+		document.getElementsByName('deptoNotif' + formulario)[0].value = "VALLE DEL CAUCA": null;
+	document.getElementsByName('entidad' + formulario)[0] ? 
+		document.getElementsByName('entidad' + formulario)[0].value = "SECRETARÍA DE SALUD MUNICIPAL - JAMUNDÍ": null;
+	document.getElementsByName('inscripcion' + formulario)[0] ?
+		document.getElementsByName('inscripcion' + formulario)[0].value = "76364": null;
+
+	if(document.getElementsByName('nomTerr' + formulario)){
+		/* console.log("El campo nomTerr está definido"); */
+		let arregloBarrios = [
+			'CIRO VELASCO',
+			'LA LIBERIA',
+			'BELLO HORIZONTE',
+			'PORTAL DE JAMUNDI',
+			'LAS ACACIAS',
+			'PORTAL DEL JORDAN',
+			'POPULAR',
+			'BELALCAZAR II',
+			'POTRERITO',
+			'ROBLES',
+			'VILLA PAZ',
+			'BELALCAZAR I',
+			'CIUDADELA TERRANOVA',
+			'LA ESMERALDA',
+			'EL JORDAN',
+			'PANAMERICANO',
+			'ALFAGUARA',
+			'EL SOCORRO',
+			'QUINTAS DE BOLIVAR',
+			'JORGE ELIECER GAITAN',
+			'PUENTE VELEZ',
+			'LIBERTADORES',
+			'LA ESTACION',
+			'SAN ISIDRO',
+			'LA PRADERA',
+			'CENTENARIO',
+			'PASO DE LA BOLSA',
+			'JUAN DE AMPUDIA',
+			'BOCAS DEL PALO',
+			'EL JARDIN',
+			'ALFEREZ REAL',
+			'VILLA DEL SOL',
+			'SAN ANTONIO',
+			'AMPUDIA',
+			'ANGEL MARIA CAMACHO',
+			'EL ROSARIO',
+			'QUINAMAYO',
+			'RANCHO ALEGRE',
+			'VILLA COLOMBIA',
+			'VILLA TATIANA',
+			'LA VENTURA',
+			'TIMBA',
+			'LA ESTRELLA',
+			'GUACHINTE',
+			'EL PRIVILEGIO',
+			'LA ISLA',
+			'CIUDAD SUR',
+			'RIO CLARO',
+			'MUNICIPAL SACHAMATE',
+			'SACHAMATE',
+			'LOMA DE PIEDRA',
+			'LA CEIBITA',
+			'EL PORVENIR',
+			'LA PLAYITA',
+			'LAS MERCEDES',
+			'SAN VICENTE',
+			'SANTA ANA',
+			'LA HOJARASCA',
+			'CESTILLAL',
+			'LAS BRISAS',
+			'VILLA ESTELA',
+			'EL CAMPITO',
+			'EL RODEO',
+			'SIMON BOLIVAR 2',
+			'RIVERAS DEL ROSARIO',
+			'EL GUABAL',
+			'EL PILOTO',
+			'RINCON DE LAS GARZAS',
+			'LOS CRISTALES',
+			'LA ESPERANZA',
+			'LA ADRIANITA',
+			'OPORTO',
+			'RINCON DE ZARAGOZA',
+			'LAS PILAS',
+			'LA AURORA',
+			'SAN PABLO',
+			'LOS MANDARINOS',
+			'VILLA MONICA',
+			'VILLA PAULINA',
+			'PEON',
+			'PARQUES DE CASTILLA',
+			'LA LUCHA',
+			'CASCARILLAL',
+			'VILLA PIME',
+			'SANCHEZ',
+			'CHAGRES',
+			'LA NUEVA VENTURA',
+			'PRIMAVERA CIUDADELA BONANZA',
+			'CANTABRIA',
+			'LA CABAÑA',
+			'CHORRERA BLANCA',
+			'MESETA',
+			'PRIMERO DE MAYO',
+			'CHONTADURO',
+			'GATO DE MONTE',
+			'TINAJAS',
+			'PLAN DE MORALES',
+			'LA PLAYA',
+			'LAS PALMAS',
+			'EL PITAL',
+			'BELLA VISTA',
+			'ALTO VELEZ',
+			'EL ALBA',
+			'LOMA LARGA',
+			'PEÑAS NEGRAS',
+			'PUEBLO NUEVE',
+			'LA DESPENSA',
+			'EL PLACER',
+			'EL DESCANSO',
+			'CAÑITAS',
+			'SOLARES LA MORADA',
+			'EL OSO',
+			'VAREJONAL',
+			'EL CEDRO',
+			'COLINAS DE MIRA VALLE',
+			'MAKUNAIMA',
+			'NARANJAL',
+			'COVICEDROS',
+			'EL DIAMANTE',
+			'EL PROGRESO',
+			'CARRIZAL',
+			'BERLIN',
+			'LA MINA',
+			'PORTAL DEL SAMAN II',
+			'LA BERTHA',
+			'EL DORADO',
+			'SIGLO XXI',
+			'LA ARBOLEDA',
+			'PITALITO',
+			'LA PRADERA MIRAVALLE',
+			'JUAN PABLO II',
+			'VILLA DE ALTAGRACIA',
+			'LA MORADA',
+			'SAN CAYETANO',
+			'SANTA BARBARA',
+			'CONDADOS DEL SUR',
+			'LA FERREIRA',
+			'VILLA ELVIRA',
+			'PATIO BONITO',
+			'SAN MIGUEL',
+			'LA OLGA',
+			'LA CLAVELLINA',
+			'VILLA EMMA',
+			'VILLA MAITE',
+			'COUNTRY PLAZA I',
+			'COLINDRES',
+			'LA PRIMAVERA',
+			'EL CRUCERO',
+			'TIMBITA',
+			'EL CABUYO',
+			'LA BORRASCOSA',
+			'EL RECREO',
+			'LA BALASTRERA',
+			'PARAISO DE SARDI',
+			'COMUNEROS',
+			'LA CIMA',
+			'LA CRISTALINA',
+			'EL BOSQUE',
+			'EL SILENCIO',
+			'SANTA ROSA (VILLA COLOMBIA)',
+			'REMOLINO',
+			'EL MORRO',
+			'CAZADORES',
+			'TRES ESQUINAS',
+			'LA SELVA',
+			'PLAYA LARGA',
+			'FALDIQUERAS',
+			'EL PALMAR',
+			'LOS MANGOS',
+			'COUNTRY PLAZA II',
+			'CONJUNTO MADEIRA CLUB HOUSE',
+			'LA HERRERIA',
+			'LA PROFUNDA',
+		]
+		let madre = document.getElementsByName('nomTerr' + formulario)[0];
+		arregloBarrios.sort();
+		arregloBarrios.forEach( elemento => {
+			let option = document.createElement('option');
+			option.value = elemento;
+			option.innerHTML = elemento;
+			madre.appendChild(option);
+		});
+	}
+
+	if(formulario == '26'){
+		let arregloSujetos = [
+			'479-1',
+			'479-2',
+			'479-3',
+			'479-4',
+			'479-5',
+			'479-6',
+			'481-1',
+			'481-2',
+			'481-3',
+			'495-1',
+			'495-2',
+			'495-3',
+			'495-4',
+			'495-5',
+			'495-6',
+			'440-1',
+			'440-2',
+			'474-1',
+			'474-2',
+			'474-3',
+			'474-4',
+			'474-5',
+			'474-6',
+			'474-7',
+			'474-8',
+			'474-9',
+			'478-1',
+			'478-2',
+			'478-3',
+			'478-4',
+			'475-1',
+			'475-2',
+			'472-1',
+			'480-1',
+			'480-2',
+			'480-3',
+			'480-4',
+			'480-5',
+			'480-6'
+		];
+		let madre = document.getElementsByName('tipoSujeto26')[0];
+		arregloSujetos.forEach( elemento => {
+			let option = document.createElement('option');
+			option.value = elemento;
+			option.innerHTML = elemento;
+			madre.appendChild(option);
+		});
 	}
 }
 
@@ -197,7 +498,9 @@ function cargarInicioInscripciones(formulario){
 			dbNuevos = dbNuevos444;
 			break;
 	}
-	calcularActaInscripcion(formulario, dbNuevos).then( acta => { 
+	let formu = localStorage.getItem('form');
+	console.log("Valor de form!!!", formu);
+	calcularActaInscripcion(formu, dbNuevos).then( acta => {
 		document.getElementsByName('acta' + formulario)[0].value = acta;
 	});
 	if(localStorage.getItem('inscrito') && localStorage.getItem('firmaAutoridad') && localStorage.getItem('firmaInscribe') )
@@ -385,7 +688,7 @@ function calcularIndice(ultimo){
 	return indice;		
 }
 
-function calcularNumActa(formulario){
+function calcularNumActa(formulario, form){
 	let db = dbActasForm(formulario);
 	let codUsuario = localStorage.getItem('codigoUsuario');
 	return db.info().then( result => {
@@ -395,41 +698,41 @@ function calcularNumActa(formulario){
 		let year = fecha.anio.toString()
 		let cadenaFecha = fecha.dia + fecha.mes + year.substring(2, 4);
 		//console.log(indice);
-		let acta = formulario + codUsuario + cadenaFecha + indice;
+		let acta = form + codUsuario + cadenaFecha + indice;
 		console.log(acta);
 		return acta;
 	});
 }
 
 function escogerInscrito(registro, formulario){
+	document.getElementsByName('inscripcion' + formulario)[0].value = registro.N_INSCRIP;
+	document.getElementsByName('direccion' + formulario)[0].value = registro.DIRECC;
+	document.getElementsByName('correoProp' + formulario)[0].value = registro.CORREO;
+	document.getElementsByName('tel' + formulario)[0].value = registro.TELS;
+	document.getElementsByName('cel' + formulario)[0].value = registro.CELULAR;
+	document.getElementsByName('propietario' + formulario)[0].value = registro.NOMBRE_P;
+	document.getElementsByName('idPropietario' + formulario)[0].value = registro.DOC_P;
+	document.getElementsByName('tipoIdProp' + formulario)[0].value = registro.TID_P;
+	document.getElementsByName('autorizaNoti' + formulario)[0].value = registro.AUTORIZA;
 
 	if(formulario == '333' || formulario == '243'){
-		document.getElementsByName('inscripcion' + formulario)[0].value = registro.N_INSCRIP;
-		document.getElementsByName('direccion' + formulario)[0].value = registro.DIRECC;
-		document.getElementsByName('tel' + formulario)[0].value = registro.TELS;
-		document.getElementsByName('correoProp' + formulario)[0].value = registro.CORREO;
-		document.getElementsByName('propietario' + formulario)[0].value = registro.NOMBRE_P;
-		document.getElementsByName('tipoIdProp' + formulario)[0].value = registro.TID_P;
-		document.getElementsByName('idPropietario' + formulario)[0].value = registro.DOC_P;
 		document.getElementsByName('nomTerr' + formulario)[0].value = registro.NOLOCA;
 		document.getElementsByName('razonSocial' + formulario)[0].value = registro.RSO;
 		document.getElementsByName('nit' + formulario)[0].value = registro.NIT;
-		calcularNumActa(formulario).then( acta => {
+		let formu = localStorage.getItem('form');
+		console.log("lo que se recoge de localstorage", formu);
+		calcularNumActa(formulario, formu).then( acta => {
 			console.log("Valor de acta recibido ", acta);
 			document.getElementsByName('acta' + formulario)[0].value = acta;
 		});
 	}else{
 		document.getElementsByName('fax' + formulario)[0].value = registro.FAX;
-		document.getElementsByName('tel' + formulario)[0].value = registro.TELS;
-		document.getElementsByName('cel' + formulario)[0].value = registro.CELULAR;
-		document.getElementsByName('correoProp' + formulario)[0].value = registro.CORREO;
-		document.getElementsByName('direccion' + formulario)[0].value = registro.DIRECC;
-		document.getElementsByName('inscripcion' + formulario)[0].value = registro.N_INSCRIP;
-		document.getElementsByName('propietario' + formulario)[0].value = registro.NOMBRE_P;
-		document.getElementsByName('idPropietario' + formulario)[0].value = registro.DOC_P;
-		document.getElementsByName('deptoNotif' + formulario)[0].value = registro.DPTO_NOTI;
-		document.getElementsByName('mpioNotif' + formulario)[0].value = registro.MPIO_NOTI;
-		document.getElementsByName('tipoIdProp' + formulario)[0].value = registro.TID_P;
+		document.getElementsByName('deptoNotif' + formulario)[0].value = registro.DPTO_NOTI ? 
+			registro.DPTO_NOTI : 
+			document.getElementsByName('deptoNotif' + formulario)[0].value;
+		document.getElementsByName('mpioNotif' + formulario)[0].value = registro.MPIO_NOTI ? 
+			registro.MPIO_NOTI : 
+			document.getElementsByName('mpioNotif' + formulario)[0].value;
 		
 		if(formulario == '444' || formulario == '472' || formulario == '441'){
 			console.log('Inscritos 444');
@@ -502,7 +805,8 @@ function escogerInscrito(registro, formulario){
 			}
 		}else{
 			// Aquí se puede introducir un método para calcular automáticamente un número de acta
-			calcularNumActa(formulario).then( acta => {
+			let formu = localStorage.getItem('form');
+			calcularNumActa(formulario, formu).then( acta => {
 				console.log("Valor de acta recibido ", acta);
 				document.getElementsByName('acta' + formulario)[0].value = acta;
 			});
@@ -655,10 +959,6 @@ function mostrarInscritos444(formulario){
 	});
 }
 
-/*function eliminarInscritos(){
-	db493.destroy().then(resp => console.log);
-}*/
-
 function guardarTraidos(formulario, dbBase, respObj){
 	dbBase.destroy().then( response => {
 		console.log('Base de datos anterior eliminada');
@@ -708,8 +1008,7 @@ function cerrarSesionServidor(){
 		localStorage.removeItem('identity');
 	}else{
 		alert('No hay una sesión abierta con el servidor en este momento');
-	}
-	
+	}	
 }
 
 function verificarSesion(){
@@ -964,7 +1263,6 @@ function persistirInscrito(dbBase, dbNuevos, inscrito, idExistente){
 }
 
 function guardarComunesInscritos(formulario){
-
 	var inscrito = {
 		//Campos comunes a todos los formularios en general
 		ACTA: document.getElementsByName('acta' + formulario)[0].value,
@@ -1289,10 +1587,6 @@ function guardarEvaluadoReducido(formulario){
 
 	return evaluado;
 }
-
-/*function validarEvaluado(evaluado){
-	
-}*/
 
 function persistirEvaluado(db, evaluado, formulario){
 	calcularNumActa(formulario).then( acta => {

@@ -5,7 +5,7 @@
 		<title>F333</title>
 
 		<!-- favicon -->
-		<link rel="shortcut icon" type="img/png" href="./img/escudo.jpg" />
+		<link rel="shortcut icon" type="img/png" href="./img/escudo130.ico" />
 
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
@@ -30,7 +30,6 @@
 		<script src="./js/pouchdb.min.js"></script>
 		<script type="text/javascript" src="main.js"></script>
 		<script type="text/javascript" src="./js/sw-db.js"></script>
-		<script type="text/javascript" src="./js/firma.js"></script>
 		
 	</head>
 	<body onload="verificarAccionForm('333')">
@@ -39,9 +38,9 @@
 				<img alt src="./img/escudo.jpg" />
 			</a>
 			<div class="titulos">
-				<h1>MUNICIPIO DE JAMUNDÍ (V)</h1>
+				<h1>MUNICIPIO DE <span id="municipio"></span> (V)</h1>
 				<h2>Vigilancia en Salud Pública</h2>
-				<h2>Formato FT333</h2>
+				<h2>Acta <span id="formato"></span></h2>
 			</div>
 		</header>
 
@@ -52,7 +51,7 @@
 
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						Acta de toma de muestras de alimentos Formato FT333
+						Acta de toma de muestras de alimentos Formato <span id="nomForm"></span>
 					</div>
 					<div class="panel-body">
 						
@@ -68,25 +67,48 @@
 								<script type="text/javascript">mostrarInscritos493('333');</script>
 								<div class="form-group">
 									<div class="panel panel-default">
-										<div class="panel-heading">INSCRITOS EN BD</div>
+										<div class="panel-heading">INSCRITOS CREADOS O MODIFICADOS EN ESTE DISPOSITIVO</div>
 										<div class="panel-body">	                    			
-											<table class="table table-bordered" id="tablaInscritos">
+											<table class="table table-bordered" id="tablaInscritosNuevos">
 												<thead>
 													<tr>
 														<th></th>
 														<th>ID</th>
 														<th>Establecimiento</th>
-														<th>Inscripción No.</th>
+														<th>Acta No.</th>
 														<th>Fecha Inscrip.</th>
 														<th>Nom. Propietario</th>
 														<th>Ident. Propietario</th>									
 														<th></th>
 													</tr>									
 												</thead>
-												<tbody id="inscritos"></tbody>
+												<tbody id="inscritosNuevos"></tbody>
 											</table>													
 										</div>
-									</div>									
+									</div>							
+								</div><!-- Fin del form-group -->	
+								<br>
+								<div class="form-group">
+									<div class="panel panel-default">
+										<div class="panel-heading">INSCRITOS CARGADOS DESDE SERVIDOR</div>
+										<div class="panel-body">
+											<table class="table table-bordered" id="tablaInscritos">
+												<thead>
+													<tr>
+														<th></th>
+														<th>ID</th>
+														<th>Establecimiento</th>
+														<th>Acta No.</th>
+														<th>Fecha Inscrip.</th>
+														<th>Nom. Propietario</th>
+														<th>Ident. Propietario</th>									
+														<th></th>
+													</tr>	
+												</thead>
+												<tbody id="inscritos"></tbody>
+											</table>
+										</div>
+									</div>
 								</div><!-- Fin del form-group -->
 							</div><!-- Fin del tab-pane -->
 
@@ -99,7 +121,7 @@
 									<div class="col-md-9">
 										<div class="col-md-4">
 											<label class="col-md-12 control-label">Mpio:</label>
-											<input type="text" class="form-control" name="mpio333" value="JAMUNDÍ">
+											<input type="text" class="form-control" name="mpio333">
 										</div>
 										<div class="col-md-4">
 											<label class="col-md-12 control-label">Fecha:</label>
@@ -192,31 +214,6 @@
 									<div class="col-md-3">
 										<select class="form-control" name="nomTerr333">
 											<option></option>
-											<option value="SAMANES">SAMANES</option>
-											<option value="OBRERO">OBRERO</option>
-											<option value="PANAMERICANO">PANAMERICANO</option>
-											<option value="SAN CRISTOBAL">SAN CRISTOBAL</option>
-											<option value="MUNICIPAL">MUNICIPAL</option>
-											<option value="LA CRUZ">LA CRUZ</option>
-											<option value="LA VICTORIA">LA VICTORIA</option>
-											<option value="JORGE ELIECER GAITAN">JORGE ELIECER GAITAN</option>
-											<option value="MARIA AUXILIADORA">MARIA AUXILIADORA</option>
-											<option value="SANTA ANA">SANTA ANA</option>
-											<option value="ARMANDO VASQUEZ">ARMANDO VASQUEZ</option>
-											<option value="COOTRAIM">COOTRAIM</option>
-											<option value="BRISAS DEL RIO">BRISAS DEL RIO</option>
-											<option value="BUCHITOLO">BUCHITOLO</option>
-											<option value="EL ARENAL">EL ARENAL</option>
-											<option value="EL CABUYAL">EL CABUYAL</option>
-											<option value="EL CARMELO">EL CARMELO</option>
-											<option value="EL LAURO">EL LAURO</option>
-											<option value="EL TIPLE">EL TIPLE</option>
-											<option value="JUANCHITO">JUANCHITO</option>
-											<option value="VILLAGORGONA">VILLAGORGONA</option>
-											<option value="LA REGINA">LA REGINA</option>
-											<option value="MADRE VIEJA">MADRE VIEJA</option>
-											<option value="SAN JOAQUIN">SAN JOAQUIN</option>
-											<option value="POBLADO CAMPESTRE">POBLADO CAMPESTRE</option>
 										</select>
 									</div>			
 								</div><!-- Fin del form-group -->
@@ -516,5 +513,6 @@
 
 			</div><!-- Fin del Row -->
 		</div><!-- Fin del Container -->
+		<script>setInicio('333');</script>
 	</body>
 </html>

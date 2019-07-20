@@ -5,7 +5,7 @@
 		<title>F26</title>
 
 		<!-- favicon -->
-		<link rel="shortcut icon" type="img/png" href="./img/escudo.jpg" />
+		<link rel="shortcut icon" type="img/png" href="./img/escudo130.ico" />
 
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
@@ -38,9 +38,9 @@
 				<img alt src="./img/escudo.jpg" />
 			</a>
 			<div class="titulos">
-				<h1>MUNICIPIO DE JAMUNDÍ (V)</h1>
-				<h2>Vigilancia en Salud Pública</h2>
-				<h2>Formato FT26</h2>
+                <h1>MUNICIPIO DE <span id="municipio"></span> (V)</h1>
+                <h2>Vigilancia en Salud Pública</h2>
+                <h2>Acta <span id="formato"></span></h2>
 			</div>
 		</header>
 
@@ -51,14 +51,14 @@
 
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						Acta de visita de inspección y vigilancia FT26
+						Acta de visita de inspección y vigilancia <span id="nomForm"></span>
 					</div>
 					<div class="panel-body">
 						<div class="form-group">
                             <div class="col-md-4" style="padding:0">
                                 <div class="col-md-5">
                                     <label class="col-md-12 control-label">Mpio:</label>
-                                    <input type="text" class="form-control" name="mpio26" value="JAMUNDÍ">
+                                    <input type="text" class="form-control" name="mpio26">
                                 </div>
                                 <div class="col-md-7">
                                     <label class="col-md-12 control-label">Fecha:</label>
@@ -75,45 +75,6 @@
                                     <select class="form-control col-md-3" name="tipoSujeto26"
                                         onchange="setSujeto(this.value, 'sujeto26')">
                                         <option></option>
-                                        <option value="479-1">479-1</option>
-                                        <option value="479-2">479-2</option>
-                                        <option value="479-3">479-3</option>
-                                        <option value="479-4">479-4</option>
-                                        <option value="479-5">479-5</option>
-                                        <option value="479-6">479-6</option>
-                                        <option value="481-1">481-1</option>
-                                        <option value="481-2">481-2</option>
-                                        <option value="481-3">481-3</option>
-                                        <option value="495-1">495-1</option>
-                                        <option value="495-2">495-2</option>
-                                        <option value="495-3">495-3</option>
-                                        <option value="495-4">495-4</option>
-                                        <option value="495-5">495-5</option>
-                                        <option value="495-6">495-6</option>
-                                        <option value="440-1">440-1</option>
-                                        <option value="440-2">440-2</option>
-                                        <option value="474-1">474-1</option>
-                                        <option value="474-2">474-2</option>
-                                        <option value="474-3">474-3</option>
-                                        <option value="474-4">474-4</option>
-                                        <option value="474-5">474-5</option>
-                                        <option value="474-6">474-6</option>
-                                        <option value="474-7">474-7</option>
-                                        <option value="474-8">474-8</option>
-                                        <option value="474-9">474-9</option>
-                                        <option value="478-1">478-1</option>
-                                        <option value="478-2">478-2</option>
-                                        <option value="478-3">478-3</option>
-                                        <option value="478-4">478-4</option>
-                                        <option value="475-1">475-1</option>
-                                        <option value="475-2">475-2</option>
-                                        <option value="472-1">472-1</option>
-                                        <option value="480-1">480-1</option>
-                                        <option value="480-2">480-2</option>
-                                        <option value="480-3">480-3</option>
-                                        <option value="480-4">480-4</option>
-                                        <option value="480-5">480-5</option>
-                                        <option value="480-6">480-6</option>
                                     </select>
                                 </div>
                                 <div class="col-md-10">
@@ -139,11 +100,6 @@
                                     <label class="col-md-12 control-label">Acta:</label>
                                     <input type="text" class="form-control" name="acta26">
                                 </div>
-                                <script>
-                                    calcularNumActa('26').then( numActa => {
-                                        document.getElementsByName('acta26')[0].value = numActa;
-                                    });
-                                </script>
                                 <div class="col-md-5">
                                     <label class="col-md-12 control-label">Hora: </label>
                                     <input type="text" class="form-control" name="hora26" required="required">
@@ -210,31 +166,6 @@
                                 <label class="col-md-12 control-label">Nombre:</label>
                                 <select class="form-control" name="nomTerr26">
                                     <option></option>
-                                    <option value="SAMANES">SAMANES</option>
-                                    <option value="OBRERO">OBRERO</option>
-                                    <option value="PANAMERICANO">PANAMERICANO</option>
-                                    <option value="SAN CRISTOBAL">SAN CRISTOBAL</option>
-                                    <option value="MUNICIPAL">MUNICIPAL</option>
-                                    <option value="LA CRUZ">LA CRUZ</option>
-                                    <option value="LA VICTORIA">LA VICTORIA</option>
-                                    <option value="JORGE ELIECER GAITAN">JORGE ELIECER GAITAN</option>
-                                    <option value="MARIA AUXILIADORA">MARIA AUXILIADORA</option>
-                                    <option value="SANTA ANA">SANTA ANA</option>
-                                    <option value="ARMANDO VASQUEZ">ARMANDO VASQUEZ</option>
-                                    <option value="COOTRAIM">COOTRAIM</option>
-                                    <option value="BRISAS DEL RIO">BRISAS DEL RIO</option>
-                                    <option value="BUCHITOLO">BUCHITOLO</option>
-                                    <option value="EL ARENAL">EL ARENAL</option>
-                                    <option value="EL CABUYAL">EL CABUYAL</option>
-                                    <option value="EL CARMELO">EL CARMELO</option>
-                                    <option value="EL LAURO">EL LAURO</option>
-                                    <option value="EL TIPLE">EL TIPLE</option>
-                                    <option value="JUANCHITO">JUANCHITO</option>
-                                    <option value="VILLAGORGONA">VILLAGORGONA</option>
-                                    <option value="LA REGINA">LA REGINA</option>
-                                    <option value="MADRE VIEJA">MADRE VIEJA</option>
-                                    <option value="SAN JOAQUIN">SAN JOAQUIN</option>
-                                    <option value="POBLADO CAMPESTRE">POBLADO CAMPESTRE</option>
                                 </select>
                             </div>
                             <div class="col-md-2">
@@ -419,5 +350,12 @@
             
             </div><!-- Fin del row -->
         </div><!-- Fin del container -->
+        <script>
+            let formu = localStorage.getItem('form');
+            setInicio('26');
+            calcularNumActa('26', formu).then( numActa => {
+                document.getElementsByName('acta26')[0].value = numActa;
+            }).catch( err => alert('Problemas calculando el número de acta: ', err) );
+        </script>
     </body>
 </html>  

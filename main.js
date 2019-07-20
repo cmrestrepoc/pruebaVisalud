@@ -191,7 +191,7 @@ function loginServer(){
 				}
 				location.reload();
 			}else if (jsonRes.token == 'Usuario ya está loggeado') {
-				alert('Este usuario ya está loggeado');
+				alert('Este usuario está bloqueado. Posiblemente por decisión del administrador del sistema o porque otro dispositivo lo está usando');
 				history.back();
 			}else{
 				identity.token = jsonRes.token;
@@ -341,4 +341,30 @@ function setSujeto(value, destino) {
 		default:
 			document.getElementsByName(destino)[0].value = '';
 	}
+}
+
+function setInicioMenu(){
+	document.getElementById('municipio').innerHTML = "JAMUNDÍ";
+	document.getElementsByName("nombreFormularios")[0].innerHTML = "F-57";
+	document.getElementsByName("nombreFormularios")[1].innerHTML = "F-59";
+	document.getElementsByName("nombreFormularios")[2].innerHTML = "F-54";
+	document.getElementsByName("nombreFormularios")[3].innerHTML = "F-55";
+	document.getElementsByName("nombreFormularios")[4].innerHTML = "F-53";
+	document.getElementsByName("nombreFormularios")[5].innerHTML = "F-48";
+	document.getElementsByName("nombreFormularios")[6].innerHTML = "F-58";
+	document.getElementsByName("nombreFormularios")[7].innerHTML = "F-50";
+	document.getElementsByName("nombreFormularios")[8].innerHTML = "F-61";
+	document.getElementsByName("nombreFormularios")[9].innerHTML = "F-62";
+	document.getElementsByName("nombreFormularios")[10].innerHTML = "F-63";
+	document.getElementsByName("nombreFormularios")[11].innerHTML = "F-64";
+	document.getElementsByName("nombreFormularios")[12].innerHTML = "F-45";
+	document.getElementsByName("nombreFormularios")[13].innerHTML = "F-65";
+	document.getElementsByName("nombreFormularios")[14].innerHTML = "F-11";
+	document.getElementsByName("nombreFormularios")[15].innerHTML = "F-67";
+	document.getElementsByName("nombreFormularios")[16].innerHTML = "F-71";
+	document.getElementsByName("nombreFormularios")[17].innerHTML = "F-72";
+}
+
+function setInicioIndex(){
+	document.getElementById('municipio').innerHTML = "CANDELARIA";
 }

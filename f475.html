@@ -5,7 +5,7 @@
 		<title>F475</title>
 
 		<!-- favicon -->
-		<link rel="shortcut icon" type="img/png" href="./img/escudo.jpg" />
+		<link rel="shortcut icon" type="img/png" href="./img/escudo130.ico" />
 
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
@@ -35,7 +35,6 @@
 		<script type="text/javascript" src="./js/jquery.dataTables.min.js"></script>
 		<script src="./js/bootstrap.min.js"></script>
 		<script src="./js/pouchdb.min.js"></script>
-		<script src="./js/validate.min.js"></script>
 		<script type="text/javascript" src="main.js"></script>
 		<script type="text/javascript" src="./js/sw-db.js"></script>
 
@@ -47,9 +46,9 @@
 				<img alt src="./img/escudo.jpg" />
 			</a>
 			<div class="titulos">
-				<h1>MUNICIPIO DE JAMUNDÍ (V)</h1>
+				<h1>MUNICIPIO DE <span id="municipio"></span> (V)</h1>
 				<h2>Vigilancia en Salud Pública</h2>
-				<h2>Acta FT475</h2>
+				<h2>Acta <span id="formato"></span></h2>
 			</div>
 
 		</header>
@@ -61,7 +60,7 @@
 				
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						FT475: Acta de Inspección Sanitaria con Enfoque de Riesgo para Plazas de Mercado o Central de Abastos 
+						<span id="nomForm"></span>: Acta de Inspección Sanitaria con Enfoque de Riesgo para Plazas de Mercado o Central de Abastos 
 					</div>
 						
 					<div class="panel-body">
@@ -133,7 +132,7 @@
 								<div class="form-group">
 									<div class="col-md-2">
 										<label class="col-md-12 control-label">Ciudad:</label>
-										<input type="text" class="form-control" name="ciudad475" value="JAMUNDÍ">
+										<input type="text" class="form-control" name="ciudad475">
 									</div>
 									<div class="col-md-10">
 										<div class="col-md-3">
@@ -150,7 +149,7 @@
 
 										<div class="col-md-6" style="padding:0">
 											<label class="col-md-12 control-label">Entidad:</label>
-											<input type="text" class="form-control" name="entidad475" value="SECRETARÍA DE SALUD MUNICIPAL - JAMUNDÍ">
+											<input type="text" class="form-control" name="entidad475">
 										</div>
 									</div>
 															
@@ -210,11 +209,11 @@
 									</div>
 									<div class="col-md-3">
 										<label class="col-md-12 control-label">Departamento:</label>
-										<input type="text" class="form-control" name="dpto475" value="VALLE DEL CAUCA">
+										<input type="text" class="form-control" name="dpto475">
 									</div>
 									<div class="col-md-2">
 										<label class="col-md-12 control-label">Municipio:</label>
-										<input type="text" class="form-control" name="mpio475" value="JAMUNDÍ">
+										<input type="text" class="form-control" name="mpio475">
 									</div>
 								</div><!-- Fin del form-group -->
 								<br><br><br><hr>
@@ -228,23 +227,7 @@
 										    </span>
 										    <input type="text" class="form-control" name="barrio" value="Barrio">
 										</div>
-									</div>
-									<!--div class="col-md-2">
-										<div class="input-group">
-											<span class="input-group-addon">
-										    	<input type="radio" name="territorio475" value="comuna" id="comuna">
-										    </span>
-										    <input type="text" class="form-control" name="comuna" value="Comuna">
-										</div>
-									</div>									
-									<div class="col-md-2">
-										<div class="input-group">
-											<span class="input-group-addon">
-										    	<input type="radio" name="territorio475" value="localidad" id="localidad">
-										    </span>
-										    <input type="text" class="form-control" name="localidad" value="Localidad">
-										</div>
-									</div-->																	
+									</div>																	
 									<div class="col-md-2" style="padding:0">
 										<div class="input-group">
 											<span class="input-group-addon">
@@ -253,38 +236,6 @@
 										    <input type="text" class="form-control" name="corregimiento" value="Corregimiento">
 										</div>
 									</div>
-									<!--div class="col-md-2" style="margin-left:50px">
-										<div class="input-group">
-											<span class="input-group-addon">
-										    	<input type="radio" name="territorio475" value="caserio" id="caserio">
-										    </span>
-										    <input type="text" class="form-control" name="caserio" value="Caserío">
-										</div>
-									</div>
-									<div class="col-md-2">
-										<div class="input-group">
-											<span class="input-group-addon">
-										    	<input type="radio" name="territorio475" value="sector" id="sector">
-										    </span>
-										    <input type="text" class="form-control" name="sector" value="Sector">
-										</div>
-									</div>
-									<div class="col-md-2">
-										<div class="input-group">
-											<span class="input-group-addon">
-										    	<input type="radio" name="territorio475" value="upz" id="upz">
-										    </span>
-										    <input type="text" class="form-control" name="upz" value="Upz">
-										</div>
-									</div>
-									<div class="col-md-2">
-										<div class="input-group">
-											<span class="input-group-addon">
-										    	<input type="radio" name="territorio475" value="otro" id="otro">
-										    </span>
-										    <input type="text" class="form-control" name="otro" value="Otro">
-										</div>
-									</div-->
 									<div class="col-md-2">
 										<div class="input-group">
 											<span class="input-group-addon">
@@ -297,31 +248,6 @@
 									<div class="col-md-3">
 										<select class="form-control" name="nomTerr475">
 											<option></option>
-											<option value="SAMANES">SAMANES</option>
-											<option value="OBRERO">OBRERO</option>
-											<option value="PANAMERICANO">PANAMERICANO</option>
-											<option value="SAN CRISTOBAL">SAN CRISTOBAL</option>
-											<option value="MUNICIPAL">MUNICIPAL</option>
-											<option value="LA CRUZ">LA CRUZ</option>
-											<option value="LA VICTORIA">LA VICTORIA</option>
-											<option value="JORGE ELIECER GAITAN">JORGE ELIECER GAITAN</option>
-											<option value="MARIA AUXILIADORA">MARIA AUXILIADORA</option>
-											<option value="SANTA ANA">SANTA ANA</option>
-											<option value="ARMANDO VASQUEZ">ARMANDO VASQUEZ</option>
-											<option value="COOTRAIM">COOTRAIM</option>
-											<option value="BRISAS DEL RIO">BRISAS DEL RIO</option>
-											<option value="BUCHITOLO">BUCHITOLO</option>
-											<option value="EL ARENAL">EL ARENAL</option>
-											<option value="EL CABUYAL">EL CABUYAL</option>
-											<option value="EL CARMELO">EL CARMELO</option>
-											<option value="EL LAURO">EL LAURO</option>
-											<option value="EL TIPLE">EL TIPLE</option>
-											<option value="JUANCHITO">JUANCHITO</option>
-											<option value="VILLAGORGONA">VILLAGORGONA</option>
-											<option value="LA REGINA">LA REGINA</option>
-											<option value="MADRE VIEJA">MADRE VIEJA</option>
-											<option value="SAN JOAQUIN">SAN JOAQUIN</option>
-											<option value="POBLADO CAMPESTRE">POBLADO CAMPESTRE</option>
 										</select>
 									</div>														
 								</div><!-- Fin del form-group -->
@@ -402,11 +328,11 @@
 										</div>										
 										<div class="col-md-4">
 											<label class="control-label col-md-12">Depto N.:</label>
-											<input type="text" class="form-control" value="VALLE DEL CAUCA" name="deptoNotif475">
+											<input type="text" class="form-control" name="deptoNotif475">
 										</div>
 										<div class="col-md-3" style="padding:0">
 											<label class="control-label col-md-12">Mpio N.:</label>
-											<input type="text" class="form-control" value="JAMUNDÍ" name="mpioNotif475">
+											<input type="text" class="form-control" name="mpioNotif475">
 										</div>
 									</div>
 									<div class="col-md-6">
@@ -886,7 +812,7 @@
 				</div><!-- Fin del panel default -->
 			</div><!-- Fin del Row -->
 		</div><!-- Fin del container -->
-
+		<script>setInicio('475');</script>
 	</body>
 
 </html>

@@ -5,7 +5,7 @@
 		<title>F472</title>
 
 		<!-- favicon -->
-		<link rel="shortcut icon" type="img/png" href="./img/escudo.jpg" />
+		<link rel="shortcut icon" type="img/png" href="./img/escudo130.ico" />
 
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
@@ -46,9 +46,9 @@
 				<img alt src="./img/escudo.jpg" />
 			</a>
 			<div class="titulos">
-				<h1>MUNICIPIO DE JAMUNDÍ (V)</h1>
+				<h1>MUNICIPIO DE <span id="municipio"></span> (V)</h1>
 				<h2>Vigilancia en Salud Pública</h2>
-				<h2>Acta FT472</h2>
+				<h2>Acta <span id="formato"></span></h2>
 			</div>
 
 		</header>
@@ -60,7 +60,7 @@
 				
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						FT472: Acta de Inspección Sanitaria con Enfoque de Riesgo para Vehículos de transporte de Alimentos
+						<span id="nomForm"></span>: Acta de Inspección Sanitaria con Enfoque de Riesgo para Vehículos de transporte de Alimentos
 					</div>
 						
 					<div class="panel-body">
@@ -136,23 +136,29 @@
 								<div class="form-group">
 									<div class="col-md-2">
 										<label class="col-md-12 control-label">Ciudad:</label>
-										<input type="text" class="form-control" name="ciudad472" value="JAMUNDÍ">
+										<input type="text" class="form-control" name="ciudad472">
 									</div>
-									<div class="col-md-10">
-										<div class="col-md-3">
-											<label class="col-md-12 control-label">Fecha:</label>
-											<input type="date" class="form-control" name="fecha472">
-										</div>
-										<script type="text/javascript">
-											cargarInicio('472');
-										</script>
+									<div class="col-md-2">
+										<label class="col-md-12 control-label">Fecha:</label>
+										<input type="date" class="form-control" name="fecha472">
+									</div>
+									<script type="text/javascript">
+										cargarInicio('472');
+									</script>
+									<div class="col-md-8">
 										<div class="col-md-6" style="padding:0">
 											<label class="col-md-12 control-label">Entidad:</label>
-											<input type="text" class="form-control" name="entidad472" value="SECRETARÍA DE SALUD MUNICIPAL - JAMUNDÍ">
+											<input type="text" class="form-control" name="entidad472">
 										</div>										
-										<div class="col-md-3">
-											<label class="col-md-12 control-label">Inscripción No:</label>
-											<input type="text" class="form-control" name="inscripcion472">
+										<div class="col-md-6">
+											<div class="col-md-6">
+												<label class="col-md-12 control-label">Inscripción No:</label>
+												<input type="text" class="form-control" name="inscripcion472">
+											</div>
+											<div class="col-md-6">
+												<label class="col-md-12 control-label">Acta No:</label>
+												<input type="text" class="form-control" name="acta472">
+											</div>
 										</div>
 									</div>
 															
@@ -230,11 +236,11 @@
 								<div class="form-group">
 									<div class="col-md-2">
 										<label class="col-md-12 control-label">Departamento:</label>
-										<input type="text" class="form-control" name="dpto472" value="VALLE DEL CAUCA">
+										<input type="text" class="form-control" name="dpto472">
 									</div>
 									<div class="col-md-2">
 										<label class="col-md-12 control-label">Municipio:</label>
-										<input type="text" class="form-control" name="mpio472" value="JAMUNDÍ">
+										<input type="text" class="form-control" name="mpio472">
 									</div>																						
 									<div class="col-md-3">
 										<label class="col-md-12 control-label">Celular:</label>
@@ -292,11 +298,11 @@
 										</div>										
 										<div class="col-md-4">
 											<label class="control-label col-md-12">Depto N.:</label>
-											<input type="text" class="form-control" value="VALLE DEL CAUCA" name="deptoNotif472">
+											<input type="text" class="form-control" name="deptoNotif472">
 										</div>
 										<div class="col-md-3" style="padding:0">
 											<label class="control-label col-md-12">Mpio N.:</label>
-											<input type="text" class="form-control" value="JAMUNDÍ" name="mpioNotif472">
+											<input type="text" class="form-control" name="mpioNotif472">
 										</div>
 									</div>
 									<div class="col-md-6">
@@ -879,7 +885,7 @@
 				</div><!-- Fin del panel default -->
 			</div><!-- Fin del Row -->
 		</div><!-- Fin del container -->
-
+		<script>setInicio('472');</script>
 	</body>
 
 </html>

@@ -1,7 +1,7 @@
 {
-	"name": "VISALUD JAMUNDÍ",
+	"name": "Visalud Móvil Jamundí",
 	"short_name": "VISALUD",
-	"description": "Aplicación para el ejercicio de vigilancia en salud pública sobre establecimientos y vehículos",
+	"description": "Aplicación para captura de datos de vigilancia en salud para establecimientos y vehículos",
 	"background_color": "#FFF",
 	"theme_color": "#65c0ba",
 	"orientation": "landscape",
@@ -11,9 +11,19 @@
 	"lang": "es-CO",
 	"icons": [
 		{
+			"src": "./img/escudo130.ico",
+			"sizes": "100x112",
+			"type": "image/ico"
+		},
+		{
 			"src": "./img/escudo.jpg",
 			"sizes": "100x112",
 			"type": "image/jpg"
+		},
+		{
+			"src": "./img/llave.png",
+			"sizes": "51x153",
+			"type": "image/png"
 		}
 	]
 }
