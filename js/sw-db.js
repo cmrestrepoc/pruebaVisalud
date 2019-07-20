@@ -147,7 +147,7 @@ function cargarInicio(formulario){
 
 function setInicio(formulario){
 	//alert("Se ejecuta setInicio");
-	document.getElementById('municipio').innerHTML = "CANDELARIA";
+	document.getElementById('municipio').innerHTML = "JAMUNDÍ";
 	let form = "";
 	switch(formulario){
 		case '440':
