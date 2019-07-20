@@ -366,5 +366,5 @@ function setInicioMenu(){
 }
 
 function setInicioIndex(){
-	document.getElementById('municipio').innerHTML = "CANDELARIA";
+	document.getElementById('municipio').innerHTML = "JAMUNDÍ";
 }
