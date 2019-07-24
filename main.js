@@ -11,6 +11,10 @@ if('serviceWorker' in navigator){
 	console.log('NO PUEDES usar los serviceWorker en tu navegador');
 }
 
+const BASEURL = 'https://sisbenpro.com/jamundi/public/';
+const URL_CERRAR_SESION = 'cerrarSesion/';
+const URL_LOGIN_SERVER = 'loginVisalud';
+
 function setConcepto(objeto, destino) {
 	var concepto = objeto.value;
 
@@ -168,7 +172,7 @@ function loginServer(){
 		token: ''
 	};
 	//console.log(data);
-	fetch('https://sisbenpro.com/public/loginVisalud', {
+	fetch( BASEURL + URL_LOGIN_SERVER, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/x-www-form-urlencoded'
@@ -182,7 +186,7 @@ function loginServer(){
 				var identidad = JSON.parse(localStorage.getItem('identity'));
 				if (identidad != undefined) {
 					//identidad = JSON.parse(localStorage.getItem('identity'));
-					fetch('https://sisbenpro.com/public/cerrarSesion/'+identidad.usuario)
+					fetch( BASEURL + URL_CERRAR_SESION + identidad.usuario )
 					.then( res => res.json() )
 					.then( jsonRes => alert('Sesión cerrada por precaución. ' + jsonRes.res) );
 					localStorage.removeItem('identity');				

@@ -21,6 +21,12 @@ var db443 = new PouchDB('evaluaciones443');
 var db441 = new PouchDB('evaluaciones441');
 var db472 = new PouchDB('evaluaciones472');
 
+const BASEURL = 'https://sisbenpro.com/jamundi/public/';
+const URL_CERRAR_SESION = 'cerrarSesion/';
+const URL_INSCRITOS_VFP = 'inscritosVisual';
+const URL_INSCRITOS_TABLET = 'inscritosTabla';
+const URL_EVALUACIONES_TABLET = 'evaluacionesTabla';
+
 dbNuevos493.changes({
 	since: 'now',
 	live: true
@@ -1001,7 +1007,7 @@ function guardarTraidos(formulario, dbBase, respObj){
 function cerrarSesionServidor(){
 	var identidad = JSON.parse(localStorage.getItem('identity'));
 	if (identidad != undefined) {
-		fetch('https://sisbenpro.com/public/cerrarSesion/' + identidad.usuario)
+		fetch( BASEURL + URL_CERRAR_SESION + identidad.usuario)
 		.then( res => res.json() )
 		.then( jsonRes => alert(jsonRes.res) )
 		.catch( err => alert("Problemas en la respuesta del servidor " + err) );
@@ -1027,7 +1033,7 @@ function fetchInscritos(formulario){
 		console.log('Estamos en el formulario: ', formulario);
 		
 		return new Promise((resolve, reject) => {
-			fetch('https://sisbenpro.com/public/inscritosVisual', {
+			fetch( BASEURL + URL_INSCRITOS_VFP, {
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/x-www-form-urlencoded'
@@ -1127,7 +1133,7 @@ function fetchEvaluados(doc, formulario, url){
 				body: data
 		}).then( res => {
 			if(res.status == 500){
-				return fetchEvaluados(doc, formulario)
+				return fetchEvaluados(doc, formulario, url)
 				.then( body => resolve(body) );
 				//.then( () => setTimeout( () => alert("Registros cargados en servidor"), 1500) );	
 			}else{
@@ -1148,19 +1154,19 @@ function cargarServidor(formulario){
 	switch (formulario) {
 		case '493':
 		db = dbNuevos493;
-		urltofetch = 'https://sisbenpro.com/public/inscritosTabla'
+		urltofetch = BASEURL + URL_INSCRITOS_TABLET;
 		break;
 		case '569':
 		db = dbNuevos569;
-		urltofetch = 'https://sisbenpro.com/public/inscritosTabla'
+		urltofetch = BASEURL + URL_INSCRITOS_TABLET;
 		break;
 		case '444':
 		db = dbNuevos444;
-		urltofetch = 'https://sisbenpro.com/public/inscritosTabla'
+		urltofetch = BASEURL + URL_INSCRITOS_TABLET;
 		break;
 		default:
 		db = dbActasForm(formulario);
-		urltofetch = 'https://sisbenpro.com/public/evaluacionesTabla';
+		urltofetch = BASEURL + URL_EVALUACIONES_TABLET;
 		break;
 	}
 
