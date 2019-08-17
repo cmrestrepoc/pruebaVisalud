@@ -21,6 +21,11 @@
 			"type": "image/jpg"
 		},
 		{
+			"src": "./img/escudo.jpg",
+			"sizes": "100x112",
+			"type": "image/jpg"
+		},
+		{
 			"src": "./img/llave.png",
 			"sizes": "51x153",
 			"type": "image/png"
