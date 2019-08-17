@@ -11,6 +11,13 @@ if('serviceWorker' in navigator){
 	console.log('NO PUEDES usar los serviceWorker en tu navegador');
 }
 
+caches.open('v3_cache_visalud_jamundi')
+	.then(cache => {
+		cache.keys()
+			.then(keys => alert('Longitud del caché instalado: ' + keys.length))
+			.catch(err => console.log('Problemas abriendo el cache', err));
+	})
+
 const BASEURL1 = 'https://sisbenpro.com/jamundi/public/';
 const URL_CERRAR_SESION1 = 'cerrarSesion/';
 const URL_LOGIN_SERVER = 'loginVisalud';
