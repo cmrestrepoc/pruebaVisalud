@@ -21,7 +21,7 @@
 			"type": "image/jpg"
 		},
 		{
-			"src": "./img/escudo.jpg",
+			"src": "./img/escudo.png",
 			"sizes": "100x112",
 			"type": "image/jpg"
 		},
