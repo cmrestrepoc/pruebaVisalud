@@ -5,6 +5,11 @@ var dbNuevos569 = new PouchDB('inscritosNuevos569');
 var db444 = new PouchDB('inscritosCargados444');
 var dbNuevos444 = new PouchDB('inscritosNuevos444');
 
+var censo = new PouchDB('censo');
+var censoc = new PouchDB('censoc');
+var censov = new PouchDB('censov');
+var censosv = new PouchDB('censosv');
+
 var db440 = new PouchDB('evaluaciones440');
 var db474 = new PouchDB('evaluaciones474');
 var db479 = new PouchDB('evaluaciones479');
@@ -21,7 +26,7 @@ var db443 = new PouchDB('evaluaciones443');
 var db441 = new PouchDB('evaluaciones441');
 var db472 = new PouchDB('evaluaciones472');
 
-const BASEURL = 'https://sisbenpro.com/jamundi/public/';
+const BASEURL = 'https://sisbenpro.com/visaludJamundi/public/';
 const URL_CERRAR_SESION = 'cerrarSesion/';
 const URL_INSCRITOS_VFP = 'inscritosVisual';
 const URL_INSCRITOS_TABLET = 'inscritosTabla';
@@ -587,6 +592,16 @@ function agregarValidacionTextInputs(formulario){
 								"No puede escribir más de 50 caracteres en este campo"));
 	});
 
+	/* validación de campo inscripción */
+	/* Ejemplo de uso de var vs let... en este caso, si se pone let, longitud no es reconocida dentro del forEach*/
+	var longitud = formulario != '444' ? 15 : 11; 
+	let inputInscripcion = "input[name='inscripcion" + formulario  + "']";
+	let objetosInscripcion = document.querySelectorAll(inputInscripcion);
+	objetosInscripcion.forEach( elemento => {
+		elemento.addEventListener('input', validarLongitudInput.bind(this, elemento, longitud,
+			"No puede escribir más de " + longitud + " caracteres en este campo"));
+	});
+
 	/* correo, horarios, objeto */
 	let medianosInput = "input[name='correoProp" + formulario + "'], input[name='horarios" + formulario + "'], "
 						+ "input[name='objeto" + formulario + "']";
@@ -836,7 +851,7 @@ function escogerInscrito(registro, formulario){
 			if (registro.ACTIVIDAD != null){
 				if (registro.ACTIVIDAD.length != 0) {
 					var actividad = [];
-					for (var i = 0; i < document.getElementsByName('actividad' + formulario).length; i++) {
+					for (let i = 0; i < document.getElementsByName('actividad' + formulario).length; i++) {
 						actividad.push(document.getElementsByName('actividad' + formulario)[i].value);
 					}
 	
@@ -854,7 +869,7 @@ function escogerInscrito(registro, formulario){
 	
 					$('input:checkbox[name=actividad'+formulario+']').prop('checked', false);
 	
-					for (var i = 0; i < actividad.length; i++) {
+					for (let i = 0; i < actividad.length; i++) {
 						//console.log(actividad[i]);
 						//console.log(mapActividad.has(actividad[i]));
 						mapActividad.has(actividad[i]) ? $('input:checkbox[value='+actividad[i]+']').prop('checked', true) : $('input:checkbox[value='+actividad[i]+']').prop('checked', false);			
@@ -881,14 +896,21 @@ function escogerInscrito(registro, formulario){
 			document.getElementsByName('despresa' + formulario)[0].value = registro.DESPRESA;
 		}
 	}
-} 
+}
 
-function createRadio(registro, formulario){
+function escogerCensado(registro, formulario){
+	console.log('Se activa funcionalidad de escoger censado en formulario ', formulario);
+	console.log('Con datos: ', registro)
+}
+
+function createRadio(registro, formulario, funcionEscoger='inscrito'){
 	var radio = document.createElement('input');
 	radio.type = 'radio';
 	radio.setAttribute('name',"seleInscrito");
 	radio.value = registro._id;
-	radio.addEventListener('click', escogerInscrito.bind(this, registro, formulario));
+	funcionEscoger == 'inscrito' ?
+	radio.addEventListener('click', escogerInscrito.bind(this, registro, formulario)) :
+	radio.addEventListener('click', escogerCensado.bind(this, registro, formulario));
 
 	var span = document.createElement('span');
 	span.className = 'input-group-addon';
@@ -963,6 +985,62 @@ function mostrarInscritos444(formulario){
 	dbNuevos444.allDocs({include_docs: true, descending: true}).then ( doc => {
 		crearTabla(doc, 'inscritosNuevos444', '#tablaInscritosNuevos444', '444', formulario);
 	});
+}
+
+function crearTablaCenso(doc, idBody, idTabla, formulario){
+	var tbody = document.getElementById(idBody);
+		tbody.innerHTML = '';
+		var contador = 0;
+		doc.rows.forEach( registro => {
+			// console.log('registro en crearTablaCenso', registro.doc);
+			var extra = formulario == 'censov' ? registro.doc.placa : registro.doc.nit;
+			contador++;
+			var tr = document.createElement('tr');
+			tr.appendChild(createColumns(contador));
+			tr.appendChild(createColumns(registro.doc._id));
+			tr.appendChild(createColumns(registro.doc.rso));
+			tr.appendChild(createColumns(extra));
+			tr.appendChild(createColumns(registro.doc.nombre_p));
+			tr.appendChild(createColumns(registro.doc.doc_p));
+			tr.appendChild(createRadio(registro.doc, formulario, 'censo'));
+			tbody.appendChild(tr);
+		});
+		$(idTabla).DataTable();
+		return tbody;
+}
+
+function mostrarCenso(formulario){
+	let db;
+	let tbody;
+	let tabla;
+	switch(formulario){
+		case 'censo':
+			db = censo;
+			tbody = 'censados';
+			tabla = '#censo';
+			break;
+		case 'censoc':
+			db = censoc;
+			tbody = 'censadosc';
+			tabla = '#censoc';
+			break;
+		case 'censov':
+			db = censov;
+			tbody = 'censadosv';
+			tabla = '#censov';
+			break;
+		case 'censosv':
+			db = censosv;
+			tbody = 'censadossv';
+			tabla = '#censosv';
+			break;
+	}
+	if (db){
+		db.allDocs({include_docs: true, descending: true}).then ( doc => {
+			crearTablaCenso(doc, tbody, tabla, formulario);
+		})
+		.catch(err => console.log('error recorriendo la db', err));
+	}
 }
 
 function guardarTraidos(formulario, dbBase, respObj){
@@ -1112,6 +1190,68 @@ function cargarTodosLosInscritos(){
 		}).catch( err1 => console.log('Error: ', err1) );
 
 	}).catch( err => console.log('Error: ', err) );	
+}
+
+function guardarCensos(formulario, dbBase, respObj, bandera){
+	dbBase.destroy().then( response => {
+		console.log('Base de datos anterior eliminada');
+		dbBase = new PouchDB(formulario);
+		console.log('Nueva base de datos creada');
+		
+		let count = 0;
+		let long = respObj.length;
+		respObj.forEach( registro => {
+			//console.log('Registro: ',registro);
+			let indice  = calcularIndice(registro.id);
+			let id = { _id: indice };
+			
+			// Los inscritos que vienen desde el servidor vienen sin numero de acta
+			//registro.ACTA = " ";
+			// Con la siguiente línea se añade la variable _id al objeto			
+			registro = Object.assign(id, registro);   
+			//console.log('Registro: ',registro);
+			dbBase.put(registro, function callback(err, result){
+				if (!err) {
+					if (count != long - 1) {
+						count++;
+						console.log('inscrito guardado en base de datos: ', count);	
+					}else{
+						alert("Registros de " + bandera + " cargados correctamente");
+						localStorage.removeItem('Accion');
+					}
+				}else {
+					console.log('problemas guardando inscrito en base de datos', err);
+				}
+			});
+		});
+	});	
+}
+
+function cargarCensos() {
+	if(localStorage.getItem('Accion')){
+		localStorage.getItem('Accion') == 'cargarCensos' ?
+				localStorage.removeItem('Accion') :
+				localStorage.setItem('Accion', 'cargarCensos');
+	}else{
+		localStorage.setItem('Accion', 'cargarCensos');
+	}
+	let promesas = [];
+	promesas[0] = fetchInscritos('censo')
+					.then(resp => guardarCensos('censo', censo, resp, 'Censo Alimentos'))
+					.catch(err => console.log('problemas con el fetch a censo', err));
+	promesas[1] = fetchInscritos('censoc')
+					.then(resp => guardarCensos('censoc', censoc, resp, 'Censo Carnes'))
+					.catch(err => console.log('problemas con el fetch a censo', err));
+	promesas[2] = fetchInscritos('censov')
+					.then(resp => guardarCensos('censov', censov, resp, 'Censo Vehículos'))
+					.catch(err => console.log('problemas con el fetch a censo', err));
+	promesas[3] = fetchInscritos('censosv')
+					.then(resp => guardarCensos('censosv', censosv, resp, 'Censo Sujetos Varios'))
+					.catch(err => console.log('problemas con el fetch a censo', err));
+	Promise
+		.all(promesas)
+		.then( () => console.log('Todos los censos fueron cargados correctamente'))
+		.catch(err => console.log('Error en carga de uno de los censos', err));
 }
 
 function fetchEvaluados(doc, formulario, url){

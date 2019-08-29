@@ -11,16 +11,18 @@ if('serviceWorker' in navigator){
 	console.log('NO PUEDES usar los serviceWorker en tu navegador');
 }
 
-caches.open('v3_cache_visalud_jamundi')
+const BASEURL1 = 'https://sisbenpro.com/visaludJamundi/public/';
+const URL_CERRAR_SESION1 = 'cerrarSesion/';
+const URL_LOGIN_SERVER = 'loginVisalud';
+
+function mostrarCache(){
+	caches.open('v3_cache_visalud_jamundi')
 	.then(cache => {
 		cache.keys()
 			.then(keys => alert('Longitud del caché instalado: ' + keys.length))
 			.catch(err => console.log('Problemas abriendo el cache', err));
 	})
-
-const BASEURL1 = 'https://sisbenpro.com/jamundi/public/';
-const URL_CERRAR_SESION1 = 'cerrarSesion/';
-const URL_LOGIN_SERVER = 'loginVisalud';
+}
 
 function setConcepto(objeto, destino) {
 	var concepto = objeto.value;
@@ -217,16 +219,25 @@ function loginServer(){
 }
 
 function estabNumInscripcion(valor, formulario){
-	document.getElementsByName('inscripcion' + formulario)[0].value += valor;
+	let event = new Event('input');
+	let elementoInscripcion = document.getElementsByName('inscripcion' + formulario)[0];
+	elementoInscripcion.value += valor;
+	elementoInscripcion.dispatchEvent(event);
 }
 
 function vehiNumInscripcion(valor){
-	document.getElementsByName('inscripcion444')[0].value += valor;
+	let event = new Event('input');
+	let elementoInscripcion = document.getElementsByName('inscripcion444')[0];
+	elementoInscripcion.value = '76130' + valor;
+	elementoInscripcion.dispatchEvent(event);
 }
 
 function auxiliarInscVehi(valor){
 	if(document.getElementsByName('placaSrmque444')[0].value == '' && document.getElementsByName('placaRemolque444')[0].value == ''){
-		document.getElementsByName('inscripcion444')[0].value += valor;
+		let event = new Event('input');
+		let elementoInscripcion = document.getElementsByName('inscripcion444')[0];
+		elementoInscripcion.value += valor;
+		elementoInscripcion.dispatchEvent(event);
 	}
 }
 

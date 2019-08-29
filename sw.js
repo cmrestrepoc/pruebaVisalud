@@ -150,7 +150,7 @@ self.addEventListener('fetch', e => {
 	// Codigo como está en el curso del Tico: Network with cache fallback
 	const respuesta = fetch( e.request ).then( res => {
 		//console.log(e.request.method);
-		//if(e.request.method !== 'POST'){
+		if(e.request.method !== 'POST'){
 			// console.log('Request: ', e.request.url);
 			if(!res) return caches.match(e.request);
 			
@@ -181,7 +181,7 @@ self.addEventListener('fetch', e => {
 					.catch(err => console.log('No se pudo obtener las keys (items) del cache', err));
 				})
 				.catch (err => console.log('No se logró abrir el cache', err));
-		//}
+		}
 
 		return res.clone();
 
