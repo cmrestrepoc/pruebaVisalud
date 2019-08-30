@@ -237,8 +237,8 @@ function setInicio(formulario){
 	document.getElementsByName('inscripcion' + formulario)[0] ?
 		document.getElementsByName('inscripcion' + formulario)[0].value = "76364": null;
 
-	if(document.getElementsByName('nomTerr' + formulario)){
-		/* console.log("El campo nomTerr está definido"); */
+	if(document.getElementsByName('nomTerr' + formulario)[0]){
+		console.log("El campo nomTerr está definido");
 		let arregloBarrios = [
 			'CIRO VELASCO',
 			'LA LIBERIA',
@@ -898,9 +898,38 @@ function escogerInscrito(registro, formulario){
 	}
 }
 
+function setCodigoConcepto(concepto){
+	let codigo;
+	switch(concepto){
+		case 'FAVORABLE':
+			codigo = '1';
+			break;
+		case 'DESFAVORABLE':
+			codigo = '3';
+			break;
+		case 'SIN CONCEPTO':
+			codigo = '';
+			break;
+		default:
+			codigo = '2';
+			break;
+	}
+	console.log('codigo', codigo);
+	return codigo;
+}
+
 function escogerCensado(registro, formulario){
-	console.log('Se activa funcionalidad de escoger censado en formulario ', formulario);
-	console.log('Con datos: ', registro)
+	document.getElementsByName('razonSocial' + formulario)[0].value = registro.rso;
+	document.getElementsByName('propietario' + formulario)[0].value = registro.nombre_p;
+	document.getElementsByName('idPropietario' + formulario)[0].value = registro.doc_p;
+	document.getElementsByName('direccion' + formulario)[0].value = registro.direcc;
+	document.getElementsByName('tel' + formulario)[0].value = registro.tels;
+	document.getElementsByName('correoProp' + formulario)[0].value = registro.correo;
+	document.getElementsByName('fechaUltVisita' + formulario)[0].value = registro.f_uv;
+	document.getElementsByName('textoConcepto' + formulario)[0].value = registro.cuv;
+	document.getElementsByName('funcUltVisita' + formulario)[0].value = registro.nombre_f1;
+	document.getElementsByName('concepto' + formulario)[0].value = registro.cuv ? setCodigoConcepto(registro.cuv) : '';
+	console.log('Registro', registro);
 }
 
 function createRadio(registro, formulario, funcionEscoger='inscrito'){
@@ -987,7 +1016,7 @@ function mostrarInscritos444(formulario){
 	});
 }
 
-function crearTablaCenso(doc, idBody, idTabla, formulario){
+function crearTablaCenso(doc, idBody, idTabla, formulario, formularioActual){
 	var tbody = document.getElementById(idBody);
 		tbody.innerHTML = '';
 		var contador = 0;
@@ -1002,7 +1031,7 @@ function crearTablaCenso(doc, idBody, idTabla, formulario){
 			tr.appendChild(createColumns(extra));
 			tr.appendChild(createColumns(registro.doc.nombre_p));
 			tr.appendChild(createColumns(registro.doc.doc_p));
-			tr.appendChild(createRadio(registro.doc, formulario, 'censo'));
+			tr.appendChild(createRadio(registro.doc, formularioActual, 'censo'));
 			tbody.appendChild(tr);
 		});
 		$(idTabla).DataTable();
@@ -1013,31 +1042,36 @@ function mostrarCenso(formulario){
 	let db;
 	let tbody;
 	let tabla;
+	let formuLlamado;
 	switch(formulario){
 		case 'censo':
 			db = censo;
 			tbody = 'censados';
 			tabla = '#censo';
+			formuLlamado = '493';
 			break;
 		case 'censoc':
 			db = censoc;
 			tbody = 'censadosc';
 			tabla = '#censoc';
+			formuLlamado = '569';
 			break;
 		case 'censov':
 			db = censov;
 			tbody = 'censadosv';
 			tabla = '#censov';
+			formuLlamado = '444';
 			break;
 		case 'censosv':
 			db = censosv;
 			tbody = 'censadossv';
 			tabla = '#censosv';
+			formuLlamado = '245';
 			break;
 	}
 	if (db){
 		db.allDocs({include_docs: true, descending: true}).then ( doc => {
-			crearTablaCenso(doc, tbody, tabla, formulario);
+			crearTablaCenso(doc, tbody, tabla, formulario, formuLlamado);
 		})
 		.catch(err => console.log('error recorriendo la db', err));
 	}
