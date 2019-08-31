@@ -1,7 +1,7 @@
 {
 	"name": "Visalud Móvil Jamundí",
 	"short_name": "VISALUD",
-	"description": "Aplicación para captura de datos de vigilancia en salud para establecimientos y vehículos",
+	"description": "Aplicación de información de vigilancia en salud",
 	"background_color": "#FFF",
 	"theme_color": "#65c0ba",
 	"orientation": "landscape",
