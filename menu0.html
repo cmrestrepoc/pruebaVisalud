@@ -34,12 +34,12 @@
 
 	</head>
 
-	<body onload="verificarSesionLocal(); verificarAccion(); mostrarCache()">
+	<body onload="verificarSesionLocal(); verificarAccion(); /* mostrarCache() */">
 		<header id="index">
 			<img alt style="width: 8%" src="./img/escudo.jpg" />
 			<div class="titulos">
-				<h1>MUNICIPIO DE <span id="municipio"></span> (V)</h1>
-				<h2>Vigilancia en Salud Pública</h2>
+				<h2>MUNICIPIO DE <span id="municipio"></span> (V)</h2>
+				<h3>Vigilancia en Salud Pública</h3>
 				<h4>Control de Riesgo en Alimentos y Bebidas</h4>
 				<h4>IVC a Establecimientos y Vehículos</h4>
 			</div>
@@ -175,6 +175,7 @@
 			</div>
 
 			<div id="deriActaEstablecimientos">
+				<h4><a href="f245.html" name="nombreFormularios"></a></h4>
 				<h4><a href="f26.html" name="nombreFormularios"></a></h4>
 				<h4><a href="f243.html" name="nombreFormularios"></a></h4>
 				<h4><a href="f333.html" name="nombreFormularios"></a></h4>
@@ -201,6 +202,11 @@
 
 			 
 		</section>
+		<div class="alert alert-danger alert-dismissible fade in col-md-4 col-md-offset-4" role="alert" name="version">
+			<div class="col-md-offset-5">
+				<strong>Versión:</strong> 2.1.0
+			</div>
+		</div>
 		<script>setInicioMenu()</script>
 	</body>
 

@@ -1,0 +1,896 @@
+<!DOCTYPE HTML>
+<html lang="es">
+	<head>
+		<meta charset="utf-8"/>
+		<title>F245</title>
+
+		<!-- favicon -->
+		<link rel="shortcut icon" type="img/png" href="./img/escudo130.ico" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+		<!-- Color de la aplicación -->
+		<meta name="theme-color" content="#65c0ba" />
+
+		<!-- Optomización para móvil -->
+		<meta name="MobileOptimized" content="width" />
+		<meta name="HandleFriendly" content="true" />
+
+		<!-- Configuración General PWA -->
+		<link rel="manifest" href="manifest.json" />
+
+		<style>
+			body {
+				/* Disables pull-to-refresh but allows overscroll glow effects. */
+				overscroll-behavior-y: contain;
+			}
+		</style>
+
+		<link rel="stylesheet" type="text/css" href="./css/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="./css/styles.css">
+		<link rel="stylesheet" type="text/css" href="./css/jquery.dataTables.min.css">
+
+		<script src="./js/jquery-3.3.1.slim.min.js"></script>
+		<script type="text/javascript" src="./js/jquery.dataTables.min.js"></script>
+		<script src="./js/bootstrap.min.js"></script>
+		<script src="./js/pouchdb.min.js"></script>
+		<script type="text/javascript" src="main.js"></script>
+		<script type="text/javascript" src="./js/sw-db.js"></script>
+
+	</head>
+
+	<body onload="verificarAccionForm('245')">
+		<header>
+			<a href="menu0.html">
+				<img alt src="./img/escudo.jpg" />
+			</a>
+			<div class="titulos">
+				<h1>MUNICIPIO DE <span id="municipio"></span> (V)</h1>
+				<h2>Vigilancia en Salud Pública</h2>
+				<h2>Acta <span id="formato"></span></h2>
+			</div>
+
+		</header>
+
+		<br><br>
+
+		<div class="container">
+			<div class="row">
+				
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<span id="nomForm"></span>: Acta de visita de control ULS
+					</div>
+						
+					<div class="panel-body">
+
+						<!-- Nav tabs -->
+						<ul id="misTabs" class="nav nav-tabs" role="tablist">
+							<li role="presentation" class="active"><a href="#censoSV" aria-controls="censoSV" role="tab" data-toggle="tab">Censo</a></li>
+							<li role="presentation"><a href="#datos" aria-controls="datos" role="tab" data-toggle="tab" onclick="validarCambioTab(0)">Datos del Establecimiento</a></li>
+							<li role="presentation"><a href="#evaluacionPrt1" aria-controls="evaluacionPrt1" role="tab" data-toggle="tab" onclick="validarCambioTab(1)">Evaluación</a></li>
+							<li role="presentation"><a href="#observaciones" aria-controls="observaciones" role="tab" data-toggle="tab" onclick="mostrarEvaluados('245')">Observaciones - Notificaciones</a></li>
+						</ul>
+
+						<!-- Tab panes -->
+						<div class="tab-content" id="miTabContent">
+							<div role="tabpanel" class="tab-pane fade active in" id="censoSV" aria-labelledby="censoSV-tab">
+								<br>
+								<script type="text/javascript">mostrarCenso('censosv');</script>
+	                    		<div class="form-group">
+									<div class="panel panel-default">
+										<div class="panel-heading">CENSO DE SUJETOS VARIOS</div>
+										<div class="panel-body">	                    			
+											<table class="table table-bordered" id="censosv">
+												<thead>
+													<tr>
+                                                        <th></th>
+                                                        <th>ID</th>
+                                                        <th>Establecimiento</th>
+                                                        <th>NIT</th>
+                                                        <th>Nom. Propietario</th>
+                                                        <th>Ident. Propietario</th>									
+                                                        <th></th>
+													</tr>									
+												</thead>
+												<tbody id="censadossv"></tbody>
+											</table>													
+										</div>
+									</div>							
+								</div><!-- Fin del form-group --><br>
+                                
+							</div><!-- Fin del tab-pane -->
+
+							<div role="tabpanel" class="tab-pane fade" id="datos" aria-labelledby="datos-tab">
+								<br><div class="alert alert-danger alert-dismissible fade in col-md-12" role="alert" name="alertaInscrito" style="display: none">
+									<strong>Cuidado!</strong> Debe elegir un censado antes de continuar.
+								</div><br>
+												
+								<div class="form-group">
+									<div class="col-md-2">
+										<label class="col-md-12 control-label">Ciudad:</label>
+										<input type="text" class="form-control" name="ciudad245">
+									</div>
+									<div class="col-md-10">
+										<div class="col-md-3">
+											<label class="col-md-12 control-label">Fecha:</label>
+											<input type="date" class="form-control" name="fecha245">
+										</div>
+										<script type="text/javascript">
+											cargarInicio('245');
+										</script>										
+										<div class="col-md-3">
+											<label class="col-md-12 control-label">Acta:</label>
+											<input type="text" class="form-control" name="acta245">
+										</div>
+
+										<div class="col-md-6" style="padding:0">
+											<label class="col-md-12 control-label">Entidad:</label>
+											<input type="text" class="form-control" name="entidad245">
+										</div>
+									</div>
+															
+								</div>
+
+								<br><br><br><hr>
+
+								<div class="form-group">
+									<div class="col-md-4">
+										<label class="col-md-6 control-label">Razón Social:</label>
+										<input type="text" class="form-control" name="razonSocial245">
+									</div>
+									<div class="col-md-2">
+										<label class="col-md-6 control-label">Nit/CC:</label>
+										<input type="text" class="form-control" name="nit245">
+									</div>
+									<div class="col-md-4">
+										<label class="col-md-12 control-label">Nombre Comercial:</label>
+										<input type="text" class="form-control" name="nombreComercial245">
+									</div>
+									<div class="col-md-2">
+										<label class="col-md-12 control-label">Inscripción No:</label>
+										<input type="text" class="form-control" name="inscripcion245">
+									</div>
+								</div><!-- Fin del form-group -->
+								<br><br><br><hr>
+
+								<div class="form-group">
+									<div class="col-md-3">
+										<label class="col-md-12 control-label">Matrícula Mercantil:</label>
+										<input type="text" class="form-control" name="matriculaMercantil245">
+									</div>
+									<div class="col-md-4">
+										<label class="col-md-12 control-label">Dirección:</label>
+										<input type="text" class="form-control" name="direccion245">
+									</div>				
+									<div class="col-md-3">
+										<label class="col-md-12 control-label">Departamento:</label>
+										<input type="text" class="form-control" name="dpto245">
+									</div>
+									<div class="col-md-2">
+										<label class="col-md-12 control-label">Municipio:</label>
+										<input type="text" class="form-control" name="mpio245">
+									</div>
+								</div><!-- Fin del form-group -->
+								<br><br><br><hr>
+
+								<div class="form-group">
+									<label class="col-md-2 control-label" style="text-align:right; padding-right:0">Tipo de territorio:</label>
+									<div class="col-md-2">
+										<div class="input-group">
+											<span class="input-group-addon">
+										    	<input type="radio" name="territorio245" value="barrio" id="barrio">
+										    </span>
+										    <input type="text" class="form-control" name="barrio" value="Barrio">
+										</div>
+									</div>
+									<div class="col-md-2" style="padding:0">
+										<div class="input-group">
+											<span class="input-group-addon">
+										    	<input type="radio" name="territorio245" value="corregimiento" id="corregimiento">
+										    </span>
+										    <input type="text" class="form-control" name="corregimiento" value="Corregimiento">
+										</div>
+									</div>
+									<div class="col-md-2">
+										<div class="input-group">
+											<span class="input-group-addon">
+										    	<input type="radio" name="territorio245" value="vereda" id="vereda">
+										    </span>
+										    <input type="text" class="form-control" name="vereda" value="Vereda">
+										</div>
+									</div>
+									<label class="col-md-1 control-label" style="text-align:right;padding:0">Nombre:</label>
+									<div class="col-md-3">
+										<select class="form-control" name="nomTerr245">
+											<option></option>
+										</select>
+									</div>														
+								</div><!-- Fin del form-group -->
+
+			                    <br><br><hr>
+
+			                    <div class="form-group">
+									<div class="col-md-5">
+										<label class="col-md-12 control-label">Correo</label>
+										<input type="text" class="form-control" name="correoProp245">
+									</div>													
+									<div class="col-md-3">
+										<label class="col-md-12 control-label">Celular:</label>
+										<input type="text" class="form-control" name="cel245">	
+									</div>
+									<div class="col-md-2">
+										<label class="col-md-12 control-label">Fax:</label>
+										<input type="text" class="form-control" name="fax245">		
+									</div>
+									<div class="col-md-2">
+										<label class="col-md-12 control-label">Teléfono:</label>
+										<input type="text" class="form-control" name="tel245">		
+									</div>							
+								</div><!-- Fin del form-group -->
+
+								<br><br><br><hr>
+
+			                    <div class="form-group">
+									<div class="col-md-6">
+										<div class="col-md-6" style="padding:0">
+											<label class="col-md-12 control-label">Propietario:</label>
+											<input type="text" class="form-control" name="propietario245">
+										</div>
+										<div class="col-md-6" style="padding:0">
+											<label class="col-md-12 control-label">Identificación:</label>
+											<div class="col-md-5">
+												<select class="form-control" name="tipoIdProp245" id="tipoIdProp245">
+													<option></option>
+													<option value="CC">CC</option>
+													<option value="CE">CE</option>
+													<option value="NIT">NIT</option>
+												</select>
+											</div>
+											<div class="col-md-7" style="padding:0">
+												<input type="text" class="form-control" name="idPropietario245" placeholder="# identificación">
+											</div>							
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="col-md-6" style="padding:0">
+											<label class="col-md-12 control-label">Rep. Legal:</label>
+											<input type="text" class="form-control" name="repLegal245">
+										</div>										
+										<div class="col-md-6" style="padding:0">					
+											<label class="col-md-12 control-label">Identificación:</label>
+											<div class="col-md-5">
+												<select class="form-control" name="tipoIdRl245">
+													<option></option>
+													<option value="CC">CC</option>
+													<option value="CE">CE</option>
+													<option value="NIT">NIT</option>
+												</select>
+											</div>
+											<div class="col-md-7" style="padding:0">
+												<input type="text" class="form-control" name="idRepLegal245" placeholder="# identificación">
+											</div>											
+										</div>										
+									</div>
+								</div><!-- Fin del form-group -->
+								<br><br><br><hr>
+
+								<div class="form-group">
+									
+									<div class="col-md-6" style="padding:0">
+										<div class="col-md-5" style="padding:0">
+											<label class="col-md-12 control-label">Dir Notif:</label>
+										<input type="text" class="form-control" name="dirNotif245">
+										</div>										
+										<div class="col-md-4">
+											<label class="control-label col-md-12">Depto N.:</label>
+											<input type="text" class="form-control" name="deptoNotif245">
+										</div>
+										<div class="col-md-3" style="padding:0">
+											<label class="control-label col-md-12">Mpio N.:</label>
+											<input type="text" class="form-control" name="mpioNotif245">
+										</div>
+									</div>
+									<div class="col-md-6">
+                                        <label class="col-md-6 control-label">Usuario autoriza Notifiación y/o firma electrónica</label>
+                                        <div class="col-md-3">
+                                            <label class="col-md-12 control-label">Notific.</label>
+                                            <select class="form-control" name="autorizaNoti478">
+                                                <option></option>
+                                                <option value="S">Si</option>
+                                                <option value="N">No</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="col-md-12 control-label">Firma</label>
+                                            <select class="form-control" name="autorizaFirma478">
+                                                <option></option>
+                                                <option value="S">Si</option>
+                                                <option value="N">No</option>
+                                            </select>
+                                        </div>
+									</div>								
+								</div><!-- Fin del form-group -->								
+								<br><br><br><br>
+							</div><!-- Fin del tab-pane -->	
+
+							<div role="tabpanel" aria-labelledby="evaluacion-tab" class="tab-pane fade" id="evaluacionPrt1">
+								<br><div class="alert alert-danger alert-dismissible fade in col-md-12" role="alert" name="alertaInscrito" style="display: none">
+									<strong>Cuidado!</strong> Debe elegir un inscrito antes de continuar.
+								</div><br>
+								<div class="col-md-6"><br>
+									<div class="form-group" style="border-style:ridge; padding:3px">
+										<table class="table" style="font-size:12px">
+											<tbody>
+												<tr>
+													<td>1.</td>
+													<td>El establecimiento está ubicado en un lugar alejado de focos de insalubridad como: basuras, agua estancada, sitios de anidamiento de plagas u otros que puedan contaminar el alimento. (Ley 9/1979: Artículo 262).</td>
+													<td>
+														<label class="control-label">Respuesta</label>
+														<select class="form-control" name="pregunta">
+															<option></option>
+															<option value="S">Si</option>
+															<option value="N">No</option>
+														</select>
+													</td>
+												</tr>
+												<tr>
+													<td>2.</td>
+													<td>La construcción es resistente al medio ambiente. (Resolución 3009/2010: Artículo 67, Numeral 2. Resolución 240/2013: Artículo 130, Numeral 2. Resolución 242/2013: Artículo 55, Numeral 2).</td>
+													<td>
+														<label class="control-label">Respuesta</label>
+														<select class="form-control" name="pregunta">
+															<option></option>
+															<option value="S">Si</option>
+															<option value="N">No</option>
+														</select>
+													</td>
+												</tr>
+												<tr>
+													<td>3.</td>
+													<td>La construcción impide el ingreso de plagas. (Ley 9/1979: Artículo 259).</td>
+													<td>
+														<label class="control-label">Respuesta</label>
+														<select class="form-control" name="pregunta">
+															<option></option>
+															<option value="S">Si</option>
+															<option value="N">No</option>
+														</select>
+													</td>
+												</tr>
+												<tr>
+													<td>4.</td>
+													<td>El establecimiento tiene el tamaño necesario para permitir la manipulación y almacenamiento de la carne y/o productos cárnicos comestibles, así como el flujo del personal. (Resolución 3009/2010: Artículo 67, Numeral 2. Resolución 240/2013: Artículo 130, Numeral 2. Resolución 242/2013: Artículo 55, Numeral 2).</td>
+													<td>
+														<label class="control-label">Respuesta</label>
+														<select class="form-control" name="pregunta">
+															<option></option>
+															<option value="S">Si</option>
+															<option value="N">No</option>
+														</select>
+													</td>
+												</tr>
+												<tr>
+													<td>5.</td>
+													<td>Las actividades que realiza el establecimiento no generan condiciones insalubres, que pongan en riesgo la salud y bienestar de la comunidad. (Resolución 3009/2010: Artículo 67, Numeral 1. Resolución 240/2013: Artículo 130, Numeral 1. Resolución 242/2013: Artículo 55, Numeral 1).</td>
+													<td>
+														<label class="control-label">Respuesta</label>
+														<select class="form-control" name="pregunta">
+															<option></option>
+															<option value="S">Si</option>
+															<option value="N">No</option>
+														</select>
+													</td>
+												</tr>
+												<tr>
+													<td>6.</td>
+													<td>Cada área o sección se encuentra claramente señalizada en cuanto a nombre, accesos, circulación, entre otros. (Resolución 3009/2010: Artículo 67, Numeral 10. Resolución 240/2013: Artículo 130, Numeral 10. Resolución 242/2013: Artículo 55, Numeral 10).</td>
+													<td>
+														<label class="control-label">Respuesta</label>
+														<select class="form-control" name="pregunta">
+															<option></option>
+															<option value="S">Si</option>
+															<option value="N">No</option>
+														</select>
+													</td>
+												</tr>
+												<tr>
+													<td>7.</td>
+													<td>El establecimiento no es  usado como dormitorio, en caso que el servicio se preste en una edificación que es también vivienda, está separado físicamente de ésta. (Ley 9/1979: Artículo 262).</td>
+													<td>
+														<label class="control-label">Respuesta</label>
+														<select class="form-control" name="pregunta">
+															<option></option>
+															<option value="S">Si</option>
+															<option value="N">No</option>
+														</select>
+													</td>
+												</tr>
+												<tr>
+													<td>8.</td>
+													<td>Los pisos se encuentran construidos en materiales resistentes, no tóxicos, impermeables, lavables, no absorbentes y su superficie es lisa (sin grietas, rugosidades, asperezas o  falta de continuidad de la superficie). (Resolución 3009/2010: Artículo 67, Numeral 4. Resolución 240/2013: Artículo 130, Numeral 4. Resolución 242/2013: Artículo 55, Numeral 4).</td>
+													<td>
+														<label class="control-label">Respuesta</label>
+														<select class="form-control" name="pregunta">
+															<option></option>
+															<option value="S">Si</option>
+															<option value="N">No</option>
+														</select>
+													</td>
+												</tr>
+												<tr>
+													<td>9.</td>
+													<td>Los pisos cuentan con la pendiente necesaria para efectos de drenaje. (Resolución 3009/2010: Artículo 67, Numeral 4. Resolución 240/2013: Artículo 130, Numeral 4. Resolución 242/2013: Artículo 55, Numeral 4).</td>
+													<td>
+														<label class="control-label">Respuesta</label>
+														<select class="form-control" name="pregunta">
+															<option></option>
+															<option value="S">Si</option>
+															<option value="N">No</option>
+														</select>
+													</td>
+												</tr>
+												<tr>
+													<td>10.</td>
+													<td>Cuenta con las tuberías y drenajes, debidamente protegidos por rejillas para la conducción y recolección de aguas residuales. (Resolución 3009/2010: Artículo 67, Numerales 4, 11.2. Resolución 240/2013: Artículo 130, Numeral 4, 11.2. Resolución 242/2013: Artículo 55, Numeral 4, 11.2).</td>
+													<td>
+														<label class="control-label">Respuesta</label>
+														<select class="form-control" name="pregunta">
+															<option></option>
+															<option value="S">Si</option>
+															<option value="N">No</option>
+														</select>
+													</td>
+												</tr>
+												<tr>
+													<td>11.</td>
+													<td>Las paredes se encuentran construidas en materiales resistentes, no tóxicos, impermeables, lavables, no absorbentes y su superficie es lisa (sin grietas, rugosidades, asperezas o  falta de continuidad de la superficie). (Resolución 3009/2010: Artículo 67, Numeral 5. Resolución 240/2013: Artículo 130, Numeral 5. Resolución 242/2013: Artículo 55, Numeral 5).</td>
+													<td>
+														<label class="control-label">Respuesta</label>
+														<select class="form-control" name="pregunta">
+															<option></option>
+															<option value="S">Si</option>
+															<option value="N">No</option>
+														</select>
+													</td>
+												</tr>
+												<tr>
+													<td>12.</td>
+													<td>Las uniones entre las paredes y de éstas con el piso son redondeadas. (Resolución 3009/2010: Artículo 67, Numeral 5. Resolución 240/2013: Artículo 130, Numeral 5. Resolución 242/2013: Artículo 55, Numeral 5).</td>
+													<td>
+														<label class="control-label">Respuesta</label>
+														<select class="form-control" name="pregunta">
+															<option></option>
+															<option value="S">Si</option>
+															<option value="N">No</option>
+														</select>
+													</td>
+												</tr>
+												<tr>
+													<td>13.</td>
+													<td>Los techos, falsos techos e instalaciones suspendidas son de material impermeable, resistente, liso, no presenta condensación, no se observa desprendimiento de partículas y permiten su limpieza y desinfección. (Resolución 3009/2010: Artículo 67, Numeral 6. Resolución 240/2013: Artículo 130, Numeral 6. Resolución 242/2013: Artículo 55, Numeral 6.).</td>
+													<td>
+														<label class="control-label">Respuesta</label>
+														<select class="form-control" name="pregunta">
+															<option></option>
+															<option value="S">Si</option>
+															<option value="N">No</option>
+														</select>
+													</td>
+												</tr>
+												<tr>
+													<td>14.</td>
+													<td>Las áreas cuentan con la ventilación necesaria, tomando las medidas requeridas para evitar la contaminación de los alimentos. (Decreto 1500/2007: Artículo 26, Numeral 1.1.2).</td>
+													<td>
+														<label class="control-label">Respuesta</label>
+														<select class="form-control" name="pregunta">
+															<option></option>
+															<option value="S">Si</option>
+															<option value="N">No</option>
+														</select>
+													</td>
+												</tr>
+												<tr>
+													<td>15.</td>
+													<td>Las ventanas y otras aberturas están construidas de forma que impiden la acumulación de suciedad, facilitando su limpieza y desinfección. (Resolución 3009/2010: Artículo 67, Numeral 8. Resolución 240/2013: Artículo 130, Numeral 8. Resolución 242/2013: Artículo 55, Numeral 8).</td>
+													<td>
+														<label class="control-label">Respuesta</label>
+														<select class="form-control" name="pregunta">
+															<option></option>
+															<option value="S">Si</option>
+															<option value="N">No</option>
+														</select>
+													</td>
+												</tr>
+												<tr>
+													<td>16.</td>
+													<td>Las puertas son de material resistente, de superficie lisa y no absorbente. (Resolución 3009/2010: Artículo 67, Numeral 7. Resolución 240/2013: Artículo 130, Numeral 7. Resolución 242/2013: Artículo 55, Numeral 7).</td>
+													<td>
+														<label class="control-label">Respuesta</label>
+														<select class="form-control" name="pregunta">
+															<option></option>
+															<option value="S">Si</option>
+															<option value="N">No</option>
+														</select>
+													</td>
+												</tr>
+												<tr>
+													<td>17.</td>
+													<td>El establecimiento cuenta con la suficiente iluminación (natural o artificial), sobretodo en las áreas donde se manipule la carne o los productos cárnicos comestibles. (Resolución 3009/2010: Artículo 67, Numerales 3, 9, 13. Resolución 240/2013: Artículo 130, Numerales 3, 9, 13. Resolución 242/2013: Artículo 55, Numerales 3, 9, 13).</td>
+													<td>
+														<label class="control-label">Respuesta</label>
+														<select class="form-control" name="pregunta">
+															<option></option>
+															<option value="S">Si</option>
+															<option value="N">No</option>
+														</select>
+													</td>
+												</tr>
+												<tr>
+													<td>18.</td>
+													<td>Las lámparas se encuentran en buen estado de mantenimiento, son de fácil limpieza y poseen la protección necesaria para evitar la caída de partículas extrañas. (Resolución 240/2013: Artículo 130, Numeral 14. Resolución 242/2013: Artículo 55, Numeral 14).</td>
+													<td>
+														<label class="control-label">Respuesta</label>
+														<select class="form-control" name="pregunta">
+															<option></option>
+															<option value="S">Si</option>
+															<option value="N">No</option>
+														</select>
+													</td>
+												</tr>
+												<tr>
+													<td>19.</td>
+													<td>Cuenta con los servicios sanitarios (baños) en material higiénico sanitario, en cantidad suficiente con respecto a la cantidad de personal que labora en él, son funcionales y se encuentran separados de las áreas donde se manipula la carne y los productos cárnicos comestibles. (Resolución 3009/2010: Artículo 67, Numeral 15, 16. Resolución 240/2013: Artículo 130, Numeral 15, 16. Resolución 242/2013: Artículo 55, Numeral 15, 16)</td>
+													<td>
+														<label class="control-label">Respuesta</label>
+														<select class="form-control" name="pregunta">
+															<option></option>
+															<option value="S">Si</option>
+															<option value="N">No</option>
+														</select>
+													</td>
+												</tr>												
+											</tbody>
+										</table>
+									</div>													
+								</div>
+								
+								<div class="col-md-6">
+									<br>
+									<div class="form-group" style="border-style:ridge; padding:3px">
+										<table class="table" style="font-size:12px">
+											<tbody>
+												<tr>
+													<td>20.</td>
+													<td>Los servicios sanitarios cuentan con los implementos requeridos para la higiene personal como: papel higiénico, dispensador con jabón desinfectante, implementos desechables o equipos automáticos para el secado de manos y papeleras de accionamiento no manual. (Resolución 3009/2010: Artículo 67, Numeral 15. Resolución 240/2013: Artículo 130, Numeral 15. Resolución 242/2013: Artículo 55, Numeral 15)</td>
+													<td>
+														<label class="control-label">Respuesta</label>
+														<select class="form-control" name="pregunta">
+															<option></option>
+															<option value="S">Si</option>
+															<option value="N">No</option>
+														</select>
+													</td>
+												</tr>
+												<tr>
+													<td>21.</td>
+													<td>Los servicios sanitarios cuentan con sistema de ventilación o extracción de olores y no se encuentra dirigido a las áreas donde se manipula carne y/o productos cárnicos comestibles. (Resolución 3009/2010: Artículo 67, Numeral 18. Resolución 240/2013: Artículo 130, Numeral 18. Resolución 242/2013: Artículo 55, Numeral 18).</td>
+													<td>
+														<label class="control-label">Respuesta</label>
+														<select class="form-control" name="pregunta">
+															<option></option>
+															<option value="S">Si</option>
+															<option value="N">No</option>
+														</select>
+													</td>
+												</tr>
+												<tr>
+													<td>22.</td>
+													<td>Cuenta con casilleros o sistemas para el almacenamiento de la dotación y su diseño permite la circulación de aire. (Resolución 3009/2010: Artículo 67, Numeral 17. Resolución 240/2013: Artículo 130, Numeral 17. Resolución 242/2013: Artículo 55, Numeral 17).</td>
+													<td>
+														<label class="control-label">Respuesta</label>
+														<select class="form-control" name="pregunta">
+															<option></option>
+															<option value="S">Si</option>
+															<option value="N">No</option>
+														</select>
+													</td>
+												</tr>
+												<tr>
+													<td>23.</td>
+													<td>Cuenta con instalaciones para operaciones de limpieza, desinfección y secado de las manos de los manipuladores en las áreas de corte o cercanas a estas de accionamiento no manual. (Resolución 3009/2010: Artículo 67, Numeral 19.1. Resolución 240/2013: Artículo 130, Numeral 19.1. Resolución 242/2013: Artículo 55, Numeral 19.1).</td>
+													<td>
+														<label class="control-label">Respuesta</label>
+														<select class="form-control" name="pregunta">
+															<option></option>
+															<option value="S">Si</option>
+															<option value="N">No</option>
+														</select>
+													</td>
+												</tr>
+												<tr>
+													<td>24.</td>
+													<td>Cuenta con sistemas para la limpieza y desinfección de cuchillos, sierras y chairas en las áreas de corte o cercanas a estas (Resolución 3009/2010: Artículo 67, Numeral 19.2. Resolución 240/2013: Artículo 130, Numeral 19.2. Resolución 242/2013: Artículo 55, Numeral 19.2)</td>
+													<td>
+														<label class="control-label">Respuesta</label>
+														<select class="form-control" name="pregunta">
+															<option></option>
+															<option value="S">Si</option>
+															<option value="N">No</option>
+														</select>
+													</td>
+												</tr>
+												<tr>
+													<td>25.</td>
+													<td>El establecimiento cuenta con los equipos y utensilios necesarios para el desarrollo de las actividades; los cuales están diseñados, construidos, instalados, son de fácil limpieza y desinfección y su mantenimeinto evita la contaminación de la carne o los productos cárnicos comestibles.(Decreto 1500/2007: Artículo 26, Numeral 1.1.1. Resolución 3009/2010: Artículo 67, Numerales 22, 23 y 24. Resolución 240/2013: Artículo 130, Numerales 22, 23 Y 24. Resolución 242/2013: Artículo 22: Numerales 2.1 y 3.2; Artículo 55, Numerales 22, 23, 24 y 33).</td>
+													<td>
+														<label class="control-label">Respuesta</label>
+														<select class="form-control" name="pregunta">
+															<option></option>
+															<option value="S">Si</option>
+															<option value="N">No</option>
+														</select>
+													</td>
+												</tr>
+												<tr>
+													<td>26.</td>
+													<td>El personal manipulador no presenta signos y/o síntomas de enfermedad (heridas infectadas, irritaciones cutáneas o diarrea, entre otras) o en caso de presentarse, el establecimiento implementa las medidas preventivas y correctivas necesarias para evitar la contaminación de la carne y productos cárnicos comestibles. (Decreto 1500/2007: Artículo 26, Numeral 1.1.13. Resolución 3009/2010: Artículo 15, Numeral 1, 3.16; Artículo 67, Numeral 21.2. Resolución 240/2013: Artículo 14, Numeral 1; Artículo 15; Artículo 17: Numeral 16; Artículo 130: Numeral 21.2. Resolución 242/2013: Artículo 13: Numeral 1; Artículo 14; Artículo 16: Numeral 16; Artículo 55: Numeral 21.2)</td>
+													<td>
+														<label class="control-label">Respuesta</label>
+														<select class="form-control" name="pregunta">
+															<option></option>
+															<option value="S">Si</option>
+															<option value="N">No</option>
+														</select>
+													</td>
+												</tr>
+												<tr>
+													<td>27.</td>
+													<td>Todos los manipuladores de alimentos cumplen con las prácticas higiénicas (no comer, no fumar, no toser, no usan accesorios, presentan uñas cortas, protectores de cabello, barba o bigote, entre otras). (Resolución 3009/2010: Artículo 15: Numeral 3.1, 3.7, 3.8, 3.11, 3.12, 3.15, 3.17; Artículo 67: Numeral 21.2. Resolución 240/2013: Artículo 14, Numeral 3; Artículo 17: Numeral 1, 7, 8, 11, 12, 15, 17. Resolución 242/2013: Artículo 13, Numeral 3; Artículo 16, Numeral 1, 7, 8, 11, 12, 15, 17)</td>
+													<td>
+														<label class="control-label">Respuesta</label>
+														<select class="form-control" name="pregunta">
+															<option></option>
+															<option value="S">Si</option>
+															<option value="N">No</option>
+														</select>
+													</td>
+												</tr>
+												<tr>
+													<td>28.</td>
+													<td>Los manipuladores de alimentos se lavan y desinfectan las manos cada vez que sea necesario. En caso de usar guantes son sometidos al mismo cuidado higiénico de las manos. (Resolución 3009/2010: Artículo 15: Numeral 3.6, 3.14; Artículo 67: Numeral 21.2. Resolución 240/2013: Artículo 17, Numerales 6, 14. Resolución 242/2013: Artículo 13, Numeral 6, 14)</td>
+													<td>
+														<label class="control-label">Respuesta</label>
+														<select class="form-control" name="pregunta">
+															<option></option>
+															<option value="S">Si</option>
+															<option value="N">No</option>
+														</select>
+													</td>
+												</tr>
+												<tr>
+													<td>29.</td>
+													<td>Cuenta con avisos alusivos al cumplimiento de las buenas prácticas higiénicas. (Resolución 3009/2010: Artículo 15: Numeral 3.19; Artículo 67: Numeral 21.2. Resolución 240/2013: Artículo 17, Numeral 19. Resolución 242/2013: Artículo 13, Numeral 19).</td>
+													<td>
+														<label class="control-label">Respuesta</label>
+														<select class="form-control" name="pregunta">
+															<option></option>
+															<option value="S">Si</option>
+															<option value="N">No</option>
+														</select>
+													</td>
+												</tr>
+												<tr>
+													<td>30.</td>
+													<td>La dotación de trabajo se mantiene limpia y es de color claro, sin botones o accesorios. En caso de uso de delantales, estos permanecen atados al cuerpo. (Resolución 3009/2010: Artículo 15, Numeral 3.2, 3.3; Artículo 67, Numeral 21.2. Resolución 240/2013: Artículo 17, Numeral 2, 3; Artículo 130: Numeral 21.2. Resolución 242/2013: Artículo 16, Numeral 2, 3; Artículo 55: Numeral 21.2)</td>
+													<td>
+														<label class="control-label">Respuesta</label>
+														<select class="form-control" name="pregunta">
+															<option></option>
+															<option value="S">Si</option>
+															<option value="N">No</option>
+														</select>
+													</td>
+												</tr>
+												<tr>
+													<td>31.</td>
+													<td>El personal usa tapabocas y cubre tanto la boca como la nariz. (Resolución 3009/2010: Artículo 15: Numeral 3.10; Artículo 67: Numeral 21.2. Resolución 240/2013: Artículo 17, Numeral 10; Artículo 130: Numeral 21.2. Resolución 242/2013: Artículo 16, Numeral 10; Artículo 55: Numeral 21.2)</td>
+													<td>
+														<label class="control-label">Respuesta</label>
+														<select class="form-control" name="pregunta">
+															<option></option>
+															<option value="S">Si</option>
+															<option value="N">No</option>
+														</select>
+													</td>
+												</tr>
+												<tr>
+													<td>32.</td>
+													<td>El personal usa calzado cerrado, de tacón bajo e impermeable. (Resolución 3009/2010: Artículo 15: Numeral 3.13; Artículo 67: Numeral 21.2. Resolución 240/2013: Artículo 17, Numeral 13; Artículo 130: Numeral 21.2. Resolución 242/2013: Artículo 16, Numeral 13; Artículo 55: Numeral 21.2)</td>
+													<td>
+														<label class="control-label">Respuesta</label>
+														<select class="form-control" name="pregunta">
+															<option></option>
+															<option value="S">Si</option>
+															<option value="N">No</option>
+														</select>
+													</td>
+												</tr>
+												<tr>
+													<td>33.</td>
+													<td>El establecimiento suministra la dotación de trabajo a los manipuladores y cuenta con dotación para los visitantes. (Resolución 3009/2010: Artículo 15: Numeral 3.18, 3.20; Artículo 67: Numeral 21.2. Resolución 240/2013: Artículo 17, Numeral 18, 20; Artículo 130: Numeral 21.2. Resolución 242/2013: Artículo 16, Numeral 18, 20; Artículo 55: Numeral 21.2)</td>
+													<td>
+														<label class="control-label">Respuesta</label>
+														<select class="form-control" name="pregunta">
+															<option></option>
+															<option value="S">Si</option>
+															<option value="N">No</option>
+														</select>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>	
+
+							<div role="tabpanel" aria-labelledby="observacion-tab" class="tab-pane fade" id="observaciones">
+								
+								<br><div class="alert alert-danger alert-dismissible fade in col-md-12" role="alert" name="alertaInscrito" style="display: none">
+									<strong>Cuidado!</strong> Debe elegir un inscrito antes de continuar.
+								</div><br>
+
+								<div class="form-group">
+									<br><label class="control-label col-md-12">VI. OBSERVACIONES</label><br><br>
+
+									<label class="col-md-3 control-label" style="text-align:right">Por parte de la autoridad sanitaria:</label>		
+									<div class="col-md-9">
+										<textarea class="form-control" name="obAutoridad245"></textarea>
+									</div>
+									<br><br><br>
+									<label class="col-md-3 control-label" style="text-align:right">Por parte del establecimiento:</label>
+									<div class="col-md-9">
+										<textarea class="form-control" name="obPersona245"></textarea>
+									</div>
+								</div><!-- Fin del form-group -->
+								<br><br><hr>
+
+								<div class="form-group">
+									<label class="control-label col-md-12">VII. NOTIFICACIÓN DEL ACTA: POR PARTE DE LOS FUNCIONARIOS QUE REALIZAN LA VISITA</label>																
+									<div class="col-md-2">
+										<label class="col-md-12 control-label">__</label>
+										<label class="col-md-12 control-label">Funcionario 1:</label>
+									</div>
+									<div class="col-md-5">
+										<label class="col-md-12 control-label">___</label>
+										<input type="text" class="form-control" name="funcionario245-1">
+									</div>
+									<div class="col-md-2">								
+										<label class="col-md-12 control-label">Identificación:</label>
+										<input type="text" class="form-control" name="idFuncionario245-1">
+									</div>
+									<div class="col-md-3">								
+										<label class="col-md-12 control-label">Cargo:</label>
+										<input type="text" class="form-control" name="cargoFuncionario245-1">
+									</div>
+									<div class="col-md-2">
+										<label class="col-md-12 control-label">Funcionario 2:</label>
+									</div>
+									<div class="col-md-5">
+										<input type="text" class="form-control" name="funcionario245-2">
+									</div>
+									<div class="col-md-2">								
+										<input type="text" class="form-control" name="idFuncionario245-2">
+									</div>
+									<div class="col-md-3">								
+										<input type="text" class="form-control" name="cargoFuncionario245-2">
+									</div>							
+								</div><!-- Fin del form-group -->
+
+								<br><br><br><br><br><br><hr>
+
+								<div class="form-group">
+									<label class="control-label col-md-12">VII. NOTIFICACIÓN DEL ACTA: POR PARTE DEL ESTABLECIMIENTO</label>																
+									<div class="col-md-2">
+										<label class="col-md-12 control-label">__</label>
+										<label class="col-md-12 control-label">Persona 1:</label>
+									</div>
+									<div class="col-md-5">
+										<label class="col-md-12 control-label">___</label>
+										<input type="text" class="form-control" name="persona245-1">
+									</div>
+									<div class="col-md-2">								
+										<label class="col-md-12 control-label">Identificación:</label>
+										<input type="text" class="form-control" name="idPersona245-1">
+									</div>
+									<div class="col-md-3">								
+										<label class="col-md-12 control-label">Cargo:</label>
+										<input type="text" class="form-control" name="cargoPersona245-1">
+									</div>
+									<div class="col-md-2">
+										<label class="col-md-12 control-label">Persona 2:</label>
+									</div>
+									<div class="col-md-5">
+										<input type="text" class="form-control" name="persona245-2">
+									</div>
+									<div class="col-md-2">								
+										<input type="text" class="form-control" name="idPersona245-2">
+									</div>
+									<div class="col-md-3">								
+										<input type="text" class="form-control" name="cargoPersona245-2">
+									</div>							
+								</div><!-- Fin del form-group -->
+
+								<br><br><br><br><br><br><hr>
+
+								<input type="hidden" name="id245" value="0">
+								<br><br>
+								<div class="form-group">
+			                        <div class="col-md-4 col-md-offset-2">
+			                            <button type="submit" data-toggle="modal" data-target="#resp" onclick="guardarEvaluacion('245')" class="btn btn-primary">
+			                                Guardar
+			                            </button>			                            
+			                        </div>
+			                        <div class="col-md-3">
+			                        	<button class="btn btn-primary" data-toggle="modal" data-target="#resp"  onclick="cargarServidor('245')">
+			                                Subir información a servidor
+										</button>
+										<!-- Modal -->
+										<div class="modal fade" id="resp" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+											<div class="modal-dialog" role="document">
+												<div class="modal-content">
+													<div class="modal-header">
+														<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+														<h4 class="modal-title" id="myModalLabel">Respuesta: </h4>
+													</div>
+													<div class="modal-body">
+														<label id="cuerpoRespuesta"></label>
+													</div>
+												</div>
+											</div>
+										</div>
+			                        </div>
+			                        <div class="col-md-3">
+			                            <a type="submit" onclick="cerrarSesionServidor()" class="btn btn-primary">
+			                                Cerrar Sesión con Servidor
+			                            </a>
+			                        </div>			                       
+			                    </div>
+
+			                    <br><br><br><hr>
+
+			                    <div class="form-group">
+			                    	<div class="panel panel-default">
+			                    		<div class="panel-heading">EVALUADOS EN BD</div>
+			                    		<div class="panel-body">	                    			
+			                    			<table class="table table-bordered" id="tablaEvaluados">
+												<thead>
+													<tr>
+														<th></th>
+														<th>Establecimiento</th>
+														<th>Acta Número</th>
+														<th>Fecha Evaluación</th>
+														<th>Observaciones Autoridad Sanitaria</th>
+														<th></th>
+													</tr>									
+												</thead>
+												<tbody id="evaluados"></tbody>
+											</table>													
+			                    		</div>
+			                    	</div>
+									
+								</div><!-- Fin del form-group -->
+
+							</div><!-- Fin del tab-pane -->
+
+						</div><!-- Fin del tab-content -->						
+
+					</div><!-- Fin del Panel-body -->
+				</div><!-- Fin del panel default -->
+			</div><!-- Fin del Row -->
+		</div><!-- Fin del container -->
+		<script>setInicio('245');</script>
+	</body>
+
+</html>

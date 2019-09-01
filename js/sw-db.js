@@ -22,6 +22,7 @@ var db442 = new PouchDB('evaluaciones442');
 var db333 = new PouchDB('evaluaciones333');
 var db243 = new PouchDB('evaluaciones243');
 var db26 = new PouchDB('evaluaciones26');
+var db245 = new PouchDB('evaluaciones245');
 var db443 = new PouchDB('evaluaciones443');
 var db441 = new PouchDB('evaluaciones441');
 var db472 = new PouchDB('evaluaciones472');
@@ -103,7 +104,10 @@ function dbActasForm(formulario){
 			break;
 		case '26':
 			db = db26;
-			break
+			break;
+		case '245':
+			db = db245;
+			break;
 		case '443':
 			db = db443;
 			break;
@@ -196,7 +200,10 @@ function setInicio(formulario){
 			break;
 		case '26':
 			form = 'F-48'
-			break
+			break;
+		case '245':
+			form = 'F-13'
+			break;
 		case '443':
 			form = 'F-59';
 			break;
@@ -920,15 +927,33 @@ function setCodigoConcepto(concepto){
 
 function escogerCensado(registro, formulario){
 	document.getElementsByName('razonSocial' + formulario)[0].value = registro.rso;
-	document.getElementsByName('propietario' + formulario)[0].value = registro.nombre_p;
-	document.getElementsByName('idPropietario' + formulario)[0].value = registro.doc_p;
+	document.getElementsByName('propietario' + formulario)[0].value = formulario !== '245' ? 
+		registro.nombre_p : '';
+	document.getElementsByName('idPropietario' + formulario)[0].value = formulario !== '245' ? 
+		registro.doc_p : '';
+	document.getElementsByName('repLegal' + formulario)[0].value = formulario == '245' ? 
+		registro.nombre_rl : '';
+	document.getElementsByName('idRepLegal' + formulario)[0].value = formulario == '245' ? 
+		registro.doc_rl : '';
 	document.getElementsByName('direccion' + formulario)[0].value = registro.direcc;
 	document.getElementsByName('tel' + formulario)[0].value = registro.tels;
 	document.getElementsByName('correoProp' + formulario)[0].value = registro.correo;
-	document.getElementsByName('fechaUltVisita' + formulario)[0].value = registro.f_uv;
-	document.getElementsByName('textoConcepto' + formulario)[0].value = registro.cuv;
-	document.getElementsByName('funcUltVisita' + formulario)[0].value = registro.nombre_f1;
-	document.getElementsByName('concepto' + formulario)[0].value = registro.cuv ? setCodigoConcepto(registro.cuv) : '';
+	formulario !== '245' ? 
+		document.getElementsByName('fechaUltVisita' + formulario)[0].value = registro.f_uv : '';
+	formulario !== '245' ? 
+		document.getElementsByName('textoConcepto' + formulario)[0].value = registro.cuv : '';
+	formulario !== '245' ? 
+		document.getElementsByName('funcUltVisita' + formulario)[0].value = registro.nombre_f1 : '';
+	if (formulario !== '245'){
+		document.getElementsByName('concepto' + formulario)[0].value = registro.cuv ? 
+			setCodigoConcepto(registro.cuv) : '';
+	}else{
+		let formu = localStorage.getItem('form');
+		calcularNumActa(formulario, formu).then( acta => {
+			console.log("Valor de acta recibido ", acta);
+			document.getElementsByName('acta' + formulario)[0].value = acta;
+		});
+	}
 	console.log('Registro', registro);
 }
 
@@ -1029,8 +1054,12 @@ function crearTablaCenso(doc, idBody, idTabla, formulario, formularioActual){
 			tr.appendChild(createColumns(registro.doc._id));
 			tr.appendChild(createColumns(registro.doc.rso));
 			tr.appendChild(createColumns(extra));
-			tr.appendChild(createColumns(registro.doc.nombre_p));
-			tr.appendChild(createColumns(registro.doc.doc_p));
+			formulario !== 'censosv' ? 
+				tr.appendChild(createColumns(registro.doc.nombre_p)) : 
+				tr.appendChild(createColumns(registro.doc.nombre_rl));
+			formulario !== 'censosv' ? 
+				tr.appendChild(createColumns(registro.doc.doc_p)) : 
+				tr.appendChild(createColumns(registro.doc.doc_rl));
 			tr.appendChild(createRadio(registro.doc, formularioActual, 'censo'));
 			tbody.appendChild(tr);
 		});

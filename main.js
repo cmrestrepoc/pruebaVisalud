@@ -372,19 +372,20 @@ function setInicioMenu(){
 	document.getElementsByName("nombreFormularios")[2].innerHTML = "F-54";
 	document.getElementsByName("nombreFormularios")[3].innerHTML = "F-55";
 	document.getElementsByName("nombreFormularios")[4].innerHTML = "F-53";
-	document.getElementsByName("nombreFormularios")[5].innerHTML = "F-48";
-	document.getElementsByName("nombreFormularios")[6].innerHTML = "F-58";
-	document.getElementsByName("nombreFormularios")[7].innerHTML = "F-50";
-	document.getElementsByName("nombreFormularios")[8].innerHTML = "F-61";
-	document.getElementsByName("nombreFormularios")[9].innerHTML = "F-62";
-	document.getElementsByName("nombreFormularios")[10].innerHTML = "F-63";
-	document.getElementsByName("nombreFormularios")[11].innerHTML = "F-64";
-	document.getElementsByName("nombreFormularios")[12].innerHTML = "F-45";
-	document.getElementsByName("nombreFormularios")[13].innerHTML = "F-65";
-	document.getElementsByName("nombreFormularios")[14].innerHTML = "F-11";
-	document.getElementsByName("nombreFormularios")[15].innerHTML = "F-67";
-	document.getElementsByName("nombreFormularios")[16].innerHTML = "F-71";
-	document.getElementsByName("nombreFormularios")[17].innerHTML = "F-72";
+	document.getElementsByName("nombreFormularios")[5].innerHTML = "F-13";
+	document.getElementsByName("nombreFormularios")[6].innerHTML = "F-48";
+	document.getElementsByName("nombreFormularios")[7].innerHTML = "F-58";
+	document.getElementsByName("nombreFormularios")[8].innerHTML = "F-50";
+	document.getElementsByName("nombreFormularios")[9].innerHTML = "F-61";
+	document.getElementsByName("nombreFormularios")[10].innerHTML = "F-62";
+	document.getElementsByName("nombreFormularios")[11].innerHTML = "F-63";
+	document.getElementsByName("nombreFormularios")[12].innerHTML = "F-64";
+	document.getElementsByName("nombreFormularios")[13].innerHTML = "F-45";
+	document.getElementsByName("nombreFormularios")[14].innerHTML = "F-65";
+	document.getElementsByName("nombreFormularios")[15].innerHTML = "F-11";
+	document.getElementsByName("nombreFormularios")[16].innerHTML = "F-67";
+	document.getElementsByName("nombreFormularios")[17].innerHTML = "F-71";
+	document.getElementsByName("nombreFormularios")[18].innerHTML = "F-72";
 }
 
 function setInicioIndex(){
