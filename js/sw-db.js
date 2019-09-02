@@ -644,7 +644,9 @@ function agregarValidacionTextInputs(formulario){
 	}
 
 	let nombresTextAreas = "textarea[name='obAutoridad" + formulario + "'], textarea[name='obPersona" + formulario + "'], "
-					 + stringHallazgos + "textarea[name='medida" + formulario + "'] ";
+					 + stringHallazgos + "textarea[name='medida" + formulario + "'], " 
+					 + "textarea[name='requerimientos" + formulario + "'], "
+					 + "textarea[name='observaciones']";
 	let textAreas = document.querySelectorAll(nombresTextAreas);
 	textAreas.forEach(elemento => {
 		elemento.addEventListener('input', validarLongitudInput.bind(this, elemento, 254, 

@@ -68,7 +68,8 @@
         $("#firmaIns1").jqScribble();
         $("#firmaIns2").jqScribble();
 
-        if(localStorage.getItem('form') == '333'|| localStorage.getItem('form') == '243' || localStorage.getItem('form') == '26') {
+        if(localStorage.getItem('form') == '333'|| localStorage.getItem('form') == '243' || 
+            localStorage.getItem('form') == '26' || localStorage.getItem('form') == '245') {
             let elemento = document.getElementsByName('firma');
             elemento[0].innerHTML = "POR PARTE DE LA EMPRESA";
             document.getElementsByClassName('panel')[1].style.display = localStorage.getItem('form') == '26' ? 'none': 'block';
