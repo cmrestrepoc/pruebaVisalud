@@ -2197,6 +2197,29 @@ function guardarEvaluacion(formulario){
 				evaluado = Object.assign( evaluadoEsta, reducido, adicional );
 				localStorage.setItem('form', '26');
 				break;
+			case '245':
+				evaluadoEsta = guardarEvaluadosEstablecimientos(formulario);
+				reducido = guardarEvaluadoReducido(formulario);
+				let iterable = document.getElementsByName('pregunta');
+				let iteObservaciones = document.getElementsByName('observaciones');
+				let arregloPreguntas = [];
+				let arregloObservaciones = [];
+				iterable.forEach( item => arregloPreguntas.push(item.value) );
+				iteObservaciones.forEach( item => arregloObservaciones.push(item.value) );
+				adicional = {
+					FAX: document.getElementsByName('fax' + formulario)[0].value,
+					DIR_NOT: document.getElementsByName('dirNotif' + formulario)[0].value,
+					DPTO_NOTI: document.getElementsByName('deptoNotif' + formulario)[0].value,
+					MPIO_NOTI: document.getElementsByName('mpioNotif' + formulario)[0].value,
+					REQUES: document.getElementsByName('requerimientos' + formulario)[0].value,
+					CONCEPTO: '',
+					NCONCEPTO: '', 			// INCLUIR AQUÍ LO QUE SE RECOGE DE LA CALIFICACIÓN TOTAL DEL FORMULARIO 
+					PREGUNTAS: arregloPreguntas,
+					OBSERVACIONES: arregloObservaciones
+				};
+				evaluado = Object.assign( evaluadoEsta, reducido, adicional );
+				localStorage.setItem('form', '245');
+				break;
 			case '441':
 				evaluadoVehi = guardarEvaluadosVehiculos(formulario);
 				adicional = {
