@@ -956,6 +956,12 @@ function escogerCensado(registro, formulario){
 			document.getElementsByName('acta' + formulario)[0].value = acta;
 		});
 	}
+	let alerta = document.getElementsByName('alertaInscrito');
+	let arreglo = Array.from(alerta); //en este caso alerta es un iterable pero no un arreglo, hay que convertirlo primero
+	arreglo.forEach( item => {
+		item.style.display = "none";
+		return item;
+	});
 	console.log('Registro', registro);
 }
 
@@ -1768,7 +1774,9 @@ function guardarEvaluadosEstablecimientos(formulario){
 function guardarEvaluadoReducido(formulario){
 	let evaluado = {
 		FECHA: document.getElementsByName('fecha' + formulario)[0].value,
-		N_INSCRIP: formulario != '26' ? document.getElementsByName('inscripcion' + formulario)[0].value : "",
+		ACTA: document.getElementsByName('acta' + formulario)[0].value,
+		N_INSCRIP: formulario != '26' && formulario != '245' ? 
+			document.getElementsByName('inscripcion' + formulario)[0].value : "",
 		DIRECC: document.getElementsByName('direccion' + formulario)[0].value,
 		TELS: document.getElementsByName('tel' + formulario)[0].value + ' ' + document.getElementsByName('cel' + formulario)[0].value,
 		CORREO: document.getElementsByName('correoProp' + formulario)[0].value,
@@ -1788,7 +1796,8 @@ function guardarEvaluadoReducido(formulario){
 		CARGO_E1: formulario != '26' ? document.getElementsByName('cargoPersona' + formulario + '-1')[0].value : "",
 		NOMBRE_E2: formulario != '26' ? document.getElementsByName('persona' + formulario + '-2')[0].value : "",
 		ID_E2: formulario != '26' ? document.getElementsByName('idPersona' + formulario + '-2')[0].value : "",
-		CARGO_E2: formulario != '26' ? document.getElementsByName('cargoPersona' + formulario + '-2')[0].value : "",
+		CARGO_E2: formulario != '26' && formulario != '245' ? 
+			document.getElementsByName('cargoPersona' + formulario + '-2')[0].value : "",
 		FIRMA_F1: '',
 		FIRMA_F2: '',
 		FIRMA_E1: '',
@@ -1800,7 +1809,7 @@ function guardarEvaluadoReducido(formulario){
 }
 
 function persistirEvaluado(db, evaluado, formulario){
-	var insertar = { _id: evaluado.ACTA.substring(11, 15) };
+	var insertar = { _id: evaluado.ACTA.substring(10, 14) };
 	evaluado = Object.assign( insertar, evaluado );
 	console.log(evaluado);
 	db.put(evaluado, function callback(err, result){
@@ -1815,7 +1824,8 @@ function persistirEvaluado(db, evaluado, formulario){
 
 function guardarEvaluacion(formulario){
 	console.log('Estamos en el formulario', formulario)
-	let evaluado = formulario != '333' && formulario != '442' && formulario != '26' && formulario != '243' ? 
+	let evaluado = formulario != '333' && formulario != '442' && formulario != '26' && formulario != '243' &&
+					formulario != '245' ? 
 					guardarComunesEvaluados(formulario) : null;
 	let preguntasComunes;
 	let evaluadoEsta;
@@ -2200,11 +2210,11 @@ function guardarEvaluacion(formulario){
 			case '245':
 				evaluadoEsta = guardarEvaluadosEstablecimientos(formulario);
 				reducido = guardarEvaluadoReducido(formulario);
-				let iterable = document.getElementsByName('pregunta');
+				let preguntas = document.getElementsByName('pregunta');
 				let iteObservaciones = document.getElementsByName('observaciones');
-				let arregloPreguntas = [];
+				let arrPreguntas = [];
 				let arregloObservaciones = [];
-				iterable.forEach( item => arregloPreguntas.push(item.value) );
+				preguntas.forEach( item => arrPreguntas.push(item.value) );
 				iteObservaciones.forEach( item => arregloObservaciones.push(item.value) );
 				adicional = {
 					FAX: document.getElementsByName('fax' + formulario)[0].value,
@@ -2212,9 +2222,9 @@ function guardarEvaluacion(formulario){
 					DPTO_NOTI: document.getElementsByName('deptoNotif' + formulario)[0].value,
 					MPIO_NOTI: document.getElementsByName('mpioNotif' + formulario)[0].value,
 					REQUES: document.getElementsByName('requerimientos' + formulario)[0].value,
-					CONCEPTO: '',
-					NCONCEPTO: '', 			// INCLUIR AQUÍ LO QUE SE RECOGE DE LA CALIFICACIÓN TOTAL DEL FORMULARIO 
-					PREGUNTAS: arregloPreguntas,
+					CONCEPTO: document.getElementsByName('concepto' + formulario)[0].value,
+					NCONCEPTO: document.getElementsByName('textoConcepto' + formulario)[0].value,
+					PREGUNTAS: arrPreguntas,
 					OBSERVACIONES: arregloObservaciones
 				};
 				evaluado = Object.assign( evaluadoEsta, reducido, adicional );
@@ -2304,9 +2314,12 @@ function setColumnas(tr, registro, contador, evaluado){
 	tr.appendChild(createColumns(registro.FECHA));
 	evaluado == 'D' ? tr.appendChild(createColumns(registro.OBS_AS)) : 
 		evaluado == 'C' ? 
-			tr.appendChild(createColumns(registro.SUJETO)) : 
-			tr.appendChild(createColumns(registro.P_CUMPL));
-	evaluado == 'D' || evaluado == 'C' ? null : tr.appendChild(createColumns(registro.CONCEPTO));
+			tr.appendChild(createColumns(registro.SUJETO)) :
+			evaluado == 'F' ?
+				tr.appendChild(createColumns(registro.NCONCEPTO)) :
+				tr.appendChild(createColumns(registro.P_CUMPL));
+	evaluado == 'D' || evaluado == 'C' || evaluado == 'F' ? null : 
+		tr.appendChild(createColumns(registro.CONCEPTO));
 	tr.appendChild(createRadioEvaluado(registro));
 	return tr;		
 }
@@ -2376,6 +2389,10 @@ function mostrarEvaluados(formulario){
 		case '26':
 			traerEvaluados(db26, 'C');
 			break;
+		case '245':
+			traerEvaluados(db245, 'F');
+			validarCambioTab(2);
+			break;
 		case '441':
 			traerEvaluados(db441, 'V');
 			validarCambioTab(2);
@@ -2396,7 +2413,7 @@ function validarCambioTab(i){
 	let verificador = check.indexOf(true);
 	if (verificador == -1) {
 		if(i == 10){
-			console.log("Se retrna false");
+			console.log("Se retorna false");
 			return false;
 		}else{
 			document.getElementsByName('alertaInscrito')[i].style.display = "block";

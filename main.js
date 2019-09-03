@@ -37,6 +37,9 @@ function setConcepto(objeto, destino) {
 		case '3':
 			document.getElementsByName(destino)[0].value = 'DESFAVORABLE';
 			break;
+		case 'N':
+			document.getElementsByName(destino)[0].value = 'SIN CONCEPTO';
+			break;
 		default:
 			document.getElementsByName(destino)[0].value = '';
 	}
