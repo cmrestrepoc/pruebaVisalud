@@ -677,19 +677,23 @@ function verificarAccionForm(formulario){
 
 function verificarAccion(){
 	if (localStorage.getItem('Accion')) {
+		console.log('Acción en localStorage', localStorage.getItem('Accion'));
 		switch(localStorage.getItem('Accion')){
 			case 'cargarInscritos493':
-			cargarInscritos('493');
-			break;
+				cargarInscritos('493');
+				break;
 			case 'cargarInscritos444':
-			cargarInscritos('444');
-			break;
+				cargarInscritos('444');
+				break;
 			case 'cargarInscritos569':
-			cargarInscritos('569');
-			break;
+				cargarInscritos('569');
+				break;
 			case 'cargarTodosLosInscritos':
-			cargarTodosLosInscritos();
-			break;
+				cargarTodosLosInscritos();
+				break;
+			case 'cargarCensos':
+				cargarCensos();
+				break;
 			default:
 			break;
 		}
