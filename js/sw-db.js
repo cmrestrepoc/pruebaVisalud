@@ -1267,7 +1267,7 @@ function cargarTodosLosInscritos(){
 	}).catch( err => console.log('Error: ', err) );	
 }
 
-function guardarCensos(formulario, dbBase, respObj, bandera){
+function guardarCensos(formulario, dbBase, respObj, bandera, banderaAlerta){
 	dbBase.destroy().then( response => {
 		console.log('Base de datos anterior eliminada');
 		dbBase = new PouchDB(formulario);
@@ -1279,7 +1279,7 @@ function guardarCensos(formulario, dbBase, respObj, bandera){
 			//console.log('Registro: ',registro);
 			let indice  = calcularIndice(registro.id);
 			let id = { _id: indice };
-			
+			let alerta = document.getElementsByName('mensajesServicios')[banderaAlerta];
 			// Los inscritos que vienen desde el servidor vienen sin numero de acta
 			//registro.ACTA = " ";
 			// Con la siguiente línea se añade la variable _id al objeto			
@@ -1289,12 +1289,18 @@ function guardarCensos(formulario, dbBase, respObj, bandera){
 				if (!err) {
 					if (count != long - 1) {
 						count++;
-						console.log('inscrito guardado en base de datos: ', count);	
+						alerta.style.display = 'block';
+						alerta.innerHTML = 'Censados guardados en base de datos: ' + count;
+						console.log('Censados guardados en base de datos: ', count);	
 					}else{
-						alert("Registros de " + bandera + " cargados correctamente");
+						alerta.style.display = 'block';
+						alerta.innerHTML = "Registros de " + bandera + " cargados correctamente";
+						console.log("Registros de " + bandera + " cargados correctamente");
 						localStorage.removeItem('Accion');
 					}
 				}else {
+					alerta.style.display = 'block';
+					alerta.innerHTML = 'problemas guardando inscrito en base de datos' + err;
 					console.log('problemas guardando inscrito en base de datos', err);
 				}
 			});
@@ -1303,25 +1309,28 @@ function guardarCensos(formulario, dbBase, respObj, bandera){
 }
 
 function cargarCensos() {
+	let banderaAlerta;
 	if(localStorage.getItem('Accion')){
 		localStorage.getItem('Accion') == 'cargarCensos' ?
 				localStorage.removeItem('Accion') :
 				localStorage.setItem('Accion', 'cargarCensos');
+		banderaAlerta = 1;
 	}else{
 		localStorage.setItem('Accion', 'cargarCensos');
+		banderaAlerta = 0;
 	}
 	let promesas = [];
 	promesas[0] = fetchInscritos('censo')
-					.then(resp => guardarCensos('censo', censo, resp, 'Censo Alimentos'))
+					.then(resp => guardarCensos('censo', censo, resp, 'Censo Alimentos', banderaAlerta))
 					.catch(err => console.log('problemas con el fetch a censo', err));
 	promesas[1] = fetchInscritos('censoc')
-					.then(resp => guardarCensos('censoc', censoc, resp, 'Censo Carnes'))
+					.then(resp => guardarCensos('censoc', censoc, resp, 'Censo Carnes', banderaAlerta))
 					.catch(err => console.log('problemas con el fetch a censo', err));
 	promesas[2] = fetchInscritos('censov')
-					.then(resp => guardarCensos('censov', censov, resp, 'Censo Vehículos'))
+					.then(resp => guardarCensos('censov', censov, resp, 'Censo Vehículos', banderaAlerta))
 					.catch(err => console.log('problemas con el fetch a censo', err));
 	promesas[3] = fetchInscritos('censosv')
-					.then(resp => guardarCensos('censosv', censosv, resp, 'Censo Sujetos Varios'))
+					.then(resp => guardarCensos('censosv', censosv, resp, 'Censo Sujetos Varios', banderaAlerta))
 					.catch(err => console.log('problemas con el fetch a censo', err));
 	Promise
 		.all(promesas)
