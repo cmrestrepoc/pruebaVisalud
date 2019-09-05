@@ -1,34 +1,34 @@
 function obtenerCodigo(usuario){
 	let indice;
 	switch(usuario){
-		case 'CLMARTINEZ':
-			indice = '01';
-			break;
-		case 'BBEDOYA':
+		case 'MARIOR':
 			indice = '02';
 			break;
-		case 'JREYES':
+		case 'CRESTREPO':
 			indice = '03';
 			break;
-		case 'EPEREA':
+		case 'AESPINOZA':
 			indice = '04';
 			break;
-		case 'EPALMA':
+		case 'ETORRES':
 			indice = '05';
 			break;
-		case 'DLLANOS':
+		case 'JEVANEGAS':
 			indice = '06';
 			break;
-		case 'OBETANCOUR':
+		case 'DPAMO':
 			indice = '07';
 			break;
-		case 'JCARDENAS':
+		case 'JFRANCO':
 			indice = '08';
 			break;
-		case 'MARIOR':
-			indice = '10';
+		case 'RCALLE':
+			indice = '09';
 			break;
-		case 'CRESTREPO':
+		case 'CVASQUEZ':
+			indice = '10'
+			break;
+		case 'MPEREZ':
 			indice = '11'
 			break;
 		default:
