@@ -291,12 +291,13 @@
 						<br><br>
 						<div class="form-group">
 			                <div class="col-md-4 col-md-offset-2">
-			                    <button type="submit" onclick="guardarEvaluacion('26')" class="btn btn-primary">
+                                <button type="submit" onclick="guardarEvaluacion('26')" class="btn btn-primary" 
+                                        data-toggle="modal" data-target="#resp">
 			                        Guardar
 			                    </button>			                            
 			                </div>
 			                <div class="col-md-3">
-			                    <button class="btn btn-primary" data-toggle="modal" data-target="#resp"  onclick="cargarServidor('26')">
+			                    <button class="btn btn-primary" data-toggle="modal" data-target="#resp" onclick="cargarServidor('26')">
 			                        Subir información a servidor
 								</button>
 								<!-- Modal -->
@@ -354,7 +355,11 @@
             let formu = localStorage.getItem('form');
             setInicio('26');
             calcularNumActa('26', formu).then( numActa => {
-                document.getElementsByName('acta26')[0].value = numActa;
+                console.log("Valor de acta recibido ", numActa);
+                let event = new Event('input');
+                let objetoActa = document.getElementsByName('acta26')[0];
+                objetoActa.value = numActa;
+                objetoActa.dispatchEvent(event);
             }).catch( err => alert('Problemas calculando el número de acta: ', err) );
         </script>
     </body>

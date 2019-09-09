@@ -75,10 +75,10 @@
             document.getElementsByClassName('panel')[1].style.display = localStorage.getItem('form') == '26' ? 'none': 'block';
             localStorage.getItem('form') == '333' ? elemento[1].innerHTML = "POR PARTE DEL LABORATORIO" : elemento[1].innerHTML = "TESTIGO DE LA ENCUESTA";
         } 
+        localStorage.removeItem('form');
     });
 
     function regresar(){
-        localStorage.removeItem('form');
         save();
         history.back();
     }

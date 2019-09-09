@@ -519,7 +519,11 @@ function cargarInicioInscripciones(formulario){
 	let formu = localStorage.getItem('form');
 	console.log("Valor de form!!!", formu);
 	calcularActaInscripcion(formu, dbNuevos).then( acta => {
-		document.getElementsByName('acta' + formulario)[0].value = acta;
+		console.log("Valor de acta recibido ", acta);
+		let event = new Event('input');
+		let objetoActa = document.getElementsByName('acta' + formulario)[0];
+		objetoActa.value = acta;
+		objetoActa.dispatchEvent(event);
 	});
 	if(localStorage.getItem('inscrito') && localStorage.getItem('firmaAutoridad') && localStorage.getItem('firmaInscribe') )
 	{
@@ -607,6 +611,15 @@ function agregarValidacionTextInputs(formulario){
 	objetosInscripcion.forEach( elemento => {
 		elemento.addEventListener('input', validarLongitudInput.bind(this, elemento, longitud,
 			"No puede escribir más de " + longitud + " caracteres en este campo"));
+	});
+
+	/* Validación campo Acta */
+	longitud = 14;
+	let inputActa = "input[name='acta" + formulario  + "']";
+	let objetosActa = document.querySelectorAll(inputActa);
+	objetosActa.forEach( elemento => {
+		elemento.addEventListener('input', validarLongitudInput.bind(this, elemento, longitud, 
+								"No puede escribir más de " + longitud + " caracteres en este campo"));
 	});
 
 	/* correo, horarios, objeto */
@@ -757,7 +770,10 @@ function escogerInscrito(registro, formulario){
 		console.log("lo que se recoge de localstorage", formu);
 		calcularNumActa(formulario, formu).then( acta => {
 			console.log("Valor de acta recibido ", acta);
-			document.getElementsByName('acta' + formulario)[0].value = acta;
+			let event = new Event('input');
+			let objetoActa = document.getElementsByName('acta' + formulario)[0];
+			objetoActa.value = acta;
+			objetoActa.dispatchEvent(event);
 		});
 	}else{
 		document.getElementsByName('fax' + formulario)[0].value = registro.FAX;
@@ -842,7 +858,10 @@ function escogerInscrito(registro, formulario){
 			let formu = localStorage.getItem('form');
 			calcularNumActa(formulario, formu).then( acta => {
 				console.log("Valor de acta recibido ", acta);
-				document.getElementsByName('acta' + formulario)[0].value = acta;
+				let event = new Event('input');
+				let objetoActa = document.getElementsByName('acta' + formulario)[0];
+				objetoActa.value = acta;
+				objetoActa.dispatchEvent(event);
 			});
 			
 			let alerta = document.getElementsByName('alertaInscrito');
@@ -1557,84 +1576,95 @@ function firmaEvaluacion(){
 	window.location.assign('firmaEvaluacion.html');
 }
 
-function guardarInscrito493(){
-	var idExistente = document.getElementsByName('id493')[0].value;
-
-	var inscrito = guardarComunesInscritos('493');
-	var inscritoEsta = guardarComunesEstablecimientos('493');
-	
-	var actividad = [];
-	for (var i = 0; i < document.getElementsByName('actividad493').length; i++) {
-		document.getElementsByName('actividad493')[i].checked ? actividad.push(document.getElementsByName('actividad493')[i].value) : console.log(i); 
-		//console.log(actividad[i].checked ? actividad[i].value : 'No aplica');
+function validarOjetoActa(formulario){
+	let objetoActa = document.getElementsByName('acta' + formulario)[0];
+	let cuerpo = document.getElementById('cuerpoRespuesta');
+	console.log('objetoActa en plena validación', objetoActa.value);
+	if (!objetoActa.value){
+		console.log('Entramos al if');
+		cuerpo.innerHTML = 'Lo sentimos mucho. Es absolutamente obligatorio diligenciar el número de acta. '
+							+ 'Por favor devuélvase y verifique que el número de acta esté incluido ' 
+							+ 'antes de guardar el acta.';
+		return false;
+	}else{
+		cuerpo.innerHTML = 'Guardando... ';
+		return true;
 	}
+}
 
-	console.log(document.getElementsByName('territorio493'));
-
-	var adicional = {		
-		ZONA: document.getElementsByName('zona493')[0].value,
-		ACTIVIDAD: actividad,
-		CARGO_F1: document.getElementsByName('cargoRecibe493')[0].value,
-		CARGO_E1: document.getElementsByName('cargoInscribe493')[0].value,
-		ACTIVO: '',					//campos no funcionales que es mejor remover
-		GRABADO: ''					//campos no funcionales que es mejor remover
-	};
-
-	inscrito = Object.assign( inscrito, inscritoEsta, adicional );
-	localStorage.setItem('inscrito', JSON.stringify(inscrito));
-	
-	idExistente == 0 ? firmaInscripcion() : persistirInscrito(db493, dbNuevos493, inscrito, idExistente);
+function guardarInscrito493(){
+	if(validarOjetoActa('493')){
+		var idExistente = document.getElementsByName('id493')[0].value;
+		var inscrito = guardarComunesInscritos('493');
+		var inscritoEsta = guardarComunesEstablecimientos('493');
+		var actividad = [];
+		for (var i = 0; i < document.getElementsByName('actividad493').length; i++) {
+			document.getElementsByName('actividad493')[i].checked ? actividad.push(document.getElementsByName('actividad493')[i].value) : console.log(i); 
+			//console.log(actividad[i].checked ? actividad[i].value : 'No aplica');
+		}
+		console.log(document.getElementsByName('territorio493'));
+		var adicional = {		
+			ZONA: document.getElementsByName('zona493')[0].value,
+			ACTIVIDAD: actividad,
+			CARGO_F1: document.getElementsByName('cargoRecibe493')[0].value,
+			CARGO_E1: document.getElementsByName('cargoInscribe493')[0].value,
+			ACTIVO: '',					//campos no funcionales que es mejor remover
+			GRABADO: ''					//campos no funcionales que es mejor remover
+		};
+		inscrito = Object.assign( inscrito, inscritoEsta, adicional );
+		localStorage.setItem('inscrito', JSON.stringify(inscrito));
+		idExistente == 0 ? firmaInscripcion() : persistirInscrito(db493, dbNuevos493, inscrito, idExistente);
+	}
 }
 
 function guardarInscrito444(){
-	var idExistente = document.getElementsByName('id444')[0].value;
-
-	var inscrito = guardarComunesInscritos('444');
-
-	var adicional = {
-		MARCAV: document.getElementsByName('marca444')[0].value,
-		MODELOV: document.getElementsByName('modelo444')[0].value,
-		PLACA: document.getElementsByName('placa444')[0].value,
-		FURGON: document.getElementsByName('furgon444')[0].value,
-		REMOLQUE: document.getElementsByName('rmque444')[0].value,
-		PLACAREM: document.getElementsByName('placaRemolque444')[0].value,
-		SEMIREM: document.getElementsByName('srmque444')[0].value,
-		PLACASEMI: document.getElementsByName('placaSrmque444')[0].value,
-		ISOTERMO: document.getElementsByName('isotermo444')[0].value,
-		U_UFRIO: document.getElementsByName('ufrio444')[0].value,
-		PRODUCTO: document.getElementsByName('producto444')[0].value
-	};
-	
-	inscrito = Object.assign( inscrito, adicional );
-	localStorage.setItem('inscrito', JSON.stringify(inscrito));
-	
-	idExistente == 0 ? firmaInscripcion() : persistirInscrito(db444, dbNuevos444, inscrito, idExistente);
+	if(validarOjetoActa('444')){
+		var idExistente = document.getElementsByName('id444')[0].value;
+		var inscrito = guardarComunesInscritos('444');
+		var adicional = {
+			MARCAV: document.getElementsByName('marca444')[0].value,
+			MODELOV: document.getElementsByName('modelo444')[0].value,
+			PLACA: document.getElementsByName('placa444')[0].value,
+			FURGON: document.getElementsByName('furgon444')[0].value,
+			REMOLQUE: document.getElementsByName('rmque444')[0].value,
+			PLACAREM: document.getElementsByName('placaRemolque444')[0].value,
+			SEMIREM: document.getElementsByName('srmque444')[0].value,
+			PLACASEMI: document.getElementsByName('placaSrmque444')[0].value,
+			ISOTERMO: document.getElementsByName('isotermo444')[0].value,
+			U_UFRIO: document.getElementsByName('ufrio444')[0].value,
+			PRODUCTO: document.getElementsByName('producto444')[0].value
+		};
+		
+		inscrito = Object.assign( inscrito, adicional );
+		localStorage.setItem('inscrito', JSON.stringify(inscrito));
+		
+		idExistente == 0 ? firmaInscripcion() : persistirInscrito(db444, dbNuevos444, inscrito, idExistente);
+	}
 }
 
 function guardarInscrito569(){
-	var idExistente = document.getElementsByName('id569')[0].value;
-
-	var inscrito = guardarComunesInscritos('569');
-	var inscritoEsta = guardarComunesEstablecimientos('569');
-	
-	console.log(document.getElementsByName('territorio569'));
-
-	var adicional = {
-		NOMBRE_RL: document.getElementsByName('repLegal569')[0].value,
-		TID_RL: document.getElementsByName('tipoIdRl569')[0].value,
-		DOC_RL: document.getElementsByName('idRepLegal569')[0].value,
-		DEPENDEN: document.getElementsByName('dependencia569')[0].value,
-		EXPENDIO: document.getElementsByName('expendio569')[0].value,
-		ALMACENA: document.getElementsByName('almacena569')[0].value,
-		DEPOSITO: document.getElementsByName('deposito569')[0].value,
-		DESPRESA: document.getElementsByName('despresa569')[0].value,
-		OTROTIPO: document.getElementsByName('cual569')[0].value
-	};
-	
-	inscrito = Object.assign( inscrito, inscritoEsta, adicional );
-	localStorage.setItem('inscrito', JSON.stringify(inscrito));
-	
-	idExistente == 0 ? firmaInscripcion() : persistirInscrito(db569, dbNuevos569, inscrito, idExistente);
+	if(validarOjetoActa('569')){
+		var idExistente = document.getElementsByName('id569')[0].value;
+		var inscrito = guardarComunesInscritos('569');
+		var inscritoEsta = guardarComunesEstablecimientos('569');
+		console.log(document.getElementsByName('territorio569'));
+		var adicional = {
+			NOMBRE_RL: document.getElementsByName('repLegal569')[0].value,
+			TID_RL: document.getElementsByName('tipoIdRl569')[0].value,
+			DOC_RL: document.getElementsByName('idRepLegal569')[0].value,
+			DEPENDEN: document.getElementsByName('dependencia569')[0].value,
+			EXPENDIO: document.getElementsByName('expendio569')[0].value,
+			ALMACENA: document.getElementsByName('almacena569')[0].value,
+			DEPOSITO: document.getElementsByName('deposito569')[0].value,
+			DESPRESA: document.getElementsByName('despresa569')[0].value,
+			OTROTIPO: document.getElementsByName('cual569')[0].value
+		};
+		
+		inscrito = Object.assign( inscrito, inscritoEsta, adicional );
+		localStorage.setItem('inscrito', JSON.stringify(inscrito));
+		
+		idExistente == 0 ? firmaInscripcion() : persistirInscrito(db569, dbNuevos569, inscrito, idExistente);
+	}
 }
 
 function guardarComunesEvaluados(formulario){
@@ -1845,7 +1875,12 @@ function guardarEvaluacion(formulario){
 	let evaluadoVehi;
 	let reducido;
 	
-	if (!validarCambioTab(10) && formulario != '26'){
+	let objetoActa = document.getElementsByName('acta' + formulario)[0];
+	let cuerpo = document.getElementById('cuerpoRespuesta');
+	if (!objetoActa.value){
+		cuerpo.innerHTML = 'Lo sentimos mucho. Es absolutamente obligatorio diligenciar el número de acta. '
+							+ 'Por favor devuélvase y verifique que el número de acta esté incluido antes de guardar el acta.';
+	}else if (!validarCambioTab(10) && formulario != '26'){
 		let cuerpo = document.getElementById('cuerpoRespuesta');
 		cuerpo.innerHTML = 'Lo sentimos mucho. Usted no escogió un inscrito antes de diligenciar la evaluación. '
 							+ 'Debe regresar a la pesataña de INSCRITOS y escoger uno o, en caso de que no esté inscrito '
@@ -1853,6 +1888,7 @@ function guardarEvaluacion(formulario){
 							+ 'Sentimos las molestias ocasionadas si ha perdido su trabajo, pero este paso es fundamental '
 							+ 'para salvaguardar la integridad de los datos.';
 	}else{
+		cuerpo.innerHTML = 'Guardando... ';
 		switch(formulario){
 			case '440':
 				var tipocarne;
