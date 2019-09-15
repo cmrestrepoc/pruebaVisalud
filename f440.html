@@ -166,7 +166,7 @@
 									</div>
 									<div class="col-md-2">
 										<label class="col-md-6 control-label">Nit/CC:</label>
-										<input type="text" class="form-control" name="nit440">
+										<input type="number" class="form-control" name="nit440">
 									</div>
 									<div class="col-md-4">
 										<label class="col-md-12 control-label">Nombre Comercial:</label>
@@ -182,7 +182,7 @@
 								<div class="form-group">
 									<div class="col-md-3">
 										<label class="col-md-12 control-label">Matrícula Mercantil:</label>
-										<input type="text" class="form-control" name="matriculaMercantil440">
+										<input type="number" class="form-control" name="matriculaMercantil440">
 									</div>
 									<div class="col-md-4">
 										<label class="col-md-12 control-label">Dirección:</label>
@@ -242,15 +242,15 @@
 									</div>													
 									<div class="col-md-3">
 										<label class="col-md-12 control-label">Celular:</label>
-										<input type="text" class="form-control" name="cel440">	
+										<input type="number" class="form-control" name="cel440">	
 									</div>
 									<div class="col-md-2">
 										<label class="col-md-12 control-label">Fax:</label>
-										<input type="text" class="form-control" name="fax440">		
+										<input type="number" class="form-control" name="fax440">		
 									</div>
 									<div class="col-md-2">
 										<label class="col-md-12 control-label">Teléfono:</label>
-										<input type="text" class="form-control" name="tel440">		
+										<input type="number" class="form-control" name="tel440">		
 									</div>							
 								</div><!-- Fin del form-group -->
 
@@ -273,7 +273,7 @@
 												</select>
 											</div>
 											<div class="col-md-7" style="padding:0">
-												<input type="text" class="form-control" name="idPropietario440" placeholder="# identificación">
+												<input type="number" class="form-control" name="idPropietario440" placeholder="# identificación">
 											</div>							
 										</div>
 									</div>
@@ -293,7 +293,7 @@
 												</select>
 											</div>
 											<div class="col-md-7" style="padding:0">
-												<input type="text" class="form-control" name="idRepLegal440" placeholder="# identificación">
+												<input type="number" class="form-control" name="idRepLegal440" placeholder="# identificación">
 											</div>											
 										</div>										
 									</div>
@@ -804,19 +804,34 @@
 												
 										<div class="panel-body">
 											<div class="form-group">
-												<div class="col-md-3">
-													<button class="btn btn-primary" style="font-size:13px" onClick="consolidarPuntaje('conceptoEval440','cumplimiento440')">Cumplimiento</button>
+												<div class="col-md-4" style="padding:0">
+													<label class="control-label col-md-12">Consolidado:</label>
+													<div class="col-md-6">
+														<button class="btn btn-primary" style="font-size:13px" onclick="setConceptoEval()">
+															Puntaje
+														</button>
+													</div>													
+													<div class="col-md-6">
+														<input class="form-control" type="text" name="cumplimiento440"></input>
+													</div>
 												</div>
-												<div class="col-md-3">
-													<input class="form-control" type="number" name="cumplimiento440"></input>
-												</div>
+												<script>
+													function setConceptoEval(){
+														consolidarPuntaje('conceptoEval440','cumplimiento440'); 
+														setConcepto(document.getElementsByName('conceptoEval440')[0], 'textoConceptoEval440');
+													}
+												</script>
 
-												<div class="col-md-3" style="text-align:right">
-													<label class="control-label">Concepto:</label>
+												<div class="col-md-8" style="padding:0">
+													<label class="control-label col-md-12">Concepto:</label>
+													<div class="col-md-3" style="padding-left:0">
+														<input class="form-control" type="number" name="conceptoEval440" 
+															oninput="setConcepto(this, 'textoConceptoEval440')">
+													</div>
+													<div class="col-md-9" style="padding:0">
+														<input class="form-control" type="text" name="textoConceptoEval440">
+													</div>										
 												</div>
-												<div class="col-md-3" style="padding-left:0">
-													<input class="form-control" type="number" name="conceptoEval440"></input>
-												</div>										
 											</div>
 										</div>
 									</div>

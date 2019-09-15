@@ -70,7 +70,7 @@
 							<li role="presentation" class="active"><a href="#censoSV" aria-controls="censoSV" role="tab" data-toggle="tab">Censo</a></li>
 							<li role="presentation"><a href="#datos" aria-controls="datos" role="tab" data-toggle="tab" onclick="validarCambioTab(0)">Datos del Establecimiento</a></li>
 							<li role="presentation"><a href="#evaluacionPrt1" aria-controls="evaluacionPrt1" role="tab" data-toggle="tab" onclick="validarCambioTab(1)">Evaluación</a></li>
-							<li role="presentation"><a href="#observaNoti" aria-controls="observaNoti" role="tab" data-toggle="tab" onclick="mostrarEvaluados('245')">Observaciones - Notificaciones</a></li>
+							<li role="presentation"><a href="#observaNoti" aria-controls="observaNoti" role="tab" data-toggle="tab" onclick="mostrarEvaluados('245'); setSemaforo()">Observaciones - Notificaciones</a></li>
 						</ul>
 
 						<!-- Tab panes -->
@@ -106,6 +106,144 @@
 								<br><div class="alert alert-danger alert-dismissible fade in col-md-12" role="alert" name="alertaInscrito" style="display: none">
 									<strong>Cuidado!</strong> Debe elegir un censado antes de continuar.
 								</div><br>
+
+								<div class="form-group">
+									<div class="col-md-12">
+										<label class="col-md-12 control-label">Codigo Actividad</label>
+										<div class="col-md-2">
+											<select class="form-control" name="tipoActividad245"
+												onchange="setActividad(this.value, 'actividad245')">
+												<option></option>
+												<option value="1.1A">1.1A: Visita de inspección y vigilancia sanitaria al sistema de abasto público de Agua para el consumo humano URBANO. Incluye concertación. actualización y materialización de puntos de muestreo.</option>
+												<option value="1.2A">1.2A: Visita de inspección y vigilancia sanitaria al sistema de abastecimiento de Agua para el consumo humano RURAL. Incluye concertación. actualización y materialización de puntos de muestreo.</option>
+												<option value="1.3A">1.3A: Visitas y elaboración de mapa de riesgo de la calidad de agua para consumo humano para adopción por la secretaria de salud municipal (incluye la ficha y los anexos)"</option>
+												<option value="1.4A">1.4A: Visita para la toma de muestra de agua para elaboración de mapa de riesgo de la calidad del agua</option>
+												<option value="1.5A">1.5A: Elaboración del acto administrativo de adopción del mapa de riesgo de la calidad del agua para la secretaria de salud municipal.</option>
+												<option value="1.5A-2">1.5A-2: Programacion de muestreos para sistemas urbanos y rurales.</option>
+												<option value="1.6A">1.6A: Muestreos de agua en sistemas de abastecimiento urbano</option>
+												<option value="1.7A">1.7A: Muestreos de agua en sistemas de abastecimiento rurales</option>
+												<option value="1.8A">1.8A: Elaborar el informe técnico para la administracion municipal. COVE. Empresas de Servicios Publicos. de la calidad del agua con los resultados de laboratorio obtenidos en los muestreos de los sistemas de abastecimiento de agua (Urbano-Rural)</option>
+												<option value="1.9A">1.9A: Notificar a las administraciones municipales. COVE y Empresas prestadoras de servicios publicos. el informe con los resultados de laboratorio obtenidos en los muestreos de los sistemas de abastecimiento de agua de acueductos urbanos y rurales. acorde con</option>
+												<option value="1.10A">1.10A: Educacion Sanitaria</option>
+												<option value="1.11A">1.11A: Recepción. Atención y Elaboración de Informes de las Peticiones. Quejas. Reclamos y Solicitudes relacionadas con el programa.</option>
+												<option value="1.12A">1.12A: Acompañamiento técnico en mejoramiento calidad del agua para consumo humano en sistemas de abastecimiento en acueductos rurales</option>
+												<option value="1.13A">1.13A: Cargue de información al Sistema de Vigilancia para la Calidad del Agua para consumo - SIVICAP (Actas de inspección en acueductos. concertación. actualización y materialización de puntos de muestreo. resultados de Analisis de Laboratorio y mapas de riesg</option>
+												<option value="1.15A">1.15A: Visita de inspección sanitaria a vehiculo para transporte y suministro de agua para consumo humano- Carrotanque</option>
+												<option value="1.16A">1.16A: Capacitaciones internas</option>
+												<option value="1.17A">1.17A: CUADROS DE SALIDA DEL PROCESO DE AGUA PARA CONSUMO HUMANO</option>
+												<option value="1.18A">1.18A: INFORME TRIMESTRAL A LA ALCALDIA</option>
+												<option value="5.1SA">5.1SA: Visita de inspección sanitaria a la empresa de aseo municipal y elaboración de informe a la Administración Municipal. CVC y Superintendencia de Servicios</option>
+												<option value="5.3SA">5.3SA: Visita integral de inspección sanitaria a empresas sociales del estado-ESE (incluye la visita de residuos de Atención en salud. tanques de abasto de agua. alimentos. higienico locativo- ETV y radiaciones ionizantes)</option>
+												<option value="5.4SA">5.4SA: Visita integral de inspección sanitaria a IPS que presten servicio de urgencia y hospitalización (incluye la visita de residuos de Atención en salud. tanques de abasto de agua. alimentos. higienico locativo- ETV y radiaciones ionizantes)</option>
+												<option value="5.5SA">5.5SA: Visita integral de inspección sanitaria a generadores de residuos en Atención en salud y otras actividades tales como funerarias y salas de velación (incluye inspección a carro funebre) SIN SERVICIO DE TANATOPRAXIA</option>
+												<option value="5.6SA">5.6SA: Visita integral de inspeccion sanitaria a morgues y cementerios (incluye inscripción e inspección de ETV)</option>
+												<option value="5.7SA">5.7SA: Visita integral de vigilancia y control para constatar condiciones sanitarias y técnicas de establecimientos de Estática Ornamental y emitir Acta conceptualizada.</option>
+												<option value="5.7SA">5.7SA: Visita integral de vigilancia y control para constatar condiciones sanitarias y técnicas de Establecimientos de Estática Ornamental y emitir Acta conceptualizada. CON ENFOQUE DE RIESGO DE DISPOSICIÓN INADECUADA DE LOS RESIDUOS PELIGROSOS</option>
+												<option value="5.9SA">5.9SA: Visita integral de inspección sanitaria a establecimientos con estanque de piscinas para uso recreacional y elaboración de informe a la Administración Municipal</option>
+												<option value="5.13SA">5.13SA: Visita Integral a parques destinado a usos diversos</option>
+												<option value="5.15SA">5.15SA: Educacion Sanitaria</option>
+												<option value="5.16SA">5.16SA: Recepción. Atención y Elaboración de Informes de las Peticiones. Quejas. Reclamos y Solicitudes relacionadas con el programa</option>
+												<option value="5.17SA">5.17SA: CUADROS DE SALIDA DEL PROGRAMA DE SALUD AMBIENTAL</option>
+												<option value="5.18SA">5.18SA: INFORME TRIMESTRAL A LA ALCALDIA</option>
+												<option value="7.1P">7.1P: Visitas de inspección. vigilancia y control sanitario para verificar el cumplimiento de las condiciones de funcionamiento en depósitos y expendios de plaguicidas.  CON ENFOQUE DE RIESGO POR INADECUADA DISPOSICION DE RESIDUOS GENERADOS EN SERVICIOS DE SAL</option>
+												<option value="7.2P">7.2P: Visitas de inspección. vigilancia y control Sanitario para verificar el cumplimiento de las condiciones de funcionamiento en empresas aplicadoras terrestres y áreas de plaguicidas. el cual incluye la inscripción y Revisión de vehículos</option>
+												<option value="7.3P">7.3P: Efectuar monitoreo biológico: exámenes de colinesterasa. Elaboración y notificación de los resultados de la prueba.</option>
+												<option value="7.4P">7.4P: Efectuar el registro. consolidación y analisis de resultados de vigilancia epidemiológica en formatos VEO-2 (EXCEL).</option>
+												<option value="7.5P">7.5P: Visitas de IVC a establecimientos que almacenan. manejan y expenden sustancias potencialmente toxicas diferentes a plaguicidas.</option>
+												<option value="7.6P">7.6P: Realizar recolección e investigación de los reportes de intoxicación por exposición a plaguicidas y otras sustancias quimicas (accidentales y ocupacionales)</option>
+												<option value="7.7P">7.7P: Revisión de las intoxicaciones por sustancias químicas y plaguicidas notificadas en el SIVIGILA con la remisión de la información a la alcaldia.</option>
+												<option value="7.8P">7.8P: Revisión y carnetización de operarios aplicadores de plaguicidas.</option>
+												<option value="7.9P">7.9P: Revisión e inscripción de asistentes técnicos de empresas aplicadoras de plaguicidas.</option>
+												<option value="7.10P">7.10P: Realización de pruebas de control de calidad analítica de colinesterasa y envío de reporte al INS.</option>
+												<option value="7.11P">7.11P: Preparación y asistencia al Consejo Seccional de Plaguicidas</option>
+												<option value="7.12P">7.12P: Educacion Sanitaria en manejo adecuado de plaguicidas y riesgos en su aplicación.</option>
+												<option value="7.13P">7.13P: Recepción. Atención y Elaboración de Informes de las Peticiones. Quejas. Reclamos y Solicitudes relacionadas con el respectivo Programa</option>
+												<option value="7.14P">7.14P: CUADROS DE SALIDA DEL PROGRAMA DE PLAGUICIDAS</option>
+												<option value="7.15P">7.15P: INFORME TRIMESTRAL A LA ALCALDIA</option>
+												<option value="2.4AL">2.4AL: Visitas de vigilancia y control para constatar condiciones sanitarias y técnicas a Panaderías y Reposteria.</option>
+												<option value="2.5AL">2.5AL: Visita integral de inspección. vigilancia y control para constatar condiciones sanitarias y técnicas a plazas de mercado</option>
+												<option value="2.6AL">2.6AL: Visita integral de inspección. vigilancia y control para constatar condiciones sanitarias y técnicas a supermercados y grandes superficies.</option>
+												<option value="2.6AL">2.6AL: Visita integral de inspección. vigilancia y control para constatar condiciones sanitarias y técnicas a supermercados y grandes superficies (Incluye la Revisión de los medicamentos de venta Libre) - CON ENFOQUE DE RIESGO POR ALIMENTOS ALTERADOS Y FRAUDULE</option>
+												<option value="2.7AL">2.7AL: Visitas de vigilancia y control para constatar condiciones sanitarias y técnicas a restaurantes. cafeterías y heladerías.</option>
+												<option value="2.8AL">2.8AL: Efectuar visita integral (alimentos incluido el PAE. ETV y saneamiento edificaciones) de inspección. vigilancia y control a establecimientos educativos entre los que se encuentran: Universidades. Colegios. escuelas. jardines. guarderias que incluye ICBF.</option>
+												<option value="2.9AL">2.9AL: Visitas de vigilancia y control para constatar condiciones sanitarias y técnicas a restaurantes escolares Beneficiados con el PAE.</option>
+												<option value="2.10AL">2.10AL: Visita integral de vigilancia y control para constatar condiciones sanitarias y técnicas a tiendas. graneros. depósitos de alimentos. (Incluye la Revisión de los medicamentos de venta Libre)</option>
+												<option value="2.11AL">2.11AL: Visita integral de vigilancia y control para constatar condiciones sanitarias y técnicas a expendios ambulantes y estacionarios (casetas. kioskos) INCLUIR EN ESTA VISITA EL LUGAR DE PREPARACION Y ALMACENAMIENTO DE MATERIAS PRIMAS ( NO INCLUIR LOS EXPENDI</option>
+												<option value="2.12AL">2.12AL: Toma de muestras de alimentos solicitadas por el Laboratorio Departamental de Salud Publica</option>
+												<option value="2.13AL">2.13AL: Autorizacion de Planes de capacitación de manipuladores de alimentos (solo sede principal)</option>
+												<option value="2.14AL">2.14AL: Visitas de Vigilancia a establecimientos Capacitadores en Manipulación de carne y productos carnicos (Decreto 1500/2007)</option>
+												<option value="2.15AL">2.15AL: Investigaciones epidemiológicas por brotes de E.T.A.notificadas por la Secretaria Dptal de Salud .DLS</option>
+												<option value="2.16AL">2.16AL: Toma de muestras de bebidas alcohólicas para LDS</option>
+												<option value="2.17AL">2.17AL: Visita integral de vigilancia y control para constatar condiciones sanitarias y técnicas a estanquillos. estancos. depositos de bebidas alcoholicas. bares. cantinas. griles. tabernas y emitir acta conceptualizada (Incluye la Revisión de los medicamentos</option>
+												<option value="2.18AL">2.18AL: Educacion Sanitaria (Basado en el Plan de Educación elaborado por el profesional responsable del proceso)</option>
+												<option value="2.19AL">2.19AL: Recepción. Atención y Elaboración de Informes de las Peticiones. Quejas. Reclamos y Solicitudes relacionadas con el respectivo Proceso Misional</option>
+												<option value="2.20AL">2.20AL: Elaborar el informe de conceptualización de los resultados de laboratorio obtenidos en los muestreos en el LDSP y UES Valle</option>
+												<option value="2.21AL">2.21AL: Notificación de los resultados y manejo de contramuestra donde aplique</option>
+												<option value="2.22AL">2.22AL: Atención de fiestas. eventos o similares en los municipios con la presentacion del informe</option>
+												<option value="2.23AL">2.23AL: Asistencia a COVES y mesas departamentales del COTSA y grupos funcionales (Solo sede principal)</option>
+												<option value="2.24AL">2.24AL: Revisión de los eventos afines al procesos notificados en el SIVIGILA y boletin epidemiologico de la SDS y del INS</option>
+												<option value="2.25AL">2.25AL: Realizar la visita para la inscripción de establecimientos del sector gastronomico y expendios de alimentos.</option>
+												<option value="11.1Z">11.1Z: Realizar  inmunización de caninos contra la Rabia</option>
+												<option value="11.2Z">11.2Z: Realizar  inmunización de felinos contra la Rabia</option>
+												<option value="11.3Z">11.3Z: Realizar las observaciones por Agresión Animal.</option>
+												<option value="11.4Z">11.4Z: Apoyar todos los controles de foco de rabia. Encefalitis Equina Venezolana. Brucelosis. Influenza Aviar. Accidente Ofidico y  Leptospirosis</option>
+												<option value="11.5Z">11.5Z: Educacion Sanitaria (Basado en el Plan de Educación elaborado por el profesional responsable del proceso</option>
+												<option value="11.6Z">11.6Z: Visitas de vigilancia y control de fabricas de materia prima para Alimentos para consumo  animal y fabricas de concentrado animal</option>
+												<option value="11.7Z">11.7Z: Visitas de vigilancia y control a clinicas. cementerios de mascotas. consultorios.  SPA y peluquerías veterinarias</option>
+												<option value="11.8Z">11.8Z: Diagnostico y control de roedores plaga en viviendas y establecimientos publicos y evaluacion</option>
+												<option value="11.9Z">11.9Z: Recepción. Atención y Elaboración de Informes de las Peticiones. Quejas. Reclamos y Solicitudes relacionadas con el respectivo Proceso Misional</option>
+												<option value="11.10">11.10: Apoyo al programa Departamental de esterilizacion canina y felina</option>
+												<option value="11.11">11.11: Asistencia a COVES y mesas departamentales del COTSA - Consejo Seccional de Zoonosis y grupos funcionales</option>
+												<option value="11.12">11.12: Revisión y seguimiento de los eventos afines al procesos notificados en el SIVIGILA e ICA</option>
+												<option value="11.13">11.13: Realizar  el acompañamiento técnico por funcionario de las actividades del proceso en los formatos y procecedimientos establecidos</option>
+												<option value="4.6M">4.6M: Visita de vigilancia y control para constatar condiciones sanitarias y técnicas a Tiendas Naturistas. expendios de Productos Esotóricos y demás productos afines y emitir acta conceptualizada. En Mpios categorias 4a. 5a y 6a.</option>
+												<option value="1.1ETV">1.1ETV: Realizar el Control quimico con equipo de espalda ULV en viviendas y establecimientos</option>
+												<option value="1.2ETV">1.2ETV: Realiza el Control quimico con equipo pesado ULV</option>
+												<option value="1.3ETV">1.3ETV: Realizar la Investigacion por la mortalidad por una ETV reportada por la SDS</option>
+												<option value="1.4ETV">1.4ETV: Asistencia y participar COVE SALUD y reuniones intersectoriales de ETV o afines. Elaborar informe ejecutivo de la reunión</option>
+												<option value="1.5ETV">1.5ETV: Educacion Sanitaria en prevencion de criaderos de zancudos</option>
+												<option value="1.6ETV">1.6ETV: Revisión de los eventos afines al procesos notificados en el SIVIGILA y boletin epidemiologico de la SDS y del INS</option>
+												<option value="1.7ETV">1.7ETV: Recepción. Atención y Elaboración de Informes de las Peticiones. Quejas. Reclamos y Solicitudes relacionadas con el respectivo programa.</option>
+												<option value="10.1SV">10.1SV: Efectuar visitas de inspección. vigilancia y control a depósitos. talleres. estaciones de servicio. lavanderías. fabricas de colchones y similares. Elaboración y notificación del informe de visita.</option>
+												<option value="10.2SV">10.2SV: Efectuar visitas de inspección. vigilancia y control a hoteles. moteles y hospedajes. Elaboración y notificación del informe de visita.</option>
+												<option value="10.3SV">10.3SV: Efectuar visitas de inspección. vigilancia y control a teatros. coliseos. estadios. centro comercial y circos. Elaboración y notificación del informe de visita.</option>
+												<option value="10.4SV">10.4SV: Efectuar visitas de inspección. vigilancia y control a almacenes. bancos. oficinas y juegos de azar. Elaboración y notificación del informe de visita.</option>
+												<option value="10.5SV">10.5SV: Efectuar visitas de inspección. vigilancia y control a Geriatricos. Elaboración y notificación del informe de visita.</option>
+												<option value="10.6SV">10.6SV: Efectuar visitas de inspección. vigilancia y control a Edificios Públicos. cuarteles. batallones. inspecciones de policía. iglesias. Elaboración y notificación del informe de visita.</option>
+												<option value="10.7SV">10.7SV: Efectuar visita integral de IVC a carceles (Centro penitenciario y de rehabilitación) Incluye Tanques de almacenamiento de agua. ETV. alimentos. medicamentos. manejo de residuos. control de plagas e higienico locativo</option>
+												<option value="10.8SV">10.8SV: Visitas de visitas de inspección. vigilancia y control a ladrilleras. tejares. trilladoras. fundidoras. industria manufacturera entre otros. (Revision de condiciones higienico locativas y ETV)</option>
+												<option value="10.9SV">10.9SV: Recepción. Atención y Elaboración de Informes de las Peticiones. Quejas. Reclamos y Solicitudes relacionadas con el respectivo Programa</option>
+												<option value="10.10S">10.10S: CUADROS DE SALIDA DEL PROGRAMA DE PLAGUICIDAS</option>
+												<option value="10.11S">10.11S: INFORME TRIMESTRAL A LA ALCALDIA</option>
+											</select>
+										</div>
+										<div class="col-md-10">
+											<input type="text" class="form-control" name="actividad245">
+										</div>
+									</div><br><br><br><br>
+									<div class="col-md-12">
+										<label class="col-md-12 control-label">Tipo de Sujeto</label>
+										<div class="col-md-2">
+											<select class="form-control" name="tipoSujeto245"
+												onchange="setSujeto(this.value, 'sujeto245')">
+												<option></option>
+												<option value="24501">24501: ALMACENES- BANCOS- OFICINAS-JUEGOS DE AZAR</option>
+												<option value="24502">24502: CARCELES</option>
+												<option value="24503">24503: EDIFICIOS PUBLICOS - CUARTELES - IGLESIAS</option>
+												<option value="24504">24504: ESTADIOS - COLISEOS - CENTROS COMERCIALES</option>
+												<option value="24505">24505: GERIATRICOS</option>
+												<option value="24506">24506: HOTELES - MOTELES - HOSPEDAJES</option>
+												<option value="24507">24507: LADRILLERAS - TEJARES - TRILLADORAS</option>
+												<option value="24508">24508: TALLERES - DEPOSITOS -  ESTACIONES DE SERVICIO</option>
+											</select>
+										</div>
+										<div class="col-md-10">
+											<input type="text" class="form-control" name="sujeto245">
+										</div>
+									</div>
+								</div>
+
+								<br><br><br><hr>
 												
 								<div class="form-group">
 									<div class="col-md-2">
@@ -142,7 +280,7 @@
 									</div>
 									<div class="col-md-2">
 										<label class="col-md-6 control-label">Nit/CC:</label>
-										<input type="text" class="form-control" name="nit245">
+										<input type="number" class="form-control" name="nit245">
 									</div>
 									<div class="col-md-5">
 										<label class="col-md-12 control-label">Nombre Comercial:</label>
@@ -154,7 +292,7 @@
 								<div class="form-group">
 									<div class="col-md-3">
 										<label class="col-md-12 control-label">Matrícula Mercantil:</label>
-										<input type="text" class="form-control" name="matriculaMercantil245">
+										<input type="number" class="form-control" name="matriculaMercantil245">
 									</div>
 									<div class="col-md-4">
 										<label class="col-md-12 control-label">Dirección:</label>
@@ -214,15 +352,15 @@
 									</div>													
 									<div class="col-md-3">
 										<label class="col-md-12 control-label">Celular:</label>
-										<input type="text" class="form-control" name="cel245">	
+										<input type="number" class="form-control" name="cel245">	
 									</div>
 									<div class="col-md-2">
 										<label class="col-md-12 control-label">Fax:</label>
-										<input type="text" class="form-control" name="fax245">		
+										<input type="number" class="form-control" name="fax245">		
 									</div>
 									<div class="col-md-2">
 										<label class="col-md-12 control-label">Teléfono:</label>
-										<input type="text" class="form-control" name="tel245">		
+										<input type="number" class="form-control" name="tel245">		
 									</div>							
 								</div><!-- Fin del form-group -->
 
@@ -245,7 +383,7 @@
 												</select>
 											</div>
 											<div class="col-md-7" style="padding:0">
-												<input type="text" class="form-control" name="idPropietario245" placeholder="# identificación">
+												<input type="number" class="form-control" name="idPropietario245" placeholder="# identificación">
 											</div>							
 										</div>
 									</div>
@@ -265,7 +403,7 @@
 												</select>
 											</div>
 											<div class="col-md-7" style="padding:0">
-												<input type="text" class="form-control" name="idRepLegal245" placeholder="# identificación">
+												<input type="number" class="form-control" name="idRepLegal245" placeholder="# identificación">
 											</div>											
 										</div>										
 									</div>
@@ -723,7 +861,7 @@
 												Por Favor asigne una calificación total de acuerdo con lo valorado en las preguntas de la seccion anterior
 											</p>
 										</div>
-										<label class="col-md-12 control-label">Concepto última inspección:</label>
+										<label class="col-md-12 control-label">Concepto:</label>
 										<div class="col-md-3">
 											<select class="form-control" name="concepto245" onchange="setConcepto(this, 'textoConcepto245')">
 												<option></option>				
@@ -742,23 +880,23 @@
 											<table class="table">
 												<tr>
 													<td>Cumple:</td>
-													<td><button class="btn btn-success">-</button></td>
+													<td name="semaforo" style="background-color: green"></td>
 												</tr>
 												<tr>
 													<td>Cumple Parcialmente:</td>
-													<td><button class="btn btn-warning">-</button></td>
+													<td name="semaforo" style="background-color: yellow"></td>
 												</tr>
 												<tr>
 													<td>No Cumple:</td>
-													<td><button class="btn btn-danger">-</button></td>
+													<td name="semaforo" style="background-color: red"></td>
 												</tr>
 												<tr>
 													<td>No Aplica:</td>
-													<td><button class="btn btn-default">-</button></td>
+													<td name="semaforo" style="background-color: white"></td>
 												</tr>
 												<tr>
 													<td>No Observado:</td>
-													<td><button class="btn btn-default">-</button></td>
+													<td name="semaforo" style="background-color: white"></td>
 												</tr>
 											</table>
 										</div>										

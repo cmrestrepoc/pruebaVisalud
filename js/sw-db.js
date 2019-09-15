@@ -1366,7 +1366,7 @@ function fetchEvaluados(doc, formulario, url){
 	};
 	let bigDoc = Object.assign(credentials, doc);
 	let data = JSON.stringify(bigDoc);
-	//console.log(data);
+	console.log(data);
 	return new Promise((resolve, reject) => {
 		fetch(url, {
 				method: 'POST',
@@ -1417,7 +1417,7 @@ function cargarServidor(formulario){
 		localStorage.removeItem('Accion');	
 		db.allDocs({include_docs: true, descending: true}).then( doc => {
 			console.log('Cantidad de registros en indexDB para este formulario: ', doc.rows.length);
-			console.log(JSON.stringify(doc.rows));
+			// console.log(JSON.stringify(doc.rows));
 			let promesas = doc.rows.map( registro => fetchEvaluados(registro.doc, formulario, urltofetch));
 			console.log(promesas);
 			Promise
@@ -1605,7 +1605,7 @@ function guardarInscrito493(){
 		console.log(document.getElementsByName('territorio493'));
 		var adicional = {		
 			ZONA: document.getElementsByName('zona493')[0].value,
-			ACTIVIDAD: actividad,
+			ACTIVIDAD: JSON.stringify(actividad),
 			CARGO_F1: document.getElementsByName('cargoRecibe493')[0].value,
 			CARGO_E1: document.getElementsByName('cargoInscribe493')[0].value,
 			ACTIVO: '',					//campos no funcionales que es mejor remover
@@ -2259,6 +2259,7 @@ function guardarEvaluacion(formulario){
 			case '245':
 				evaluadoEsta = guardarEvaluadosEstablecimientos(formulario);
 				reducido = guardarEvaluadoReducido(formulario);
+				delete evaluado.CARGO_E2;
 				let preguntas = document.getElementsByName('pregunta');
 				let iteObservaciones = document.getElementsByName('observaciones');
 				let arrPreguntas = [];
@@ -2273,6 +2274,12 @@ function guardarEvaluacion(formulario){
 					REQUES: document.getElementsByName('requerimientos' + formulario)[0].value,
 					CONCEPTO: document.getElementsByName('concepto' + formulario)[0].value,
 					NCONCEPTO: document.getElementsByName('textoConcepto' + formulario)[0].value,
+					CODA: document.getElementsByName('tipoActividad' + formulario)[0].value,
+					NOCODA: document.getElementsByName('actividad' + formulario)[0].value,
+					SUJETO: document.getElementsByName('sujeto' + formulario)[0].value,
+					TIPO_SU: document.getElementsByName('tipoSujeto' + formulario)[0].value,
+					/* NOMBRE_T1: document.getElementsByName('testigo' + formulario)[0].value,
+					ID_T1: document.getElementsByName('idTestigo' + formulario)[0].value, */
 					PREGUNTAS: arrPreguntas,
 					OBSERVACIONES: arregloObservaciones
 				};
