@@ -37,13 +37,12 @@ function setSemaforo(){
 
 function setConcepto(objeto, destino) {
 	var concepto = objeto.value;
-	// destino === 'textoConcepto245' ? setSemaforo() : null;
 	switch(concepto){
 		case '1':
 			document.getElementsByName(destino)[0].value = 'FAVORABLE';
 			break;
 		case '2':
-			document.getElementsByName(destino)[0].value = 'FAVORABLE CON REQUERIMIENTOS';
+			document.getElementsByName(destino)[0].value = 'F. CON REQUERIMIENTOS';
 			break;
 		case '3':
 			document.getElementsByName(destino)[0].value = 'DESFAVORABLE';
