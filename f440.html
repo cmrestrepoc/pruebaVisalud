@@ -257,7 +257,7 @@
 								<br><br><br><hr>
 
 			                    <div class="form-group">
-									<div class="col-md-6">
+									<div class="col-md-6" style="padding:0">
 										<div class="col-md-6" style="padding:0">
 											<label class="col-md-12 control-label">Propietario:</label>
 											<input type="text" class="form-control" name="propietario440">
@@ -277,8 +277,8 @@
 											</div>							
 										</div>
 									</div>
-									<div class="col-md-6">
-										<div class="col-md-6" style="padding:0">
+									<div class="col-md-6" style="padding:0">
+										<div class="col-md-6" style="padding-right:0">
 											<label class="col-md-12 control-label">Rep. Legal:</label>
 											<input type="text" class="form-control" name="repLegal440">
 										</div>										
@@ -308,11 +308,11 @@
 										<input type="text" class="form-control" name="dirNotif440">
 										</div>										
 										<div class="col-md-4">
-											<label class="control-label col-md-12">Depto N.:</label>
+											<label class="control-label col-md-12">Depto Not.:</label>
 											<input type="text" class="form-control" name="deptoNotif440">
 										</div>
 										<div class="col-md-3" style="padding:0">
-											<label class="control-label col-md-12">Mpio N.:</label>
+											<label class="control-label col-md-12">Mpio Not.:</label>
 											<input type="text" class="form-control" name="mpioNotif440">
 										</div>
 									</div>
@@ -322,7 +322,7 @@
 											<input type="text" class="form-control" name="horarios440">
 										</div>
 										<div class="col-md-4" style="padding:0">
-											<label class="col-md-12 control-label">No. Trabajadores:</label>
+											<label class="col-md-12 control-label">Trabajadores:</label>
 											<div class="col-md-8">
 												<input type="number" class="form-control" name="noTrabajadores440">
 											</div>								
@@ -382,13 +382,13 @@
 								<br><br><br><hr>
 
 								<div class="form-group">
-									<label class="control-label col-md-2" style="text-align:right">ÚLTIMA INSPECCIÓN:</label>
+									<label class="control-label col-md-2" style="text-align:right; padding:0">ÚLTIMA INSPECCIÓN:</label>
 									<div class="col-md-7">
 										<div class="col-md-4" style="padding:0">
 											<label class="col-md-12 control-label">Fecha:</label>
 											<input type="date" class="form-control" name="fechaUltVisita440">
 										</div>
-										<div class="col-md-7 col-md-offset-1" style="padding:0">
+										<div class="col-md-8">
 											<label class="col-md-12 control-label">Concepto última inspección:</label>
 											<div class="col-md-3">
 												<select class="form-control" name="concepto440" onchange="setConcepto(this,'textoConcepto440')">
@@ -866,17 +866,12 @@
 										<div class="panel-body">
 											<div class="form-group">
 												<div class="form-group">
-													<div class="col-md-3">
-														<label class="control-label" style="text-align:right">Número de Muestras</label>
-													</div>
-													<div class="col-md-3">
+													<div class="col-md-4">
+														<label class="control-label col-md-12">Muestras</label>
 														<input class="form-control" type="number" name="numeroMuestras440"></input>
 													</div>
-
-													<div class="col-md-3">
-														<label class="control-label" style="text-align:right">Número de Acta</label>
-													</div>
-													<div class="col-md-3" style="padding-left:0">
+													<div class="col-md-8">
+														<label class="control-label col-md-12">Número de Acta</label>
 														<input class="form-control" type="number" name="numeroActa440"></input>
 													</div>										
 												</div>
