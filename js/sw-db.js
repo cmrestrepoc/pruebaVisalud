@@ -2259,7 +2259,6 @@ function guardarEvaluacion(formulario){
 			case '245':
 				evaluadoEsta = guardarEvaluadosEstablecimientos(formulario);
 				reducido = guardarEvaluadoReducido(formulario);
-				delete evaluado.CARGO_E2;
 				let preguntas = document.getElementsByName('pregunta');
 				let iteObservaciones = document.getElementsByName('observaciones');
 				let arrPreguntas = [];
