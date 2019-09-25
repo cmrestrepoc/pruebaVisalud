@@ -1880,7 +1880,7 @@ function guardarEvaluacion(formulario){
 	if (!objetoActa.value){
 		cuerpo.innerHTML = 'Lo sentimos mucho. Es absolutamente obligatorio diligenciar el número de acta. '
 							+ 'Por favor devuélvase y verifique que el número de acta esté incluido antes de guardar el acta.';
-	}else if (!validarCambioTab(10) && formulario != '26'){
+	}else if (!validarCambioTab(10) && formulario != '26' && formulario != '245'){
 		let cuerpo = document.getElementById('cuerpoRespuesta');
 		cuerpo.innerHTML = 'Lo sentimos mucho. Usted no escogió un inscrito antes de diligenciar la evaluación. '
 							+ 'Debe regresar a la pesataña de INSCRITOS y escoger uno o, en caso de que no esté inscrito '
@@ -2446,7 +2446,7 @@ function mostrarEvaluados(formulario){
 			break;
 		case '245':
 			traerEvaluados(db245, 'F');
-			validarCambioTab(2);
+			// validarCambioTab(2);
 			break;
 		case '441':
 			traerEvaluados(db441, 'V');

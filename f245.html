@@ -103,8 +103,8 @@
 							</div><!-- Fin del tab-pane -->
 
 							<div role="tabpanel" class="tab-pane fade" id="datos" aria-labelledby="datos-tab">
-								<br><div class="alert alert-danger alert-dismissible fade in col-md-12" role="alert" name="alertaInscrito" style="display: none">
-									<strong>Cuidado!</strong> Debe elegir un censado antes de continuar.
+								<br><div class="alert alert-info alert-dismissible fade in col-md-12" role="alert" name="alertaInscrito" style="display: none">
+									<strong>Recuerde...</strong> El proceso se facilita si escoge un censado antes de continuar.
 								</div><br>
 
 								<div class="form-group">
@@ -450,8 +450,8 @@
 							</div><!-- Fin del tab-pane -->	
 
 							<div role="tabpanel" aria-labelledby="evaluacion-tab" class="tab-pane fade" id="evaluacionPrt1">
-								<br><div class="alert alert-danger alert-dismissible fade in col-md-12" role="alert" name="alertaInscrito" style="display: none">
-									<strong>Cuidado!</strong> Debe elegir un Censado antes de continuar.
+								<br><div class="alert alert-info alert-dismissible fade in col-md-12" role="alert" name="alertaInscrito" style="display: none">
+									<strong>Recuerde...</strong> El proceso se facilita si escoge un Censado antes de continuar.
 								</div><br>
 								<div class="col-md-12"><br>
 									<div class="form-group" style="border-style:ridge; padding:3px">
@@ -834,8 +834,8 @@
 
 							<div role="tabpanel" aria-labelledby="observacion-tab" class="tab-pane fade" id="observaNoti">
 								
-								<br><div class="alert alert-danger alert-dismissible fade in col-md-12" role="alert" name="alertaInscrito" style="display: none">
-									<strong>Cuidado!</strong> Debe elegir un Censado antes de continuar.
+								<br><div class="alert alert-info alert-dismissible fade in col-md-12" role="alert" name="alertaInscrito" style="display: none">
+									<strong>Recuerde...</strong> El proceso se facilita si escoge un Censado antes de continuar.
 								</div><br>
 
 								<div class="form-group">
@@ -1035,7 +1035,17 @@
 				</div><!-- Fin del panel default -->
 			</div><!-- Fin del Row -->
 		</div><!-- Fin del container -->
-		<script>setInicio('245');</script>
+		<script>
+			setInicio('245');
+            let formu = localStorage.getItem('form');
+			calcularNumActa('245', formu).then( numActa => {
+                console.log("Valor de acta recibido ", numActa);
+                let event = new Event('input');
+                let objetoActa = document.getElementsByName('acta245')[0];
+                objetoActa.value = numActa;
+                objetoActa.dispatchEvent(event);
+            }).catch( err => alert('Problemas calculando el número de acta: ', err) );
+        </script>
 	</body>
 
 </html>
