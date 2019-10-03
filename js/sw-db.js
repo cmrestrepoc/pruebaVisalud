@@ -1460,6 +1460,7 @@ function persistirInscrito(dbBase, dbNuevos, inscrito, idExistente){
 			dbNuevos.put(inscrito, function callback(err, result){
 				if (!err) {
 					alert('inscrito guardado en base de datos');
+					location.reload();
 				}else {
 					alert('problemas guardando inscrito en base de datos' + err);
 				}
@@ -1481,6 +1482,7 @@ function persistirInscrito(dbBase, dbNuevos, inscrito, idExistente){
 			dbNuevos.put(inscrito, function callback(err, result){
 				if (!err) {
 					alert('inscrito modificado en base de datos');
+					location.reload();
 				}else {
 					alert('problemas modificando inscrito en base de datos: ' + err);
 					console.log(err);
@@ -1501,6 +1503,7 @@ function persistirInscrito(dbBase, dbNuevos, inscrito, idExistente){
 				dbNuevos.put(inscrito, function callback(err, result){
 					if (!err) {
 						alert('inscrito almacenado en base de datos');
+						location.reload();
 					}else {
 						alert('problemas almacenando inscrito en base de datos: ' + err);
 						console.log(err);
@@ -1880,7 +1883,7 @@ function guardarEvaluacion(formulario){
 	if (!objetoActa.value){
 		cuerpo.innerHTML = 'Lo sentimos mucho. Es absolutamente obligatorio diligenciar el número de acta. '
 							+ 'Por favor devuélvase y verifique que el número de acta esté incluido antes de guardar el acta.';
-	}else if (!validarCambioTab(10) && formulario != '26'){
+	}else if (!validarCambioTab(10) && formulario != '26' && formulario != '245'){
 		let cuerpo = document.getElementById('cuerpoRespuesta');
 		cuerpo.innerHTML = 'Lo sentimos mucho. Usted no escogió un inscrito antes de diligenciar la evaluación. '
 							+ 'Debe regresar a la pesataña de INSCRITOS y escoger uno o, en caso de que no esté inscrito '
@@ -2446,7 +2449,7 @@ function mostrarEvaluados(formulario){
 			break;
 		case '245':
 			traerEvaluados(db245, 'F');
-			validarCambioTab(2);
+			// validarCambioTab(2);
 			break;
 		case '441':
 			traerEvaluados(db441, 'V');
