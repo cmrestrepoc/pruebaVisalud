@@ -1534,10 +1534,10 @@ function guardarComunesInscritos(formulario){
 		CELULAR: document.getElementsByName('cel' + formulario)[0].value,
 		OBSERVA_AU: document.getElementsByName('obAutoridad' + formulario)[0].value,
 		OBSERVA_F1: document.getElementsByName('obPersona' + formulario)[0].value,
-		NOMBRE_F1: document.getElementsByName('inscribe' + formulario)[0].value,
-		ID_F1: document.getElementsByName('idInscribe' + formulario)[0].value,
-		NOMBRE_E1: document.getElementsByName('recibe' + formulario)[0].value,
-		ID_E1: document.getElementsByName('idRecibe' + formulario)[0].value,
+		NOMBRE_E1: document.getElementsByName('inscribe' + formulario)[0].value,
+		ID_E1: document.getElementsByName('idInscribe' + formulario)[0].value,
+		NOMBRE_F1: document.getElementsByName('recibe' + formulario)[0].value,
+		ID_F1: document.getElementsByName('idRecibe' + formulario)[0].value,
 	}
 	return inscrito;		
 }
