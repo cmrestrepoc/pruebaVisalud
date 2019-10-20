@@ -623,11 +623,11 @@ function agregarValidacionTextInputs(formulario){
 	});
 
 	/* validaciones para numeros de identificación (cedulas) */
-	let cedulas = "input[name='idPropietario" + formulario + "'], input[name='idRepLegal" + formulario + "'], "
+	let cedulasInput = "input[name='idPropietario" + formulario + "'], input[name='idRepLegal" + formulario + "'], "
 						+ "input[name='idFuncionario" + formulario + "-1']," + "input[name='idFuncionario" + formulario + "-2'],"
 						+ "input[name='idPersona" + formulario + "-1']," + "input[name='idPersona" + formulario + "-2']";
-	let medianos = document.querySelectorAll(cedulas);
-	medianos.forEach(element => {
+	let cedulas = document.querySelectorAll(cedulasInput);
+	cedulas.forEach(element => {
 		element.addEventListener('input', validarLongitudInput.bind(this, element, 12,
 								"No puede escribir más de 12 caracteres en este campo"));
 	});
