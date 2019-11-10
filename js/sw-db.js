@@ -490,7 +490,7 @@ function calcularActaInscripcion(formulario, db){
 		let indice = calcularIndice(ultimo);
 		let fecha = calcularFecha();
 		let year = fecha.anio.toString()
-		let cadenaFecha = fecha.dia + fecha.mes + year.substring(2, 4);
+		let cadenaFecha = fecha.dia.toString() + fecha.mes.toString() + year.substring(2, 4);
 		//console.log(indice);
 		let acta = formulario + codUsuario + cadenaFecha + indice;
 		console.log(acta);
@@ -755,7 +755,7 @@ function calcularNumActa(formulario, form){
 		let indice = calcularIndice(ultimo);
 		let fecha = calcularFecha();
 		let year = fecha.anio.toString()
-		let cadenaFecha = fecha.dia + fecha.mes + year.substring(2, 4);
+		let cadenaFecha = fecha.dia.toString() + fecha.mes.toString() + year.substring(2, 4);
 		//console.log(indice);
 		let acta = form + codUsuario + cadenaFecha + indice;
 		console.log(acta);
