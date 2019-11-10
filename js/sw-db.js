@@ -1884,7 +1884,8 @@ function guardarEvaluacion(formulario){
 	console.log('Estamos en el formulario', formulario)
 	let evaluado = formulario != '333' && formulario != '442' && formulario != '26' && formulario != '243' &&
 					formulario != '245' ? 
-					guardarComunesEvaluados(formulario) : null;
+					guardarComunesEvaluados(formulario) : {};
+	var coordinates = {}					
 	let preguntasComunes;
 	let evaluadoEsta;
 	let evaluadoVehi;
@@ -2325,8 +2326,16 @@ function guardarEvaluacion(formulario){
 	
 		//console.log("Estructura de evaluado en formulario " + formulario + " para revisión: " + JSON.stringify(evaluado));
 		
-		localStorage.setItem('evaluado', JSON.stringify(evaluado));
-		firmaEvaluacion();
+		navigator.geolocation.getCurrentPosition(position => {
+			coordinates = {
+				LONGITUD: position.coords.longitude,
+				LATITUD: position.coords.latitude
+			}
+			console.log('Coordenadas calculadas')
+			evaluado = Object.assign(evaluado, coordinates)
+			localStorage.setItem('evaluado', JSON.stringify(evaluado));
+			firmaEvaluacion();
+		})
 		
 		//persistirEvaluado(db, evaluado, formulario);
 		//location.reload();
