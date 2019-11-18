@@ -123,7 +123,7 @@ function consolidarPuntaje(con, puntaje){
 
 	if (puntajeTotal >= 90) {
 		concepto = 1;
-	}else if (puntajeTotal < 90 && puntajeTotal >= 70){
+	}else if (puntajeTotal < 90 && puntajeTotal >= 60){
 		concepto = 2;
 	}else {
 		concepto = 3;
