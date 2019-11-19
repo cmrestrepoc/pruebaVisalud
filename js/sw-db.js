@@ -2335,6 +2335,10 @@ function guardarEvaluacion(formulario){
 			evaluado = Object.assign(evaluado, coordinates)
 			localStorage.setItem('evaluado', JSON.stringify(evaluado));
 			firmaEvaluacion();
+		}, (err) => {
+			console.log('Error obteniendo coordenadas', err)
+			localStorage.setItem('evaluado', JSON.stringify(evaluado));
+			firmaEvaluacion();
 		})
 		
 		//persistirEvaluado(db, evaluado, formulario);
