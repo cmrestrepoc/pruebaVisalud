@@ -34,7 +34,7 @@
 
 	</head>
 
-	<body onload="verificarSesionLocal(); verificarAccion(); /* mostrarCache() */">
+	<body onload="verificarSesionLocal(); verificarAccion(); mostrarCache()">
 		<header id="index">
 			<img alt style="width: 8%" src="./img/escudo.jpg" />
 			<div class="titulos">
@@ -111,18 +111,19 @@
 				        </div><br>
 				      </div>
 				      <div class="modal-footer">
-				      	<div class="alert alert-success alert-dismissible fade in col-md-12" role="alert" name="mensajesServicios" style="display: none">
-							<!-- <strong>Cuidado!</strong> Texto Adicional. -->
-						</div>
-				        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+						  <div class="alert alert-success alert-dismissible fade in col-md-12" 
+						  		role="alert" name="mensajesServicios" style="display: none"></div>
+						<button type="button" class="btn btn-default" data-dismiss="modal"
+								onclick="document.getElementsByName('mensajesServicios')[0].style.display = 'none'">
+							Cerrar
+						</button>
 				      </div>
 				    </div>
 				  </div>
 				</div>
 			</div>
-			<div class="alert alert-success alert-dismissible fade in col-md-6 col-md-offset-3" role="alert" name="mensajesServicios" style="display: none">
-				<!-- <strong>Prueba:</strong> mensajes de validación -->
-			</div>
+			<div class="alert alert-success alert-dismissible fade in col-md-6 col-md-offset-3" 
+				role="alert" name="mensajesServicios" style="display: none"></div>
 		</header>
 
 		<section id="menu1">
@@ -206,8 +207,8 @@
 			 
 		</section>
 		<div class="alert alert-danger alert-dismissible fade in col-md-4 col-md-offset-4" role="alert" name="version">
-			<div class="col-md-offset-5">
-				<strong>Versión:</strong> 2.1.3
+			<div class="col-md-offset-3" name="versionContent">
+				<strong>Versión:</strong> 2.1.4
 			</div>
 		</div>
 		<script>setInicioMenu()</script>
