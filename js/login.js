@@ -50,7 +50,6 @@ function login(){
 			localStorage.setItem('estado', JSON.stringify(estado));
 			localStorage.setItem('usuario', JSON.stringify(usuario));
 			localStorage.setItem('codigoUsuario', codigoUsuario);
-			alert('Login exitoso');
 			window.location.replace("menu0.html");
 		}else{
 			alert('Clave incorrecta');
