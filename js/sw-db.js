@@ -613,6 +613,15 @@ function agregarValidacionTextInputs(formulario){
 			"No puede escribir más de " + longitud + " caracteres en este campo"));
 	});
 
+	/* placas */
+	let placasInput = "input[name='placa" + formulario + "'], input[name='placaRemolque" + formulario + "'], "
+						+ "input[name='placaSrmque" + formulario + "']";
+	let placas = document.querySelectorAll(placasInput);
+	placas.forEach(element => {
+		element.addEventListener('input', validarLongitudInput.bind(this, element, 6,
+								"No debe escribir más de 6 caracteres en este campo. Introduzca la placa sin espacio"));
+	});
+
 	/* Validación campo Acta */
 	longitud = 14;
 	let inputActa = "input[name='acta" + formulario  + "']";
