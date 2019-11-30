@@ -172,7 +172,7 @@ self.addEventListener('fetch', e => {
 						//console.log('res', res);
 						if(! arreglo.length > 0 ) {
 							console.log('El request ' + e.request.url + ' no estaba en caché, por lo cual se guardará');
-							cache.put(e.request, res);
+							e.request.method !== 'POST' && cache.put(e.request, res);
 						}/* else{
 							console.log('elemento ' + e.request.url + ' ya estaba en el caché y por tanto no se guarda');
 						} */
