@@ -1624,15 +1624,17 @@ function firmaEvaluacion(){
 	window.location.assign('firmaEvaluacion.html');
 }
 
-function validarOjetoActa(formulario){
-	let objetoActa = document.getElementsByName('acta' + formulario)[0];
+function validarObjetoActa(formulario){
 	let cuerpo = document.getElementById('cuerpoRespuesta');
-	console.log('objetoActa en plena validación', objetoActa.value);
-	if (!objetoActa.value){
-		console.log('Entramos al if');
-		cuerpo.innerHTML = 'Lo sentimos mucho. Es absolutamente obligatorio diligenciar el número de acta. '
-							+ 'Por favor devuélvase y verifique que el número de acta esté incluido ' 
-							+ 'antes de guardar el acta.';
+	
+	let inputs = document.getElementsByTagName('input');
+	console.log('arreglo de todos los inputs', inputs);
+	let arregloInputs = Array.from(inputs);
+	let errorArray = arregloInputs.filter(element => element.required == true && element.value.length <= 0).map(e => e.name)
+	console.log('Arreglo filtrado de requireds', arregloInputs)
+	console.log('Arreglo filtrado de erorres', errorArray)
+	if (errorArray.length > 0) {
+		cuerpo.innerHTML = 'Lo sentimos, tiene campos obligatorios (*) sin diligenciar. Por favor llénelos para poder guardar el acta';
 		return false;
 	}else{
 		cuerpo.innerHTML = 'Guardando... ';
@@ -1641,7 +1643,7 @@ function validarOjetoActa(formulario){
 }
 
 function guardarInscrito493(){
-	if(validarOjetoActa('493')){
+	if(validarObjetoActa('493')){
 		var idExistente = document.getElementsByName('id493')[0].value;
 		var inscrito = guardarComunesInscritos('493');
 		var inscritoEsta = guardarComunesEstablecimientos('493');
@@ -1666,7 +1668,7 @@ function guardarInscrito493(){
 }
 
 function guardarInscrito444(){
-	if(validarOjetoActa('444')){
+	if(validarObjetoActa('444')){
 		var idExistente = document.getElementsByName('id444')[0].value;
 		var inscrito = guardarComunesInscritos('444');
 		var adicional = {
@@ -1691,7 +1693,7 @@ function guardarInscrito444(){
 }
 
 function guardarInscrito569(){
-	if(validarOjetoActa('569')){
+	if(validarObjetoActa('569')){
 		var idExistente = document.getElementsByName('id569')[0].value;
 		var inscrito = guardarComunesInscritos('569');
 		var inscritoEsta = guardarComunesEstablecimientos('569');
@@ -1924,13 +1926,18 @@ function guardarEvaluacion(formulario){
 	let evaluadoVehi;
 	let reducido;
 	
-	let objetoActa = document.getElementsByName('acta' + formulario)[0];
 	let cuerpo = document.getElementById('cuerpoRespuesta');
-	if (!objetoActa.value){
-		cuerpo.innerHTML = 'Lo sentimos mucho. Es absolutamente obligatorio diligenciar el número de acta. '
-							+ 'Por favor devuélvase y verifique que el número de acta esté incluido antes de guardar el acta.';
+	
+	let inputs = document.getElementsByTagName('input');
+	console.log('arreglo de todos los inputs', inputs);
+	let arregloInputs = Array.from(inputs);
+	let errorArray = arregloInputs.filter(element => element.required == true && element.value.length <= 0).map(e => e.name)
+	console.log('Arreglo filtrado de requireds', arregloInputs)
+	console.log('Arreglo filtrado de erorres', errorArray)
+	if (errorArray.length > 0) {
+		cuerpo.innerHTML = 'Lo sentimos, tiene campos obligatorios (*) sin diligenciar. Por favor llénelos para poder guardar el acta';
+		return;
 	}else if (!validarCambioTab(10) && formulario != '26' && formulario != '245'){
-		let cuerpo = document.getElementById('cuerpoRespuesta');
 		cuerpo.innerHTML = 'Lo sentimos mucho. Usted no escogió un inscrito antes de diligenciar la evaluación. '
 							+ 'Debe regresar a la pesataña de INSCRITOS y escoger uno o, en caso de que no esté inscrito '
 							+ 'el establecimiento o vehículo, debe dirigirse al formulario de inscripción correspondiente. '
