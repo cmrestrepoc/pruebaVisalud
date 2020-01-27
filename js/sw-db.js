@@ -1929,9 +1929,13 @@ function guardarEvaluacion(formulario){
 	let cuerpo = document.getElementById('cuerpoRespuesta');
 	
 	let inputs = document.getElementsByTagName('input');
+	let selects = document.getElementsByTagName('select');
 	console.log('arreglo de todos los inputs', inputs);
 	let arregloInputs = Array.from(inputs);
-	let errorArray = arregloInputs.filter(element => element.required == true && element.value.length <= 0).map(e => e.name)
+	let arregloSelects = Array.from(selects);
+	let errorInputs = arregloInputs.filter(element => element.required == true && element.value.length <= 0).map(e => e.name)
+	let errorSelects = arregloSelects.filter(element => element.required == true && element.value.length <= 0).map(e => e.name)
+	let errorArray = errorInputs.concat(errorSelects)
 	console.log('Arreglo filtrado de requireds', arregloInputs)
 	console.log('Arreglo filtrado de erorres', errorArray)
 	if (errorArray.length > 0) {
