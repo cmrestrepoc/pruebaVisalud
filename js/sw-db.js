@@ -1280,6 +1280,7 @@ function cargarInscritos(formulario){
 		!localStorage.getItem('identity') && localStorage.setItem('Accion', 'cargarInscritos' + formulario);
 		banderaAlerta = 0;
 	}
+	alerta = document.getElementsByName('mensajesServicios')[banderaAlerta];
 	var promesa = fetchInscritos(formulario);
 	promesa.then( respObj => {
 		if (respObj.err != undefined) {
