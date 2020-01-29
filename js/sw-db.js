@@ -543,26 +543,32 @@ function cargarInicioInscripciones(formulario){
 
 /* Desde aqui arranca funcionalidad relacionada con validaciones */
 
-function ponerLabelError(element, mensaje){
+function ponerLabelError(element, mensaje, key = ''){
 	element.style.borderColor = "red";
-	if(!document.getElementById(element.name)){
-		let etiqueta = document.createElement('Label');
-		let parent = element.parentNode;
-		etiqueta.style.color = 'red';
-		etiqueta.style.fontSize = '10px';
+	let etiqueta = document.createElement('Label');
+	let parent = element.parentNode;
+	etiqueta.style.color = 'red';
+	etiqueta.style.fontSize = '10px';
+	if(key != ''){
+		if(!document.getElementById(element.name + '_' + key)){
+			etiqueta.setAttribute('id', element.name + '_' + key);
+			etiqueta.innerHTML = mensaje;
+			parent.insertBefore(etiqueta, element);
+		}
+	}else if(!document.getElementById(element.name)){
 		etiqueta.setAttribute('id', element.name);
 		etiqueta.innerHTML = mensaje;
-		console.log(etiqueta);
 		parent.insertBefore(etiqueta, element);
 	}
 }
 
-function ponerLabelOk(element){
-	let label = document.getElementById(element.name);
+function ponerLabelOk(element, key = ''){
+	let label = key != '' ?
+		document.getElementById(element.name + '_' + key) : 
+		document.getElementById(element.name);
 	if(label){
 		label.parentNode.removeChild(label);
 	}
-	//element.style.removeProperty('borderColor');
 	element.style.borderColor = "green";
 }
 
@@ -587,6 +593,14 @@ function validarLongitudInput(elemento, longitud, mensaje){
 	}else{
 		ponerLabelOk(elemento);
 	}
+}
+
+function validarObservaciones(elemento, pregunta, key){
+	console.log('valor', pregunta.value)
+	const mensaje = 'Si califica con 0 o 1 debe incluir una observación';
+	pregunta.value == 1 || pregunta.value == 0 ?
+		ponerLabelError(elemento, mensaje, key) :
+		ponerLabelOk(elemento, key);
 }
 
 function agregarValidacionTextInputs(formulario){
@@ -700,6 +714,12 @@ function agregarValidacionTextInputs(formulario){
 				element[key].addEventListener('change', validarHallazgos.bind(this, element, key));
 			}
 		}
+	});
+
+	let iteratorPreguntas = document.getElementsByName('pregunta');
+	let iteratorObservaciones = document.getElementsByName('observaciones');
+	iteratorPreguntas.forEach((element, key) => {
+		element.addEventListener('change', validarObservaciones.bind(this, iteratorObservaciones[key], element, key))
 	});
 }
 
@@ -1159,6 +1179,20 @@ function mostrarCenso(formulario){
 }
 
 function guardarTraidos(formulario, dbBase, respObj, bandera, banderaAlerta){
+	let flag = '';
+	switch(bandera){
+		case '493':
+			flag = 'Estab. Alimentos';
+			break;
+		case '569':
+			flag = 'Estab. Cárnicos';
+			break;
+		case '444':
+			flag = 'Vehículos';
+			break;
+		default:
+			break;
+	}
 	let alerta = document.getElementsByName('mensajesServicios')[banderaAlerta];
 	alerta.style.display = 'block';
 	dbBase.destroy().then( response => {
@@ -1188,7 +1222,7 @@ function guardarTraidos(formulario, dbBase, respObj, bandera, banderaAlerta){
 							count++;
 							alerta.innerHTML = 'Inscritos guardados en base de datos: ' + count;	
 						}else{
-							alerta.innerHTML = "Registros de " + bandera + " cargados correctamente";
+							alerta.innerHTML = "Registros de " + flag + " cargados correctamente";
 							localStorage.removeItem('Accion');
 						}
 					}else {
