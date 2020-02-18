@@ -430,49 +430,6 @@ function setInicio(formulario){
 			madre.appendChild(option);
 		});
 	}
-
-	if(formulario == '26'){
-		let arregloSujetos = [
-			'479-1',
-			'479-2',
-			'479-3',
-			'479-4',
-			'479-5',
-			'479-6',
-			'481-1',
-			'481-2',
-			'481-3',
-			'495-1',
-			'495-2',
-			'495-3',
-			'495-4',
-			'495-5',
-			'495-6',
-			'440-1',
-			'440-2',
-			'474-1',
-			'474-2',
-			'474-3',
-			'474-4',
-			'474-5',
-			'474-6',
-			'474-7',
-			'474-8',
-			'474-9',
-			'478-1',
-			'478-2',
-			'478-3',
-			'478-4',
-			'475-1',
-			'475-2',
-			'472-1',
-			'480-1',
-			'480-2',
-			'480-3',
-			'480-4',
-			'480-5',
-			'480-6'
-		];
 		let madre = document.getElementsByName('tipoSujeto26')[0];
 		arregloSujetos.forEach( elemento => {
 			let option = document.createElement('option');
