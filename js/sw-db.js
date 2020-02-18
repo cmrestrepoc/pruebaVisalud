@@ -430,15 +430,15 @@ function setInicio(formulario){
 			madre.appendChild(option);
 		});
 	}
-		let madre = document.getElementsByName('tipoSujeto26')[0];
-		arregloSujetos.forEach( elemento => {
-			let option = document.createElement('option');
-			option.value = elemento;
-			option.innerHTML = elemento;
-			madre.appendChild(option);
-		});
-	}
+	let madre = document.getElementsByName('tipoSujeto26')[0];
+	arregloSujetos.forEach( elemento => {
+		let option = document.createElement('option');
+		option.value = elemento;
+		option.innerHTML = elemento;
+		madre.appendChild(option);
+	});
 }
+
 
 function calcularActaInscripcion(formulario, db){
 	let codUsuario = localStorage.getItem('codigoUsuario');
