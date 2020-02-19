@@ -430,13 +430,13 @@ function setInicio(formulario){
 			madre.appendChild(option);
 		});
 	}
-	let madre = document.getElementsByName('tipoSujeto26')[0];
+	/* let madre = document.getElementsByName('tipoSujeto26')[0];
 	arregloSujetos.forEach( elemento => {
 		let option = document.createElement('option');
 		option.value = elemento;
 		option.innerHTML = elemento;
 		madre.appendChild(option);
-	});
+	}); */
 }
 
 
