@@ -491,8 +491,8 @@
             </div><!-- Fin del row -->
         </div><!-- Fin del container -->
         <script>
-            let formu = localStorage.getItem('form');
             setInicio('26');
+            let formu = localStorage.getItem('form');
             calcularNumActa('26', formu).then( numActa => {
                 console.log("Valor de acta recibido ", numActa);
                 let event = new Event('input');
