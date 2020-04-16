@@ -1194,16 +1194,21 @@ function guardarTraidos(formulario, dbBase, respObj, bandera, banderaAlerta){
 }
 
 function cerrarSesionServidor(){
-	var identidad = JSON.parse(localStorage.getItem('identity'));
-	if (identidad != undefined) {
-		fetch( BASEURL + URL_CERRAR_SESION + identidad.usuario)
-		.then( res => res.json() )
-		.then( jsonRes => alert(jsonRes.res) )
-		.catch( err => alert("Problemas en la respuesta del servidor " + err) );
-		localStorage.removeItem('identity');
-	}else{
-		alert('No hay una sesión abierta con el servidor en este momento');
-	}	
+	let identidad = JSON.parse(localStorage.getItem('identity'));
+	let alerta = document.getElementsByName('mensajesServicios')[0]
+	let final = identidad ? identidad.usuario : JSON.parse(localStorage.getItem('usuario'))
+	fetch( BASEURL + URL_CERRAR_SESION + final)
+	.then( res => res.json() )
+	.then( jsonRes => {
+		console.log('respuesta del servicio', jsonRes)
+		alerta.style.display = 'block'
+		alerta.innerHTML = jsonRes.res 
+	})
+	.catch( err => {
+		alerta.style.display = 'block'
+		alerta.innerHTML = "Problemas en la respuesta del servidor " + err 
+	});
+	localStorage.removeItem('identity');	
 }
 
 function verificarSesion(){
