@@ -1427,7 +1427,7 @@ function fetchEvaluados(doc, formulario, url){
 				cuerpo.appendChild(texto);
 			} 
 		})
-		.catch( err => reject([err, doc.acta]) );
+		.catch( err => reject([err, doc.ACTA]) );
 	});
 }
 
