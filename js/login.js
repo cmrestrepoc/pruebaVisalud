@@ -31,6 +31,12 @@ function obtenerCodigo(usuario){
 		case 'MPEREZ':
 			indice = '11';
 			break;
+		case 'SSANCHEZ':
+			indice = '12';
+			break;
+		case 'RMARIN':
+			indice = '13';
+			break;
 		case 'JOSORIO':
 			indice = '14';
 			break;
