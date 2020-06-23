@@ -41,6 +41,7 @@ function obtenerCodigo(usuario){
 			indice = '14';
 			break;
 		default:
+			console.log('Usuario en switch', usuario);
 			indice = 'error';
 			alert('El usuario no está registrado para obtener código');
 			break;
