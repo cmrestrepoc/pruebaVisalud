@@ -485,8 +485,8 @@ function cargarInicioInscripciones(formulario){
 	if(localStorage.getItem('inscrito') && localStorage.getItem('firmaAutoridad') && localStorage.getItem('firmaInscribe') )
 	{
 		let ins = JSON.parse(localStorage.getItem('inscrito'));
-		ins.FIRMA_F1 = localStorage.getItem('firmaAutoridad');
-		ins.FIRMA_E1 = localStorage.getItem('firmaInscribe');
+		ins.firma_f1 = localStorage.getItem('firmaAutoridad');
+		ins.firma_e1 = localStorage.getItem('firmaInscribe');
 
 		/* calcularActaInscripcion(formulario, dbNuevos).then( acta => {
 			ins.ACTA = acta;
@@ -1416,6 +1416,7 @@ function fetchEvaluados(doc, formulario, url){
 				},
 				body: data
 		}).then( res => {
+			const inscrito = formulario == '493' || formulario == '569' || formulario == '444'
 			if(res.status == 500){
 				return fetchEvaluados(doc, formulario, url)
 				.then( body => resolve(body) );
@@ -1423,7 +1424,7 @@ function fetchEvaluados(doc, formulario, url){
 			}else{
 				res.json().then( body => resolve(body) )
 				let texto = document.createElement('p');
-				texto.innerHTML = "Se almacenó el acta: " + doc.ACTA;
+				texto.innerHTML = "Se almacenó el acta: " + (inscrito ? doc.acta : doc.ACTA);
 				cuerpo.appendChild(texto);
 			} 
 		})
