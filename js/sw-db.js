@@ -440,8 +440,11 @@ function setInicio(formulario){
 }
 
 
-function calcularActaInscripcion(formulario, db){
-	let codUsuario = localStorage.getItem('codigoUsuario');
+function calcularActaInscripcion(formulario, formu, db){
+	let usuario = JSON.parse(localStorage.getItem('usuario'))
+	document.getElementsByName(`recibe${formulario}`)[0].value = usuario.nombre;
+	document.getElementsByName(`idRecibe${formulario}`)[0].value = usuario.cedula;
+	let codUsuario = JSON.parse(localStorage.getItem('codigoUsuario'));
 	return db.info().then( result => {
 		var ultimo = result.doc_count!=0 ? result.doc_count + 1: result.doc_count = 1;
 		let indice = calcularIndice(ultimo);
@@ -449,7 +452,7 @@ function calcularActaInscripcion(formulario, db){
 		let year = fecha.anio.toString()
 		let cadenaFecha = fecha.dia.toString() + fecha.mes.toString() + year.substring(2, 4);
 		//console.log(indice);
-		let acta = formulario + codUsuario + cadenaFecha + indice;
+		let acta = formu + codUsuario + cadenaFecha + indice;
 		console.log(acta);
 		return acta;
 	});
@@ -475,7 +478,7 @@ function cargarInicioInscripciones(formulario){
 	}
 	let formu = localStorage.getItem('form');
 	console.log("Valor de form!!!", formu);
-	calcularActaInscripcion(formu, dbNuevos).then( acta => {
+	calcularActaInscripcion(formulario, formu, dbNuevos).then( acta => {
 		console.log("Valor de acta recibido ", acta);
 		let event = new Event('input');
 		let objetoActa = document.getElementsByName('acta' + formulario)[0];
@@ -735,7 +738,7 @@ function calcularIndice(ultimo){
 
 function calcularNumActa(formulario, form){
 	let db = dbActasForm(formulario);
-	let codUsuario = localStorage.getItem('codigoUsuario');
+	let codUsuario = JSON.parse(localStorage.getItem('usuario')).indice;
 	return db.info().then( result => {
 		var ultimo = result.doc_count!=0 ? result.doc_count + 1: result.doc_count = 1;
 		let indice = calcularIndice(ultimo);
@@ -861,6 +864,11 @@ function escogerInscrito(registro, formulario){
 				objetoActa.value = acta;
 				objetoActa.dispatchEvent(event);
 			});
+
+			let sufixFuncionario = formulario == '443' ? '' : '-1';
+			let usuario = JSON.parse(localStorage.getItem('usuario'))
+			document.getElementsByName(`funcionario${formulario}${sufixFuncionario}`)[0].value = usuario.nombre;
+			document.getElementsByName(`idFuncionario${formulario}${sufixFuncionario}`)[0].value = usuario.cedula;
 			
 			let alerta = document.getElementsByName('alertaInscrito');
 			let arreglo = Array.from(alerta); //en este caso alerta es un iterable pero no un arreglo, hay que convertirlo primero
@@ -1196,7 +1204,7 @@ function guardarTraidos(formulario, dbBase, respObj, bandera, banderaAlerta){
 function cerrarSesionServidor(){
 	let identidad = JSON.parse(localStorage.getItem('identity'));
 	let alerta = document.getElementsByName('mensajesServicios')[0]
-	let final = identidad ? identidad.usuario : JSON.parse(localStorage.getItem('usuario'))
+	let final = identidad ? identidad.usuario : JSON.parse(localStorage.getItem('usuario')).indice
 	fetch( BASEURL + URL_CERRAR_SESION + final)
 	.then( res => res.json() )
 	.then( jsonRes => {
