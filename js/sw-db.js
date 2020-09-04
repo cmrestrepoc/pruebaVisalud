@@ -146,9 +146,9 @@ function cargarInicio(formulario){
 	if(localStorage.getItem('evaluado') && (localStorage.getItem('firmaAut1') || localStorage.getItem('firmaAut2') || localStorage.getItem('firmaIns1') || localStorage.getItem('firmaIns2'))){
 		let eva = JSON.parse(localStorage.getItem('evaluado'));
 		eva.FIRMA_E1 = localStorage.getItem('firmaIns1');
-		eva.FIRMA_E2 = localStorage.getItem('firmaIns2');
+		eva.FIRMA_E2 = formulario != '443' ? localStorage.getItem('firmaIns2'): null;
 		eva.FIRMA_F1 = localStorage.getItem('firmaAut1');
-		eva.FIRMA_F2 = localStorage.getItem('firmaAut2');
+		eva.FIRMA_F2 = formulario != '443' ? localStorage.getItem('firmaAut2'): null;
 		
 		persistirEvaluado(db, eva, formulario);
 		
@@ -189,9 +189,6 @@ function setInicio(formulario){
 		case '481':
 			form = 'F-11'; 
 			break;
-		case '442':
-			form = 'F-57';
-			break;
 		case '333':
 			form = 'F-50';
 			break;
@@ -203,6 +200,9 @@ function setInicio(formulario){
 			break;
 		case '245':
 			form = 'F-13'
+			break;
+		case '442':
+			form = 'F-57';
 			break;
 		case '443':
 			form = 'F-59';
@@ -440,8 +440,11 @@ function setInicio(formulario){
 }
 
 
-function calcularActaInscripcion(formulario, db){
-	let codUsuario = localStorage.getItem('codigoUsuario');
+function calcularActaInscripcion(formulario, formu, db){
+	let usuario = JSON.parse(localStorage.getItem('usuario'))
+	document.getElementsByName(`recibe${formulario}`)[0].value = usuario.nombre;
+	document.getElementsByName(`idRecibe${formulario}`)[0].value = usuario.cedula;
+	let codUsuario = JSON.parse(localStorage.getItem('codigoUsuario'));
 	return db.info().then( result => {
 		var ultimo = result.doc_count!=0 ? result.doc_count + 1: result.doc_count = 1;
 		let indice = calcularIndice(ultimo);
@@ -449,7 +452,7 @@ function calcularActaInscripcion(formulario, db){
 		let year = fecha.anio.toString()
 		let cadenaFecha = fecha.dia.toString() + fecha.mes.toString() + year.substring(2, 4);
 		//console.log(indice);
-		let acta = formulario + codUsuario + cadenaFecha + indice;
+		let acta = formu + codUsuario + cadenaFecha + indice;
 		console.log(acta);
 		return acta;
 	});
@@ -475,7 +478,7 @@ function cargarInicioInscripciones(formulario){
 	}
 	let formu = localStorage.getItem('form');
 	console.log("Valor de form!!!", formu);
-	calcularActaInscripcion(formu, dbNuevos).then( acta => {
+	calcularActaInscripcion(formulario, formu, dbNuevos).then( acta => {
 		console.log("Valor de acta recibido ", acta);
 		let event = new Event('input');
 		let objetoActa = document.getElementsByName('acta' + formulario)[0];
@@ -735,7 +738,7 @@ function calcularIndice(ultimo){
 
 function calcularNumActa(formulario, form){
 	let db = dbActasForm(formulario);
-	let codUsuario = localStorage.getItem('codigoUsuario');
+	let codUsuario = JSON.parse(localStorage.getItem('usuario')).indice;
 	return db.info().then( result => {
 		var ultimo = result.doc_count!=0 ? result.doc_count + 1: result.doc_count = 1;
 		let indice = calcularIndice(ultimo);
@@ -861,6 +864,11 @@ function escogerInscrito(registro, formulario){
 				objetoActa.value = acta;
 				objetoActa.dispatchEvent(event);
 			});
+
+			let sufixFuncionario = formulario == '443' ? '' : '-1';
+			let usuario = JSON.parse(localStorage.getItem('usuario'))
+			document.getElementsByName(`funcionario${formulario}${sufixFuncionario}`)[0].value = usuario.nombre;
+			document.getElementsByName(`idFuncionario${formulario}${sufixFuncionario}`)[0].value = usuario.cedula;
 			
 			let alerta = document.getElementsByName('alertaInscrito');
 			let arreglo = Array.from(alerta); //en este caso alerta es un iterable pero no un arreglo, hay que convertirlo primero
@@ -1196,7 +1204,7 @@ function guardarTraidos(formulario, dbBase, respObj, bandera, banderaAlerta){
 function cerrarSesionServidor(){
 	let identidad = JSON.parse(localStorage.getItem('identity'));
 	let alerta = document.getElementsByName('mensajesServicios')[0]
-	let final = identidad ? identidad.usuario : JSON.parse(localStorage.getItem('usuario'))
+	let final = identidad ? identidad.usuario : JSON.parse(localStorage.getItem('usuario')).indice
 	fetch( BASEURL + URL_CERRAR_SESION + final)
 	.then( res => res.json() )
 	.then( jsonRes => {
@@ -1618,7 +1626,8 @@ function firmaInscripcion() {
 }
 
 function firmaEvaluacion(){
-	window.location.assign('firmaEvaluacion.html');
+	let ruta = formulario == '443' ? 'firmaInscripcion.html' : 'firmaEvaluacion.html';
+	window.location.assign(ruta);
 }
 
 function validarObjetoActa(formulario){
@@ -1845,9 +1854,9 @@ function guardarEvaluadosEstablecimientos(formulario){
 	}
 
 	var evaluado = {
-		NOMBRE_RL: document.getElementsByName('repLegal' + formulario)[0].value,
-		TID_RL: document.getElementsByName('tipoIdRl' + formulario)[0].value,
-		DOC_RL: document.getElementsByName('idRepLegal' + formulario)[0].value,
+		NOMBRE_RL: formulario != "443" ? document.getElementsByName('repLegal' + formulario)[0].value : "",
+		TID_RL: formulario != "443" ? document.getElementsByName('tipoIdRl' + formulario)[0].value : "",
+		DOC_RL: formulario != "443" ? document.getElementsByName('idRepLegal' + formulario)[0].value : "",
 		NOCO: formulario != "333" && formulario != '243' ? 
 			document.getElementsByName('nombreComercial' + formulario)[0].value : "",
 		RSO: document.getElementsByName('razonSocial' + formulario)[0].value,
@@ -1862,6 +1871,7 @@ function guardarEvaluadosEstablecimientos(formulario){
 }
 
 function guardarEvaluadoReducido(formulario){
+	let sufixFuncionario = formulario == '443' ? '' : '-1';
 	let evaluado = {
 		FECHA: document.getElementsByName('fecha' + formulario)[0].value,
 		ACTA: document.getElementsByName('acta' + formulario)[0].value,
@@ -1875,18 +1885,21 @@ function guardarEvaluadoReducido(formulario){
 		DOC_P: formulario != '26' ? document.getElementsByName('idPropietario' + formulario)[0].value : "",
 		AUTORIZA: document.getElementsByName('autorizaNoti' + formulario)[0].value,			
 		OBS_AS: document.getElementsByName('obAutoridad' + formulario)[0].value,
-		NOMBRE_F1: document.getElementsByName('funcionario' + formulario + '-1')[0].value,
-		ID_F1: document.getElementsByName('idFuncionario' + formulario + '-1')[0].value,
-		CARGO_F1: formulario != '26' ? document.getElementsByName('cargoFuncionario' + formulario + '-1')[0].value: "",
-		NOMBRE_F2: formulario != '26' ? document.getElementsByName('funcionario' + formulario + '-2')[0].value : "",
-		ID_F2: formulario != '26' ? document.getElementsByName('idFuncionario' + formulario + '-2')[0].value : "",
-		CARGO_F2: formulario != '26' ? document.getElementsByName('cargoFuncionario' + formulario + '-2')[0].value : "",
-		NOMBRE_E1: document.getElementsByName('persona' + formulario + '-1')[0].value,
-		ID_E1: document.getElementsByName('idPersona' + formulario + '-1')[0].value,
-		CARGO_E1: formulario != '26' ? document.getElementsByName('cargoPersona' + formulario + '-1')[0].value : "",
-		NOMBRE_E2: formulario != '26' ? document.getElementsByName('persona' + formulario + '-2')[0].value : "",
-		ID_E2: formulario != '26' ? document.getElementsByName('idPersona' + formulario + '-2')[0].value : "",
-		CARGO_E2: formulario != '26' && formulario != '245' ? 
+		NOMBRE_F1: document.getElementsByName(`funcionario${formulario}${sufixFuncionario}`)[0].value,
+		ID_F1: document.getElementsByName(`idFuncionario${formulario}${sufixFuncionario}`)[0].value,
+		CARGO_F1: formulario != '26' ? document.getElementsByName(`cargoFuncionario${formulario}${sufixFuncionario}`)[0].value : "",
+		NOMBRE_F2: formulario != '26' && formulario != '443' ? 
+			document.getElementsByName('funcionario' + formulario + '-2')[0].value : "",
+		ID_F2: formulario != '26' && formulario != '443' ? 
+			document.getElementsByName('idFuncionario' + formulario + '-2')[0].value : "",
+		CARGO_F2: formulario != '26' && formulario != '443' ? 
+			document.getElementsByName('cargoFuncionario' + formulario + '-2')[0].value : "",
+		NOMBRE_E1: document.getElementsByName(`persona${formulario}${sufixFuncionario}`)[0].value,
+		ID_E1: document.getElementsByName(`idPersona${formulario}${sufixFuncionario}`)[0].value,
+		CARGO_E1: formulario != '26' ? document.getElementsByName(`cargoPersona${formulario}${sufixFuncionario}`)[0].value : "",
+		NOMBRE_E2: formulario != '26' && formulario != '443' ? document.getElementsByName('persona' + formulario + '-2')[0].value : "",
+		ID_E2: formulario != '26' && formulario != '443' ? document.getElementsByName('idPersona' + formulario + '-2')[0].value : "",
+		CARGO_E2: formulario != '26' && formulario != '443' && formulario != '245' ? 
 			document.getElementsByName('cargoPersona' + formulario + '-2')[0].value : "",
 		FIRMA_F1: '',
 		FIRMA_F2: '',
@@ -1914,9 +1927,15 @@ function persistirEvaluado(db, evaluado, formulario){
 
 function guardarEvaluacion(formulario){
 	console.log('Estamos en el formulario', formulario)
-	let evaluado = formulario != '333' && formulario != '442' && formulario != '26' && formulario != '243' &&
-					formulario != '245' ? 
-					guardarComunesEvaluados(formulario) : {};
+	let excluded = [
+		'333',
+		'442',
+		'245',
+		'26',
+		'243',
+		'443'
+	]
+	let evaluado = !excluded.includes(formulario) ? guardarComunesEvaluados(formulario) : {};
 	var coordinates = {}					
 	let preguntasComunes;
 	let evaluadoEsta;
@@ -2211,7 +2230,40 @@ function guardarEvaluacion(formulario){
 				};
 				evaluado = Object.assign( evaluadoEsta, reducido, adicional );
 				break;
-			case '333':
+				case '443':
+					reducido = guardarEvaluadoReducido(formulario);
+					evaluadoEsta = guardarEvaluadosEstablecimientos(formulario);
+					delete reducido.NOMBRE_F2; 
+					delete reducido.ID_F2;
+					delete reducido.CARGO_F2;
+					delete reducido.NOMBRE_E2;
+					delete reducido.ID_E2;
+					delete reducido.CARGO_E2;
+					delete reducido.FIRMA_F2;
+					delete reducido.FIRMA_E2;
+					tipocarne = [];
+					for (let i = 0; i < document.getElementsByName('tipoCarneExpende').length; i++){
+						document.getElementsByName('tipoCarneExpende')[i].checked ? tipocarne.push(document.getElementsByName('tipoCarneExpende')[i].value) : console.log(i);
+					}
+					adicional = {
+						TIPOCARNE: JSON.stringify(tipocarne),
+						OTRAS: document.getElementsByName('otrasEspecies' + formulario)[0].value,
+						OTIPOPRO: document.getElementsByName('otrosProductos' + formulario)[0].value,
+						SOPROVIS: document.getElementsByName('provisional' + formulario)[0].value,
+						VISITO: document.getElementsByName('funcUltVisita' + formulario)[0].value,
+						VISITADO: document.getElementsByName('visitado' + formulario)[0].value,
+						HORARIOS: document.getElementsByName('horarios' + formulario)[0].value,
+						NUTRA: document.getElementsByName('noTrabajadores' + formulario)[0].value,
+						F_UV: document.getElementsByName('fechaUltVisita' + formulario)[0].value,
+						CCUV: document.getElementsByName('concepto' + formulario)[0].value,
+						CUV: document.getElementsByName('textoConcepto' + formulario)[0].value,
+						UV_P: document.getElementsByName('porcentaje' + formulario)[0].value,
+						OBS_ES: document.getElementsByName('obPersona' + formulario)[0].value,
+					};
+					evaluado = Object.assign( reducido, evaluadoEsta, adicional );
+					localStorage.setItem('form', '443');
+					break;
+				case '333':
 				reducido = guardarEvaluadoReducido(formulario);
 				evaluadoEsta = guardarEvaluadosEstablecimientos(formulario);
 				delete evaluadoEsta.MAMER;
@@ -2469,6 +2521,10 @@ function mostrarEvaluados(formulario){
 		case '440':
 			traerEvaluados(db440, 'E');
 			validarCambioTab(2);
+			break;
+		case '443':
+			traerEvaluados(db443, 'D');
+			validarCambioTab(0);
 			break;
 		case '474':
 			traerEvaluados(db474, 'E');

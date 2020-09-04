@@ -50,20 +50,62 @@ function obtenerCodigo(usuario){
 }
 
 function login(){
+	let funcionarios = [
+		{
+			nombre: 'MARIO RESTREPO',
+			usuario: 'MARIOR',
+			indice: '02',
+			cedula: '6332086'
+		},
+		{
+			nombre: 'CARLOS MARIO RESTREPO',
+			usuario: 'CRESTREPO',
+			indice: '03',
+			cedula: '16845913'
+		},
+		{
+			nombre: 'JOSE OBED OSORIO',
+			usuario: 'JOSORIO',
+			indice: '04',
+			cedula: '75096222'
+		},
+		{
+			nombre: 'MARCELA MOSQUERA',
+			usuario: 'MMOSQUERA',
+			indice: '05',
+			cedula: '1144165679'
+		},
+		{
+			nombre: 'MARY JASMIN MORENO',
+			usuario: 'MJMORENO',
+			indice: '06',
+			cedula: '29111329'
+		},
+		{
+			nombre: 'LINA LOTERO',
+			usuario: 'LLOTERO',
+			indice: '07',
+			cedula: '1143826309'
+		},
+	]
 	let estado;
 	let usuario = document.getElementsByName('nomUsuario')[0].value;
+	let indice = funcionarios.findIndex(element => element.usuario == usuario);
+	console.log('indice usuario', usuario, indice);
 	let clave = document.getElementsByName('password')[0].value;
-	let codigoUsuario = obtenerCodigo(usuario) !== 'error' ? obtenerCodigo(usuario) : null;
-	if(codigoUsuario){
+	// let codigoUsuario = obtenerCodigo(usuario) !== 'error' ? obtenerCodigo(usuario) : null;
+	if(indice > 0){
 		clave == 'GC130' ? estado = true : estado = false;
 		if (estado) {
 			localStorage.setItem('estado', JSON.stringify(estado));
-			localStorage.setItem('usuario', JSON.stringify(usuario));
-			localStorage.setItem('codigoUsuario', codigoUsuario);
+			localStorage.setItem('usuario', JSON.stringify(funcionarios[indice]));	
+			localStorage.setItem('codigoUsuario', JSON.stringify(funcionarios[indice].indice))		
 			window.location.replace("menu0.html");
 		}else{
 			alert('Clave incorrecta');
 		}
+	}else{
+		alert('El usuario no está registrado para obtener código');
 	}
 }
 
