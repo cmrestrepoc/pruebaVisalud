@@ -1411,6 +1411,12 @@ function fetchEvaluados(doc, formulario, url){
 		token: credenciales.token,
 		formulario: formulario
 	};
+	for(const d in doc){
+		console.log('d: ', d, doc[d])
+		const arrExcluded = ['TERRITORIO', 'LONGITUD', 'LATITUD', 'FIRMA_E2', 'FIRMA_F2']
+		if(!arrExcluded.includes(d))
+		    doc[d] = doc[d].trim()
+	}
 	let bigDoc = Object.assign(credentials, doc);
 	let data = JSON.stringify(bigDoc);
 	let cuerpo = document.getElementById('cuerpoRespuesta');
