@@ -778,14 +778,14 @@ function escogerInscrito(registro, formulario){
 	document.getElementsByName('tel' + formulario)[0].value = registro.tels;
 	document.getElementsByName('cel' + formulario)[0].value = registro.celular;
 	document.getElementsByName('propietario' + formulario)[0].value = registro.nombre_p;
-	document.getElementsByName('idPropietario' + formulario)[0].value = registro.doc_p;
+	document.getElementsByName('idPropietario' + formulario)[0].value = parseInt(registro.doc_p);
 	document.getElementsByName('tipoIdProp' + formulario)[0].value = registro.tid_p;
 	document.getElementsByName('autorizaNoti' + formulario)[0].value = registro.autoriza;
 
 	if(formulario == '333' || formulario == '243'){
 		document.getElementsByName('nomTerr' + formulario)[0].value = registro.noloca;
 		document.getElementsByName('razonSocial' + formulario)[0].value = registro.rso;
-		document.getElementsByName('nit' + formulario)[0].value = registro.nit;
+		document.getElementsByName('nit' + formulario)[0].value = parseInt(registro.nit);
 		let formu = localStorage.getItem('form');
 		console.log("lo que se recoge de localstorage", formu);
 		calcularNumActa(formulario, formu).then( acta => {
@@ -823,7 +823,7 @@ function escogerInscrito(registro, formulario){
 			document.getElementsByName('dirNotif' + formulario)[0].value = registro.dir_not;
 			document.getElementsByName('nombreComercial' + formulario)[0].value = registro.noco;
 			document.getElementsByName('razonSocial' + formulario)[0].value = registro.rso;
-			document.getElementsByName('nit' + formulario)[0].value = registro.nit;
+			document.getElementsByName('nit' + formulario)[0].value = parseInt(registro.nit);
 			document.getElementsByName('nomTerr' + formulario)[0].value = registro.noloca;
 			document.getElementsByName('matriculaMercantil' + formulario)[0].value = registro.mamer;
 	
@@ -941,7 +941,7 @@ function escogerInscrito(registro, formulario){
 		if (formulario == '569' || formulario == '440') {
 			document.getElementsByName('repLegal' + formulario)[0].value = registro.nombre_rl;
 			document.getElementsByName('tipoIdRl' + formulario)[0].value = registro.tid_rl;
-			document.getElementsByName('idRepLegal' + formulario)[0].value = registro.doc_rl;
+			document.getElementsByName('idRepLegal' + formulario)[0].value = parseInt(registro.doc_rl);
 		}
 	
 		if(formulario == '569'){
