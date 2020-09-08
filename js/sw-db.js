@@ -1961,7 +1961,7 @@ function persistirEvaluado(db, evaluado){
 	var insertar = { _id: evaluado.ACTA.substring(10, 14) };
 	evaluado = Object.assign( insertar, evaluado );
 	console.log(evaluado);
-	db.put(evaluado, function callback(err, result){
+	db.put(evaluado, async function callback(err, result){
 		if (!err) {
 			console.log('resultado', result)
 			await persistirCoordenadas(db, evaluado, result)
@@ -2466,7 +2466,7 @@ function guardarEvaluacion(formulario){
 		}
 	
 		//console.log("Estructura de evaluado en formulario " + formulario + " para revisión: " + JSON.stringify(evaluado));
-		
+
 		localStorage.setItem('evaluado', JSON.stringify(evaluado));
 		firmaEvaluacion();
 		
