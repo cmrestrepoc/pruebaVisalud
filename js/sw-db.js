@@ -150,13 +150,32 @@ function cargarInicio(formulario){
 		eva.FIRMA_F1 = localStorage.getItem('firmaAut1');
 		eva.FIRMA_F2 = formulario != '443' ? localStorage.getItem('firmaAut2'): null;
 		
-		persistirEvaluado(db, eva, formulario);
+		persistirEvaluado(db, eva);
 		
 		localStorage.removeItem('evaluado');
 		localStorage.removeItem('firmaAut1');
 		localStorage.removeItem('firmaAut2');
 		localStorage.removeItem('firmaIns1');
 		localStorage.removeItem('firmaIns2');
+
+		navigator.geolocation.getCurrentPosition(position => {
+			let coordinates = {
+				LONGITUD: position.coords.longitude,
+				LATITUD: position.coords.latitude
+			}
+			eva = Object.assign(evaluado, coordinates)
+			db.get(eva.ACTA.substring(10, 14))
+				.then(doc => db.put({
+					_id: doc._id,
+					_rev: doc._rev,
+					LONGITUD: position.coords.longitude,
+					LATITUD: position.coords.latitude
+				}))
+				.catch(error => alert('Problemas actualizando registro: ' + error))
+			console.log('Coordenadas calculadas')
+		}, (err) => {
+			console.log('Error obteniendo coordenadas', err)
+		})
 	}
 }
 
@@ -759,14 +778,14 @@ function escogerInscrito(registro, formulario){
 	document.getElementsByName('tel' + formulario)[0].value = registro.tels;
 	document.getElementsByName('cel' + formulario)[0].value = registro.celular;
 	document.getElementsByName('propietario' + formulario)[0].value = registro.nombre_p;
-	document.getElementsByName('idPropietario' + formulario)[0].value = registro.doc_p;
+	document.getElementsByName('idPropietario' + formulario)[0].value = parseInt(registro.doc_p);
 	document.getElementsByName('tipoIdProp' + formulario)[0].value = registro.tid_p;
 	document.getElementsByName('autorizaNoti' + formulario)[0].value = registro.autoriza;
 
 	if(formulario == '333' || formulario == '243'){
 		document.getElementsByName('nomTerr' + formulario)[0].value = registro.noloca;
 		document.getElementsByName('razonSocial' + formulario)[0].value = registro.rso;
-		document.getElementsByName('nit' + formulario)[0].value = registro.nit;
+		document.getElementsByName('nit' + formulario)[0].value = parseInt(registro.nit);
 		let formu = localStorage.getItem('form');
 		console.log("lo que se recoge de localstorage", formu);
 		calcularNumActa(formulario, formu).then( acta => {
@@ -804,7 +823,7 @@ function escogerInscrito(registro, formulario){
 			document.getElementsByName('dirNotif' + formulario)[0].value = registro.dir_not;
 			document.getElementsByName('nombreComercial' + formulario)[0].value = registro.noco;
 			document.getElementsByName('razonSocial' + formulario)[0].value = registro.rso;
-			document.getElementsByName('nit' + formulario)[0].value = registro.nit;
+			document.getElementsByName('nit' + formulario)[0].value = parseInt(registro.nit);
 			document.getElementsByName('nomTerr' + formulario)[0].value = registro.noloca;
 			document.getElementsByName('matriculaMercantil' + formulario)[0].value = registro.mamer;
 	
@@ -922,7 +941,7 @@ function escogerInscrito(registro, formulario){
 		if (formulario == '569' || formulario == '440') {
 			document.getElementsByName('repLegal' + formulario)[0].value = registro.nombre_rl;
 			document.getElementsByName('tipoIdRl' + formulario)[0].value = registro.tid_rl;
-			document.getElementsByName('idRepLegal' + formulario)[0].value = registro.doc_rl;
+			document.getElementsByName('idRepLegal' + formulario)[0].value = parseInt(registro.doc_rl);
 		}
 	
 		if(formulario == '569'){
@@ -1917,12 +1936,35 @@ function guardarEvaluadoReducido(formulario){
 	return evaluado;
 }
 
-function persistirEvaluado(db, evaluado, formulario){
+function persistirCoordenadas(db, eva, result){
+	navigator.geolocation.getCurrentPosition(position => {
+		let coordinates = {
+			LONGITUD: position.coords.longitude,
+			LATITUD: position.coords.latitude
+		}
+		console.log('evaluado antes de coordenadas', eva)
+		return db.put({
+			_id: result.id,
+			_rev: result.rev,
+			...eva,
+			LONGITUD: coordinates.LONGITUD,
+			LATITUD: coordinates.LATITUD,
+		})
+		.then(res => console.log('Registro actualizado con coordenadas', res))
+		.catch(err => console.log('Problemas actualizando registro', err))
+	}, (err) => {
+		console.log('Error obteniendo coordenadas', err)
+	})
+}
+
+function persistirEvaluado(db, evaluado){
 	var insertar = { _id: evaluado.ACTA.substring(10, 14) };
 	evaluado = Object.assign( insertar, evaluado );
 	console.log(evaluado);
-	db.put(evaluado, function callback(err, result){
+	db.put(evaluado, async function callback(err, result){
 		if (!err) {
+			console.log('resultado', result)
+			await persistirCoordenadas(db, evaluado, result)
 			alert('evaluado guardado en base de datos');
 			location.reload();
 		}else {
@@ -2424,23 +2466,11 @@ function guardarEvaluacion(formulario){
 		}
 	
 		//console.log("Estructura de evaluado en formulario " + formulario + " para revisión: " + JSON.stringify(evaluado));
+
+		localStorage.setItem('evaluado', JSON.stringify(evaluado));
+		firmaEvaluacion();
 		
-		navigator.geolocation.getCurrentPosition(position => {
-			coordinates = {
-				LONGITUD: position.coords.longitude,
-				LATITUD: position.coords.latitude
-			}
-			console.log('Coordenadas calculadas')
-			evaluado = Object.assign(evaluado, coordinates)
-			localStorage.setItem('evaluado', JSON.stringify(evaluado));
-			firmaEvaluacion();
-		}, (err) => {
-			console.log('Error obteniendo coordenadas', err)
-			localStorage.setItem('evaluado', JSON.stringify(evaluado));
-			firmaEvaluacion();
-		})
-		
-		//persistirEvaluado(db, evaluado, formulario);
+		//persistirEvaluado(db, evaluado);
 		//location.reload();
 	}
 

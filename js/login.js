@@ -94,7 +94,7 @@ function login(){
 	console.log('indice usuario', usuario, indice);
 	let clave = document.getElementsByName('password')[0].value;
 	// let codigoUsuario = obtenerCodigo(usuario) !== 'error' ? obtenerCodigo(usuario) : null;
-	if(indice > 0){
+	if(indice >= 0){
 		clave == 'GC130' ? estado = true : estado = false;
 		if (estado) {
 			localStorage.setItem('estado', JSON.stringify(estado));
