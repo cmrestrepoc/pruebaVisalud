@@ -1223,7 +1223,7 @@ function guardarTraidos(formulario, dbBase, respObj, bandera, banderaAlerta){
 function cerrarSesionServidor(){
 	let identidad = JSON.parse(localStorage.getItem('identity'));
 	let alerta = document.getElementsByName('mensajesServicios')[0]
-	let final = identidad ? identidad.usuario : JSON.parse(localStorage.getItem('usuario')).indice
+	let final = identidad ? identidad.usuario : JSON.parse(localStorage.getItem('usuario')).usuario
 	fetch( BASEURL + URL_CERRAR_SESION + final)
 	.then( res => res.json() )
 	.then( jsonRes => {
@@ -1650,7 +1650,7 @@ function firmaInscripcion() {
 	window.location.assign('firmaInscripcion.html');
 }
 
-function firmaEvaluacion(){
+function firmaEvaluacion(formulario){
 	let ruta = formulario == '443' ? 'firmaInscripcion.html' : 'firmaEvaluacion.html';
 	window.location.assign(ruta);
 }
@@ -2468,7 +2468,7 @@ function guardarEvaluacion(formulario){
 		//console.log("Estructura de evaluado en formulario " + formulario + " para revisión: " + JSON.stringify(evaluado));
 
 		localStorage.setItem('evaluado', JSON.stringify(evaluado));
-		firmaEvaluacion();
+		firmaEvaluacion(formulario);
 		
 		//persistirEvaluado(db, evaluado);
 		//location.reload();
