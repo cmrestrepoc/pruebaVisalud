@@ -87,6 +87,12 @@ function login(){
 			indice: '07',
 			cedula: '1143826309'
 		},
+		{
+			nombre: 'MARIO VALENCIA',
+			usuario: 'MVALENCIA',
+			indice: '15',
+			cedula: '16838802'
+		},
 	]
 	let estado;
 	let usuario = document.getElementsByName('nomUsuario')[0].value;
