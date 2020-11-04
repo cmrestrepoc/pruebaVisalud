@@ -93,6 +93,12 @@ function login(){
 			indice: '15',
 			cedula: '16838802'
 		},
+		{
+			nombre: 'MARIA CIRLEY GONZALEZ',
+			usuario: 'CIRLEYG',
+			indice: '16',
+			cedula: '34373769'
+		},
 	]
 	let estado;
 	let usuario = document.getElementsByName('nomUsuario')[0].value;
