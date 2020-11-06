@@ -482,7 +482,7 @@ function cargarInicioInscripciones(formulario){
 		objetoActa.value = acta;
 		objetoActa.dispatchEvent(event);
 	});
-	if(localStorage.getItem('inscrito') && localStorage.getItem('firmaAutoridad') && localStorage.getItem('firmaInscribe') )
+	if(localStorage.getItem('inscrito') || (localStorage.getItem('firmaAutoridad') && localStorage.getItem('firmaInscribe')) )
 	{
 		let ins = JSON.parse(localStorage.getItem('inscrito'));
 		ins.firma_f1 = localStorage.getItem('firmaAutoridad');
