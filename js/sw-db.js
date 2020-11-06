@@ -1432,7 +1432,9 @@ function fetchEvaluados(doc, formulario, url){
 	};
 	for(const d in doc){
 		console.log('d: ', d, doc[d])
-		const arrExcluded = ['TERRITORIO', 'LONGITUD', 'LATITUD', 'FIRMA_E2', 'FIRMA_F2']
+		const arrExcluded = formulario === '493' || formulario === '569' || formulario === '444' ? 
+			['territorio', 'longitud', 'latitud', 'firma_e1', 'firma_f1', 'firma_e2', 'firma_f2'] : 
+			['TERRITORIO', 'LONGITUD', 'LATITUD', 'FIRMA_E1', 'FIRMA_F1', 'FIRMA_E2', 'FIRMA_F2']
 		if(!arrExcluded.includes(d))
 		    doc[d] = doc[d].trim()
 	}
