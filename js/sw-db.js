@@ -146,17 +146,36 @@ function cargarInicio(formulario){
 	if(localStorage.getItem('evaluado') && (localStorage.getItem('firmaAut1') || localStorage.getItem('firmaAut2') || localStorage.getItem('firmaIns1') || localStorage.getItem('firmaIns2'))){
 		let eva = JSON.parse(localStorage.getItem('evaluado'));
 		eva.FIRMA_E1 = localStorage.getItem('firmaIns1');
-		eva.FIRMA_E2 = localStorage.getItem('firmaIns2');
+		eva.FIRMA_E2 = formulario != '443' ? localStorage.getItem('firmaIns2'): null;
 		eva.FIRMA_F1 = localStorage.getItem('firmaAut1');
-		eva.FIRMA_F2 = localStorage.getItem('firmaAut2');
+		eva.FIRMA_F2 = formulario != '443' ? localStorage.getItem('firmaAut2'): null;
 		
-		persistirEvaluado(db, eva, formulario);
+		persistirEvaluado(db, eva);
 		
 		localStorage.removeItem('evaluado');
 		localStorage.removeItem('firmaAut1');
 		localStorage.removeItem('firmaAut2');
 		localStorage.removeItem('firmaIns1');
 		localStorage.removeItem('firmaIns2');
+
+		navigator.geolocation.getCurrentPosition(position => {
+			let coordinates = {
+				LONGITUD: position.coords.longitude,
+				LATITUD: position.coords.latitude
+			}
+			eva = Object.assign(evaluado, coordinates)
+			db.get(eva.ACTA.substring(10, 14))
+				.then(doc => db.put({
+					_id: doc._id,
+					_rev: doc._rev,
+					LONGITUD: position.coords.longitude,
+					LATITUD: position.coords.latitude
+				}))
+				.catch(error => alert('Problemas actualizando registro: ' + error))
+			console.log('Coordenadas calculadas')
+		}, (err) => {
+			console.log('Error obteniendo coordenadas', err)
+		})
 	}
 }
 
@@ -189,9 +208,6 @@ function setInicio(formulario){
 		case '481':
 			form = 'F-11'; 
 			break;
-		case '442':
-			form = 'F-57';
-			break;
 		case '333':
 			form = 'F-50';
 			break;
@@ -203,6 +219,9 @@ function setInicio(formulario){
 			break;
 		case '245':
 			form = 'F-13'
+			break;
+		case '442':
+			form = 'F-57';
 			break;
 		case '443':
 			form = 'F-59';
@@ -440,8 +459,11 @@ function setInicio(formulario){
 }
 
 
-function calcularActaInscripcion(formulario, db){
-	let codUsuario = localStorage.getItem('codigoUsuario');
+function calcularActaInscripcion(formulario, formu, db){
+	let usuario = JSON.parse(localStorage.getItem('usuario'))
+	document.getElementsByName(`recibe${formulario}`)[0].value = usuario.nombre;
+	document.getElementsByName(`idRecibe${formulario}`)[0].value = usuario.cedula;
+	let codUsuario = JSON.parse(localStorage.getItem('codigoUsuario'));
 	return db.info().then( result => {
 		var ultimo = result.doc_count!=0 ? result.doc_count + 1: result.doc_count = 1;
 		let indice = calcularIndice(ultimo);
@@ -449,7 +471,7 @@ function calcularActaInscripcion(formulario, db){
 		let year = fecha.anio.toString()
 		let cadenaFecha = fecha.dia.toString() + fecha.mes.toString() + year.substring(2, 4);
 		//console.log(indice);
-		let acta = formulario + codUsuario + cadenaFecha + indice;
+		let acta = formu + codUsuario + cadenaFecha + indice;
 		console.log(acta);
 		return acta;
 	});
@@ -475,7 +497,7 @@ function cargarInicioInscripciones(formulario){
 	}
 	let formu = localStorage.getItem('form');
 	console.log("Valor de form!!!", formu);
-	calcularActaInscripcion(formu, dbNuevos).then( acta => {
+	calcularActaInscripcion(formulario, formu, dbNuevos).then( acta => {
 		console.log("Valor de acta recibido ", acta);
 		let event = new Event('input');
 		let objetoActa = document.getElementsByName('acta' + formulario)[0];
@@ -735,7 +757,7 @@ function calcularIndice(ultimo){
 
 function calcularNumActa(formulario, form){
 	let db = dbActasForm(formulario);
-	let codUsuario = localStorage.getItem('codigoUsuario');
+	let codUsuario = JSON.parse(localStorage.getItem('usuario')).indice;
 	return db.info().then( result => {
 		var ultimo = result.doc_count!=0 ? result.doc_count + 1: result.doc_count = 1;
 		let indice = calcularIndice(ultimo);
@@ -756,14 +778,14 @@ function escogerInscrito(registro, formulario){
 	document.getElementsByName('tel' + formulario)[0].value = registro.tels;
 	document.getElementsByName('cel' + formulario)[0].value = registro.celular;
 	document.getElementsByName('propietario' + formulario)[0].value = registro.nombre_p;
-	document.getElementsByName('idPropietario' + formulario)[0].value = registro.doc_p;
+	document.getElementsByName('idPropietario' + formulario)[0].value = parseInt(registro.doc_p);
 	document.getElementsByName('tipoIdProp' + formulario)[0].value = registro.tid_p;
 	document.getElementsByName('autorizaNoti' + formulario)[0].value = registro.autoriza;
 
 	if(formulario == '333' || formulario == '243'){
 		document.getElementsByName('nomTerr' + formulario)[0].value = registro.noloca;
 		document.getElementsByName('razonSocial' + formulario)[0].value = registro.rso;
-		document.getElementsByName('nit' + formulario)[0].value = registro.nit;
+		document.getElementsByName('nit' + formulario)[0].value = parseInt(registro.nit);
 		let formu = localStorage.getItem('form');
 		console.log("lo que se recoge de localstorage", formu);
 		calcularNumActa(formulario, formu).then( acta => {
@@ -801,7 +823,7 @@ function escogerInscrito(registro, formulario){
 			document.getElementsByName('dirNotif' + formulario)[0].value = registro.dir_not;
 			document.getElementsByName('nombreComercial' + formulario)[0].value = registro.noco;
 			document.getElementsByName('razonSocial' + formulario)[0].value = registro.rso;
-			document.getElementsByName('nit' + formulario)[0].value = registro.nit;
+			document.getElementsByName('nit' + formulario)[0].value = parseInt(registro.nit);
 			document.getElementsByName('nomTerr' + formulario)[0].value = registro.noloca;
 			document.getElementsByName('matriculaMercantil' + formulario)[0].value = registro.mamer;
 	
@@ -861,12 +883,17 @@ function escogerInscrito(registro, formulario){
 				objetoActa.value = acta;
 				objetoActa.dispatchEvent(event);
 			});
+
+			let sufixFuncionario = formulario == '443' ? '' : '-1';
+			let usuario = JSON.parse(localStorage.getItem('usuario'))
+			document.getElementsByName(`funcionario${formulario}${sufixFuncionario}`)[0].value = usuario.nombre;
+			document.getElementsByName(`idFuncionario${formulario}${sufixFuncionario}`)[0].value = usuario.cedula;
 			
 			let alerta = document.getElementsByName('alertaInscrito');
 			let arreglo = Array.from(alerta); //en este caso alerta es un iterable pero no un arreglo, hay que convertirlo primero
-			arreglo.forEach( item => {
+			for ( const item of arreglo) {
 				item.style.display = "none";
-			});
+			};
 			document.getElementsByName('entidad' + formulario).value = registro.entidad;
 		}
 	
@@ -914,7 +941,7 @@ function escogerInscrito(registro, formulario){
 		if (formulario == '569' || formulario == '440') {
 			document.getElementsByName('repLegal' + formulario)[0].value = registro.nombre_rl;
 			document.getElementsByName('tipoIdRl' + formulario)[0].value = registro.tid_rl;
-			document.getElementsByName('idRepLegal' + formulario)[0].value = registro.doc_rl;
+			document.getElementsByName('idRepLegal' + formulario)[0].value = parseInt(registro.doc_rl);
 		}
 	
 		if(formulario == '569'){
@@ -1196,7 +1223,7 @@ function guardarTraidos(formulario, dbBase, respObj, bandera, banderaAlerta){
 function cerrarSesionServidor(){
 	let identidad = JSON.parse(localStorage.getItem('identity'));
 	let alerta = document.getElementsByName('mensajesServicios')[0]
-	let final = identidad ? identidad.usuario : JSON.parse(localStorage.getItem('usuario'))
+	let final = identidad ? identidad.usuario : JSON.parse(localStorage.getItem('usuario')).usuario
 	fetch( BASEURL + URL_CERRAR_SESION + final)
 	.then( res => res.json() )
 	.then( jsonRes => {
@@ -1403,6 +1430,12 @@ function fetchEvaluados(doc, formulario, url){
 		token: credenciales.token,
 		formulario: formulario
 	};
+	for(const d in doc){
+		console.log('d: ', d, doc[d])
+		const arrExcluded = ['TERRITORIO', 'LONGITUD', 'LATITUD', 'FIRMA_E2', 'FIRMA_F2']
+		if(!arrExcluded.includes(d))
+		    doc[d] = doc[d].trim()
+	}
 	let bigDoc = Object.assign(credentials, doc);
 	let data = JSON.stringify(bigDoc);
 	let cuerpo = document.getElementById('cuerpoRespuesta');
@@ -1617,8 +1650,9 @@ function firmaInscripcion() {
 	window.location.assign('firmaInscripcion.html');
 }
 
-function firmaEvaluacion(){
-	window.location.assign('firmaEvaluacion.html');
+function firmaEvaluacion(formulario){
+	let ruta = formulario == '443' ? 'firmaInscripcion.html' : 'firmaEvaluacion.html';
+	window.location.assign(ruta);
 }
 
 function validarObjetoActa(formulario){
@@ -1845,9 +1879,9 @@ function guardarEvaluadosEstablecimientos(formulario){
 	}
 
 	var evaluado = {
-		NOMBRE_RL: document.getElementsByName('repLegal' + formulario)[0].value,
-		TID_RL: document.getElementsByName('tipoIdRl' + formulario)[0].value,
-		DOC_RL: document.getElementsByName('idRepLegal' + formulario)[0].value,
+		NOMBRE_RL: formulario != "443" ? document.getElementsByName('repLegal' + formulario)[0].value : "",
+		TID_RL: formulario != "443" ? document.getElementsByName('tipoIdRl' + formulario)[0].value : "",
+		DOC_RL: formulario != "443" ? document.getElementsByName('idRepLegal' + formulario)[0].value : "",
 		NOCO: formulario != "333" && formulario != '243' ? 
 			document.getElementsByName('nombreComercial' + formulario)[0].value : "",
 		RSO: document.getElementsByName('razonSocial' + formulario)[0].value,
@@ -1862,6 +1896,7 @@ function guardarEvaluadosEstablecimientos(formulario){
 }
 
 function guardarEvaluadoReducido(formulario){
+	let sufixFuncionario = formulario == '443' ? '' : '-1';
 	let evaluado = {
 		FECHA: document.getElementsByName('fecha' + formulario)[0].value,
 		ACTA: document.getElementsByName('acta' + formulario)[0].value,
@@ -1875,18 +1910,21 @@ function guardarEvaluadoReducido(formulario){
 		DOC_P: formulario != '26' ? document.getElementsByName('idPropietario' + formulario)[0].value : "",
 		AUTORIZA: document.getElementsByName('autorizaNoti' + formulario)[0].value,			
 		OBS_AS: document.getElementsByName('obAutoridad' + formulario)[0].value,
-		NOMBRE_F1: document.getElementsByName('funcionario' + formulario + '-1')[0].value,
-		ID_F1: document.getElementsByName('idFuncionario' + formulario + '-1')[0].value,
-		CARGO_F1: formulario != '26' ? document.getElementsByName('cargoFuncionario' + formulario + '-1')[0].value: "",
-		NOMBRE_F2: formulario != '26' ? document.getElementsByName('funcionario' + formulario + '-2')[0].value : "",
-		ID_F2: formulario != '26' ? document.getElementsByName('idFuncionario' + formulario + '-2')[0].value : "",
-		CARGO_F2: formulario != '26' ? document.getElementsByName('cargoFuncionario' + formulario + '-2')[0].value : "",
-		NOMBRE_E1: document.getElementsByName('persona' + formulario + '-1')[0].value,
-		ID_E1: document.getElementsByName('idPersona' + formulario + '-1')[0].value,
-		CARGO_E1: formulario != '26' ? document.getElementsByName('cargoPersona' + formulario + '-1')[0].value : "",
-		NOMBRE_E2: formulario != '26' ? document.getElementsByName('persona' + formulario + '-2')[0].value : "",
-		ID_E2: formulario != '26' ? document.getElementsByName('idPersona' + formulario + '-2')[0].value : "",
-		CARGO_E2: formulario != '26' && formulario != '245' ? 
+		NOMBRE_F1: document.getElementsByName(`funcionario${formulario}${sufixFuncionario}`)[0].value,
+		ID_F1: document.getElementsByName(`idFuncionario${formulario}${sufixFuncionario}`)[0].value,
+		CARGO_F1: formulario != '26' ? document.getElementsByName(`cargoFuncionario${formulario}${sufixFuncionario}`)[0].value : "",
+		NOMBRE_F2: formulario != '26' && formulario != '443' ? 
+			document.getElementsByName('funcionario' + formulario + '-2')[0].value : "",
+		ID_F2: formulario != '26' && formulario != '443' ? 
+			document.getElementsByName('idFuncionario' + formulario + '-2')[0].value : "",
+		CARGO_F2: formulario != '26' && formulario != '443' ? 
+			document.getElementsByName('cargoFuncionario' + formulario + '-2')[0].value : "",
+		NOMBRE_E1: document.getElementsByName(`persona${formulario}${sufixFuncionario}`)[0].value,
+		ID_E1: document.getElementsByName(`idPersona${formulario}${sufixFuncionario}`)[0].value,
+		CARGO_E1: formulario != '26' ? document.getElementsByName(`cargoPersona${formulario}${sufixFuncionario}`)[0].value : "",
+		NOMBRE_E2: formulario != '26' && formulario != '443' ? document.getElementsByName('persona' + formulario + '-2')[0].value : "",
+		ID_E2: formulario != '26' && formulario != '443' ? document.getElementsByName('idPersona' + formulario + '-2')[0].value : "",
+		CARGO_E2: formulario != '26' && formulario != '443' && formulario != '245' ? 
 			document.getElementsByName('cargoPersona' + formulario + '-2')[0].value : "",
 		FIRMA_F1: '',
 		FIRMA_F2: '',
@@ -1898,12 +1936,35 @@ function guardarEvaluadoReducido(formulario){
 	return evaluado;
 }
 
-function persistirEvaluado(db, evaluado, formulario){
+function persistirCoordenadas(db, eva, result){
+	navigator.geolocation.getCurrentPosition(position => {
+		let coordinates = {
+			LONGITUD: position.coords.longitude,
+			LATITUD: position.coords.latitude
+		}
+		console.log('evaluado antes de coordenadas', eva)
+		return db.put({
+			_id: result.id,
+			_rev: result.rev,
+			...eva,
+			LONGITUD: coordinates.LONGITUD,
+			LATITUD: coordinates.LATITUD,
+		})
+		.then(res => console.log('Registro actualizado con coordenadas', res))
+		.catch(err => console.log('Problemas actualizando registro', err))
+	}, (err) => {
+		console.log('Error obteniendo coordenadas', err)
+	})
+}
+
+function persistirEvaluado(db, evaluado){
 	var insertar = { _id: evaluado.ACTA.substring(10, 14) };
 	evaluado = Object.assign( insertar, evaluado );
 	console.log(evaluado);
-	db.put(evaluado, function callback(err, result){
+	db.put(evaluado, async function callback(err, result){
 		if (!err) {
+			console.log('resultado', result)
+			await persistirCoordenadas(db, evaluado, result)
 			alert('evaluado guardado en base de datos');
 			location.reload();
 		}else {
@@ -1914,9 +1975,15 @@ function persistirEvaluado(db, evaluado, formulario){
 
 function guardarEvaluacion(formulario){
 	console.log('Estamos en el formulario', formulario)
-	let evaluado = formulario != '333' && formulario != '442' && formulario != '26' && formulario != '243' &&
-					formulario != '245' ? 
-					guardarComunesEvaluados(formulario) : {};
+	let excluded = [
+		'333',
+		'442',
+		'245',
+		'26',
+		'243',
+		'443'
+	]
+	let evaluado = !excluded.includes(formulario) ? guardarComunesEvaluados(formulario) : {};
 	var coordinates = {}					
 	let preguntasComunes;
 	let evaluadoEsta;
@@ -2211,7 +2278,40 @@ function guardarEvaluacion(formulario){
 				};
 				evaluado = Object.assign( evaluadoEsta, reducido, adicional );
 				break;
-			case '333':
+				case '443':
+					reducido = guardarEvaluadoReducido(formulario);
+					evaluadoEsta = guardarEvaluadosEstablecimientos(formulario);
+					delete reducido.NOMBRE_F2; 
+					delete reducido.ID_F2;
+					delete reducido.CARGO_F2;
+					delete reducido.NOMBRE_E2;
+					delete reducido.ID_E2;
+					delete reducido.CARGO_E2;
+					delete reducido.FIRMA_F2;
+					delete reducido.FIRMA_E2;
+					tipocarne = [];
+					for (let i = 0; i < document.getElementsByName('tipoCarneExpende').length; i++){
+						document.getElementsByName('tipoCarneExpende')[i].checked ? tipocarne.push(document.getElementsByName('tipoCarneExpende')[i].value) : console.log(i);
+					}
+					adicional = {
+						TIPOCARNE: JSON.stringify(tipocarne),
+						OTRAS: document.getElementsByName('otrasEspecies' + formulario)[0].value,
+						OTIPOPRO: document.getElementsByName('otrosProductos' + formulario)[0].value,
+						SOPROVIS: document.getElementsByName('provisional' + formulario)[0].value,
+						VISITO: document.getElementsByName('funcUltVisita' + formulario)[0].value,
+						VISITADO: document.getElementsByName('visitado' + formulario)[0].value,
+						HORARIOS: document.getElementsByName('horarios' + formulario)[0].value,
+						NUTRA: document.getElementsByName('noTrabajadores' + formulario)[0].value,
+						F_UV: document.getElementsByName('fechaUltVisita' + formulario)[0].value,
+						CCUV: document.getElementsByName('concepto' + formulario)[0].value,
+						CUV: document.getElementsByName('textoConcepto' + formulario)[0].value,
+						UV_P: document.getElementsByName('porcentaje' + formulario)[0].value,
+						OBS_ES: document.getElementsByName('obPersona' + formulario)[0].value,
+					};
+					evaluado = Object.assign( reducido, evaluadoEsta, adicional );
+					localStorage.setItem('form', '443');
+					break;
+				case '333':
 				reducido = guardarEvaluadoReducido(formulario);
 				evaluadoEsta = guardarEvaluadosEstablecimientos(formulario);
 				delete evaluadoEsta.MAMER;
@@ -2366,23 +2466,11 @@ function guardarEvaluacion(formulario){
 		}
 	
 		//console.log("Estructura de evaluado en formulario " + formulario + " para revisión: " + JSON.stringify(evaluado));
+
+		localStorage.setItem('evaluado', JSON.stringify(evaluado));
+		firmaEvaluacion(formulario);
 		
-		navigator.geolocation.getCurrentPosition(position => {
-			coordinates = {
-				LONGITUD: position.coords.longitude,
-				LATITUD: position.coords.latitude
-			}
-			console.log('Coordenadas calculadas')
-			evaluado = Object.assign(evaluado, coordinates)
-			localStorage.setItem('evaluado', JSON.stringify(evaluado));
-			firmaEvaluacion();
-		}, (err) => {
-			console.log('Error obteniendo coordenadas', err)
-			localStorage.setItem('evaluado', JSON.stringify(evaluado));
-			firmaEvaluacion();
-		})
-		
-		//persistirEvaluado(db, evaluado, formulario);
+		//persistirEvaluado(db, evaluado);
 		//location.reload();
 	}
 
@@ -2469,6 +2557,10 @@ function mostrarEvaluados(formulario){
 		case '440':
 			traerEvaluados(db440, 'E');
 			validarCambioTab(2);
+			break;
+		case '443':
+			traerEvaluados(db443, 'D');
+			validarCambioTab(0);
 			break;
 		case '474':
 			traerEvaluados(db474, 'E');
