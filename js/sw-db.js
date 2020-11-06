@@ -1459,7 +1459,7 @@ function fetchEvaluados(doc, formulario, url){
 			}else{
 				res.json().then( body => resolve(body) )
 				let texto = document.createElement('p');
-				texto.innerHTML = "Se almacenó el acta: " + (inscrito ? doc.acta : doc.ACTA);
+				texto.innerHTML = "Se envió al servidor el acta: " + (inscrito ? doc.acta : doc.ACTA);
 				cuerpo.appendChild(texto);
 			} 
 		})
