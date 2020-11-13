@@ -2005,7 +2005,7 @@ function guardarEvaluacion(formulario){
 	console.log('Arreglo filtrado de requireds', arregloInputs)
 	console.log('Arreglo filtrado de erorres', errorArray)
 	if (errorArray.length > 0) {
-		cuerpo.innerHTML = 'Lo sentimos, tiene campos obligatorios (*) sin diligenciar. Por favor llénelos para poder guardar el acta';
+		cuerpo.innerHTML = 'Lo sentimos, tiene campos obligatorios (tienen * o son consildados de puntajes) sin diligenciar. Por favor llénelos para poder guardar el acta';
 		return;
 	}else if (!validarCambioTab(10) && formulario != '26' && formulario != '245'){
 		cuerpo.innerHTML = 'Lo sentimos mucho. Usted no escogió un inscrito antes de diligenciar la evaluación. '
