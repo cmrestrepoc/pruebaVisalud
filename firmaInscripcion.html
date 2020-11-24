@@ -50,6 +50,10 @@
         history.back();
     }
 
+    function cancelar(){
+        history.back();
+    }
+
     $(document).ready(function()
     {
         $("#firmaAutoridad").jqScribble();
@@ -70,7 +74,7 @@
 }*/
 .cajonBoton {
     float:left;
-    width:230px;
+    width:200px;
     height:350px;
     background-color:#def;
     padding:10px;
@@ -90,7 +94,7 @@
 #firmaAutoridad, #firmaInscribe{
     float:left;
     height:350px;
-    width:720px;
+    width:670px;
     border:2px solid #888;
     border-radius: 4px;
     position:relative; /* Necessary for correct mouse co-ords in Firefox */
@@ -101,7 +105,7 @@
 
 <body>
     <header>
-        <a href="menu0.html">
+        <a href="#">
             <img alt src="./img/escudo.jpg" />
         </a>
         <div class="titulos">
@@ -111,7 +115,10 @@
     </header><br><br>
 
     <div class="col-md-2 col-md-offset-2">
-        <button class="btn btn-primary" onclick="regresar()">Regresar</button>    
+        <button class="btn btn-primary col-md-12" onclick="regresar()">Regresar</button>    
+    </div>
+    <div class="col-md-2 col-md-offset-1">
+        <button class="btn btn-danger" onclick="cancelar()">Cancelar</button>    
     </div>
 
     <br><br><br><br>
