@@ -1443,6 +1443,7 @@ function fetchEvaluados(doc, formulario, url){
 	let cuerpo = document.getElementById('cuerpoRespuesta');
 	cuerpo.innerHTML = ''
 	console.log(data);
+	const inscrito = formulario == '493' || formulario == '569' || formulario == '444'
 	return new Promise((resolve, reject) => {
 		fetch(url, {
 				method: 'POST',
@@ -1451,7 +1452,6 @@ function fetchEvaluados(doc, formulario, url){
 				},
 				body: data
 		}).then( res => {
-			const inscrito = formulario == '493' || formulario == '569' || formulario == '444'
 			if(res.status == 500){
 				return fetchEvaluados(doc, formulario, url)
 				.then( body => resolve(body) );
@@ -1463,7 +1463,7 @@ function fetchEvaluados(doc, formulario, url){
 				cuerpo.appendChild(texto);
 			} 
 		})
-		.catch( err => reject([err, doc.ACTA]) );
+		.catch( err => reject([err, inscrito ? doc.acta : doc.ACTA]) );
 	});
 }
 
