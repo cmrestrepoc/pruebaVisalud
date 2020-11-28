@@ -1534,7 +1534,6 @@ function persistirInscrito(dbBase, dbNuevos, inscrito, idExistente){
 			var insertar = { _id: indice };
 			inscrito = Object.assign( insertar, inscrito );
 			console.log(inscrito);
-
 			dbNuevos.put(inscrito, function callback(err, result){
 				if (!err) {
 					alert('inscrito guardado en base de datos');
@@ -1560,6 +1559,7 @@ function persistirInscrito(dbBase, dbNuevos, inscrito, idExistente){
 			dbNuevos.put(inscrito, function callback(err, result){
 				if (!err) {
 					alert('inscrito modificado en base de datos');
+					localStorage.removeItem('inscrito')
 					location.reload();
 				}else {
 					alert('problemas modificando inscrito en base de datos: ' + err);
