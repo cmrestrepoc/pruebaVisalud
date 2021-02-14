@@ -27,7 +27,7 @@ var db443 = new PouchDB('evaluaciones443');
 var db441 = new PouchDB('evaluaciones441');
 var db472 = new PouchDB('evaluaciones472');
 
-const BASEURL = 'https://sisbenpro.com/visaludJamundi/public/';
+const BASEURL = 'https://simarpro.com/visaludserverjamundi/api/';
 const URL_CERRAR_SESION = 'cerrarSesion/';
 const URL_INSCRITOS_VFP = 'inscritosVisual';
 const URL_INSCRITOS_TABLET = 'inscritosTabla';

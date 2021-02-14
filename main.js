@@ -11,7 +11,7 @@ if('serviceWorker' in navigator){
 	console.log('NO PUEDES usar los serviceWorker en tu navegador');
 }
 
-const BASEURL1 = 'https://sisbenpro.com/visaludJamundi/public/';
+const BASEURL1 = 'https://simarpro.com/visaludserverjamundi/api/';
 const URL_CERRAR_SESION1 = 'cerrarSesion/';
 const URL_LOGIN_SERVER = 'loginVisalud';
 
